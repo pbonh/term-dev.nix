@@ -55,7 +55,7 @@ pull-nix-dot-repo:
   git fetch dotfiles-nix main && git subtree pull --prefix roles/dotfiles dotfiles-nix main --squash
 
 push-nix-dot-repo:
-  git subtree push --prefix=roles/dotfiles dotfiles-nix master
+  git subtree push --prefix=roles/dotfiles dotfiles-nix main
 
 neovim-packer-sync:
   nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'

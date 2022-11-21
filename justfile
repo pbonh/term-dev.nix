@@ -51,8 +51,11 @@ add-nix-dot-repo:
   git remote add -f dotfiles-nix git@github.com:pbonh/dotfiles.nix.git
   git subtree add --prefix roles/dotfiles dotfiles-nix main --squash
 
-update-nix-dot-repo:
+pull-nix-dot-repo:
   git fetch dotfiles-nix main && git subtree pull --prefix roles/dotfiles dotfiles-nix main --squash
+
+push-nix-dot-repo:
+  git subtree push --prefix=roles/dotfiles dotfiles-nix master
 
 neovim-packer-sync:
   nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'

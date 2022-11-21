@@ -1,0 +1,89 @@
+---
+nvim_exe: "{{ nix_bin }}/nvim"
+nvim_share_dir: "{{ xdg_share_dir }}/nvim"
+nvim_packer_reldir: "site/pack/packer/start/packer.nvim"
+nvim_packer_dir: "{{ nvim_share_dir }}/{{ nvim_packer_reldir }}"
+nvim_vim_plug_dir: "{{ nvim_share_dir }}/site/autoload"
+nvim_plugged_dir: "{{ nvim_share_dir }}/plugged"
+nvim_config_dir: "{{ xdg_config_dir }}/nvim"
+nvim_init_lua: "{{ nvim_config_dir }}/init.lua"
+nvim_init: "{{ nvim_config_dir }}/init.vim"
+nvim_lua_config_dir: "{{ nvim_config_dir }}/lua"
+nvim_config_lua: "{{ nvim_lua_config_dir }}/config.lua"
+nvim_plugin_config_dir: "{{ nvim_config_dir }}/nvim-config"
+nvim_coc_settings_file: "{{ nvim_config_dir }}/coc-settings.json"
+nvim_filetype_dir: "{{ nvim_config_dir }}/ftdetect"
+nvim_syntax_dir: "{{ nvim_config_dir }}/syntax"
+nvim_filetype_settings_dir: "{{ nvim_config_dir }}/ftplugin"
+nvim_projects_dir: "{{ xdg_config_dir }}/nvim/projects"
+nvim_neorg_dir: "{{ dotfiles_user_home }}/OrgNotes"
+nvim_shell_cmd: "zsh"
+nvim_shell: "{{ nix_bin }}/{{ nvim_shell_cmd }}"
+nvim_fterm_cmds:
+  - cmd_name: ManLs
+    cmd_str: "man ls"
+  - cmd_name: BTop
+    cmd_str: "btop"
+nvim_custom_filetypes: {}
+lsp_provider_neovim_plugins: []
+language_neovim_plugins: []
+ale_plugin_settings: []
+neoformat_plugin_settings: []
+dap_plugin_settings: []
+extra_nvim_lua_settings: []
+extra_nvim_vimscript_settings: []
+extra_plugin_settings: []
+extra_lua_plugin_settings: []
+extra_nvim_language_mappings: []
+extra_bookmarks: []
+lsp_providers: []
+lsp_providers_luafile: "{{ \"'\" + lsp_providers | join(\"', '\") + \"'\" }}"
+lsp_providers_file: "{{ (lsp_providers_luafile != '') | ternary(lsp_providers_luafile, '-- No Additional Servers Preconfigured') }}"
+lsp_providers_plugins: []
+lsp_providers_setup: []
+treesitter_parsers: []
+treesitter_custom_parsers_default:
+  - just
+treesitter_custom_parsers: "{{ treesitter_custom_parsers_default }}"
+treesitter_parsers_all: "{{ treesitter_parsers + treesitter_custom_parsers }}"
+treesitter_extra_config: []
+refactoring_settings: []
+telescope_picker_config: []
+nvim_completion_config: []
+treesitter_custom_parsers_info:
+  - "parser_configs.just = {"
+  - "  install_info = {"
+  - "    url = \"https://github.com/IndianBoy42/tree-sitter-just\","
+  - "    files = { \"src/parser.c\", \"src/scanner.cc\" },"
+  - "    branch = \"main\","
+  - "  },"
+  - "  maintainers = { \"@IndianBoy42\" },"
+  - "}"
+lsp_provider_file: "{{ '''' + lsp_providers |join(''', ''') + '''' }}"
+lsp_provider_plugins_file: "{{ lsp_providers_plugins | join('\n') }}"
+lsp_provider_lspconfig_setup_file: "{{ lsp_providers_setup | join('\n') }}"
+lsp_provider_neovim_plugins_file: "{{ lsp_provider_neovim_plugins | join('\n') }}"
+language_neovim_plugins_file: "{{ language_neovim_plugins | join('\n') }}"
+treesitter_parsers_file: "{{ '\"' + treesitter_parsers_all |join('\", \"') + '\"' }}"
+treesitter_parsers_custom_file: "{{ treesitter_custom_parsers_info | join('\n') }}"
+treesitter_extra_config_file: "{{ treesitter_extra_config | join('\n') }}"
+refactoring_settings_file: "{{ refactoring_settings | join('\n') }}"
+telescope_picker_config_file: "{{ telescope_picker_config | join('\n') }}"
+nvim_completion_config_file: "{{ nvim_completion_config | join('\n') }}"
+ale_plugin_settings_file: "{{ ale_plugin_settings | join('\n') }}"
+neoformat_plugin_settings_file: "{{ neoformat_plugin_settings | join('\n') }}"
+dap_plugin_settings_file: "{{ dap_plugin_settings | join('\n') }}"
+extra_nvim_lua_settings_file: "{{ extra_nvim_lua_settings | join('\n') }}"
+extra_plugin_settings_file: "{{ extra_plugin_settings | join('\n') }}"
+extra_lua_plugin_settings_file: "{{ extra_lua_plugin_settings | join('\n') }}"
+extra_nvim_language_mappings_file: "{{ extra_nvim_language_mappings | join('\n') }}"
+extra_bookmarks_startify: "{{ '\"' + extra_bookmarks |join('\", \"') + '\"' }}"
+extra_bookmarks_project: "{{ extra_bookmarks_startify }}"
+lsp_provider_coc_settings: {}
+lsp_provider_coc_settings_base:
+  diagnostic.displayByAle: true
+lsp_provider_coc_settings_languageserver:
+  languageserver: "{{ lsp_provider_coc_settings }}"
+lsp_provider_coc_settings_merged: "{{ lsp_provider_coc_settings_base | combine(lsp_provider_coc_settings_languageserver) }}"
+lsp_provider_coc_settings_json: "{{ lsp_provider_coc_settings_merged | to_nice_json }}"
+nvim_test_enable: false

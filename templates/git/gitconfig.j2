@@ -1,0 +1,48 @@
+[user]
+	email = {{ git_email }}
+	name = {{ git_name }}
+
+[core]
+	ui = auto
+	editor = {{ nix_bin }}/nvim
+	excludesfile = {{ dotfiles_user_home }}/.gitignore
+
+[pager]
+	diff = {{ nix_bin }}/delta
+	log = {{ nix_bin }}/delta
+	reflog = {{ nix_bin }}/delta
+	show = {{ nix_bin }}/delta
+
+[interactive]
+	diffFilter = {{ nix_bin }}/delta --color-only --features=interactive
+
+[delta]
+	features = decorations
+
+[delta "interactive"]
+	keep-plus-minus-markers = false
+
+[delta "decorations"]
+	commit-decoration-style = blue ol
+	commit-style = raw
+	file-style = omit
+	hunk-header-decoration-style = blue box
+	hunk-header-file-style = red
+	hunk-header-line-number-style = "#067a00"
+	hunk-header-style = file line-number syntax
+
+[ghq "ssh://git@github.com/"]
+	vcs = git
+	root = {{ code_checkout_path }}
+
+[ghq "https://github.com/"]
+	vcs = git
+	root = {{ code_checkout_path }}
+
+[ghq "ssh://git@gitlab.com/"]
+	vcs = git
+	root = {{ code_checkout_path }}
+
+[ghq "https://gitlab.com/"]
+	vcs = git
+	root = {{ code_checkout_path }}

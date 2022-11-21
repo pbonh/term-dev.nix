@@ -1,0 +1,274 @@
+###############################################################################
+# BEGIN: Base/Nix
+# Lines configured by zsh-newuser-install
+HISTFILE=~/.histfile
+HISTSIZE=1000
+SAVEHIST=1000
+bindkey -v
+# End of lines configured by zsh-newuser-install
+# The following lines were added by compinstall
+zstyle :compinstall filename '/home/{{ zsh_username }}/.zshrc'
+fpath=({{ zsh_completions }} $fpath)
+autoload -Uz compinit
+compinit
+# End of lines added by compinstall
+. /home/{{ zsh_username }}/.nix-profile/etc/profile.d/nix.sh
+. /home/{{ zsh_username }}/.nix-profile/etc/profile.d/hm-session-vars.sh
+# source ~/.nix-profile/etc/profile.d/nix.sh
+export PATH=$PATH:{{ bin_directory }}
+# export PATH=$PATH:{{ nix_bin }}
+# END: Base
+###############################################################################
+
+###############################################################################
+# BEGIN: Environment
+export SHELL="{{ nvim_shell }}"
+export GIT_SSH="{{ git_ssh }}"
+if [ -n "$NVIM_LISTEN_ADDRESS" ]; then
+    alias nvim={{ nix_bin }}/nvr -cc split --remote-wait +'set bufhidden=wipe'
+fi
+if [ -n "$NVIM_LISTEN_ADDRESS" ]; then
+    export VISUAL="{{ nix_bin }}/nvr -cc split --remote-wait +'set bufhidden=wipe'"
+    export EDITOR="{{ nix_bin }}/nvr -cc split --remote-wait +'set bufhidden=wipe'"
+else
+    export VISUAL="{{ nix_bin }}/nvim"
+    export EDITOR="{{ nix_bin }}/nvim"
+fi
+# END: Environment
+###############################################################################
+
+###############################################################################
+# BEGIN: Others
+if [ -n "${commands[fzf-share]}" ]; then
+  source "$(fzf-share)/key-bindings.zsh"
+  source "$(fzf-share)/completion.zsh"
+fi
+# eval "$({{ nix_bin }}/starship init zsh)"
+eval "$({{ nix_bin }}/direnv hook zsh)"
+eval "$({{ nix_bin }}/zoxide init zsh)"
+# eval "$({{ nix_bin }}/navi widget zsh)"
+_navi_call() {
+   local result="$({{ nix_bin }}/navi "$@" </dev/tty)"
+   printf "%s" "$result"
+}
+
+_navi_widget() {
+   local -r input="${LBUFFER}"
+   local -r last_command="$(echo "${input}" | {{ nix_bin }}/navi fn widget::last_command)"
+   local replacement="$last_command"
+
+   if [ -z "$last_command" ]; then
+      replacement="$(_navi_call --print)"
+   elif [ "$LASTWIDGET" = "_navi_widget" ] && [ "$input" = "$previous_output" ]; then
+      replacement="$(_navi_call --print --query "$last_command")"
+   else
+      replacement="$(_navi_call --print --best-match --query "$last_command")"
+   fi
+
+   if [ -n "$replacement" ]; then
+      local -r find="${last_command}_NAVIEND"
+      previous_output="${input}_NAVIEND"
+      previous_output="${previous_output//$find/$replacement}"
+   else
+      previous_output="$input"
+   fi
+
+   zle kill-whole-line
+   LBUFFER="${previous_output}"
+   region_highlight=("P0 100 bold")
+   zle redisplay
+}
+
+zle -N _navi_widget
+bindkey '^a' _navi_widget
+# source {{ dotfiles_home }}/roles/zsh/files/aliases.zsh
+# source {{ dotfiles_home }}/roles/erlang/files/erlang.zsh
+# source {{ dotfiles_home }}/roles/docker/files/docker.zsh
+# source {{ dotfiles_home }}/roles/fzf/files/fzf.zsh
+# source {{ dotfiles_home }}/roles/flutter/files/flutter.zsh
+# source {{ dotfiles_home }}/roles/microsoft/files/microsoft.zsh
+
+# END: Others
+###############################################################################
+
+###############################################################################
+# BEGIN: FZF
+source {{ zsh_fzf_tab }}/fzf-tab.plugin.zsh
+export PATH=$PATH:{{ zsh_git_fuzzy }}/bin
+export GF_BASE_REMOTE={{ zsh_git_fuzzy_upstream }}
+export GF_BASE_BRANCH={{ zsh_git_fuzzy_branch }}
+# Options for fzf
+export FZF_COMPLETION_OPTS='+c -x'
+export FZF_DEFAULT_COMMAND='{{ nix_bin }}/fd --type f'
+#export FZF_DEFAULT_COMMAND='{{ nix_bin }}/fd --type f --color=never'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_CTRL_T_OPTS="--preview '{{ nix_bin }}/bat --color=always --line-range :500 {}'"
+export FZF_ALT_C_COMMAND='{{ nix_bin }}/fd --type d . --color=never'
+export FZF_DEFAULT_OPTS='
+  --height 75% --multi --reverse
+  --bind ctrl-f:page-down,ctrl-b:page-up
+'
+#export FZF_DEFAULT_OPTS="--layout=reverse --inline-info"
+export SKIM_DEFAULT_COMMAND="{{ nix_bin }}/fd --type f || git ls-tree -r --name-only HEAD || {{ nix_bin }}/rg --files || find ."
+
+fzf_find_edit() {
+    local file=$(
+    fzf --query="$1" --no-multi --select-1 --exit-0 \
+        --preview '{{ nix_bin }}/bat --color=always --line-range :500 {}'
+    )
+    if [[ -n $file ]]; then
+        $EDITOR "$file"
+    fi
+}
+fzf_change_directory() {
+    local directory=$(
+    {{ nix_bin }}/fd --type d | \
+        fzf --query="$1" --no-multi --select-1 --exit-0 \
+        --preview 'tree -C {} | head -100'
+    )
+    if [[ -n $directory ]]; then
+        cd "$directory"
+    fi
+}
+fzf_change_directory_arg() {
+    if [[ $# == 0 ]]; then
+        echo 'Error: search term was not provided.'
+        return
+    fi
+    local directory=$(
+    {{ nix_bin }}/fd --type d $1 | \
+        fzf --query="$2" --no-multi --select-1 --exit-0 \
+        --preview 'tree -C {} | head -100'
+    )
+    if [[ -n $directory ]]; then
+        cd "$directory"
+    fi
+}
+fzf_grep_edit(){
+    if [[ $# == 0 ]]; then
+        echo 'Error: search term was not provided.'
+        return
+    fi
+    local match=$(
+    {{ nix_bin }}/rg --color=never --line-number "$1" |
+        fzf --no-multi --delimiter : \
+        --preview "{{ nix_bin }}/bat --color=always --line-range {2}: {1}"
+    )
+    local file=$(echo "$match" | cut -d':' -f1)
+    if [[ -n $file ]]; then
+        $EDITOR "$file" +$(echo "$match" | cut -d':' -f2)
+    fi
+}
+fzf_kill() {
+    local pid_col
+    if [[ $(uname) = Linux ]]; then
+        pid_col=2
+    elif [[ $(uname) = Darwin ]]; then
+        pid_col=3;
+    else
+        echo 'Error: unknown platform'
+        return
+    fi
+    local pids=$(
+        ps -f -u $USER | sed 1d | fzf --multi | tr -s [:blank:] | cut -d' ' -f"$pid_col"
+    )
+    if [[ -n $pids ]]; then
+        echo "$pids" | xargs kill -9 "$@"
+    fi
+}
+# # Use fd (https://github.com/sharkdp/fd) instead of the default find
+# # # command for listing path candidates.
+# # # - The first argument to the function ($1) is the base path to start
+# # traversal
+# # # - See the source code (completion.{bash,zsh}) for the details.
+# _fzf_compgen_path() {
+#     {{ nix_bin }}/fd --hidden --follow --exclude ".svn" . "$1"
+# }
+#
+# # Use fd to generate the list for directory completion
+# _fzf_compgen_dir() {
+#     {{ nix_bin }}/fd --type d --hidden --follow --exclude ".svn" . "$1"
+# }
+# END: FZF
+###############################################################################
+
+###############################################################################
+# BEGIN: Aliases
+alias v={{ nvim_exe }}
+alias cat={{ nix_bin }}/bat
+#alias ls='{{ nix_bin }}/exa  --group-directories-first'
+alias ls='{{ nix_bin}}/lsd --group-dirs first'
+alias ffe='fzf_find_edit'
+alias fcd='fzf_change_directory'
+alias fcdd='fzf_change_directory_arg'
+alias fge='fzf_grep_edit'
+alias fkill='fzf_kill'
+alias fsk='{{ nix_bin }}/sk --ansi -i -c '"'"'{{ nix_bin }}/fd --type f "{}"'"'"''
+alias gsk='{{ nix_bin }}/sk --ansi -i -c '"'"'{{ nix_bin }}/rg --color=always --line-number "{}"'"'"''
+alias dsk='{{ nix_bin }}/sk --ansi -i -c '"'"'{{ nix_bin }}/fd --type d "{}"'"'"''
+alias skvi='f(){ x="$({{ nix_bin }}/sk --bind "ctrl-p:toggle-preview" --ansi --preview="{{ nix_bin }}/bat {} --color=always" --preview-window=right:60%:hidden)"; [[ $? -eq 0 ]] && nvim "$x" || true }; f'
+unalias mkcd 2> /dev/null
+mkcd () {
+  mkdir "$1"
+  cd "$1"
+}
+unalias cdg 2> /dev/null
+cdg() {
+   local dest_dir=$(cdscuts_glob_echo | {{ nix_bin }}/fzf )
+   if [[ $dest_dir != '' ]]; then
+      cd "$dest_dir"
+   fi
+}
+#export -f cdg > /dev/null
+{{ extra_zsh_aliases_file or "# No Extra Zsh Aliases Installed" }}
+# END: Aliases
+###############################################################################
+
+###############################################################################
+# BEGIN: SSH
+env=~/.ssh/agent.env
+
+agent_load_env () { test -f "$env" && . "$env" >| /dev/null ; }
+
+agent_start () {
+    (umask 077; ssh-agent >| "$env")
+    . "$env" >| /dev/null ; }
+
+agent_load_env
+
+# agent_run_state: 0=agent running w/ key; 1=agent w/o key; 2=agent not running
+agent_run_state=$(ssh-add -l >| /dev/null 2>&1; echo $?)
+
+if [ ! "$SSH_AUTH_SOCK" ] || [ $agent_run_state = 2 ]; then
+    agent_start
+    ssh-add
+elif [ "$SSH_AUTH_SOCK" ] && [ $agent_run_state = 1 ]; then
+    ssh-add
+fi
+
+unset env
+# END: SSH
+###############################################################################
+
+###############################################################################
+# BEGIN: Powerlevel10K Prompt
+source {{ nix_share }}/zsh-powerlevel10k/powerlevel10k.zsh-theme
+export POWERLEVEL10K_MODE=nerdfont-complete
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+# END: Powerlevel10K Prompt
+###############################################################################
+
+###############################################################################
+# BEGIN: Screenfetch
+#{{ nix_bin }}/screenfetch
+{{ nix_bin }}/macchina
+# END: Screenfetch
+###############################################################################
+
+###############################################################################
+# BEGIN: Starting Directory
+# if [[ -z "${ZELLIJ_STARTING_DIR}" ]]; then
+#   cd ${ZELLIJ_STARTING_DIR}
+# fi
+# END: Starting Directory
+###############################################################################

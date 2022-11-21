@@ -1,0 +1,2 @@
+---
+direnv_config: "{{ dotfiles_user_home }}/.direnvrc"

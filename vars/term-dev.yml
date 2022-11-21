@@ -1,4 +1,5 @@
 ---
+lang_tools_nix: "{{ cpp_tools_nix + rust_tools_nix }}"
 install_languages:
   - cpp
   - rust

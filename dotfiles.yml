@@ -2,52 +2,8 @@
 - name: Developer Nix Setup
   hosts: localhost
   connection: local
-  roles:
-    - role: "../roles"
-  vars:
-    install_languages:
-      - cpp
-      - rust
   vars_files:
-    - host_vars/workstation.yml
+    - vars/term-dev.yml
   tasks:
     - import_role:
-        name: roles/terminal-fonts
-      tags:
-        - fonts
-    - import_role:
-        name: roles/nix-tools
-      tags:
-        - nix
-        - tools
-    - import_role:
-        name: roles/nix-python-tools
-      tags:
-        - nix
-        - python
-    - import_role:
-        name: roles/nix-node-tools
-      tags:
-        - nix
-        - node
-    - import_role:
-        name: roles/nix-rust-tools
-      tags:
-        - nix
-        - rust
-    - import_role:
-        name: roles/nix-dot
-      tags:
-        - nix
-        - dot
-    - import_role:
-        name: roles/nix-binscripts
-      tags:
-        - nix
-        - scripts
-    - import_role:
-        name: roles/nix-cpp
-      tags:
-        - nix
-        - cpp
-      when: "'cpp' in install_languages"
+        name: roles/dotfiles

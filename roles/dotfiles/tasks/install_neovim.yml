@@ -1,0 +1,87 @@
+---
+- name: Setup Neovim Config Directory
+  file:
+    path: "{{ nvim_config_dir }}"
+    state: directory
+    mode: '0755'
+
+- name: Neovim | Copies Neovim Lua Config | template
+  template:
+    src: nvim/init.lua.j2
+    dest: "{{ nvim_init_lua }}"
+
+- name: Neovim | Check if Packer is Installed | stat
+  stat:
+    path: "{{ nvim_packer_dir }}"
+  register: packer_installed
+
+    #- name: Install Neovim Plugins(Packer)
+    #  changed_when: false
+    #  shell: "{{ nix_bin }}/nix-shell --command \"zsh\" -p gcc && {{ nix_bin }}/nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'"
+    #  when: packer_installed.stat.exists
+
+- name: Setup Neovim Lua Config Directory
+  file:
+    path: "{{ nvim_lua_config_dir }}"
+    state: directory
+    mode: '0755'
+
+- name: Neovim | Copies Neovim Plugin Config | template
+  template:
+    src: '{{ item.src }}'
+    dest: "{{ nvim_lua_config_dir }}/{{ item.path  | regex_replace('\\.j2$', '') }}"
+  with_filetree: '../templates/nvim/lua'
+  when: item.state == 'file'
+
+    #- name: Install Neovim Plugins(Packer)
+    #  changed_when: false
+    #  shell: "{{ nix_bin }}/nix-shell --command \"zsh\" -p gcc && {{ nix_bin }}/nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'"
+
+- name: Setup Neovim Filetype Directory
+  file:
+    path: "{{ nvim_filetype_dir }}"
+    state: directory
+    mode: '0755'
+
+- name: Setup Neovim Syntax Highlighting Files Directory
+  file:
+    path: "{{ nvim_syntax_dir }}"
+    state: directory
+    mode: '0755'
+
+- name: Setup Neovim Filetype Settings
+  file:
+    path: "{{ nvim_filetype_settings_dir }}"
+    state: directory
+    mode: '0755'
+
+- name: Install Neovim Custom Filetypes
+  vars:
+    ftype: "{{ item.value.name }}"
+    ftype_ext: "{{ item.value.ext }}"
+  template:
+    src: nvim/ftype.j2
+    dest: "{{ nvim_filetype_dir }}/{{ item.value.name }}.vim"
+  loop: "{{ nvim_custom_filetypes | dict2items }}"
+
+- name: Install Neovim Custom Syntax Highlighting
+  get_url:
+    url: "{{ item.value.url }}"
+    dest: "{{ nvim_syntax_dir }}/{{ item.value.name }}.vim"
+  loop: "{{ nvim_custom_filetypes | dict2items }}"
+
+#- name: Setup Neorg Keymap Settings
+#  file:
+#    path: "{{ nvim_filetype_settings_dir }}/norg"
+#    state: directory
+#    mode: '0755'
+#
+#- name: Setup Neorg Keymaps
+#  copy:
+#    src: nvim/norg.vim
+#    dest: "{{ nvim_filetype_settings_dir }}/norg/norg.vim"
+
+- name: Install Quickfix Window Syntax Highlighting
+  copy:
+    src: nvim/qf.vim
+    dest: "{{ nvim_syntax_dir }}/qf.vim"

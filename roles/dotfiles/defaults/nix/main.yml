@@ -1,0 +1,9 @@
+---
+nix_path: "{{ ansible_env.HOME }}/.nix-profile"
+nix_bin: "{{ nix_path }}/bin"
+nix_share: "{{ nix_path }}/share"
+nix_buildenv_name: dev-pack
+nix_config_dir: "{{ dotfiles_user_home }}/.config/nixpkgs"
+bin_directory: "{{ dotfiles_user_home }}/.local/bin"
+lang_tools_nix: []
+lang_tools_nix_file: "{{ lang_tools_nix | join('\n') }}"

@@ -1,0 +1,11 @@
+---
+zsh_username: "{{ ansible_env.USER }}"
+zsh_plugins: "{{ dotfiles_user_home }}/.zsh"
+zsh_completions: "{{ zsh_plugins }}/completion"
+zsh_completion_just: "{{ zsh_completions }}/_just"
+zsh_fzf_tab: "{{ zsh_plugins }}/fzf-tab"
+zsh_git_fuzzy: "{{ zsh_plugins }}/git-fuzzy"
+zsh_git_fuzzy_upstream: origin
+zsh_git_fuzzy_branch: main
+extra_zsh_aliases: []
+extra_zsh_aliases_file: "{{ extra_zsh_aliases | join('\n') }}"

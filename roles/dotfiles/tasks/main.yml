@@ -1,0 +1,100 @@
+---
+- name: Nix | Install Nix Home-Manager | task
+  import_tasks: tasks/install_home_manager.yml
+  tags:
+    - home-manager
+
+- name: Nix | Install Node Tools | task
+  import_tasks: tasks/install_node_tools.yml
+  tags:
+    - node-tools
+
+- name: Nix | Install Rust Tools | task
+  import_tasks: tasks/install_rust_tools.yml
+  tags:
+    - rust-tools
+
+- name: Nix | Install Python Tools | task
+  import_tasks: tasks/install_python_tools.yml
+  tags:
+    - python-tools
+
+- name: Nix | Install Scripts | task
+  import_tasks: tasks/install_scripts.yml
+  tags:
+    - scripts
+
+- name: Install Zsh Config
+  import_tasks: tasks/install_zsh.yml
+  tags:
+    - zsh
+
+- name: Install Bash Config
+  import_tasks: tasks/install_bash.yml
+  tags:
+    - bash
+
+- name: Install Git Config
+  import_tasks: tasks/install_git.yml
+  tags:
+    - git
+
+- name: Install Navi Config
+  import_tasks: tasks/install_navi.yml
+  tags:
+    - navi
+
+- name: Install Neovim Config
+  import_tasks: tasks/install_neovim.yml
+  tags:
+    - neovim
+
+- name: Install Helix Config
+  import_tasks: tasks/install_helix.yml
+  tags:
+    - helix
+
+- name: Install Tmux Config
+  import_tasks: tasks/install_tmux.yml
+  tags:
+    - tmux
+
+- name: Install Zellij Config
+  import_tasks: tasks/install_zellij.yml
+  tags:
+    - zellij
+
+- name: Install Ranger-Zoxide Plugin
+  import_tasks: tasks/install_ranger_zoxide.yml
+  tags:
+    - ranger
+
+- name: Install Lazygit
+  import_tasks: tasks/install_lazygit.yml
+  tags:
+    - git
+
+- name: Install Gitui
+  import_tasks: tasks/install_gitui.yml
+  tags:
+    - git
+
+- name: Install Broot
+  import_tasks: tasks/install_broot.yml
+  tags:
+    - broot
+
+- name: Install Bookmarks
+  import_tasks: tasks/install_bookmarks.yml
+  tags:
+    - bookmarks
+
+- name: Install Direnv Config
+  import_tasks: tasks/install_direnv.yml
+  tags:
+    - direnv
+
+- name: Install Joplin Config
+  import_tasks: tasks/install_joplin.yml
+  tags:
+    - joplin

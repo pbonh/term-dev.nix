@@ -1,0 +1,10 @@
+---
+- name: Create Navi Directory
+  file:
+    path: "{{ xdg_config_dir_navi_cheats }}"
+    state: directory
+
+- name: Navi | Copies .cheat File | template
+  template:
+    src: navi/cheat.j2
+    dest: "{{ xdg_config_dir_navi_cheats }}/{{ dotfiles_user }}.cheat"

@@ -1,0 +1,3 @@
+---
+xdg_config_dir_navi: "{{ xdg_share_dir }}/navi"
+xdg_config_dir_navi_cheats: "{{ xdg_config_dir_navi }}/cheats"

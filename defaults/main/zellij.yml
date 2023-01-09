@@ -35,7 +35,7 @@ zellij_layouts:
         - direction: Vertical
           name: "Notes"
           run:
-            command: {cmd: "{{ nvim_exe }}", args: ["+cd {{ nvim_neorg_dir }}", "+e work.norg"]}
+            command: {cmd: "{{ nvim_cmd }}", args: ["+cd {{ nvim_neorg_dir }}", "+e work.norg"]}
         - direction: Vertical
           name: "Homelab"
           run:
@@ -59,13 +59,13 @@ zellij_kdl_layouts:
       - "tab name=\"main tab\" split_direction=\"vertical\" focus=true cwd=\"{{ dotfiles_user_home }}\" {"
       - "    pane"
       - "    pane {"
-      - "        command \"{{ nvim_exe }}\""
+      - "        command \"{{ nvim_cmd }}\""
       - "        cwd \"{{ xdg_config_dir }}\""
       - "    }"
       - "}"
       - "tab name=\"second tab\" cwd=\"{{ xdg_config_dir }}\" {"
       - "    pane {"
-      - "        command \"{{ nvim_exe }}\""
+      - "        command \"{{ nvim_cmd }}\""
       - "        cwd \"{{ xdg_config_dir }}\""
       - "    }"
       - "}"

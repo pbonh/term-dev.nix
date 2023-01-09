@@ -1,20 +1,28 @@
 ---
 - name: Nix | Install Nix Home-Manager | task
+  when: ansible_distribution != 'MacOSX'
   import_tasks: tasks/install_home_manager.yml
   tags:
     - home-manager
 
 - name: Nix | Install Node Tools | task
+  when: ansible_distribution != 'MacOSX'
   import_tasks: tasks/install_node_tools.yml
   tags:
     - node-tools
 
-- name: Nix | Install Rust Tools | task
+- name: Musl | Install Rust Tools | task
   import_tasks: tasks/install_rust_tools.yml
   tags:
     - rust-tools
 
+- name: Nix | Install FZF | task
+  import_tasks: tasks/install_fzf.yml
+  tags:
+    - fzf
+
 - name: Nix | Install Python Tools | task
+  when: ansible_distribution != 'MacOSX'
   import_tasks: tasks/install_python_tools.yml
   tags:
     - python-tools
@@ -29,10 +37,20 @@
   tags:
     - zsh
 
+- name: Install Nushell Config
+  import_tasks: tasks/install_nushell.yml
+  tags:
+    - nushell
+
 - name: Install Bash Config
   import_tasks: tasks/install_bash.yml
   tags:
     - bash
+
+- name: Install Tcsh Config
+  import_tasks: tasks/install_tcsh.yml
+  tags:
+    - tcsh
 
 - name: Install Git Config
   import_tasks: tasks/install_git.yml
@@ -43,6 +61,11 @@
   import_tasks: tasks/install_navi.yml
   tags:
     - navi
+
+- name: Install Neovim AppImage
+  import_tasks: tasks/install_neovim_appimage.yml
+  tags:
+    - neovim
 
 - name: Install Neovim Config
   import_tasks: tasks/install_neovim.yml
@@ -65,11 +88,13 @@
     - zellij
 
 - name: Install Ranger-Zoxide Plugin
+  when: ansible_distribution != 'MacOSX'
   import_tasks: tasks/install_ranger_zoxide.yml
   tags:
     - ranger
 
 - name: Install Lazygit
+  when: ansible_distribution != 'MacOSX'
   import_tasks: tasks/install_lazygit.yml
   tags:
     - git
@@ -95,6 +120,30 @@
     - direnv
 
 - name: Install Joplin Config
+  when: ansible_distribution != 'MacOSX'
   import_tasks: tasks/install_joplin.yml
   tags:
     - joplin
+
+- name: Boost | Install CppTools | task
+  when: ansible_distribution != 'MacOSX' and 'cpp' in install_languages
+  import_tasks: install_cpp_tools.yml
+  tags:
+    - cpp
+
+- name: VSCode CppTools | Install VSCode CppTools | task
+  when: ansible_distribution != 'MacOSX' and 'cpp' in install_languages
+  import_tasks: install_vscode_cpptools.yml
+  tags:
+    - cpp
+
+- name: Musl | Install Python Development Tools | task
+  import_tasks: tasks/install_python_dev.yml
+  tags:
+    - python-dev
+
+#- name: GCCDiag | Install GCCDiag | task
+#  import_tasks: install_gccdiag.yml
+#  tags:
+#    - cpp
+#  when: "'cpp' in install_languages"

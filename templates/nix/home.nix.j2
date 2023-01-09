@@ -14,6 +14,7 @@
     zellij
     tmux
     oil
+    tcsh
     zsh
     zoxide
     zsh-powerlevel10k
@@ -23,8 +24,10 @@
     glow
     just
     direnv
+    nix-direnv
     rargs
     fzf
+    tree
     fd
     ripgrep
     ugrep
@@ -37,6 +40,7 @@
     hyperfine
     procs
     sd
+    rnr
     diskonaut
     du-dust
     tokei
@@ -103,7 +107,9 @@
     sumneko-lua-language-server
     shfmt
     /* Language Tools Start */
-    {{ lang_tools_nix_file or "/* No Language Tools Installed */" }}
+
+    {{ lang_tools_nix_file | indent(4) or "/* No Language Tools Installed */" }}
+
     /* Language Tools End */
   ];
 
@@ -120,6 +126,9 @@
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
+  programs.direnv.enable = true;
+  programs.direnv.nix-direnv.enable = true;
+  #programs.zsh.enable = true;
 
   # Neovim Tools
   # programs.neovim = {

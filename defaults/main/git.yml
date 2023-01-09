@@ -1,4 +1,5 @@
 ---
+git_exe: "git"
 git_name: "{{ lookup('env', 'DOTFILES_BOOTSTRAP_GIT_NAME') }}"
 git_email: "{{ lookup('env', 'DOTFILES_BOOTSTRAP_GIT_EMAIL') }}"
 github_username: "{{ lookup('env', 'DOTFILES_BOOTSTRAP_GITHUB_USERNAME') }}"

@@ -1,2 +1,3 @@
 ---
+direnv_exe: "{{ cargo_path }}/direnv"
 direnv_config: "{{ dotfiles_user_home }}/.direnvrc"

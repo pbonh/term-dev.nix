@@ -6,9 +6,9 @@
 
 - name: Scripts | Copies Scripts | template
   template:
-    src: "scripts/{{ item.src }}"
+    src: "{{ item.src }}"
     dest: "{{ bin_directory }}/{{ item.path  | regex_replace('\\.j2$', '') }}"
-  with_filetree: '../templates'
+  with_filetree: '../templates/scripts'
   when: item.state == 'file'
 
 - name: Scripts | Change Script Permissions | file

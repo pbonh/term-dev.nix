@@ -14,7 +14,25 @@
     state: absent
 
 - name: Install Cargo/Rust Dev Tools
-  shell: "{{ rustc_env_variables }} {{ cargo_bin }} install {{ item.name }}"
+  shell: "{{ rustc_env_variables }} {{ cargo_bin }} install --locked {{ item.value.name }}"
   args:
-    creates: "{{ cargo_bin }}/{{ item.path }}"
-  with_items: "{{ cargo_packages }}"
+    creates: "{{ item.value.path }}"
+  loop: "{{ cargo_packages | dict2items }}"
+
+- name: Install Cargo/Rust Dev Tools
+  shell: "{{ rustc_env_variables }} {{ cargo_binstall_exe }} --no-confirm {{ item.value.name }}"
+  args:
+    creates: "{{ item.value.path }}"
+  loop: "{{ cargo_binstall_packages | dict2items }}"
+
+- name: Install Cargo/Rust Tools for Rust Development
+  shell: "{{ rustc_env_variables }} {{ cargo_binstall_exe }} --no-confirm {{ item.value.name }}"
+  args:
+    creates: "{{ item.value.path }}"
+  loop: "{{ rust_dev_packages | dict2items }}"
+
+- name: Rust | Install Tools for Rust Development | shell
+  shell: "rustup component add {{ item.value.name }}"
+  args:
+    creates: "{{ item.value.path }}"
+  loop: "{{ rustup_dev_packages | dict2items }}"

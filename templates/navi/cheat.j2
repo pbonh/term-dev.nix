@@ -9,7 +9,7 @@ sudo resolvectl flush-caches
 nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
 
 # Remove ALL Plugins
-rm -rf ~/.local/share/nvim/plugged/*
+rm -rf {{ nvim_plugged_dir }}/*
 
 # Install Plugins
 nvim --headless +PlugInstall +qall
@@ -17,7 +17,7 @@ nvim --headless +PlugInstall +qall
 % nix
 
 # Source Nix Profile
-source ~/.nix-profile/etc/profile.d/nix.sh
+source {{ nix_shell_profile }}
 
 # Update Installed Nix Packages
 nix-env -u '*'

@@ -23,7 +23,7 @@ pls_python_exe_relative: "{{ pls_bin_path_relative }}/python"
 pls_exe_relative: "{{ pls_bin_path_relative }}/pylsp"
 pls_python_exe: "{{ python_dev_virtualenv_home }}/{{ pls_python_exe_relative }}"
 pls_exe: "{{ python_dev_virtualenv_home }}/{{ pls_exe_relative }}"
-lsp_providers_cpp:
+lsp_providers_python:
   - pylsp
 treesitter_parsers_python:
   - python

@@ -6,6 +6,7 @@
     mode: 0755
 
 - name: Execute the Rustup Installer(Stable)
+  changed_when: false
   shell: "{{ rustup_script_path }} -y --default-toolchain {{ rustup_toolchain }}"
 
 - name: Remove the Rustup Installer
@@ -32,7 +33,11 @@
   loop: "{{ rust_dev_packages | dict2items }}"
 
 - name: Rust | Install Tools for Rust Development | shell
-  shell: "rustup component add {{ item.value.name }}"
+  command: "rustup component add {{ item.value.name }}"
   args:
     creates: "{{ item.value.path }}"
   loop: "{{ rustup_dev_packages | dict2items }}"
+
+- name: Rust | Update Installed Rust Packages | shell
+  changed_when: false
+  command: "{{ cargo_bin }} install-update -a"

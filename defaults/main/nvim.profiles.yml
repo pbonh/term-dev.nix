@@ -5,6 +5,8 @@ nvim_xdg_profile_dir:
   share: "{{ xdg_share_dir }}/{{ nvim_profile_dir_name }}"
   cache: "{{ xdg_cache_dir }}/{{ nvim_profile_dir_name }}"
 nvim_default_editor_options:
+  - "vim.g.loaded_netrw = 1"
+  - "vim.g.loaded_netrwPlugin = 1"
   - "vim.opt.shell= '{{ nvim_shell }}'"
   - "vim.opt.termguicolors = true"
   - "vim.opt.hidden = true"
@@ -37,7 +39,7 @@ nvim_default_editor_options:
   - "vim.opt.sidescrolloff = 5"
   - "vim.opt.ruler = false"
   - "vim.opt.showtabline = 0"
-  - "vim.opt.winwidth = 30"
+  - "vim.opt.winwidth = 10"
   - "vim.opt.pumheight = 15"
   - "vim.opt.showcmd = false"
   - "vim.opt.cmdheight = 0"
@@ -186,14 +188,16 @@ nvim_default_plugins:
       - "    },"
       - "  }"
       - "})"
+      - "require('telescope').load_extension('aerial')"
+      - "require('telescope').load_extension('dir')"
       - "require('telescope').load_extension('fzf')"
       - "require('telescope').load_extension('ui-select')"
-      - "require('telescope').load_extension('dir')"
     keymaps:
       - "{ '<leader>ff', { n = '<cmd>lua require(\\'telescope.builtin\\').find_files()<CR>', }, description = 'Telescope: Find Files', },"
       - "{ '<leader>fb', { n = '<cmd>lua require(\\'telescope.builtin\\').buffers()<CR>', }, description = 'Telescope: Find Open Buffers', },"
       - "{ '<leader>fh', { n = '<cmd>lua require(\\'telescope.builtin\\').help_tags()<CR>', }, description = 'Telescope: Find Help Tags', },"
       - "{ '<leader>ft', { n = '<cmd>Telescope tele_tabby list<CR>', }, description = 'Telescope: Search Tabs', },"
+      - "{ '<leader>fl', { n = '<cmd>Telescope aerial<CR>', }, description = 'Telescope: Search Aerial Document Symbols', },"
       - "{ '_', { n = '<cmd>lua require(\\'telescope.builtin\\').grep_string()<CR>', }, description = 'Telescope: Grep String(Cursor Word)', },"
       - "{ '<leader>q', { n = '<cmd>Telescope dir live_grep<CR>', }, description = 'Telescope: Selective Live Grep Project', },"
       - "{ '<leader>Q', { n = '<cmd>lua require(\\'telescope.builtin\\').live_grep()<CR>', }, description = 'Telescope: Live Grep Project', },"
@@ -380,6 +384,13 @@ nvim_default_plugins:
       - "   }"
       - "})"
       - "require('windows').setup()"
+      - "require('smart-splits').setup({"
+      - "  ignored_buftypes = {"
+      - "    'NvimTree',"
+      - "    'Aerial',"
+      - "    '[No Name]',"
+      - "  },"
+      - "})"
       - "local splits = require('smart-splits')"
       - "local cmd = require('hydra.keymap-util').cmd"
       - "local pcmd = require('hydra.keymap-util').pcmd"
@@ -578,7 +589,7 @@ nvim_default_plugins:
       - "      clear_on_cursor_move = false,"
       - "    },"
       - "  },"
-      - "markid = { enable = true },"
+      - "  markid = { enable = true },"
       - "  {{ treesitter_extra_config_cpp | join('\n') | indent(2) or '-- No Extra Treesitter Config' }}"
       - "})"
       - "require('treesitter-context').setup({"
@@ -668,9 +679,15 @@ nvim_default_plugins:
       - "}"
       - "use { 'chentoast/marks.nvim' }"
       - "use { 'rcarriga/nvim-notify' }"
+      - "use { 'nvim-tree/nvim-tree.lua',"
+      - "  requires = {"
+      - "    'nvim-tree/nvim-web-devicons',"
+      - "  },"
+      - "}"
     config:
       - "require('marks').setup()"
       - "require('modicator').setup()"
+      - "require('nvim-tree').setup()"
       - "require('lualine').setup({"
       - "  options = { theme  = gruvbox },"
       - "  options = {"
@@ -708,6 +725,7 @@ nvim_default_plugins:
       - "{ 'g#', { n = 'g#<Cmd>lua require(\\'hlslens\\').start()<CR>', }, description =  'HLSLens: Search Nearest Cursorword In Reverse', },"
       - "{ '<C-]>', { n = ':noh<CR>', }, description = 'HLSLens: Clear Search Result', },"
       - "{ '-', { n = ':Oil --float<CR>', }, description = 'Oil: Open Parent Directory', },"
+      - "{ '<leader>s', { n = '<cmd>NvimTreeToggle %:p:~:.:h<CR>', }, description = 'Nvim-Tree: Toggle Tree on Current File', },"
   git:
     packer:
       - "use { 'sindrets/diffview.nvim', requires = 'nvim-lua/plenary.nvim' }"
@@ -728,7 +746,6 @@ nvim_default_plugins:
       - "  requires = {"
       - "    'is0n/fm-nvim',"
       - "  },"
-      - "  tag = 'v2.*',"
       - "}"
     config:
       - "require('fm-nvim').setup({"
@@ -828,8 +845,8 @@ nvim_default_plugins:
     keymaps:
       - "-- { '<leader>sj', { n = '<cmd>lua require(\\'fm-nvim\\').Joshuto(vim.fm.expand(\\'%:p:~:.:h\\'))<CR>', }, description = 'ToggleTerm: Joshuto(Current File)', },"
       - "-- { '<leader>sJ', { n = '<cmd>lua require(\\'fm-nvim\\').Joshuto()<CR>', }, description = 'ToggleTerm: Joshuto(Project Root)', },"
-      - "{ '<leader>sx', { n = '<cmd>lua require(\\'fm-nvim\\').Xplr(vim.fn.expand(\\'%:p:~:.:h\\'))<CR>', }, description = 'ToggleTerm: XPLR(Current File)', },"
-      - "{ '<leader>sX', { n = '<cmd>lua require(\\'fm-nvim\\').Xplr()<CR>', }, description = 'ToggleTerm: XPLR(Project Root)', },"
+      - "-- { '<leader>sx', { n = '<cmd>lua require(\\'fm-nvim\\').Xplr(vim.fn.expand(\\'%:p:~:.:h\\'))<CR>', }, description = 'ToggleTerm: XPLR(Current File)', },"
+      - "-- { '<leader>sX', { n = '<cmd>lua require(\\'fm-nvim\\').Xplr()<CR>', }, description = 'ToggleTerm: XPLR(Project Root)', },"
       - "{ '<leader>j', { n = '<cmd>lua just_terminal_runner()<CR>', }, description = 'ToggleTerm: GitUI', },"
       - "-- { '<leader>gg', { n = '<cmd>lua gitui_terminal_runner()<CR>', }, description = 'ToggleTerm: GitUI', },"
   motion:
@@ -881,7 +898,16 @@ nvim_default_plugins:
       - "    'hrsh7th/cmp-nvim-lsp',"
       - "  },"
       - "}"
+      - "use { 'stevearc/aerial.nvim', }"
     config:
+      - "require('aerial').setup({"
+      - "  -- optionally use on_attach to set keymaps when aerial has attached to a buffer"
+      - "  on_attach = function(bufnr)"
+      - "    -- Jump forwards/backwards with '{' and '}'"
+      - "    vim.keymap.set('n', '{', '<cmd>AerialPrev<CR>', {buffer = bufnr})"
+      - "    vim.keymap.set('n', '}', '<cmd>AerialNext<CR>', {buffer = bufnr})"
+      - "  end"
+      - "})"
       - "require('glance').setup()"
       - "local null_ls = require('null-ls')"
       - "null_ls.setup({"
@@ -1036,7 +1062,8 @@ nvim_default_plugins:
       - "{ 'gs', { n = '<cmd>Telescope lsp_document_symbols<CR>', }, description = 'Telescope: Document Symbol Finder', },"
       - "{ 'gS', { n = '<cmd>Telescope lsp_dynamic_workspace_symbols<CR>', }, description = 'Telescope: Workspace Symbol Finder', },"
       - "-- { '<leader>ca', { n = '<cmd>Lspsaga code_action<CR>', }, description = 'LSPSaga: Code Action', },"
-      - "{ '<leader>S', { n = '<cmd>Lspsaga outline<CR>', }, description = 'LSPSaga: Outline Toggle', },"
+      - "-- { '<leader>S', { n = '<cmd>Lspsaga outline<CR>', }, description = 'LSPSaga: Outline Toggle', },"
+      - "{ '<leader>S', { n = '<cmd>AerialToggle! right<CR>', }, description = 'Aerial: Outline Toggle', },"
       - "{ 'K', { n = '<cmd>Lspsaga hover_doc<CR>', }, description = 'LSPSaga: Hover Docs', },"
       - "{ '[e', { n = '<cmd>Lspsaga diagnostic_jump_prev<CR>', }, description = 'LSPSaga: Previous Diagnostic', },"
       - "{ 'e]', { n = '<cmd>Lspsaga diagnostic_jump_next<CR>', }, description = 'LSPSaga: Next Diagnostic', },"
@@ -1077,6 +1104,8 @@ nvim_default_plugins:
       - "{ '<F11>', { n = '<cmd>lua require(\\'dap\\').step_into()<CR>', }, description = 'DAP: Step Into', },"
       - "{ '<F12>', { n = '<cmd>lua require(\\'dap\\').step_out()<CR>', }, description = 'DAP: Step Out', },"
 nvim_extra_plugins: {}
+nvim_startup_commands: |
+  vim.cmd("WindowsDisableAutowidth")
 nvim_xdg_profiles:
   musl:
     name: musl

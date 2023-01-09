@@ -1,0 +1,41 @@
+---
+- name: Neovim | Download Neovim Appimage | get_url
+  when: ansible_distribution != 'MacOSX'
+  get_url:
+    url: "{{ nvim_appimage_url }}"
+    dest: "{{ nvim_appimage_exe }}"
+    mode: 0755
+
+- name: Neovim | Setup Neovim Download Directory | file
+  when: ansible_distribution == 'MacOSX'
+  file:
+    path: "{{ item }}"
+    state: directory
+    mode: '0755'
+  loop:
+    - "{{ nvim_macos_download_dir }}"
+    - "{{ nvim_macos_install_dir }}"
+
+- name: Neovim | Download Neovim Exe | get_url
+  when: ansible_distribution == 'MacOSX'
+  get_url:
+    url: "{{ nvim_exe_url }}/{{ nvim_macos_download_archive }}"
+    dest: "{{ nvim_macos_install_download }}"
+    mode: 0755
+
+- name: Neovim | Fix Neovim Download Permissions | shell
+  when: ansible_distribution == 'MacOSX'
+  shell: "xattr -c {{ nvim_macos_install_download }}"
+
+- name: Neovim | Unarchive Neovim Download | get_url
+  when: ansible_distribution == 'MacOSX'
+  ansible.builtin.unarchive:
+    src: "{{ nvim_macos_install_download }}"
+    dest: "{{ nvim_macos_install_dir }}"
+
+- name: Neovim | Symlink Neovim Exe | file
+  when: ansible_distribution == 'MacOSX'
+  file:
+    src: "{{ nvim_macos_download_dir }}/{{ nvim_macos_download }}/{{ nvim_macos_exe }}"
+    path: "{{ bin_directory }}/nvim"
+    state: link

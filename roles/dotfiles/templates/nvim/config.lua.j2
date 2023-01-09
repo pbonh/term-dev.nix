@@ -145,6 +145,11 @@ require('neorg').setup {
   -- Tell Neorg what modules to load
   load = {
       ["core.defaults"] = {}, -- Load all the default modules
+      ["core.norg.news"] = {
+        config = {
+          check_news = false,
+        },
+      },
       ["core.keybinds"] = {
           config = {
               default_keybinds = false,

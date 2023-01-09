@@ -1,0 +1,63 @@
+-- Packer Initialization
+local packer = require('packer')
+
+-- Packer Settings
+packer.init({
+  display = {
+    open_fn = function()
+      return require("packer.util").float { border = "rounded" }
+    end,
+  },
+  git = {
+    cmd = '{{ git_exe }}',
+    clone_timeout = 80,
+  },
+  autoremove = true,
+})
+
+-- Packer Plugins
+packer.startup(function(use)
+  -- Package manager
+  use 'wbthomason/packer.nvim'
+
+  -- Neovim Plugins(Default)
+  {% for plugin in nvim_default_plugins -%}
+  {{ nvim_default_plugins[plugin]['packer'] | join('\n') | indent(2) }}
+  {% endfor %}
+
+  -- Neovim Plugins(Extra)
+  {% for language in nvim_extra_plugins -%}
+  {{ nvim_extra_plugins[language]['packer'] | join('\n') | indent(2) }}
+  {% endfor %}
+
+end)
+
+-- Neovim Editor Settings
+{{ nvim_default_editor_options_file or "-- No Editor Options Set" }}
+
+-- Neovim Keymap Settings
+{{ nvim_default_keymap_options_file or "-- No Keymaps Set" }}
+
+-- Neovim UI Settings
+{{ nvim_default_ui_options_file or "-- No UI Options Set" }}
+
+-- Neovim Plugin Settings
+{% for plugin in nvim_default_plugins -%}
+{{ nvim_default_plugins[plugin]['config'] | join('\n') }}
+{% endfor %}
+
+-- Neovim Plugin Settings(Extra)
+{% for language in nvim_extra_plugins -%}
+{{ nvim_extra_plugins[language]['config'] | join('\n') }}
+{% endfor %}
+
+-- Neovim Plugin Keymap Settings
+require('legendary').setup({
+  keymaps = {
+    {% for plugin in nvim_default_plugins -%}
+    {{ nvim_default_plugins[plugin]['keymaps'] | join('\n') | indent(4) }}
+    {% endfor %}
+
+  },
+})
+

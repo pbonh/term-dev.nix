@@ -1,6 +1,5 @@
 set dotenv-load := true
-set shell := ["/usr/bin/bash", "-cu"]
-export BASH_ENV := "$HOME/.nix-profile/etc/profile.d/nix.sh"
+set shell := ["/bin/bash", "-cu"]
 
 default:
   @just --list

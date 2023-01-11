@@ -25,6 +25,9 @@ cargo_binstall_packages:
   broot:
     name: broot
     path: "{{ cargo_path }}/broot"
+  btm:
+    name: btm
+    path: "{{ cargo_path }}/btm"
   choose:
     name: choose
     path: "{{ cargo_path }}/choose"
@@ -122,6 +125,7 @@ rustc_env_variables: ""
 atuin_exe: "{{ cargo_binstall_packages['atuin']['path'] }}"
 bat_exe: "{{ cargo_binstall_packages['bat']['path'] }}"
 broot_exe: "{{ cargo_binstall_packages['broot']['path'] }}"
+btm_exe: "{{ cargo_binstall_packages['btm']['path'] }}"
 choose_exe: "{{ cargo_binstall_packages['choose']['path'] }}"
 counts_exe: "{{ cargo_binstall_packages['counts']['path'] }}"
 delta_exe: "{{ cargo_binstall_packages['git-delta']['path'] }}"

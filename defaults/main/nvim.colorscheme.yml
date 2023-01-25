@@ -1,0 +1,8 @@
+---
+nvim_colorscheme_default:
+  packer: |
+    use 'sainnhe/gruvbox-material'
+  config: |
+    vim.o.background = 'dark'
+    vim.cmd([[colorscheme gruvbox-material]])
+  keymaps: ''

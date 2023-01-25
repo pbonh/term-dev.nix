@@ -52,8 +52,8 @@ nvim_fterm_cmds:
 nvim_custom_filetypes: {}
 lsp_provider_neovim_plugins: []
 language_neovim_plugins: []
-ale_plugin_settings: []
-neoformat_plugin_settings: []
+ale_plugin_settings: ''
+neoformat_plugin_settings: ''
 dap_plugin_settings: []
 extra_nvim_lua_settings: []
 extra_nvim_vimscript_settings: []
@@ -61,12 +61,12 @@ extra_plugin_settings: []
 extra_lua_plugin_settings: []
 extra_nvim_language_mappings: []
 lsp_providers: []
-null_ls_providers_luafile: "{{ null_ls_providers | join(\", \") }}"
-null_ls_providers: []
+null_ls_providers: ''
 lsp_providers_luafile: "{{ \"'\" + lsp_providers | join(\"', '\") + \"'\" }}"
 lsp_providers_file: "{{ (lsp_providers_luafile != '') | ternary(lsp_providers_luafile, '-- No Additional Servers Preconfigured') }}"
 lsp_providers_plugins: []
 lsp_providers_setup: []
+treesitter_compiler_path_settings: "require('nvim-treesitter.install').compilers = { '{{ gcc_exe }}', }"
 treesitter_parsers: []
 treesitter_custom_parsers_default:
   - just
@@ -74,29 +74,25 @@ treesitter_custom_parsers: "{{ treesitter_custom_parsers_default }}"
 treesitter_parsers_all: "{{ treesitter_parsers + treesitter_custom_parsers }}"
 treesitter_extra_config: []
 refactoring_settings: []
-telescope_picker_config: []
+telescope_picker_config: ''
 nvim_completion_config: []
-treesitter_custom_parsers_info:
-  - "parser_configs.just = {"
-  - "  install_info = {"
-  - "    url = \"https://github.com/IndianBoy42/tree-sitter-just\","
-  - "    files = { \"src/parser.c\", \"src/scanner.cc\" },"
-  - "    branch = \"main\","
-  - "  },"
-  - "  maintainers = { \"@IndianBoy42\" },"
-  - "}"
+treesitter_custom_parsers_info: |
+  parser_configs.just = {
+    install_info = {
+      url = "https://github.com/IndianBoy42/tree-sitter-just",
+      files = { "src/parser.c", "src/scanner.cc" },
+      branch = "main",
+    },
+    maintainers = { "@IndianBoy42" },
+  }
 lsp_provider_file: "{{ '''' + lsp_providers |join(''', ''') + '''' }}"
 lsp_provider_plugins_file: "{{ lsp_providers_plugins | join('\n') }}"
 lsp_provider_lspconfig_setup_file: "{{ lsp_providers_setup | join('\n') }}"
 lsp_provider_neovim_plugins_file: "{{ lsp_provider_neovim_plugins | join('\n') }}"
 language_neovim_plugins_file: "{{ language_neovim_plugins | join('\n') }}"
 treesitter_parsers_file: "{{ '\"' + treesitter_parsers_all |join('\", \"') + '\"' }}"
-treesitter_parsers_custom_file: "{{ treesitter_custom_parsers_info | join('\n') }}"
+treesitter_parsers_luafile: "{{ \"'\" + treesitter_parsers_all | join(\"', '\") + \"'\" }}"
 refactoring_settings_file: "{{ refactoring_settings | join('\n') }}"
-telescope_picker_config_file: "{{ telescope_picker_config | join('\n') }}"
-nvim_completion_config_file: "{{ nvim_completion_config | join('\n') }}"
-ale_plugin_settings_file: "{{ ale_plugin_settings | join('\n') }}"
-neoformat_plugin_settings_file: "{{ neoformat_plugin_settings | join('\n') }}"
 dap_plugin_settings_file: "{{ dap_plugin_settings | join('\n') }}"
 extra_nvim_lua_settings_file: "{{ extra_nvim_lua_settings | join('\n') }}"
 extra_plugin_settings_file: "{{ extra_plugin_settings | join('\n') }}"

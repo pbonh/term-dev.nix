@@ -6,6 +6,6 @@
     depth: 1
 
 - name: FZF | Install FZF | shell
-  shell: "{{ fzf_install_dir }}/install"
+  shell: "{{ fzf_install_dir }}/install --no-update-rc"
   args:
     creates: "{{ fzf_exe }}"

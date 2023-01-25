@@ -22,40 +22,40 @@ packer.startup(function(use)
 
   -- Neovim Plugins(Default)
   {% for plugin in nvim_default_plugins -%}
-  {{ nvim_default_plugins[plugin]['packer'] | join('\n') | indent(2) }}
+  {{ nvim_default_plugins[plugin]['packer'] | indent(2) }}
   {% endfor %}
 
   -- Neovim Plugins(Extra)
   {% for language in nvim_extra_plugins -%}
-  {{ nvim_extra_plugins[language]['packer'] | join('\n') | indent(2) }}
+  {{ nvim_extra_plugins[language]['packer'] | indent(2) }}
   {% endfor %}
 
 end)
 
 -- Neovim Editor Settings
-{{ nvim_default_editor_options_file or "-- No Editor Options Set" }}
+{{ nvim_default_editor_options or "-- No Editor Options Set" }}
 
 -- Neovim Keymap Settings
-{{ nvim_default_keymap_options_file or "-- No Keymaps Set" }}
+{{ nvim_default_keymap_options or "-- No Keymaps Set" }}
 
 -- Neovim UI Settings
-{{ nvim_default_ui_options_file or "-- No UI Options Set" }}
+{{ nvim_default_ui_options or "-- No UI Options Set" }}
 
 -- Neovim Plugin Settings
 {% for plugin in nvim_default_plugins -%}
-{{ nvim_default_plugins[plugin]['config'] | join('\n') }}
+{{ nvim_default_plugins[plugin]['config'] }}
 {% endfor %}
 
 -- Neovim Plugin Settings(Extra)
 {% for language in nvim_extra_plugins -%}
-{{ nvim_extra_plugins[language]['config'] | join('\n') }}
+{{ nvim_extra_plugins[language]['config'] }}
 {% endfor %}
 
 -- Neovim Plugin Keymap Settings
 require('legendary').setup({
   keymaps = {
     {% for plugin in nvim_default_plugins -%}
-    {{ nvim_default_plugins[plugin]['keymaps'] | join('\n') | indent(4) }}
+    {{ nvim_default_plugins[plugin]['keymaps'] | indent(4) }}
     {% endfor %}
 
   },

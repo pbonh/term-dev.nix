@@ -79,6 +79,6 @@ easypick.setup({
 			command = "{{ nix_bin }}/just --list",
 			previewer = easypick.previewers.default()
 		},
-    {{ telescope_picker_config_file or "-- No Extra Telescope Picker Config" }}
+    {{ telescope_picker_config or "-- No Extra Telescope Picker Config" }}
 	}
 })

@@ -1,0 +1,25 @@
+---
+nvim_motion_default:
+  packer: |
+    use { 'ggandor/flit.nvim',
+      requires = {
+        'ggandor/leap.nvim',
+        'ggandor/leap-spooky.nvim',
+      },
+    }
+    use { 'cbochs/portal.nvim',
+      requires = {
+        'cbochs/grapple.nvim',  -- Optional: provides the 'grapple' query item
+        'ThePrimeagen/harpoon', -- Optional: provides the 'harpoon' query item
+      },
+    }
+    use { 'kylechui/nvim-surround' }
+  config: |
+    require('leap').set_default_keymaps(true)
+    require('leap-spooky').setup()
+    require('flit').setup()
+    require('portal').setup()
+    require('nvim-surround').setup()
+  keymaps: |
+    { '<C-o>', { n = '<cmd>lua require(\'portal\').jump_backward()<CR>', }, description = 'Portal: Jump Backward', },
+    { '<C-i>', { n = '<cmd>lua require(\'portal\').jump_forward()<CR>', }, description = 'Portal: Jump Forward', },

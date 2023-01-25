@@ -22,60 +22,66 @@ lsp_providers_rust_setup: []
 rust_extra_lua_plugin_settings: []
 rust_analyzer_exe: "rust-analyzer"
 clippy_exe: "cargo-clippy"
-extra_nvim_plugins_rust:
-  - "use { 'simrat39/rust-tools.nvim',"
-  - "  requires = {"
-  - "    'nvim-lua/plenary.nvim',"
-  - "    'mfussenegger/nvim-dap',"
-  - "  }"
-  - "}"
-extra_nvim_config_rust:
-  - "dap.adapters.rustdbg = {"
-  - "  id = 'rustdbg',"
-  - "  type = 'executable',"
-  - "  command = '{{ rust_dbg }}',"
-  - "  name = 'rustdbg'"
-  - "}"
-  - "dap.configurations.rust = {"
-  - "  {"
-  - "    name = \"Rust Debug\","
-  - "    type = \"lldb\","
-  - "    request = \"launch\","
-  - "    program = function()"
-  - "      vim.fn.jobstart('cargo build')"
-  - "      return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/target/debug/', 'file')"
-  - "    end,"
-  - "    cwd = '${workspaceFolder}',"
-  - "    stopOnEntry = true,"
-  - "  },"
-  - "}"
-  - "-- Update this path"
-  - "local extension_path = '{{ codelldb_install_path }}/'"
-  - "local codelldb_path = extension_path .. '{{ codelldb_bin_path }}'"
-  - "local liblldb_path = extension_path .. '{{ codelldb_liblldb_path }}'"
-  - "local opts = {"
-  - "  tools = {"
-  - "    executor = require('rust-tools.executors').toggleterm,"
-  - "    hover_actions = {"
-  - "      auto_focus = true,"
-  - "    },"
-  - "  },"
-  - "  server = {"
-  - "    cmd = { \"{{ rust_analyzer_exe }}\" },"
-  - "    settings = {"
-  - "      ['rust-analyzer'] = {"
-  - "        checkOnSave = {"
-  - "          command = 'clippy',"
-  - "        },"
-  - "      },"
-  - "    }"
-  - "  }, -- rust-analyzer options"
-  - "  dap = {"
-  - "      adapter = require('rust-tools.dap').get_codelldb_adapter(codelldb_path, liblldb_path)"
-  - "  },"
-  - "}"
-  - "require('rust-tools').setup(opts)"
-extra_nvim_keymap_rust:
-  - "vim.api.nvim_set_keymap('n', '<leader>ch', '<cmd>lua require(\"rust-tools\").hover_actions.hover_actions()<CR>', { noremap = true, silent = true })"
-  - "vim.api.nvim_set_keymap('n', '<leader>ca', '<cmd>lua require(\"rust-tools\").code_action_group.code_action_group()<CR>', { noremap = true, silent = true })"
-  - "vim.api.nvim_set_keymap('n', '<leader>cd', '<cmd>RustDebuggables<CR>', { noremap = true, silent = true })"
+null_ls_providers_rust: |
+  null_ls.builtins.formatting.rustfmt,
+extra_nvim_plugins_rust: |
+  use { 'simrat39/rust-tools.nvim',
+    requires = {
+      'nvim-lua/plenary.nvim',
+      'mfussenegger/nvim-dap',
+    }
+  }
+extra_nvim_config_rust: |
+  dap.adapters.rustdbg = {
+    id = 'rustdbg',
+    type = 'executable',
+    command = '{{ rust_dbg }}',
+    name = 'rustdbg'
+  }
+  dap.configurations.rust = {
+    {
+      name = 'Rust Debug',
+      type = 'lldb',
+      request = 'launch',
+      program = function()
+        vim.fn.jobstart('cargo build')
+        return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/target/debug/', 'file')
+      end,
+      cwd = '${workspaceFolder}',
+      stopOnEntry = true,
+    },
+  }
+  -- Update this path
+  local extension_path = '{{ codelldb_install_path }}/'
+  local codelldb_path = extension_path .. '{{ codelldb_bin_path }}'
+  local liblldb_path = extension_path .. '{{ codelldb_liblldb_path }}'
+  local opts = {
+    tools = {
+      executor = require('rust-tools.executors').toggleterm,
+      hover_actions = {
+        auto_focus = true,
+      },
+    },
+    server = {
+      cmd = { '{{ rust_analyzer_exe }}' },
+      settings = {
+        ['rust-analyzer'] = {
+          cargo = {
+            allFeatures = true,
+          },
+          checkOnSave = {
+            allFeatures = true,
+            command = 'clippy',
+          },
+        },
+      }
+    }, -- rust-analyzer options
+    dap = {
+        adapter = require('rust-tools.dap').get_codelldb_adapter(codelldb_path, liblldb_path)
+    },
+  }
+  require('rust-tools').setup(opts)
+extra_nvim_keymap_rust: |
+  vim.api.nvim_set_keymap('n', '<leader>ch', '<cmd>lua require(\"rust-tools\").hover_actions.hover_actions()<CR>', { noremap = true, silent = true })
+  vim.api.nvim_set_keymap('n', '<leader>ca', '<cmd>lua require(\"rust-tools\").code_action_group.code_action_group()<CR>', { noremap = true, silent = true })
+  vim.api.nvim_set_keymap('n', '<leader>cd', '<cmd>RustDebuggables<CR>', { noremap = true, silent = true })

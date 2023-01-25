@@ -580,7 +580,7 @@ call plug#end()
   let g:neoformat_enabled_yaml = ['prettier']
   let g:neoformat_enabled_json = ['prettier']
   let g:shfmt_opt="-ci"
-{{ neoformat_plugin_settings_file or "\" No Languages Configured for Formatting" }}
+{{ neoformat_plugin_settings or "\" No Languages Configured for Formatting" }}
 " Neoformat Settings(End) -----------------------------------------------------
 
 " FZF Settings ----------------------------------------------------------------
@@ -777,7 +777,7 @@ call plug#end()
   let g:ale_lint_on_text_changed = 'never'
   let g:ale_lint_on_insert_leave = 0
   let g:ale_lint_on_enter = 0
-{{ ale_plugin_settings_file or "\" No ALE Languages Configured" }}
+{{ ale_plugin_settings or "\" No ALE Languages Configured" }}
 " ALE Settings(End) -----------------------------------------------------------
 
 " Sneak Settings --------------------------------------------------------------

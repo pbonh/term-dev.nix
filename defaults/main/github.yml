@@ -1,0 +1,6 @@
+---
+extra_nvim_plugins_github: |
+  use { 'github/copilot.vim' }
+extra_nvim_config_github: ""
+extra_nvim_keymap_github: |
+  vim.api.nvim_set_keymap('n', '<leader>co', '<cmd>Copilot enable<CR>', { noremap = true, silent = true })

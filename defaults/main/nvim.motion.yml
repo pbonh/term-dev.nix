@@ -14,12 +14,22 @@ nvim_motion_default:
       },
     }
     use { 'kylechui/nvim-surround' }
+    use {
+      "SmiteshP/nvim-navbuddy",
+      requires = {
+        "neovim/nvim-lspconfig",
+        "SmiteshP/nvim-navic",
+        "MunifTanjim/nui.nvim"
+      }
+    }
   config: |
     require('leap').set_default_keymaps(true)
     require('leap-spooky').setup()
     require('flit').setup()
     require('portal').setup()
     require('nvim-surround').setup()
+    local navbuddy = require("nvim-navbuddy")
   keymaps: |
-    { '<C-o>', { n = '<cmd>lua require(\'portal\').jump_backward()<CR>', }, description = 'Portal: Jump Backward', },
-    { '<C-i>', { n = '<cmd>lua require(\'portal\').jump_forward()<CR>', }, description = 'Portal: Jump Forward', },
+    { '<C-o>', { n = '<cmd>Portal jumplist backward<CR>', }, description = 'Portal: Jump Backward', },
+    { '<C-i>', { n = '<cmd>Portal jumplist forward<CR>', }, description = 'Portal: Jump Forward', },
+    { '<C-Space>', { n = '<cmd>lua require("nvim-navbuddy").open()<CR>', }, description = 'NavBuddy: Open', },

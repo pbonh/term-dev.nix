@@ -15,7 +15,7 @@ layout {
             plugin location="zellij:status-bar"
         }
     }
-    {{ zellij_kdl_layout_info | join('\n') }}
+    {{ zellij_kdl_layout_info }}
 }
 session_name "{{ zellij_kdl_session_name }}"
 attach_to_session true

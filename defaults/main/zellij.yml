@@ -55,17 +55,17 @@ zellij_kdl_config_file: "{{ zellij_config_dir }}/config.kdl"
 zellij_kdl_layouts:
   example:
     name: dev1
-    layout_info:
-      - "tab name=\"main tab\" split_direction=\"vertical\" focus=true cwd=\"{{ dotfiles_user_home }}\" {"
-      - "    pane"
-      - "    pane {"
-      - "        command \"{{ nvim_cmd }}\""
-      - "        cwd \"{{ xdg_config_dir }}\""
-      - "    }"
-      - "}"
-      - "tab name=\"second tab\" cwd=\"{{ xdg_config_dir }}\" {"
-      - "    pane {"
-      - "        command \"{{ nvim_cmd }}\""
-      - "        cwd \"{{ xdg_config_dir }}\""
-      - "    }"
-      - "}"
+    layout_info: |
+      tab name="main tab" split_direction="vertical" focus=true cwd="{{ dotfiles_user_home }}" {
+          pane
+          pane {
+              command "{{ nvim_cmd }}"
+              cwd "{{ xdg_config_dir }}"
+          }
+      }
+      tab name="second tab" cwd="{{ xdg_config_dir }}" {
+          pane {
+              command "{{ nvim_cmd }}"
+              cwd "{{ xdg_config_dir }}"
+          }
+      }

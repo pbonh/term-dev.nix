@@ -1,8 +1,9 @@
 ---
-nvim_appimage_version: v0.8.1
+nvim_version: "stable"
+nvim_appimage_version: "{{ nvim_version }}"
 nvim_appimage_url: "https://github.com/neovim/neovim/releases/download/{{ nvim_appimage_version }}/nvim.appimage"
 nvim_appimage_exe: "{{ bin_directory }}/nvim.appimage"
-nvim_exe_url: https://github.com/neovim/neovim/releases/download/stable
+nvim_exe_url: "https://github.com/neovim/neovim/releases/download/{{ nvim_version }}"
 nvim_macos_download: nvim-macos
 nvim_macos_download_archive: "{{ nvim_macos_download }}.tar.gz"
 nvim_macos_download_dir: "{{ dotfiles_user_home }}/.local"

@@ -112,7 +112,8 @@ nvim_intellisense_default:
       },
       {{ nvim_completion_config_cpp | indent(2) or '-- No Extra Completion Config' }}
     })
-    local on_attach = function(_, bufnr)
+    local on_attach = function(client, bufnr)
+      navbuddy.attach(client, bufnr)
       vim.cmd [[ command! Format execute 'lua vim.lsp.buf.formatting()' ]]
     end
     local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -129,12 +130,27 @@ nvim_intellisense_default:
       }
     end
     require('lspsaga').setup({
+      -- finder = {
+      --   edit = { 'o', '<CR>' },
+      --   vsplit = 'v',
+      --   split = 'x',
+      --   tabe = 't',
+      --   quit = { 'q', '<ESC>' },
+      -- },
       finder = {
-        edit = { 'o', '<CR>' },
-        vsplit = 'v',
-        split = 'x',
-        tabe = 't',
-        quit = { 'q', '<ESC>' },
+        max_height = 0.5,
+        min_width = 30,
+        force_max_height = false,
+        keys = {
+          jump_to = 'p',
+          expand_or_jump = 'o',
+          vsplit = 's',
+          split = 'i',
+          tabe = 't',
+          tabnew = 'r',
+          quit = { 'q', '<ESC>' },
+          close_in_preview = '<ESC>',
+        },
       },
       definition = {
         edit = { 'o', '<CR>' },
@@ -199,8 +215,10 @@ nvim_intellisense_default:
     -- })
   keymaps: |
     -- { 'gd', { n = '<cmd>Lspsaga peek_definition<CR>', }, description = 'LSPSaga: Peek Definition', },
-    { 'gd', { n = '<cmd>Lspsaga lsp_finder<CR>', }, description = 'LSPSaga: Definition/Reference Finder', },
-    { 'ga', { n = '<cmd>Lspsaga code_action<CR>', }, description = 'LSPSaga: Definition/Reference Finder', },
+    -- { 'gd', { n = '<cmd>Lspsaga lsp_finder<CR>', }, description = 'LSPSaga: Definition/Reference Finder', },
+    -- { 'ga', { n = '<cmd>Lspsaga code_action<CR>', }, description = 'LSPSaga: Definition/Reference Finder', },
+    { 'gd', { n = '<cmd>Telescope lsp_definitions<CR>', }, description = 'Telescope: Definition Finder', },
+    { 'gr', { n = '<cmd>Telescope lsp_references<CR>', }, description = 'Telescope: Reference Finder', },
     { 'gs', { n = '<cmd>Telescope lsp_document_symbols<CR>', }, description = 'Telescope: Document Symbol Finder', },
     { 'gS', { n = '<cmd>Telescope lsp_dynamic_workspace_symbols<CR>', }, description = 'Telescope: Workspace Symbol Finder', },
     -- { '<leader>ca', { n = '<cmd>Lspsaga code_action<CR>', }, description = 'LSPSaga: Code Action', },

@@ -49,6 +49,9 @@ cargo_binstall_packages:
   du-dust:
     name: du-dust
     path: "{{ cargo_path }}/dust"
+  erdtree:
+    name: erdtree
+    path: "{{ cargo_path }}/et"
   eva:
     name: eva
     path: "{{ cargo_path }}/eva"
@@ -85,6 +88,9 @@ cargo_binstall_packages:
   macchina:
     name: macchina
     path: "{{ cargo_path }}/macchina"
+  mprocs:
+    name: mprocs
+    path: "{{ cargo_path }}/mprocs"
   navi:
     name: navi
     path: "{{ cargo_path }}/navi"
@@ -112,6 +118,9 @@ cargo_binstall_packages:
   starship:
     name: starship
     path: "{{ cargo_path }}/starship"
+  wikitui:
+    name: wiki-tui
+    path: "{{ cargo_path }}/wiki-tui"
   xcp:
     name: xcp
     path: "{{ cargo_path }}/xcp"
@@ -135,6 +144,7 @@ difftastic_exe: "{{ cargo_binstall_packages['difftastic']['path'] }}"
 diffr_exe: "{{ cargo_binstall_packages['diffr']['path'] }}"
 dust_exe: "{{ cargo_binstall_packages['du-dust']['path'] }}"
 eva_exe: "{{ cargo_binstall_packages['eva']['path'] }}"
+erdtree_exe: "{{ cargo_binstall_packages['erdtree']['path'] }}"
 exa_exe: "{{ cargo_binstall_packages['exa']['path'] }}"
 fd_exe: "{{ cargo_binstall_packages['fd-find']['path'] }}"
 felix_exe: "{{ cargo_binstall_packages['felix']['path'] }}"
@@ -146,6 +156,7 @@ joshuto_exe: "{{ cargo_binstall_packages['joshuto']['path'] }}"
 just_exe: "{{ cargo_binstall_packages['just']['path'] }}"
 lsd_exe: "{{ cargo_binstall_packages['lsd']['path'] }}"
 macchina_exe: "{{ cargo_binstall_packages['macchina']['path'] }}"
+mprocs_exe: "{{ cargo_binstall_packages['mprocs']['path'] }}"
 navi_exe: "{{ cargo_binstall_packages['navi']['path'] }}"
 nu_exe: "{{ cargo_binstall_packages['nu']['path'] }}"
 ouch_exe: "{{ cargo_binstall_packages['ouch']['path'] }}"
@@ -155,10 +166,8 @@ rnr_exe: "{{ cargo_binstall_packages['rnr']['path'] }}"
 sd_exe: "{{ cargo_binstall_packages['sd']['path'] }}"
 skim_exe: "{{ cargo_binstall_packages['skim']['path'] }}"
 starship_exe: "{{ cargo_binstall_packages['starship']['path'] }}"
+wikitui_exe: "{{ cargo_binstall_packages['wikitui']['path'] }}"
 xcp_exe: "{{ cargo_binstall_packages['xcp']['path'] }}"
 xplr_exe: "{{ cargo_binstall_packages['xplr']['path'] }}"
 zellij_exe: "{{ cargo_binstall_packages['zellij']['path'] }}"
 zoxide_exe: "{{ cargo_binstall_packages['zoxide']['path'] }}"
-rust_dev_packages: {}
-rust_dev_packages_rustup: {}
-rustup_dev_packages: {}

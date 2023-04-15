@@ -51,12 +51,12 @@ nvim_default_editor_options: |
   vim.opt.undofile = true
   vim.opt.smarttab = true
   vim.opt.expandtab = true
-  vim.opt.autoindent = true
+  -- vim.opt.autoindent = true
   vim.opt.tabstop = 2
   vim.opt.shiftwidth = 2
   vim.opt.linebreak = true
   vim.opt.whichwrap = 'h,l,<,>,[,],~'
-  vim.opt.breakindentopt = 'shift:2,min:20'
+  -- vim.opt.breakindentopt = 'shift:2,min:20'
   vim.opt.showbreak = '↳  '
   vim.opt.number = true
   vim.opt.relativenumber = true
@@ -73,11 +73,11 @@ nvim_default_keymap_options: |
   vim.g.mapleader = ' '
   vim.g.maplocalleader = ' '
   vim.api.nvim_set_keymap('', '<Space>', '<Nop>', { noremap = true, silent = true })
-  vim.api.nvim_set_keymap('t', '<C-]>', '<C-\\\\><C-n> ', { noremap = true, silent = true })
-  vim.api.nvim_set_keymap('t', '<C-h>', '<C-\\\\><C-n><C-W>h ', { noremap = true, silent = true })
-  vim.api.nvim_set_keymap('t', '<C-j>', '<C-\\\\><C-n><C-W>j ', { noremap = true, silent = true })
-  vim.api.nvim_set_keymap('t', '<C-k>', '<C-\\\\><C-n><C-W>k ', { noremap = true, silent = true })
-  vim.api.nvim_set_keymap('t', '<C-l>', '<C-\\\\><C-n><C-W>l ', { noremap = true, silent = true })
+  vim.api.nvim_set_keymap('t', '<C-]>', '<C-\\><C-n> ', { noremap = true, silent = true })
+  vim.api.nvim_set_keymap('t', '<C-h>', '<C-\\><C-n><C-W>h ', { noremap = true, silent = true })
+  vim.api.nvim_set_keymap('t', '<C-j>', '<C-\\><C-n><C-W>j ', { noremap = true, silent = true })
+  vim.api.nvim_set_keymap('t', '<C-k>', '<C-\\><C-n><C-W>k ', { noremap = true, silent = true })
+  vim.api.nvim_set_keymap('t', '<C-l>', '<C-\\><C-n><C-W>l ', { noremap = true, silent = true })
   -- vim.api.nvim_set_keymap('n', 'k', \"v:count == 0 ? 'gk' : 'k'\", { noremap = true, expr = true, silent = true })
   -- vim.api.nvim_set_keymap('n', 'j', \"v:count == 0 ? 'gj' : 'j'\", { noremap = true, expr = true, silent = true })
 nvim_default_keymap_options_file: "{{ nvim_default_keymap_options }}"
@@ -94,7 +94,6 @@ nvim_plugin_example:
 nvim_default_plugins:
   ui: "{{ nvim_ui_default }}"
   legendary: "{{ nvim_legendary_default }}"
-  intellisense: "{{ nvim_intellisense_default }}"
   telescope: "{{ nvim_telescope_default }}"
   hydra: "{{ nvim_hydra_default }}"
   treesitter: "{{ nvim_treesitter_default }}"
@@ -102,6 +101,7 @@ nvim_default_plugins:
   terminal: "{{ nvim_terminal_default }}"
   motion: "{{ nvim_motion_default }}"
   colorscheme: "{{ nvim_colorscheme_default }}"
+  intellisense: "{{ nvim_intellisense_default }}"
   debugger: "{{ nvim_debugger_default }}"
 nvim_extra_plugins: {}
 nvim_startup_commands: |

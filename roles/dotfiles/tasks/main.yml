@@ -1,4 +1,9 @@
 ---
+- name: XDG | Install XDG Directories | task
+  import_tasks: tasks/setup_xdg.yml
+  tags:
+    - setup
+
 - name: Nix | Install Nix Home-Manager | task
   when: ansible_distribution != 'MacOSX'
   import_tasks: tasks/install_home_manager.yml
@@ -124,6 +129,11 @@
   import_tasks: tasks/install_joplin.yml
   tags:
     - joplin
+
+- name: Install Joplin Config
+  import_tasks: tasks/install_clifm.yml
+  tags:
+    - clifm
 
 - name: Boost | Install CppTools | task
   when: ansible_distribution != 'MacOSX' and 'cpp' in install_languages

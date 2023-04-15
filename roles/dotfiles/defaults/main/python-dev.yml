@@ -37,4 +37,4 @@ extra_nvim_config_python: |
   })
   require('dap-python').setup('{{ debugpy_python_exe }}')
 extra_nvim_keymap_python: |
-  vim.api.nvim_set_keymap('n', '<leader>cd', '<cmd>lua require(\\'dap-python\\').debug_selection()<CR>', { noremap = true, silent = true })
+  vim.api.nvim_set_keymap('n', '<leader>cd', '<cmd>lua require(\'dap-python\').debug_selection()<CR>', { noremap = true, silent = true })

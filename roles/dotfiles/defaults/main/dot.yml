@@ -4,6 +4,12 @@ bin_directory: "{{ dotfiles_user_home }}/.local/bin"
 xdg_share_dir: "{{ dotfiles_user_home }}/.local/share"
 xdg_config_dir: "{{ dotfiles_user_home }}/.config"
 xdg_cache_dir:  "{{ dotfiles_user_home }}/.cache"
+xdg_config_dirs:
+  share: "{{ xdg_share_dir }}"
+  config: "{{ xdg_config_dir }}"
+  cache: "{{ xdg_cache_dir }}"
 extra_bookmarks: []
 extra_bookmarks_file: "{{ extra_bookmarks | join('\n') }}"
 gcc_exe: /usr/bin/gcc
+gpp_exe: /usr/bin/g++
+dot_download_dir: "{{ dotfiles_user_home }}/.local/downloads"

@@ -27,7 +27,7 @@
   when: ansible_distribution == 'MacOSX'
   shell: "xattr -c {{ nvim_macos_install_download }}"
 
-- name: Neovim | Unarchive Neovim Download | get_url
+- name: Neovim | Unarchive Neovim Download | unarchive
   when: ansible_distribution == 'MacOSX'
   ansible.builtin.unarchive:
     src: "{{ nvim_macos_install_download }}"

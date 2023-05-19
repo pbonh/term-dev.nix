@@ -262,19 +262,20 @@ extra_nvim_keymap_cpp: |
   vim.api.nvim_set_keymap('n', '<leader>cr', '<cmd>CMake run<CR>', { noremap = true, silent = true })
   vim.api.nvim_set_keymap('n', '<leader>cd', '<cmd>CMake debug<CR>', { noremap = true, silent = true })
   vim.api.nvim_set_keymap('n', '<leader>cl', '<cmd>CMake clean<CR>', { noremap = true, silent = true })
-nvim_completion_config_cpp: |
-  sorting = {
-    comparators = {
-      cmp.config.compare.offset,
-      cmp.config.compare.exact,
-      cmp.config.compare.recently_used,
-      require('clangd_extensions.cmp_scores'),
-      cmp.config.compare.kind,
-      cmp.config.compare.sort_text,
-      cmp.config.compare.length,
-      cmp.config.compare.order,
-    },
-  },
+nvim_completion_config_cpp: ""
+# nvim_completion_config_cpp: |
+#   sorting = {
+#     comparators = {
+#       cmp.config.compare.offset,
+#       cmp.config.compare.exact,
+#       cmp.config.compare.recently_used,
+#       require('clangd_extensions.cmp_scores'),
+#       cmp.config.compare.kind,
+#       cmp.config.compare.sort_text,
+#       cmp.config.compare.length,
+#       cmp.config.compare.order,
+#     },
+#   },
 cpp_ale_plugin_settings: |
   vim.cmd([[ let g:ale_c_parse_compile_commands=1 ]])
   vim.cmd([[

@@ -1,6 +1,9 @@
 set dotenv-load := true
 set shell := ["/bin/bash", "-cu"]
 
+task_prelude := $DOTFILES_TASK_PRELUDE
+playbook_selection := if os() == "macos" { ".macos" } else { ".nix" }
+
 default:
   @just --list
 
@@ -23,28 +26,28 @@ nix-tools: update-submodules
   ansible-playbook dotfiles.yml --tags "tools" --skip-tags "dependencies"
 
 nix-dot: update-submodules
-  ansible-playbook dotfiles.yml --tags "dot" --skip-tags "dependencies"
+  ansible-playbook dotfiles.yml --tags "dot"
 
 nix-dot-neovim: update-submodules
-  ansible-playbook dotfiles.yml --tags "dot,neovim" --skip-tags "dependencies,git,shell,zellij,tmux,ranger,helix,broot,bookmarks,direnv,joplin"
+  {{ task_prelude }} ansible-playbook dotfiles.yml --tags "neovim"
 
 nix-dot-helix: update-submodules
-  ansible-playbook dotfiles.yml --tags "dot,helix" --skip-tags "dependencies,git,shell,zellij,tmux,ranger,neovim,broot,bookmarks,direnv,joplin"
+  {{ task_prelude }} ansible-playbook dotfiles.yml --tags "helix"
 
 nix-dot-zellij: update-submodules
-  ansible-playbook dotfiles.yml --tags "dot,zellij" --skip-tags "dependencies,neovim,shell"
+  {{ task_prelude }} ansible-playbook dotfiles.yml --tags "zellij"
 
 nix-binscripts: update-submodules
-  ansible-playbook dotfiles.yml --tags "scripts" --skip-tags "dependencies"
+  {{ task_prelude }} ansible-playbook dotfiles.yml --tags "scripts"
 
 nix-cpp: update-submodules
-  ansible-playbook dotfiles.yml --tags "cpp" --skip-tags "dependencies" --ask-become-pass
-
-nix-project-dev: update-submodules
-  ansible-playbook dotfiles.yml --ask-become-pass --skip-tags "dependencies" --ask-become-pass
+  {{ task_prelude }} ansible-playbook dotfiles.yml --tags "cpp" --ask-become-pass
 
 nix-rust: update-submodules
-  ansible-playbook dotfiles.yml --tags "rust" --skip-tags "dependencies" --ask-become-pass
+  {{ task_prelude }} ansible-playbook dotfiles.yml --tags "rust"
+
+install-rust-tools:
+  {{ task_prelude }} ansible-playbook dotfiles.yml --tags "rust-tools"
 
 add-nix-dot-repo:
   git remote add -f dotfiles-nix git@github.com:pbonh/dotfiles.nix.git

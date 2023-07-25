@@ -1,7 +1,7 @@
 Role Name
 =========
 
-Terminal Development Environment Powered by Nix/Ansible
+Developer Environment Dotfiles, Powered by Nix
 
 Requirements
 ------------

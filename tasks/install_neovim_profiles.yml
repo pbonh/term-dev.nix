@@ -92,6 +92,7 @@
   register: xdg_cache_dirs
 
 - name: Neovim | Symlink XDG Cache Directories | file
+  ignore_errors: true
   file:
     src: "{{ item.path }}"
     path: "{{ nvim_xdg_profile_dir['cache'] }}/{{ nvim_profile_name }}/{{ item.path | basename }}"

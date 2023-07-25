@@ -55,67 +55,65 @@ nvim_intellisense_default:
     })
     local lspconfig = require('lspconfig')
     local lspkind = require('lspkind')
-    -- local cmp = require('cmp')
-    -- cmp.setup({
-    --   sources = {
-    --     { name = 'nvim_lsp' },
-    --     { name = 'luasnip' },
-    --     { name = 'buffer' },
-    --     { name = 'path' },
-    --   },
-    --   formatting = {
-    --     format = lspkind.cmp_format({
-    --       mode = 'symbol', -- show only symbol annotations
-    --       maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
-    --       ellipsis_char = '...', -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
-    --     })
-    --   },
-    --   snippet = {
-    --     expand = function(args)
-    --       require('luasnip').lsp_expand(args.body)
-    --     end,
-    --   },
-    --   completion = {
-    --     autocomplete = true,
-    --   },
-    --   mapping = {
-    --     ['<C-p>'] = cmp.mapping.select_prev_item(),
-    --     ['<C-n>'] = cmp.mapping.select_next_item(),
-    --     ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-    --     ['<C-f>'] = cmp.mapping.scroll_docs(4),
-    --     ['<C-Space>'] = cmp.mapping.complete(),
-    --     ['<C-e>'] = cmp.mapping.close(),
-    --     ['<CR>'] = cmp.mapping.confirm {
-    --       behavior = cmp.ConfirmBehavior.Replace,
-    --       select = true,
-    --     },
-    --  -- ['<Tab>'] = cmp.mapping(function(fallback)
-    --  --   if cmp.visible() then
-    --  --     cmp.select_next_item()
-    --  --   elseif luasnip.expand_or_jumpable() then
-    --  --     luasnip.expand_or_jump()
-    --  --   elseif has_words_before() then
-    --  --     cmp.complete()
-    --  --   else
-    --  --     fallback()
-    --  --   end
-    --  -- end, { 'i', 's' }),
-    --  -- ['<S-Tab>'] = cmp.mapping(function(fallback)
-    --  --   if cmp.visible() then
-    --  --     cmp.select_prev_item()
-    --  --   elseif luasnip.jumpable(-1) then
-    --  --     luasnip.jump(-1)
-    --  --   else
-    --  --     fallback()
-    --  --   end
-    --  -- end, { 'i', 's' }),
-    --   },
-    --   {{ nvim_completion_config_cpp | indent(2) or '-- No Extra Completion Config' }}
-    -- })
-    -- local on_attach = function(client, bufnr)
-    --   navbuddy.attach(client, bufnr)
-    --   vim.cmd [[ command! Format execute 'lua vim.lsp.buf.formatting()' ]]
-    -- end
+    local cmp = require('cmp')
+    cmp.setup({
+      sources = {
+        { name = 'nvim_lsp' },
+        { name = 'luasnip' },
+        { name = 'buffer' },
+        { name = 'path' },
+      },
+      formatting = {
+        format = lspkind.cmp_format({
+          mode = 'symbol', -- show only symbol annotations
+          maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+          ellipsis_char = '...', -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
+        })
+      },
+      snippet = {
+        expand = function(args)
+          require('luasnip').lsp_expand(args.body)
+        end,
+      },
+      completion = { autocomplete = { require('cmp.types').cmp.TriggerEvent.TextChanged } },
+      mapping = {
+        ['<C-p>'] = cmp.mapping.select_prev_item(),
+        ['<C-n>'] = cmp.mapping.select_next_item(),
+        ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+        ['<C-f>'] = cmp.mapping.scroll_docs(4),
+        ['<C-Space>'] = cmp.mapping.complete(),
+        ['<C-e>'] = cmp.mapping.close(),
+        ['<CR>'] = cmp.mapping.confirm {
+          behavior = cmp.ConfirmBehavior.Replace,
+          select = true,
+        },
+     -- ['<Tab>'] = cmp.mapping(function(fallback)
+     --   if cmp.visible() then
+     --     cmp.select_next_item()
+     --   elseif luasnip.expand_or_jumpable() then
+     --     luasnip.expand_or_jump()
+     --   elseif has_words_before() then
+     --     cmp.complete()
+     --   else
+     --     fallback()
+     --   end
+     -- end, { 'i', 's' }),
+     -- ['<S-Tab>'] = cmp.mapping(function(fallback)
+     --   if cmp.visible() then
+     --     cmp.select_prev_item()
+     --   elseif luasnip.jumpable(-1) then
+     --     luasnip.jump(-1)
+     --   else
+     --     fallback()
+     --   end
+     -- end, { 'i', 's' }),
+      },
+      {{ nvim_completion_config_cpp | indent(2) or '-- No Extra Completion Config' }}
+    })
+    local on_attach = function(client, bufnr)
+      navbuddy.attach(client, bufnr)
+      vim.cmd [[ command! Format execute 'lua vim.lsp.buf.formatting()' ]]
+    end
     local capabilities = vim.lsp.protocol.make_client_capabilities()
     -- capabilities = require('cmp_nvim_lsp').default_capabilities()
     local servers = {
@@ -167,52 +165,7 @@ nvim_intellisense_default:
         folder_level = 2,
       },
     })
-    vim.wo.winbar = require('lspsaga.symbolwinbar'):get_winbar()
-    -- local function get_file_name(include_path)
-    --   local file_name = require('lspsaga.symbolwinbar').get_file_name()
-    --   if vim.fn.bufname '%' == '' then return '' end
-    --   if include_path == false then return file_name end
-    --   -- Else if include path: ./lsp/saga.lua -> lsp > saga.lua
-    --   local sep = vim.loop.os_uname().sysname == 'Windows' and '\\\\' or '/'
-    --   local path_list = vim.split(string.gsub(vim.fn.expand '%:~:.:h', '%%', ''), sep)
-    --   local file_path = ''
-    --   for _, cur in ipairs(path_list) do
-    --     file_path = (cur == '.' or cur == '~') and '' or
-    --       file_path .. cur .. ' ' .. '%#LspSagaWinbarSep#>%*' .. ' %*'
-    --   end
-    --   return file_path .. file_name
-    -- end
-    -- local function config_winbar_or_statusline()
-    --   local exclude = {
-    --     ['terminal'] = true,
-    --     ['toggleterm'] = true,
-    --     ['prompt'] = true,
-    --     ['NvimTree'] = true,
-    --     ['help'] = true,
-    --   } -- Ignore float windows and exclude filetype
-    --   if vim.api.nvim_win_get_config(0).zindex or exclude[vim.bo.filetype] then
-    --     vim.wo.winbar = ''
-    --   else
-    --     local ok, lspsaga = pcall(require, 'lspsaga.symbolwinbar')
-    --     local sym
-    --     if ok then sym = lspsaga.get_symbol_node() end
-    --     local win_val = ''
-    --     win_val = get_file_name(true) -- set to true to include path
-    --     if sym ~= nil then win_val = win_val .. sym end
-    --     vim.wo.winbar = win_val
-    --     -- if work in statusline
-    --     vim.wo.stl = win_val
-    --   end
-    -- end
-    -- local events = { 'BufEnter', 'BufWinEnter', 'CursorMoved' }
-    -- vim.api.nvim_create_autocmd(events, {
-    --   pattern = '*',
-    --   callback = function() config_winbar_or_statusline() end,
-    -- })
-    -- vim.api.nvim_create_autocmd('User', {
-    --   pattern = 'LspsagaUpdateSymbol',
-    --   callback = function() config_winbar_or_statusline() end,
-    -- })
+    vim.wo.winbar = require('lspsaga.symbol.winbar').get_bar()
   keymaps: |
     -- { 'gd', { n = '<cmd>Lspsaga peek_definition<CR>', }, description = 'LSPSaga: Peek Definition', },
     -- { 'gd', { n = '<cmd>Lspsaga lsp_finder<CR>', }, description = 'LSPSaga: Definition/Reference Finder', },

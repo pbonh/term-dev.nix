@@ -1,7 +1,7 @@
 set dotenv-load := true
 set shell := ["/bin/bash", "-cu"]
 
-task_prelude := $DOTFILES_TASK_PRELUDE
+task_prelude := env_var_or_default('DOTFILES_TASK_PRELUDE', "")
 playbook_selection := if os() == "macos" { ".macos" } else { ".nix" }
 
 default:

@@ -94,11 +94,11 @@ nvim_terminal_default:
       }
     })
     local Terminal  = require('toggleterm.terminal').Terminal
-    local justchoose = Terminal:new({ cmd = '{{ just_exe }} --choose', hidden = true })
+    local justchoose = Terminal:new({ cmd = '{{ just_exe }} --choose' })
     function just_terminal_runner()
       justchoose:toggle()
     end
-    local gitui = Terminal:new({ cmd = '{{ gitui_exe }}', close_on_exit = true, hidden = true })
+    local gitui = Terminal:new({ cmd = '{{ gitui_exe }}', close_on_exit = true })
     function gitui_terminal_runner()
       gitui:toggle()
     end

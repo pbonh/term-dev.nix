@@ -5,6 +5,7 @@ nvim_motion_default:
       requires = {
         'ggandor/leap.nvim',
         'ggandor/leap-spooky.nvim',
+        'https://tpope.io/vim/repeat.git',
       },
     }
     use { 'cbochs/portal.nvim',

@@ -25,6 +25,7 @@ zsh_default_env: |
   export GIT_SSH="{{ git_ssh }}"
   export VISUAL="{{ nvim_exe }}"
   export EDITOR="{{ nvim_exe }}"
+  export LC_CTYPE=en_US.UTF-8
 zsh_extra_env: ""
 zsh_default_plugins: |
   #eval "$({{ atuin_exe }} init zsh)"

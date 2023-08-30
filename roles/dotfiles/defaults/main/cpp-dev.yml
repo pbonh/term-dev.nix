@@ -48,7 +48,7 @@ nvim_cmake_build_dir: build/linux-debug
 ccls_clang_args: {}
 ccls_tmp_dir: /tmp/ccls
 clang_format_fileoption: file
-vscode_cpptools_version: 1.6.0
+vscode_cpptools_version: 1.15.31
 vscode_cpptools_download: "{{ dotfiles_user_home }}/.local/vscode-cpptools"
 vscode_cpptools_extension: cpptools-linux
 vscode_cpptools_extension_path: "{{ vscode_cpptools_download }}/{{ vscode_cpptools_extension }}"

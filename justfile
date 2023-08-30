@@ -46,6 +46,9 @@ nix-cpp: update-submodules
 nix-rust: update-submodules
   {{ task_prelude }} ansible-playbook dotfiles.yml --tags "rust"
 
+update-rust-tools:
+  {{ task_prelude }} cargo install-update -a
+
 install-rust-tools:
   {{ task_prelude }} ansible-playbook dotfiles.yml --tags "rust-tools"
 

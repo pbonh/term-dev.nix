@@ -22,6 +22,9 @@ cargo_binstall_packages:
   atuin:
     name: atuin
     path: "{{ cargo_path }}/atuin"
+  ast-grep:
+    name: ast-grep
+    path: "{{ cargo_path }}/sg"
   bat:
     name: bat
     path: "{{ cargo_path }}/bat"
@@ -134,6 +137,7 @@ cargo_binstall_packages:
     name: zoxide
     path: "{{ cargo_path }}/zoxide"
 atuin_exe: "{{ cargo_binstall_packages['atuin']['path'] }}"
+astgrep_exe: "{{ cargo_binstall_packages['ast-grep']['path'] }}"
 bat_exe: "{{ cargo_binstall_packages['bat']['path'] }}"
 broot_exe: "{{ cargo_binstall_packages['broot']['path'] }}"
 bottom_exe: "{{ cargo_binstall_packages['bottom']['path'] }}"

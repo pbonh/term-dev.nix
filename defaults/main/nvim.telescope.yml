@@ -15,6 +15,7 @@ nvim_telescope_default:
     use { 'nvim-telescope/telescope-ui-select.nvim' }
     use { 'princejoogie/dir-telescope.nvim' }
     use { 'nvim-telescope/telescope-file-browser.nvim' }
+    use { 'Marskey/telescope-sg' }
   config: |
     require('dressing').setup()
     require('telescope').setup({
@@ -74,6 +75,14 @@ nvim_telescope_default:
         --   --   codeactions = false,
         --   -- }
         -- },
+        ast_grep = {
+            command = {
+                "{{ astgrep_exe }}",
+                "--json=stream",
+            },
+            grep_open_files = false,
+            lang = nil, -- string value, specify language for ast-grep `nil` for default
+        },
         tele_tabby = {
           use_highlighter = true,
         },

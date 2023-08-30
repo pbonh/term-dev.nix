@@ -19,6 +19,9 @@ rust_dev_packages:
   rustfmt:
     name: rustfmt
     path: "{{ cargo_path }}/rustfmt"
+  cargo-readme:
+    name: cargo-readme
+    path: "{{ cargo_path }}/cargo-readme"
 treesitter_parsers_rust:
   - rust
 rust_tools_nix:

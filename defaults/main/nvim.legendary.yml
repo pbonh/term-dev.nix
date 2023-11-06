@@ -14,7 +14,13 @@ nvim_legendary_default:
         v = { '<C-w>', '<C-g>' },
       },
     })
-    require('legendary').setup({ which_key = { auto_register = true } })
+    require('legendary').setup({
+      extensions = {
+        which_key = {
+          auto_register = true,
+        },
+      },
+    })
   keymaps: |
     { '<CR>', {
         n = ':',

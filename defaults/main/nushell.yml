@@ -2,6 +2,12 @@
 nushell_config_dir: "{{ xdg_config_dir }}/nushell"
 nushell_default_env: |
   # Nushell Environment Config File
+  # Keybindings
+  #[keybinding]
+  #"ctrl-r" = "run_external 'history | {{ skim_exe }} --ansi --bind=ctrl-j:down,ctrl-k:up --preview=\"echo {}\" | awk \'{print $2}\' | xargs -I {} {{ nu_exe }} -c \"{}\"'"
+  #"ctrl-t" = "run_external '{{ fd_exe }} --type f | {{ fzf_exe }} --preview \"{{ bat_exe }} --style=numbers --color=always --line-range :500 {}\" | xargs -r -o {{ nvim_exe }}'"
+  #"ctrl-a" = "run_external '{{ navi_exe }}'"
+  # Prompt
   def create_left_prompt [] {
       let path_segment = if (is-admin) {
           $"(ansi red_bold)($env.PWD)"
@@ -17,19 +23,19 @@ nushell_default_env: |
       $time_segment
   }
   # Use nushell functions to define your right and left prompt
-  let-env PROMPT_COMMAND = { create_left_prompt }
-  let-env PROMPT_COMMAND_RIGHT = { create_right_prompt }
+  $env.PROMPT_COMMAND = { create_left_prompt }
+  $env.PROMPT_COMMAND_RIGHT = { create_right_prompt }
   # The prompt indicators are environmental variables that represent
   # the state of the prompt
-  let-env PROMPT_INDICATOR = { "〉" }
-  let-env PROMPT_INDICATOR_VI_INSERT = { ": " }
-  let-env PROMPT_INDICATOR_VI_NORMAL = { "〉" }
-  let-env PROMPT_MULTILINE_INDICATOR = { "::: " }
+  $env.PROMPT_INDICATOR = { "〉" }
+  $env.PROMPT_INDICATOR_VI_INSERT = { ": " }
+  $env.PROMPT_INDICATOR_VI_NORMAL = { "〉" }
+  $env.PROMPT_MULTILINE_INDICATOR = { "::: " }
   # Specifies how environment variables are:
   # - converted from a string to a value on Nushell startup (from_string)
   # - converted from a value back to a string when running external commands (to_string)
   # Note: The conversions happen *after* config.nu is loaded
-  let-env ENV_CONVERSIONS = {
+  $env.ENV_CONVERSIONS = {
     "PATH": {
       from_string: { |s| $s | split row (char esep) | path expand -n }
       to_string: { |v| $v | path expand -n | str join (char esep) }
@@ -42,30 +48,29 @@ nushell_default_env: |
   # Directories to search for scripts when calling source or use
   #
   # By default, <nushell-config-dir>/scripts is added
-  let-env NU_LIB_DIRS = [
+  $env.NU_LIB_DIRS = [
       ($nu.config-path | path dirname | path join 'scripts')
   ]
   # Directories to search for plugin binaries when calling register
   #
   # By default, <nushell-config-dir>/plugins is added
-  let-env NU_PLUGIN_DIRS = [
+  $env.NU_PLUGIN_DIRS = [
       ($nu.config-path | path dirname | path join 'plugins')
   ]
-  # To add entries to PATH (on Windows you might use Path), you can use the following pattern:
-  # let-env PATH = ($env.PATH | split row (char esep) | prepend '/some/path')
 nushell_env: |
-  let-env PATH = ($env.PATH | split row (char esep) | append '{{ cargo_path }}')
-  let-env PATH = ($env.PATH | split row (char esep) | append '{{ bin_directory }}')
+  $env.PATH = ($env.PATH | split row (char esep) | append '{{ cargo_path }}')
+  $env.PATH = ($env.PATH | split row (char esep) | append '{{ bin_directory }}')
   {% for fzf_env_var in fzf_env -%}
-  {{ "let-env " + fzf_env[fzf_env_var]['name'] + " = '" + fzf_env[fzf_env_var]['env'] + "'" }}
+  {{ "$env." + fzf_env[fzf_env_var]['name'] + " = '" + fzf_env[fzf_env_var]['env'] + "'" }}
   {% endfor %}
-  let-env SKIM_DEFAULT_COMMAND = '{{ fd_exe }} --type f || git ls-tree -r --name-only HEAD || {{ rg_exe }} --files || find .'
+  $env.SKIM_DEFAULT_COMMAND = '{{ fd_exe }} --type f || git ls-tree -r --name-only HEAD || {{ rg_exe }} --files || find .'
   mkdir ~/.cache/starship
   starship init nu | save -f ~/.cache/starship/init.nu
 nushell_aliases: |
-  alias mkcd = mkdir $1 and cd $1
+  alias mkcd = mkdir $env.1 and cd $env.1
   alias cat = {{ bat_exe }}
   alias ls = {{ lsd_exe }} --group-dirs first
+  alias ll = {{ lsd_exe }} --group-dirs first -l
   alias cdg = set dest_dir=`{{ bin_directory }}/cdscuts_glob_echo | {{ skim_exe }} --reverse --bind ctrl-f:page-down,ctrl-b:page-up` and cd "$dest_dir"
   alias fcd = set dest_dir=`{{ fd_exe }} --type d | {{ skim_exe }} --reverse --bind ctrl-f:page-down,ctrl-b:page-up` and cd "$dest_dir"
   alias ffe = {{ nvim_cmd }} `{{ skim_exe }} --reverse --bind ctrl-f:page-down,ctrl-b:page-up`
@@ -357,7 +362,7 @@ nushell_default_config: |
   #     carapace $spans.0 nushell $spans | from json
   # }
   # The default config record. This is where much of your global configuration is setup.
-  let-env config = {
+  $env.config = {
     ls: {
       use_ls_colors: true # use the LS_COLORS environment variable to colorize output
       clickable_links: true # enable or disable clickable links. Your terminal has to support links.

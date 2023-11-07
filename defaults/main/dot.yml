@@ -12,4 +12,5 @@ extra_bookmarks: []
 extra_bookmarks_file: "{{ extra_bookmarks | join('\n') }}"
 gcc_exe: /usr/bin/gcc
 gpp_exe: /usr/bin/g++
+make_exe: make
 dot_download_dir: "{{ dotfiles_user_home }}/.local/downloads"

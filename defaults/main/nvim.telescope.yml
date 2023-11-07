@@ -16,6 +16,22 @@ nvim_telescope_default:
     use { 'princejoogie/dir-telescope.nvim' }
     use { 'nvim-telescope/telescope-file-browser.nvim' }
     use { 'Marskey/telescope-sg' }
+  lazy: |
+    { 'nvim-telescope/telescope-fzf-native.nvim',
+      dependencies = {
+        'nvim-telescope/telescope.nvim',
+        'nvim-lua/plenary.nvim',
+        'stevearc/dressing.nvim',
+        'nvim-lua/popup.nvim',
+        'TC72/telescope-tele-tabby.nvim',
+        'sharkdp/fd',
+      },
+      build = '{{ make_exe }}',
+    },
+    { 'nvim-telescope/telescope-ui-select.nvim' },
+    { 'princejoogie/dir-telescope.nvim' },
+    { 'nvim-telescope/telescope-file-browser.nvim' },
+    { 'Marskey/telescope-sg' },
   config: |
     require('dressing').setup()
     require('telescope').setup({

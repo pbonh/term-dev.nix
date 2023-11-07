@@ -70,7 +70,8 @@ lsp_providers_setup: []
 treesitter_compiler_path_settings: "require('nvim-treesitter.install').compilers = { '{{ gcc_exe }}', }"
 treesitter_parsers: []
 treesitter_custom_parsers_default:
-  - just
+  - norg_meta
+  - norg_table
 treesitter_custom_parsers: "{{ treesitter_custom_parsers_default }}"
 treesitter_parsers_all: "{{ treesitter_parsers + treesitter_custom_parsers }}"
 treesitter_extra_config: []
@@ -78,13 +79,19 @@ refactoring_settings: []
 telescope_picker_config: ''
 nvim_completion_config: []
 treesitter_custom_parsers_info: |
-  parser_configs.just = {
-    install_info = {
-      url = "https://github.com/IndianBoy42/tree-sitter-just",
-      files = { "src/parser.c", "src/scanner.cc" },
-      branch = "main",
-    },
-    maintainers = { "@IndianBoy42" },
+  parser_configs.norg_meta = {
+      install_info = {
+          url = 'https://github.com/nvim-neorg/tree-sitter-norg-meta',
+          files = { 'src/parser.c' },
+          branch = 'main'
+      },
+  }
+  parser_configs.norg_table = {
+      install_info = {
+          url = 'https://github.com/nvim-neorg/tree-sitter-norg-table',
+          files = { 'src/parser.c' },
+          branch = 'main'
+      },
   }
 lsp_provider_file: "{{ '''' + lsp_providers |join(''', ''') + '''' }}"
 lsp_provider_plugins_file: "{{ lsp_providers_plugins | join('\n') }}"

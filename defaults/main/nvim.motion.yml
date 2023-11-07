@@ -42,3 +42,44 @@ nvim_motion_default:
     { '<C-o>', { n = '<cmd>Portal jumplist backward<CR>', }, description = 'Portal: Jump Backward', },
     { '<C-i>', { n = '<cmd>Portal jumplist forward<CR>', }, description = 'Portal: Jump Forward', },
     { '<C-Space>', { n = '<cmd>lua require("nvim-navbuddy").open()<CR>', }, description = 'NavBuddy: Open', },
+nvim_motion_flash:
+  packer: |
+    use { 'folke/flash.nvim' }
+  lazy: |
+    -- {
+    --   'folke/flash.nvim',
+    --   keys = {
+    --     {
+    --       's',
+    --       function()
+    --         require('flash').jump()
+    --       end,
+    --       mode = { 'n', 'x', 'o' },
+    --       desc = 'Jump forwards',
+    --     },
+    --     {
+    --       'S',
+    --       function()
+    --         require('flash').jump({ search = { forward = false } })
+    --       end,
+    --       mode = { 'n', 'x', 'o' },
+    --       desc = 'Jump backwards',
+    --     },
+    --   },
+    -- },
+    {
+      "folke/flash.nvim",
+      event = "VeryLazy",
+      ---@type Flash.Config
+      opts = {},
+      -- stylua: ignore
+      keys = {
+        { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
+        { "S", mode = { "n", "x", "o" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
+        { "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
+        { "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
+        { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
+      },
+    },
+  config: ""
+  keymaps: ""

@@ -175,7 +175,9 @@ nvim_lua_packer_config: |
       {% for plugin in nvim_default_plugins -%}
       {{ nvim_default_plugins[plugin]['keymaps'] | indent(4) }}
       {% endfor %}
-
+      {% for plugin in nvim_extra_plugins -%}
+      {{ nvim_extra_plugins[plugin]['keymaps'] | indent(4) }}
+      {% endfor %}
     },
   })
 
@@ -202,45 +204,59 @@ nvim_lua_lazy_config: |
   -- Neovim Keymap Settings
   {{ nvim_default_keymap_options or "-- No Keymaps Set" }}
 
-  require("lazy").setup({
-    {
-      'mrjones2014/legendary.nvim',
-      version = 'v2.13.6',
-      priority = 10000,
-      lazy = false,
-      dependencies = { 'kkharji/sqlite.lua' }
-    },
-    {
-      'folke/flash.nvim',
-      keys = {
-        {
-          's',
-          function()
-            require('flash').jump()
-          end,
-          mode = { 'n', 'x', 'o' },
-          desc = 'Jump forwards',
-        },
-        {
-          'S',
-          function()
-            require('flash').jump({ search = { forward = false } })
-          end,
-          mode = { 'n', 'x', 'o' },
-          desc = 'Jump backwards',
-        },
-      },
-    },
+  -- Neovim UI Settings
+  {{ nvim_default_ui_options or "-- No UI Options Set" }}
 
+  require("lazy").setup({
+    -- Neovim Plugins
+    {{ nvim_legendary_default['lazy'] }}
+    {{ nvim_ui_default['lazy'] }}
+    {{ nvim_telescope_default['lazy'] }}
+    {{ nvim_hydra_default['lazy'] }}
+    {{ nvim_treesitter_default['lazy'] }}
+    {{ nvim_git_default['lazy'] }}
+    {{ nvim_terminal_default['lazy'] }}
+    {{ nvim_motion_flash['lazy'] }}
+    {{ nvim_colorscheme_default['lazy'] }}
+    {{ nvim_intellisense_default['lazy'] }}
+    {{ nvim_debugger_default['lazy'] }}
   })
+
+  -- Neovim Plugin Settings
+  {{ nvim_legendary_default['config'] }}
+  {{ nvim_ui_default['config'] }}
+  {{ nvim_telescope_default['config'] }}
+  {{ nvim_hydra_default['config'] }}
+  {{ nvim_treesitter_default['config'] }}
+  {{ nvim_git_default['config'] }}
+  {{ nvim_terminal_default['config'] }}
+  {{ nvim_colorscheme_default['config'] }}
+  {{ nvim_intellisense_default['config'] }}
+  {{ nvim_debugger_default['config'] }}
 
   -- Legendary Keymap Setup
   require('legendary').setup({
-    lazy_nvim = { auto_register = true },
+    extensions = {
+      which_key = {
+        auto_register = true,
+      },
+      lazy_nvim = {
+        auto_register = true
+      },
+    },
     keymaps = {
-      {% for plugin in nvim_default_plugins -%}
-      {{ nvim_default_plugins[plugin]['keymaps'] | indent(4) }}
-      {% endfor %}
-
+      {{ nvim_legendary_default['keymaps'] }}
+      {{ nvim_ui_default['keymaps'] }}
+      {{ nvim_telescope_default['keymaps'] }}
+      {{ nvim_hydra_default['keymaps'] }}
+      {{ nvim_treesitter_default['keymaps'] }}
+      {{ nvim_git_default['keymaps'] }}
+      {{ nvim_terminal_default['keymaps'] }}
+      {{ nvim_colorscheme_default['keymaps'] }}
+      {{ nvim_intellisense_default['keymaps'] }}
+      {{ nvim_debugger_default['keymaps'] }}
     },
   })
+
+  -- Neovim Startup Commands
+  {{ nvim_startup_commands }}

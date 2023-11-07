@@ -14,6 +14,20 @@ nvim_debugger_default:
           {'nvim-treesitter/nvim-treesitter'}
       }
     }
+  lazy: |
+    { 'rcarriga/nvim-dap-ui', dependencies = { 'mfussenegger/nvim-dap' } },
+    { 'nvim-telescope/telescope-dap.nvim',
+      dependencies = {
+          {'mfussenegger/nvim-dap'},
+          {'nvim-telescope/telescope.nvim'}
+      }
+    },
+    {  'theHamsta/nvim-dap-virtual-text',
+      dependencies = {
+          {'mfussenegger/nvim-dap'},
+          {'nvim-treesitter/nvim-treesitter'}
+      }
+    },
   config: |
     local dap = require('dap')
     require('dapui').setup()

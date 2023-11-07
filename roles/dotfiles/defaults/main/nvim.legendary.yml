@@ -6,19 +6,23 @@ nvim_legendary_default:
         'folke/which-key.nvim',
       },
     }
+  lazy: |
+    {
+      'mrjones2014/legendary.nvim',
+      version = 'v2.13.6',
+      priority = 10000,
+      lazy = false,
+      dependencies = {
+        'kkharji/sqlite.lua',
+        'folke/which-key.nvim',
+      },
+    },
   config: |
     require('which-key').setup({
       triggers = {'<leader>', 'g'},
       triggers_blacklist = {
         n = { '<C-w>', '<C-g>' },
         v = { '<C-w>', '<C-g>' },
-      },
-    })
-    require('legendary').setup({
-      extensions = {
-        which_key = {
-          auto_register = true,
-        },
       },
     })
   keymaps: |

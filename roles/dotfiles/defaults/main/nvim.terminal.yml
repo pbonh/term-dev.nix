@@ -7,6 +7,12 @@ nvim_terminal_default:
         'is0n/fm-nvim',
       },
     }
+  lazy: |
+    { 'akinsho/toggleterm.nvim',
+      dependencies = {
+        'is0n/fm-nvim',
+      },
+    },
   config: |
     require('fm-nvim').setup({
       -- (Vim) Command used to open files

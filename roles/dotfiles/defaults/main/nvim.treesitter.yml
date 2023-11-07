@@ -1,4 +1,5 @@
 ---
+treesitter_compiler_exe: "{{ gcc_exe }}"
 nvim_treesitter_default:
   packer: |
     use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
@@ -6,9 +7,16 @@ nvim_treesitter_default:
     use { 'nvim-treesitter/nvim-treesitter-context', requires = { 'nvim-treesitter/nvim-treesitter' } }
     use { 'nvim-treesitter/nvim-treesitter-refactor', requires = { 'nvim-treesitter/nvim-treesitter' } }
     use { 'mrjones2014/nvim-ts-rainbow', requires = { 'nvim-treesitter/nvim-treesitter' } }
-    use { 'IndianBoy42/tree-sitter-just' }
     use 'David-Kunz/markid'
     use {'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async'}
+  lazy: |
+    { 'nvim-treesitter/nvim-treesitter', build = ':TSUpdate' },
+    { 'nvim-treesitter/nvim-treesitter-textobjects', dependencies = { 'nvim-treesitter/nvim-treesitter' } },
+    { 'nvim-treesitter/nvim-treesitter-context', dependencies = { 'nvim-treesitter/nvim-treesitter' } },
+    { 'nvim-treesitter/nvim-treesitter-refactor', dependencies = { 'nvim-treesitter/nvim-treesitter' } },
+    { 'mrjones2014/nvim-ts-rainbow', dependencies = { 'nvim-treesitter/nvim-treesitter' } },
+    { 'David-Kunz/markid' },
+    { 'kevinhwang91/nvim-ufo', dependencies = 'kevinhwang91/promise-async' },
   config: |
     local parser_configs = require('nvim-treesitter.parsers').get_parser_configs()
     parser_configs.norg_meta = {
@@ -26,7 +34,7 @@ nvim_treesitter_default:
         },
     }
     {{ treesitter_custom_parsers_info or '-- No Custom Treesitter Parsers Installed' }}
-    {{ treesitter_compiler_path_settings or '-- No Path Settings for Treesitter Parser Compilation' }}
+    require('nvim-treesitter.install').compilers = { '{{ treesitter_compiler_exe }}' }
     require('nvim-treesitter.configs').setup({
       ensure_installed = { 
         'vim',
@@ -38,9 +46,9 @@ nvim_treesitter_default:
         'json',
         'query',
         'toml',
-        'yaml',
         {{ treesitter_parsers_file or '-- No Extra Treesitter Parsers Installed' }}
       },
+      -- 'yaml',
       highlight = {
         enable = true, -- false will disable the whole extension
       },

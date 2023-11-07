@@ -1,0 +1,15 @@
+---
+- name: Neovim | Setup Neovim Profile Directories | file
+  file:
+    path: "{{ item.0.value }}/{{ item.1.value.appname }}"
+    state: directory
+    mode: '0755'
+  loop: "{{ xdg_config_dirs | dict2items | product(nvim_xdg_profiles | dict2items) | list }}"
+
+- name: Neovim | Setup Neovim Profile Configs | file
+  vars:
+    nvim_lua_config: "{{ item.value['config'] }}"
+  template:
+    src: nvim/init.lua.j2
+    dest: "{{ xdg_config_dir }}/{{ item.value['appname'] }}/init.lua"
+  loop: "{{ nvim_xdg_profiles | dict2items }}"

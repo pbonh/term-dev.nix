@@ -32,6 +32,10 @@ nvim_telescope_default:
     { 'princejoogie/dir-telescope.nvim' },
     { 'nvim-telescope/telescope-file-browser.nvim' },
     { 'Marskey/telescope-sg' },
+    {
+      'NoahTheDuke/vim-just',
+      lazy = true,
+    },
   config: |
     require('dressing').setup()
     require('telescope').setup({

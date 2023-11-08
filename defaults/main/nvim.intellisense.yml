@@ -64,7 +64,7 @@ nvim_intellisense_default:
     null_ls.setup({
       sources = {
         null_ls.builtins.completion.luasnip,
-        {{ null_ls_providers or '-- No Extra Null-LS Providers Configured' }}
+        {{ null_ls_providers | indent(4) or '-- No Extra Null-LS Providers Configured' }}
       },
       on_attach = function(client, bufnr)
         fmt_on_save(client, bufnr)
@@ -136,7 +136,7 @@ nvim_intellisense_default:
     local servers = {
       'ansiblels',
       'bashls',
-      {{ lsp_providers_luafile or '-- No Additional Servers Preconfigured' }}
+      {{ lsp_providers_luafile | indent(2) or '-- No Additional Servers Preconfigured' }}
     }
     for _, lsp in ipairs(servers) do
       lspconfig[lsp].setup {

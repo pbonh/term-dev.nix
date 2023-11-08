@@ -49,6 +49,13 @@ extra_nvim_plugins_rust: |
       'mfussenegger/nvim-dap',
     }
   }
+extra_nvim_plugins_rust_lazy: |
+  { 'simrat39/rust-tools.nvim',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'mfussenegger/nvim-dap',
+    }
+  },
 extra_nvim_config_rust: |
   dap.adapters.rustdbg = {
     id = 'rustdbg',
@@ -108,7 +115,23 @@ extra_nvim_config_rust: |
     bacon_watch:toggle()
   end
 extra_nvim_keymap_rust: |
-  vim.api.nvim_set_keymap('n', '<leader>ch', '<cmd>lua require(\"rust-tools\").hover_actions.hover_actions()<CR>', { noremap = true, silent = true })
-  vim.api.nvim_set_keymap('n', '<leader>ca', '<cmd>lua require(\"rust-tools\").code_action_group.code_action_group()<CR>', { noremap = true, silent = true })
-  vim.api.nvim_set_keymap('n', '<leader>cd', '<cmd>RustDebuggables<CR>', { noremap = true, silent = true })
-  vim.api.nvim_set_keymap('n', '<leader>cw', '<cmd>lua bacon_watch_terminal_runner()<CR>', { noremap = true, silent = true })
+  { '<leader>ch', {
+      n = '<cmd>lua require(\"rust-tools\").hover_actions.hover_actions()<CR>',
+    },
+    description = 'Rust-Tools: Hover Actions',
+  },
+  { '<leader>ca', {
+      n = '<cmd>lua require(\"rust-tools\").code_action_group.code_action_group()<CR>',
+    },
+    description = 'Rust-Tools: Code Action Group',
+  },
+  { '<leader>cd', {
+      n = '<cmd>RustDebuggables<CR>',
+    },
+    description = 'Rust-Tools: Select Rust Debuggable',
+  },
+  { '<leader>cw', {
+      n = '<cmd>lua bacon_watch_terminal_runner()<CR>',
+    },
+    description = 'Rust: Bacon Codebase Watcher',
+  },

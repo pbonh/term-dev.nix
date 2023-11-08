@@ -188,6 +188,20 @@ extra_nvim_plugins_cpp: |
       'nvim-treesitter/nvim-treesitter'
     }
   }
+extra_nvim_plugins_cpp_lazy: |
+  { 'p00f/clangd_extensions.nvim' },
+  { 'Shatur/neovim-cmake',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'mfussenegger/nvim-dap',
+      'stevearc/dressing.nvim'
+    }
+  },
+  { 'Badhi/nvim-treesitter-cpp-tools',
+    dependencies = {
+      'nvim-treesitter/nvim-treesitter'
+    }
+  },
 extra_nvim_config_cpp: |
   require('clangd_extensions').setup()
   local configs = require('lspconfig.configs')
@@ -255,13 +269,41 @@ extra_nvim_config_cpp: |
     dap_open_command = require('dapui').open,
   })
 extra_nvim_keymap_cpp: |
-  vim.api.nvim_set_keymap('n', '<leader>cc', '<cmd>CMake configure<CR>', { noremap = true, silent = true })
-  vim.api.nvim_set_keymap('n', '<leader>ct', '<cmd>CMake select_target<CR>', { noremap = true, silent = true })
-  vim.api.nvim_set_keymap('n', '<leader>cb', '<cmd>CMake build<CR>', { noremap = true, silent = true })
-  vim.api.nvim_set_keymap('n', '<leader>ca', '<cmd>CMake build_all<CR>', { noremap = true, silent = true })
-  vim.api.nvim_set_keymap('n', '<leader>cr', '<cmd>CMake run<CR>', { noremap = true, silent = true })
-  vim.api.nvim_set_keymap('n', '<leader>cd', '<cmd>CMake debug<CR>', { noremap = true, silent = true })
-  vim.api.nvim_set_keymap('n', '<leader>cl', '<cmd>CMake clean<CR>', { noremap = true, silent = true })
+  { '<leader>cc', {
+      n = '<cmd>CMake configure<CR>',
+    },
+    description = 'CMake: Configure',
+  },
+  { '<leader>ct', {
+      n = '<cmd>CMake select_target<CR>',
+    },
+    description = 'CMake: Select Target',
+  },
+  { '<leader>cb', {
+      n = '<cmd>CMake build<CR>',
+    },
+    description = 'CMake: Build Target',
+  },
+  { '<leader>ca', {
+      n = '<cmd>CMake build_all<CR>',
+    },
+    description = 'CMake: Build All Targets',
+  },
+  { '<leader>cr', {
+      n = '<cmd>CMake run<CR>',
+    },
+    description = 'CMake: Run Target',
+  },
+  { '<leader>cd', {
+      n = '<cmd>CMake debug<CR>',
+    },
+    description = 'CMake: Debug Target',
+  },
+  { '<leader>cl', {
+      n = '<cmd>CMake clean<CR>',
+    },
+    description = 'CMake: Clean',
+  },
 nvim_completion_config_cpp: ""
 # nvim_completion_config_cpp: |
 #   sorting = {

@@ -31,10 +31,19 @@ python_file_extensions:
   - python
 extra_nvim_plugins_python: |
   use 'mfussenegger/nvim-dap-python'
+extra_nvim_plugins_python_lazy: |
+  {
+    'mfussenegger/nvim-dap-python',
+    lazy = true,
+  },
 extra_nvim_config_python: |
   require('lspconfig').pylsp.setup({
     cmd = { '{{ pls_exe }}' }
   })
   require('dap-python').setup('{{ debugpy_python_exe }}')
 extra_nvim_keymap_python: |
-  vim.api.nvim_set_keymap('n', '<leader>cd', '<cmd>lua require(\'dap-python\').debug_selection()<CR>', { noremap = true, silent = true })
+  { '<leader>cd', {
+      n = '<cmd>lua require(\'dap-python\').debug_selection()<CR>',
+    },
+    description = 'Python-DAP: Debugger Selection',
+  },

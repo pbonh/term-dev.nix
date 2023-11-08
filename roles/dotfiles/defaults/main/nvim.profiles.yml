@@ -209,17 +209,23 @@ nvim_lua_lazy_config: |
 
   require("lazy").setup({
     -- Neovim Plugins
-    {{ nvim_legendary_default['lazy'] }}
-    {{ nvim_ui_default['lazy'] }}
-    {{ nvim_telescope_default['lazy'] }}
-    {{ nvim_hydra_default['lazy'] }}
-    {{ nvim_treesitter_default['lazy'] }}
-    {{ nvim_git_default['lazy'] }}
-    {{ nvim_terminal_default['lazy'] }}
-    {{ nvim_motion_flash['lazy'] }}
-    {{ nvim_colorscheme_default['lazy'] }}
-    {{ nvim_intellisense_default['lazy'] }}
-    {{ nvim_debugger_default['lazy'] }}
+    {{ nvim_legendary_default['lazy'] | indent(2) }}
+    {{ nvim_ui_default['lazy'] | indent(2) }}
+    {{ nvim_telescope_default['lazy'] | indent(2) }}
+    {{ nvim_hydra_default['lazy'] | indent(2) }}
+    {{ nvim_treesitter_default['lazy'] | indent(2) }}
+    {{ nvim_git_default['lazy'] | indent(2) }}
+    {{ nvim_terminal_default['lazy'] | indent(2) }}
+    {{ nvim_motion_flash['lazy'] | indent(2) }}
+    {{ nvim_colorscheme_default['lazy'] | indent(2) }}
+    {{ nvim_intellisense_default['lazy'] | indent(2) }}
+    {{ nvim_debugger_default['lazy'] | indent(2) }}
+
+    -- Neovim Plugins(Extra)
+    {% for language in nvim_extra_plugins -%}
+    {{ nvim_extra_plugins[language]['lazy'] | indent(2) }}
+    {% endfor %}
+
   })
 
   -- Neovim Plugin Settings
@@ -234,6 +240,11 @@ nvim_lua_lazy_config: |
   {{ nvim_intellisense_default['config'] }}
   {{ nvim_debugger_default['config'] }}
 
+  -- Neovim Plugin Settings(Extra)
+  {% for language in nvim_extra_plugins -%}
+  {{ nvim_extra_plugins[language]['config'] }}
+  {% endfor %}
+
   -- Legendary Keymap Setup
   require('legendary').setup({
     extensions = {
@@ -245,16 +256,19 @@ nvim_lua_lazy_config: |
       },
     },
     keymaps = {
-      {{ nvim_legendary_default['keymaps'] }}
-      {{ nvim_ui_default['keymaps'] }}
-      {{ nvim_telescope_default['keymaps'] }}
-      {{ nvim_hydra_default['keymaps'] }}
-      {{ nvim_treesitter_default['keymaps'] }}
-      {{ nvim_git_default['keymaps'] }}
-      {{ nvim_terminal_default['keymaps'] }}
-      {{ nvim_colorscheme_default['keymaps'] }}
-      {{ nvim_intellisense_default['keymaps'] }}
-      {{ nvim_debugger_default['keymaps'] }}
+      {{ nvim_legendary_default['keymaps'] | indent(4) }}
+      {{ nvim_ui_default['keymaps'] | indent(4) }}
+      {{ nvim_telescope_default['keymaps'] | indent(4) }}
+      {{ nvim_hydra_default['keymaps'] | indent(4) }}
+      {{ nvim_treesitter_default['keymaps'] | indent(4) }}
+      {{ nvim_git_default['keymaps'] | indent(4) }}
+      {{ nvim_terminal_default['keymaps'] | indent(4) }}
+      {{ nvim_colorscheme_default['keymaps'] | indent(4) }}
+      {{ nvim_intellisense_default['keymaps'] | indent(4) }}
+      {{ nvim_debugger_default['keymaps'] | indent(4) }}
+      {% for plugin in nvim_extra_plugins -%}
+      {{ nvim_extra_plugins[plugin]['keymaps'] | indent(4) }}
+      {% endfor %}
     },
   })
 

@@ -52,26 +52,27 @@ zellij_session_info: "{{ zellij_layouts.example.zellij_session }}"
 zellij_template_info: "{{ zellij_layouts.example.zellij_template }}"
 zellij_tab_info: "{{ zellij_layouts.example.zellij_tabs }}"
 zellij_kdl_config_file: "{{ zellij_config_dir }}/config.kdl"
+zellij_kdl_template_info_default: |
+  tab_template name="shell-in-dir" {
+      pane size=1 borderless=true {
+          plugin location="zellij:tab-bar"
+      }
+  }
+  default_tab_template {
+      // the default zellij tab-bar and status bar plugins
+      pane size=1 borderless=true {
+          plugin location="zellij:tab-bar"
+      }
+      children
+      pane size=2 borderless=true {
+          plugin location="zellij:status-bar"
+      }
+  }
 zellij_kdl_layouts:
   example:
     name: dev1
     cwd: "{{ ansible_env.HOME }}"
-    template_info: |
-      tab_template name="shell-in-dir" {
-          pane size=1 borderless=true {
-              plugin location="zellij:tab-bar"
-          }
-      }
-      default_tab_template {
-          // the default zellij tab-bar and status bar plugins
-          pane size=1 borderless=true {
-              plugin location="zellij:tab-bar"
-          }
-          children
-          pane size=2 borderless=true {
-              plugin location="zellij:status-bar"
-          }
-      }
+    template_info: "{{ zellij_kdl_template_info_default }}"
     layout_info: |
       tab name="main tab" split_direction="vertical" focus=true cwd="{{ dotfiles_user_home }}" {
           pane

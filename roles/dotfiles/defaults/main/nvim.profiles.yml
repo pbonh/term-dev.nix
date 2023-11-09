@@ -236,6 +236,7 @@ nvim_lua_lazy_config: |
   {{ nvim_treesitter_default['config'] }}
   {{ nvim_git_default['config'] }}
   {{ nvim_terminal_default['config'] }}
+  {{ nvim_motion_flash['config'] }}
   {{ nvim_colorscheme_default['config'] }}
   {{ nvim_intellisense_default['config'] }}
   {{ nvim_debugger_default['config'] }}
@@ -263,6 +264,7 @@ nvim_lua_lazy_config: |
       {{ nvim_treesitter_default['keymaps'] | indent(4) }}
       {{ nvim_git_default['keymaps'] | indent(4) }}
       {{ nvim_terminal_default['keymaps'] | indent(4) }}
+      {{ nvim_motion_flash['keymaps'] | indent(4) }}
       {{ nvim_colorscheme_default['keymaps'] | indent(4) }}
       {{ nvim_intellisense_default['keymaps'] | indent(4) }}
       {{ nvim_debugger_default['keymaps'] | indent(4) }}

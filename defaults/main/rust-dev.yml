@@ -40,8 +40,6 @@ lsp_providers_rust_setup: []
 rust_extra_lua_plugin_settings: []
 rust_analyzer_exe: "{{ rustup_path }}/rust-analyzer"
 clippy_exe: "cargo-clippy"
-null_ls_providers_rust: |
-  null_ls.builtins.formatting.rustfmt,
 extra_nvim_plugins_rust: |
   use { 'simrat39/rust-tools.nvim',
     requires = {

@@ -172,8 +172,6 @@ treesitter_extra_config_cpp: |
       header_extension = 'h', -- optional
       source_extension = 'cxx', -- optional
   },
-null_ls_providers_cpp: |
-  null_ls.builtins.diagnostics.clang_check,
 extra_nvim_plugins_cpp: |
   use 'p00f/clangd_extensions.nvim'
   use { 'Shatur/neovim-cmake',

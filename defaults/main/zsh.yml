@@ -160,6 +160,7 @@ zsh_nvim_setup: |
 zsh_default_aliases: |
   alias cat={{ bat_exe }}
   alias ls='{{ lsd_exe }} --group-dirs first'
+  alias ll='{{ lsd_exe }} --group-dirs first -l'
   alias jchoose='{{ just_exe }} --choose'
 zsh_ssh_setup: |
   env={{ dotfiles_user_home }}/.ssh/agent.env

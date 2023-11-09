@@ -68,14 +68,9 @@
     - navi
 
 - name: Install Neovim AppImage
-  import_tasks: tasks/install_neovim_appimage.yml
+  import_tasks: tasks/install_neovim_app.yml
   tags:
     - neovim-app
-
-- name: Install Neovim Config
-  import_tasks: tasks/install_neovim.yml
-  tags:
-    - neovim
 
 - name: Install Neovim Config
   import_tasks: tasks/install_neovim_configs.yml

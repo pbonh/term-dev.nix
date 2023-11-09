@@ -50,7 +50,17 @@ nvim_ui_default:
         'b0o/incline.nvim',
       },
     },
-    { 'melkster/modicator.nvim' },
+    {
+      'mawkler/modicator.nvim',
+      dependencies = 'sainnhe/gruvbox-material',
+      init = function()
+        -- These are required for Modicator to work
+        vim.o.cursorline = true
+        vim.o.number = true
+        vim.o.termguicolors = true
+      end,
+      opts = {}
+    },
     { 'petertriho/nvim-scrollbar',
       dependencies = {
         'kevinhwang91/nvim-hlslens',

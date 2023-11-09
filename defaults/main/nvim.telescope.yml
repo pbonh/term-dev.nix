@@ -34,7 +34,7 @@ nvim_telescope_default:
     { 'Marskey/telescope-sg' },
     {
       'NoahTheDuke/vim-just',
-      lazy = true,
+      lazy = false,
     },
   config: |
     require('dressing').setup()

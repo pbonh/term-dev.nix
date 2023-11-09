@@ -19,31 +19,31 @@ update-submodules:
 reset-submodules:
   git submodule foreach --recursive git reset --hard
 
-nix-all:
+all:
   ansible-playbook dotfiles.yml --ask-become-pass
 
-nix-tools: update-submodules
+tools: update-submodules
   ansible-playbook dotfiles.yml --tags "tools" --skip-tags "dependencies"
 
-nix-dot: update-submodules
+dot: update-submodules
   ansible-playbook dotfiles.yml --tags "dot"
 
-nix-dot-neovim: update-submodules
-  {{ task_prelude }} ansible-playbook dotfiles.yml --tags "neovim"
+dot-neovim: update-submodules
+  {{ task_prelude }} ansible-playbook dotfiles.yml --tags "neovim-config"
 
-nix-dot-helix: update-submodules
+dot-helix: update-submodules
   {{ task_prelude }} ansible-playbook dotfiles.yml --tags "helix"
 
-nix-dot-zellij: update-submodules
+dot-zellij: update-submodules
   {{ task_prelude }} ansible-playbook dotfiles.yml --tags "zellij"
 
-nix-binscripts: update-submodules
+binscripts: update-submodules
   {{ task_prelude }} ansible-playbook dotfiles.yml --tags "scripts"
 
-nix-cpp: update-submodules
+cpp: update-submodules
   {{ task_prelude }} ansible-playbook dotfiles.yml --tags "cpp" --ask-become-pass
 
-nix-rust: update-submodules
+rust: update-submodules
   {{ task_prelude }} ansible-playbook dotfiles.yml --tags "rust"
 
 update-rust-tools:

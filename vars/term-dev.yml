@@ -6,39 +6,19 @@ lang_tools_nix: "{{ cpp_tools_nix + python_tools_nix }}"
 install_languages:
   - cpp
   - python
-nvim_cmd: "{{ bin_directory }}/nvim-musl"
+nvim_cmd: "{{ bin_directory }}/nvim"
 lsp_providers: "{{ lsp_providers_cpp + lsp_providers_python }}"
 treesitter_parsers: "{{ treesitter_parsers_cpp + treesitter_parsers_python }}"
 treesitter_extra_config: "{{ treesitter_extra_config_cpp }}"
-treesitter_custom_parsers_default:
-  - just
-  - tcl
-treesitter_custom_parsers_info:
-  - "parser_configs.just = {"
-  - "  install_info = {"
-  - "    url = \"https://github.com/IndianBoy42/tree-sitter-just\","
-  - "    files = { \"src/parser.c\", \"src/scanner.cc\" },"
-  - "    branch = \"main\","
-  - "  },"
-  - "  maintainers = { \"@IndianBoy42\" },"
-  - "}"
-  - "parser_configs.tcl = {"
-  - "  install_info = {"
-  - "    url = \"https://github.com/pbonh/tree-sitter-tcl\","
-  - "    files = { "
-  - "      \"src/parser.c\","
-  - "      \"src/scanner.c\","
-  - "    },"
-  - "    branch = \"main\","
-  - "  },"
-  - "}"
 nvim_extra_plugins:
   cpp:
     packer: "{{ extra_nvim_plugins_cpp }}"
+    lazy: "{{ extra_nvim_plugins_cpp_lazy }}"
     config: "{{ extra_nvim_config_cpp }}"
     keymaps: "{{ extra_nvim_keymap_cpp }}"
   python:
     packer: "{{ extra_nvim_plugins_python }}"
+    lazy: "{{ extra_nvim_plugins_python_lazy }}"
     config: "{{ extra_nvim_config_python }}"
     keymaps: "{{ extra_nvim_keymap_python }}"
 extra_nvim_language_mappings:
@@ -49,24 +29,20 @@ extra_nvim_language_mappings:
     mappings: "{{ extra_nvim_keymap_python }}"
     ext: "{{ python_file_extensions }}"
 zellij_kdl_layouts:
-  homelab:
-    name: example
-    layout_info:
-      - "tab name=\"Test\" split_direction=\"vertical\" focus=true {"
-      - "    pane {"
-      - "        command \"{{ nvim_cmd }}\""
-      - "        cwd \"{{ dotfiles_home }}\""
-      - "    }"
-      - "}"
-      - "tab name=\"Server\" {"
-      - "    pane {"
-      - "        command \"{{ git_ssh }}\""
-      - "        args \"{{ some_user }}@{{ some_addr }}\""
-      - "    }"
-      - "}"
-      - "tab name=\"Project 1\" split_direction=\"vertical\" {"
-      - "    pane {"
-      - "        command \"{{ nvim_cmd }}\""
-      - "        cwd \"{{ code_checkout_path }}/project1\""
-      - "    }"
-      - "}"
+  dotfiles:
+    name: dotfiles
+    cwd: "{{ ansible_env.HOME }}"
+    template_info: "{{ zellij_kdl_template_info_default }}"
+    layout_info: |
+      tab name="Dotfiles" split_direction="vertical" focus=true {
+          pane {
+              command "{{ nvim_exe }}"
+              cwd "{{ dotfiles_home }}"
+          }
+      }
+      tab name="Code" split_direction="vertical" {
+          pane {
+              command "{{ nvim_exe }}"
+              cwd "{{ dotfiles_checkout_dir }}"
+          }
+      }

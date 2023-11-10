@@ -32,6 +32,7 @@ nvim_intellisense_default:
         'hrsh7th/cmp-nvim-lsp',
       },
     },
+    { 'mhartington/formatter.nvim' },
     { 'stevearc/aerial.nvim' },
     { 'dnlhc/glance.nvim' },
     { 'numToStr/Comment.nvim' },
@@ -125,6 +126,9 @@ nvim_intellisense_default:
       },
     })
     vim.wo.winbar = require('lspsaga.symbol.winbar').get_bar()
+
+    -- Config(Formatter)
+    require('formatter').setup()
 
     -- Config(Misc)
     require('Comment').setup()

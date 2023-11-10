@@ -54,6 +54,7 @@ extra_nvim_plugins_rust_lazy: |
       'mfussenegger/nvim-dap',
     }
   },
+  { 'rust-lang/rust.vim' },
 extra_nvim_config_rust: |
   dap.adapters.rustdbg = {
     id = 'rustdbg',
@@ -112,6 +113,8 @@ extra_nvim_config_rust: |
   function bacon_watch_terminal_runner()
     bacon_watch:toggle()
   end
+
+  vim.g.rustfmt_autosave = 1
 extra_nvim_keymap_rust: |
   { '<leader>ch', {
       n = '<cmd>lua require(\"rust-tools\").hover_actions.hover_actions()<CR>',

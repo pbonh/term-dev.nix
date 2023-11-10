@@ -26,7 +26,7 @@ tools: update-submodules
   ansible-playbook dotfiles.yml --tags "tools" --skip-tags "dependencies"
 
 dot: update-submodules
-  ansible-playbook dotfiles.yml --tags "dot"
+  {{ task_prelude }} ansible-playbook dotfiles.yml --tags "git,fzf,neovim-config,navi,direnv,scripts,bookmarks,bash,nushell,zsh,zellij"
 
 dot-neovim: update-submodules
   {{ task_prelude }} ansible-playbook dotfiles.yml --tags "neovim-config"

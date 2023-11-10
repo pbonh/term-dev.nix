@@ -49,7 +49,7 @@ ccls_clang_args: {}
 ccls_tmp_dir: /tmp/ccls
 clang_format_fileoption: file
 vscode_cpptools_version: 1.15.31
-vscode_cpptools_download: "{{ dotfiles_user_home }}/.local/vscode-cpptools"
+vscode_cpptools_download: "{{ tool_install_dir }}/vscode-cpptools"
 vscode_cpptools_extension: cpptools-linux
 vscode_cpptools_extension_path: "{{ vscode_cpptools_download }}/{{ vscode_cpptools_extension }}"
 vscode_cpptools_vsix_file_path: "{{ vscode_cpptools_extension_path }}.vsix"
@@ -137,7 +137,7 @@ lldb_vscode_runner: |
       -- runInTerminal = false,
     },
 gccdiag_url: https://gitlab.com/andrejr/gccdiag
-gccdiag_download: "{{ dotfiles_user_home }}/.local/gccdiag"
+gccdiag_download: "{{ tool_install_dir }}/gccdiag"
 cpp_file_extensions:
   - c
   - cc
@@ -341,3 +341,4 @@ cpp_neoformat_plugin_settings: |
 neoformat_plugin_settings: "{{ cpp_neoformat_plugin_settings }}"
 cpp_dap_plugin_settings: []
 cpp_extra_lua_plugin_settings: []
+conan_exe: "{{ bin_directory }}/conan"

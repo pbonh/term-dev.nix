@@ -31,7 +31,7 @@
 - name: Conan | Install Conan | command
   command: "{{ nix_bin }}/pipx install conan"
   args:
-    creates: "{{ bin_directory }}/conan"
+    creates: "{{ conan_exe }}"
 
 - name: NeoCMakeLSP | Install NeoCMakeLSP | command
   shell: "{{ rustc_env_variables }} {{ cargo_bin }} install {{ item.name }}"

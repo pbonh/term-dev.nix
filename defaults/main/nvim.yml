@@ -8,7 +8,7 @@ nvim_src_install_option: false
 nvim_src_url: "https://github.com/neovim/neovim"
 nvim_src_download: "{{ dot_download_dir }}/neovim"
 nvim_src_version: "stable"
-nvim_src_install_dir: "{{ dotfiles_user_home }}/.local/neovim"
+nvim_src_install_dir: "{{ tool_install_dir }}/neovim"
 nvim_src_install_exe: "{{ nvim_src_install_dir }}/bin/nvim"
 nvim_cmake_exe: "cmake"
 nvim_src_make_opts:
@@ -16,7 +16,7 @@ nvim_src_make_opts:
   CMAKE_EXTRA_FLAGS: "-DCMAKE_INSTALL_PREFIX={{ nvim_src_install_dir }}"
 nvim_macos_download: nvim-macos
 nvim_macos_download_archive: "{{ nvim_macos_download }}.tar.gz"
-nvim_macos_download_dir: "{{ dotfiles_user_home }}/.local"
+nvim_macos_download_dir: "{{ dot_download_dir }}"
 nvim_macos_install_dir: "{{ nvim_macos_download_dir }}/{{ nvim_macos_download }}"
 nvim_macos_install_download: "{{ nvim_macos_download_dir }}/{{ nvim_macos_download_archive }}"
 nvim_macos_exe: nvim-macos/bin/nvim

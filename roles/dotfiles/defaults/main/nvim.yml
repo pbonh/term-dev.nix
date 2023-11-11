@@ -2,7 +2,7 @@
 nvim_version: "stable"
 nvim_appimage_version: "{{ nvim_version }}"
 nvim_appimage_url: "https://github.com/neovim/neovim/releases/download/{{ nvim_appimage_version }}/nvim.appimage"
-nvim_appimage_exe: "{{ bin_directory }}/nvim.appimage"
+nvim_appimage_exe: "{{ tool_install_bin }}/nvim.appimage"
 nvim_exe_url: "https://github.com/neovim/neovim/releases/download/{{ nvim_version }}"
 nvim_src_install_option: false
 nvim_src_url: "https://github.com/neovim/neovim"

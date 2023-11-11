@@ -1,8 +1,9 @@
 ---
 dotfiles_user_home: "{{ ansible_env.HOME }}"
 tool_install_dir: "{{ dotfiles_user_home }}/.local"
-bin_directory: "{{ dotfiles_user_home }}/.local/bin"
-xdg_share_dir: "{{ dotfiles_user_home }}/.local/share"
+tool_install_bin: "{{ tool_install_dir }}/bin"
+bin_directory: "{{ tool_install_bin }}"
+xdg_share_dir: "{{ tool_install_dir }}/share"
 xdg_config_dir: "{{ dotfiles_user_home }}/.config"
 xdg_cache_dir:  "{{ dotfiles_user_home }}/.cache"
 xdg_config_dirs:

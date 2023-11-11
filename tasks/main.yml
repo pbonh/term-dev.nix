@@ -77,10 +77,15 @@
   tags:
     - neovim-config
 
-- name: Install Helix Config
-  import_tasks: tasks/install_helix.yml
+- name: Install Helix App
+  import_tasks: tasks/install_helix_app.yml
   tags:
-    - helix
+    - helix-app
+
+- name: Install Helix Config
+  import_tasks: tasks/install_helix_config.yml
+  tags:
+    - helix-config
 
 - name: Install Tmux Config
   import_tasks: tasks/install_tmux.yml

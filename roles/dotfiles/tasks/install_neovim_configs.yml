@@ -6,7 +6,12 @@
     mode: '0755'
   loop: "{{ xdg_config_dirs | dict2items | product(nvim_xdg_profiles | dict2items) | list }}"
 
-- name: Neovim | Setup Neovim Profile Configs | file
+- name: Neovim | Setup Neovim Notes Directory | file
+  file:
+    path: "{{ nvim_neorg_dir }}"
+    state: directory
+
+- name: Neovim | Setup Neovim Profile Configs | template
   vars:
     nvim_lua_config: "{{ item.value['config'] }}"
   template:

@@ -214,6 +214,7 @@ nvim_lua_lazy_config: |
     {{ nvim_telescope_default['lazy'] | indent(2) }}
     {{ nvim_hydra_default['lazy'] | indent(2) }}
     {{ nvim_treesitter_default['lazy'] | indent(2) }}
+    {{ nvim_neorg_default['lazy'] | indent(2) }}
     {{ nvim_git_default['lazy'] | indent(2) }}
     {{ nvim_terminal_default['lazy'] | indent(2) }}
     {{ nvim_motion_flash['lazy'] | indent(2) }}

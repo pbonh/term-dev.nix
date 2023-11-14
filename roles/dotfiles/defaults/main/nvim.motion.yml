@@ -82,19 +82,9 @@ nvim_motion_flash:
       },
     },
     { 'kylechui/nvim-surround' },
-    {
-      'SmiteshP/nvim-navbuddy',
-      dependencies = {
-        'neovim/nvim-lspconfig',
-        'SmiteshP/nvim-navic',
-        'MunifTanjim/nui.nvim'
-      }
-    },
   config: |
     require('portal').setup()
     require('nvim-surround').setup()
-    local navbuddy = require('nvim-navbuddy')
   keymaps: |
     { '<C-o>', { n = '<cmd>Portal jumplist backward<CR>', }, description = 'Portal: Jump Backward', },
     { '<C-i>', { n = '<cmd>Portal jumplist forward<CR>', }, description = 'Portal: Jump Forward', },
-    { '<C-Space>', { n = '<cmd>lua require("nvim-navbuddy").open()<CR>', }, description = 'NavBuddy: Open', },

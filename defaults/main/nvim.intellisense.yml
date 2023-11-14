@@ -36,7 +36,16 @@ nvim_intellisense_default:
     { 'stevearc/aerial.nvim' },
     { 'dnlhc/glance.nvim' },
     { 'numToStr/Comment.nvim' },
+    {
+      'SmiteshP/nvim-navbuddy',
+      dependencies = {
+        'neovim/nvim-lspconfig',
+        'SmiteshP/nvim-navic',
+        'MunifTanjim/nui.nvim'
+      }
+    },
   config: |
+    local navbuddy = require('nvim-navbuddy')
     -- Config(Lspconfig)
     local lspconfig = require('lspconfig')
     local on_attach = function(client, bufnr)
@@ -157,3 +166,4 @@ nvim_intellisense_default:
     { 'e]', { n = '<cmd>Lspsaga diagnostic_jump_next<CR>', }, description = 'LSPSaga: Next Diagnostic', },
     { '[E', { n = 'function() require(\'lspsaga.diagnostic\').goto_prev({ severity = vim.diagnostic.severity.ERROR }) end', }, description = 'LSPSaga: Previous Error', },
     { 'E]', { n = 'function() require(\'lspsaga.diagnostic\').goto_next({ severity = vim.diagnostic.severity.ERROR }) end', }, description = 'LSPSaga: Next Error', },
+    { '<C-Space>', { n = '<cmd>lua require("nvim-navbuddy").open()<CR>', }, description = 'NavBuddy: Open', },

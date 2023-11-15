@@ -28,13 +28,16 @@ tools: update-submodules
 dot: update-submodules
   {{ task_prelude }} ansible-playbook dotfiles.yml --tags "git,fzf,neovim-config,navi,direnv,scripts,bookmarks,bash,nushell,zsh,zellij"
 
-dot-neovim: update-submodules
+shell: update-submodules
+  {{ task_prelude }} ansible-playbook dotfiles.yml --tags "scripts,bookmarks,bash,nushell,zsh,tcsh"
+
+neovim: update-submodules
   {{ task_prelude }} ansible-playbook dotfiles.yml --tags "neovim-config"
 
-dot-helix: update-submodules
-  {{ task_prelude }} ansible-playbook dotfiles.yml --tags "helix"
+helix: update-submodules
+  {{ task_prelude }} ansible-playbook dotfiles.yml --tags "helix-config"
 
-dot-zellij: update-submodules
+zellij: update-submodules
   {{ task_prelude }} ansible-playbook dotfiles.yml --tags "zellij"
 
 binscripts: update-submodules

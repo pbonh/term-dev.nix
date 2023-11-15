@@ -5,10 +5,11 @@ task_prelude := env_var_or_default('DOTFILES_TASK_PRELUDE', '')
 playbook_selection := if os() == "macos" { ".macos" } else { ".nix" }
 
 default:
-  @just --list
+  @just --choose
 
 install-requirements:
-  ansible-galaxy install -r requirements.yml && ansible-galaxy collection install -r requirements.yml
+  {{ task_prelude }} ansible-galaxy install -r requirements.yml
+  {{ task_prelude }} ansible-galaxy collection install -r requirements.yml
 
 init-submodules:
   git submodule update --recursive --init
@@ -20,10 +21,10 @@ reset-submodules:
   git submodule foreach --recursive git reset --hard
 
 all:
-  ansible-playbook dotfiles.yml --ask-become-pass
+  {{ task_prelude }} ansible-playbook dotfiles.yml --ask-become-pass
 
 tools: update-submodules
-  ansible-playbook dotfiles.yml --tags "tools" --skip-tags "dependencies"
+  {{ task_prelude }} ansible-playbook dotfiles.yml --tags "tools"
 
 setup:
   {{ task_prelude }} ansible-playbook dotfiles.yml --tags "setup"
@@ -55,9 +56,6 @@ binscripts: update-submodules
 cpp: update-submodules
   {{ task_prelude }} ansible-playbook dotfiles.yml --tags "cpp" --ask-become-pass
 
-rust: update-submodules
-  {{ task_prelude }} ansible-playbook dotfiles.yml --tags "rust"
-
 update-rust-tools:
   {{ task_prelude }} cargo install-update -a
 
@@ -73,6 +71,3 @@ pull-nix-dot-repo:
 
 push-nix-dot-repo:
   git subtree push --prefix=roles/dotfiles dotfiles-nix main
-
-neovim-packer-sync:
-  nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'

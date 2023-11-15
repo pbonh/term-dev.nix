@@ -18,5 +18,4 @@ helix_macos_install_download: "{{ helix_macos_download_dir }}/{{ helix_macos_dow
 helix_macos_install_download_dir: "{{ helix_macos_download_dir }}/{{ helix_macos_download_dir_name }}/{{ helix_macos_install_download_name }}"
 helix_macos_install_dir: "{{ helix_macos_download_dir }}/{{ helix_macos_download_dir_name }}"
 helix_macos_exe: "hx"
-helix_exe_default: "{{ bin_directory }}/hx"
 helix_exe: "{{ helix_exe_default }}"

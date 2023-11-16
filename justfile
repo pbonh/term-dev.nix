@@ -20,6 +20,9 @@ update-submodules:
 reset-submodules:
   git submodule foreach --recursive git reset --hard
 
+work tag:
+  {{ task_prelude }} ansible-playbook dotfiles.yml --tags "{{ tag }}"
+
 all:
   {{ task_prelude }} ansible-playbook dotfiles.yml --ask-become-pass
 

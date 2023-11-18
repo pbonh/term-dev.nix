@@ -1,15 +1,17 @@
 ---
 rustup_arch: x86_64
-rustup_os: linux-musl
+rustup_os: linux-gnu
+rustup_macos_arch: aarch64
+rustup_macos_os: apple-darwin
 rustup_url: https://static.rust-lang.org/rustup/rustup-init.sh
 rustup_script_path: "{{ dotfiles_user_home }}/rustup-init.sh"
 rustup_toolchain: "stable"
-rustup_musl_target: "x86_64-unknown-linux-musl"
+rustup_musl_target: "{{ rustup_arch }}-unknown-linux-musl"
 rustup_path: "{{ dotfiles_user_home }}/.rustup/toolchains/{{ rustup_toolchain }}-{{ rustup_arch }}-{{ rustup_os }}/bin"
-rustup_exe: "{{ rustup_path }}/rustup"
 cargo_home: "{{ dotfiles_user_home }}/.cargo"
 cargo_path: "{{ cargo_home }}/bin"
 cargo_bin: "{{ cargo_path }}/cargo"
+rustup_exe: "{{ cargo_path }}/rustup"
 cargo_binstall_exe: "{{ cargo_path }}/cargo-binstall"
 rustc_env_variables: ""
 cargo_binstall_args: ""

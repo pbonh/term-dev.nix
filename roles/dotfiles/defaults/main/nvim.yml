@@ -12,6 +12,7 @@ nvim_src_install_dir: "{{ tool_install_dir }}/neovim"
 nvim_src_install_exe: "{{ nvim_src_install_dir }}/bin/nvim"
 nvim_cmake_exe: "cmake"
 nvim_src_make_opts:
+  CMAKE_PRG: "{{ nvim_cmake_exe }}"
   CMAKE_BUILD_TYPE: Release
   CMAKE_EXTRA_FLAGS: "-DCMAKE_INSTALL_PREFIX={{ nvim_src_install_dir }}"
 nvim_macos_download: nvim-macos

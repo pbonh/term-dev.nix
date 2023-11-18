@@ -16,7 +16,7 @@
 
 - name: Rust | Install Rust MUSL Target | shell
   changed_when: false
-  command: "rustup target add {{ rustup_musl_target }}"
+  command: "{{ rustup_exe }} target add {{ rustup_musl_target }}"
 
 - name: Install Cargo/Rust Dev Tools
   changed_when: false
@@ -38,7 +38,7 @@
   loop: "{{ rust_dev_packages | dict2items }}"
 
 - name: Rust | Install Tools for Rust Development | shell
-  command: "rustup component add {{ item.value.name }}"
+  command: "{{ rustup_exe }} component add {{ item.value.name }}"
   args:
     creates: "{{ item.value.path }}"
   loop: "{{ rustup_dev_packages | dict2items }}"

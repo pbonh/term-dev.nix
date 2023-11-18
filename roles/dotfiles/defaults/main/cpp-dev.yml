@@ -156,7 +156,6 @@ cargo_path: "{{ ansible_env.HOME }}/.cargo/bin"
 cargo_bin: "{{ cargo_path }}/cargo"
 cargo_cpp_packages:
   - { name: neocmakelsp, path: neocmakelsp }
-rustc_env_variables: ""
 treesitter_parsers_cpp:
   - cpp
   - c

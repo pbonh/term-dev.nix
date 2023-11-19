@@ -113,6 +113,12 @@
     - zellij
     - session
 
+- name: Install Zellij Plugins
+  import_tasks: tasks/install_zellij_plugins.yml
+  tags:
+    - zellij-plugins
+    - session
+
 - name: Install Ranger-Zoxide Plugin
   when: ansible_distribution != 'MacOSX'
   import_tasks: tasks/install_ranger_zoxide.yml

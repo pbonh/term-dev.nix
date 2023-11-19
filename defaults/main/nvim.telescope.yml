@@ -45,6 +45,16 @@ nvim_telescope_default:
           vertical = { width = 1.8 }
           -- other layout configuration here
         },
+        vimgrep_arguments = {
+          '{{ rg_exe }}',
+          '--color=never',
+          '--no-heading',
+          '--with-filename',
+          '--line-number',
+          '--column',
+          '--smart-case',
+          '--trim' -- add this value
+        },
         mappings = {
           i = {
             ['<C-u>'] = false,
@@ -52,19 +62,19 @@ nvim_telescope_default:
           },
         },
         file_ignore_patterns = {
-          "node_modules/",
-          ".git/",
-          "dist/",
-          "build/",
-          "yarn.lock",
-          "package-lock.json",
-          "target/",
+          'node_modules/',
+          '.git/',
+          'dist/',
+          'build/',
+          'yarn.lock',
+          'package-lock.json',
+          'target/',
         },
       },
       pickers = {
         find_files = {
           theme = 'dropdown',
-          find_command = { '{{ fd_exe }}' },
+          find_command = { '{{ fd_exe }}', '--type', 'f', '--strip-cwd-prefix' },
           layout_config = {
             vertical = { width = 1.2 }
           },

@@ -10,7 +10,7 @@ nvim_telescope_default:
         'TC72/telescope-tele-tabby.nvim',
         'sharkdp/fd',
       },
-      run = 'make',
+      run = '{{ nvim_make_exe }}',
     }
     use { 'nvim-telescope/telescope-ui-select.nvim' }
     use { 'princejoogie/dir-telescope.nvim' }

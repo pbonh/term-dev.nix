@@ -26,7 +26,7 @@ nvim_telescope_default:
         'TC72/telescope-tele-tabby.nvim',
         'sharkdp/fd',
       },
-      build = '{{ make_exe }}',
+      build = '{{ nvim_make_exe }}',
     },
     { 'nvim-telescope/telescope-ui-select.nvim' },
     { 'princejoogie/dir-telescope.nvim' },

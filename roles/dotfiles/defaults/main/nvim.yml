@@ -34,6 +34,7 @@ nvim_macos_exe: nvim-macos/bin/nvim
 nvim_exe_default: "{{ bin_directory }}/nvim"
 nvim_exe: "{{ nvim_exe_default }}"
 nvim_cmd: "{{ nvim_exe }}"
+nvim_lazy_url: "https://github.com/folke/lazy.nvim.git"
 nvim_path_settings:
   - "-- vim.opt.runtimepath:remove(vim.fn.expand('{{ default_nvim_config_dir }}'))"
   - "-- vim.opt.packpath:remove(vim.fn.expand('{{ default_nvim_share_dir }}/site'))"

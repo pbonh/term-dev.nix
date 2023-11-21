@@ -128,6 +128,7 @@ nvim_xdg_profiles:
         {{ nvim_colorscheme_default['lazy'] }}
         {{ nvim_intellisense_default['lazy'] }}
         {{ nvim_debugger_default['lazy'] }}
+        {{ nvim_tasks_default['lazy'] }}
         {% for language in nvim_extra_plugins -%}
         {{ nvim_extra_plugins[language]['lazy'] }}
         {% endfor %}
@@ -143,6 +144,7 @@ nvim_xdg_profiles:
         {{ nvim_colorscheme_default['config'] }}
         {{ nvim_intellisense_default['config'] }}
         {{ nvim_debugger_default['config'] }}
+        {{ nvim_tasks_default['config'] }}
         {% for language in nvim_extra_plugins -%}
         {{ nvim_extra_plugins[language]['config'] }}
         {% endfor %}
@@ -158,6 +160,7 @@ nvim_xdg_profiles:
         {{ nvim_colorscheme_default['keymaps'] }}
         {{ nvim_intellisense_default['keymaps'] }}
         {{ nvim_debugger_default['keymaps'] }}
+        {{ nvim_tasks_default['keymaps'] }}
         {% for plugin in nvim_extra_plugins -%}
         {{ nvim_extra_plugins[plugin]['keymaps'] }}
         {% endfor %}
@@ -177,6 +180,7 @@ nvim_xdg_profiles:
         {{ nvim_git_default['lazy'] }}
         {{ nvim_terminal_default['lazy'] }}
         {{ nvim_motion_flash['lazy'] }}
+        {{ nvim_tasks_default['lazy'] }}
       config: |
         {{ nvim_legendary_default['config'] }}
         {{ nvim_telescope_default['config'] }}
@@ -184,6 +188,7 @@ nvim_xdg_profiles:
         {{ nvim_git_default['config'] }}
         {{ nvim_terminal_default['config'] }}
         {{ nvim_motion_flash['config'] }}
+        {{ nvim_tasks_default['config'] }}
       keymaps: |
         {{ nvim_legendary_default['keymaps'] }}
         {{ nvim_telescope_default['keymaps'] }}
@@ -191,4 +196,5 @@ nvim_xdg_profiles:
         {{ nvim_git_default['keymaps'] }}
         {{ nvim_terminal_default['keymaps'] }}
         {{ nvim_motion_flash['keymaps'] }}
+        {{ nvim_tasks_default['keymaps'] }}
       startup: "{{ nvim_startup_commands }}"

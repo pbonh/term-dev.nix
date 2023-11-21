@@ -49,6 +49,10 @@ nvim_debugger_default:
 nvim_debugger_nondap:
   packer: |
     use 'sakhnik/nvim-gdb'
+  lazy: |
+    {
+      'sakhnik/nvim-gdb'
+    },
   config: |
     vim.cmd([[ let g:nvimgdb_use_find_executables=0 ]])
 

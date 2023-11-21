@@ -1,5 +1,9 @@
 ---
 treesitter_compiler_exe: "{{ gcc_exe }}"
+treesitter_compiler_path_settings: |
+  require('nvim-treesitter.install').compilers = {
+    '{{ treesitter_compiler_exe }}',
+  }
 nvim_treesitter_default:
   packer: |
     use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
@@ -18,9 +22,9 @@ nvim_treesitter_default:
     { 'David-Kunz/markid' },
     { 'kevinhwang91/nvim-ufo', dependencies = 'kevinhwang91/promise-async' },
   config: |
+    {{ treesitter_compiler_path_settings }}
     local parser_configs = require('nvim-treesitter.parsers').get_parser_configs()
     {{ treesitter_custom_parsers_info or '-- No Custom Treesitter Parsers Installed' }}
-    require('nvim-treesitter.install').compilers = { '{{ treesitter_compiler_exe }}' }
     require('nvim-treesitter.configs').setup({
       ensure_installed = { 
         'vim',

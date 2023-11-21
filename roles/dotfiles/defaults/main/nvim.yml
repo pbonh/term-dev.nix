@@ -89,7 +89,6 @@ lsp_providers_luafile: "{{ \"'\" + lsp_providers | join(\"', '\") + \"'\" }}"
 lsp_providers_file: "{{ (lsp_providers_luafile != '') | ternary(lsp_providers_luafile, '-- No Additional Servers Preconfigured') }}"
 lsp_providers_plugins: []
 lsp_providers_setup: []
-treesitter_compiler_path_settings: "require('nvim-treesitter.install').compilers = { '{{ gcc_exe }}', }"
 treesitter_parsers: []
 treesitter_custom_parsers_default:
   - norg_meta

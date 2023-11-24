@@ -36,35 +36,37 @@ nvim_neorg_default:
       "nvim-neorg/neorg",
       build = ":Neorg sync-parsers",
       dependencies = { "nvim-lua/plenary.nvim" },
+      ft = 'norg',
       config = function()
-        require('neorg').setup {
-          load = {
-              ["core.defaults"] = {}, -- Loads default behaviour
-              ["core.concealer"] = {}, -- Adds pretty icons to your documents
-              ["core.keybinds"] = {
-                  config = {
-                      default_keybinds = true,
-                      neorg_leader = ",",
-                      hook = function(keybinds)
-                        keybinds.unmap("norg", "n", "<CR>")
-                        keybinds.unmap("norg", "n", "<M-CR>")
-                      end,
-                  },
-              },
-              ["core.dirman"] = { -- Manages Neorg workspaces
-                  config = {
-                      workspaces = {
-                          notes = "{{ nvim_neorg_dir }}"
-                      },
-                      default_workspace = notes,
-                      autochdir = true, -- Automatically change the directory to the current workspace's root every time
-                      index = "index.norg", -- The name of the main (root) .norg file
-                  },
-              },
-          },
-        }
+        require('neorg').setup({
+            load = {
+                ["core.defaults"] = {}, -- Loads default behaviour
+                ["core.concealer"] = {}, -- Adds pretty icons to your documents
+                ["core.keybinds"] = {
+                    config = {
+                        default_keybinds = true,
+                        neorg_leader = ",",
+                        hook = function(keybinds)
+                          keybinds.unmap("norg", "n", "<CR>")
+                          keybinds.unmap("norg", "n", "<M-CR>")
+                        end,
+                    },
+                },
+                ["core.dirman"] = { -- Manages Neorg workspaces
+                    config = {
+                        workspaces = {
+                            notes = "{{ nvim_neorg_dir }}"
+                        },
+                        default_workspace = notes,
+                        autochdir = true, -- Automatically change the directory to the current workspace's root every time
+                        index = "index.norg", -- The name of the main (root) .norg file
+                    },
+                },
+            },
+        })
 
         vim.wo.foldlevel = 99
         vim.wo.conceallevel = 2
+        vim.cmd([[ setlocal spell spelllang=en_us ]])
       end,
     },

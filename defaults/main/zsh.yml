@@ -23,8 +23,8 @@ zsh_default_env: |
   export PATH=$PATH:{{ fzf_install_dir }}/bin
   export SHELL="{{ nvim_shell }}"
   export GIT_SSH="{{ git_ssh }}"
-  export VISUAL="{{ nvim_exe }}"
   export EDITOR="{{ nvim_exe }}"
+  export VISUAL="{{ nvim_exe }} --cmd 'let g:flatten_wait=1'"
   export LC_CTYPE=en_US.UTF-8
 zsh_extra_env: ""
 zsh_default_plugins: |

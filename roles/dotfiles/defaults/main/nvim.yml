@@ -65,7 +65,6 @@ nvim_filetype_dir: "{{ nvim_config_dir }}/ftdetect"
 nvim_syntax_dir: "{{ nvim_config_dir }}/syntax"
 nvim_filetype_settings_dir: "{{ nvim_config_dir }}/ftplugin"
 nvim_projects_dir: "{{ nvim_xdg_config_dir }}/nvim/projects"
-nvim_neorg_dir: "{{ dotfiles_user_home }}/OrgNotes"
 nvim_shell_cmd: "zsh"
 nvim_shell: "/bin/{{ nvim_shell_cmd }}"
 nvim_fterm_cmds:

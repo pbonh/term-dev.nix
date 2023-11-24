@@ -1,3 +1,4 @@
+nvim_neorg_dir: "{{ dotfiles_user_home }}/OrgNotes"
 nvim_neorg_default:
   packer: |
     use {
@@ -55,6 +56,9 @@ nvim_neorg_default:
                       workspaces = {
                           notes = "{{ nvim_neorg_dir }}"
                       },
+                      default_workspace = notes,
+                      autochdir = true, -- Automatically change the directory to the current workspace's root every time
+                      index = "index.norg", -- The name of the main (root) .norg file
                   },
               },
           },

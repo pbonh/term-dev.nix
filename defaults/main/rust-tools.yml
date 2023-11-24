@@ -134,6 +134,9 @@ cargo_binstall_packages:
   xplr:
     name: xplr
     path: "{{ cargo_path }}/xplr"
+  yazi:
+    name: yazi-fm
+    path: "{{ cargo_path }}/yazi"
   zellij:
     name: zellij
     path: "{{ cargo_path }}/zellij"
@@ -177,5 +180,6 @@ starship_exe: "{{ cargo_binstall_packages['starship']['path'] }}"
 wikitui_exe: "{{ cargo_binstall_packages['wikitui']['path'] }}"
 xcp_exe: "{{ cargo_binstall_packages['xcp']['path'] }}"
 xplr_exe: "{{ cargo_binstall_packages['xplr']['path'] }}"
+yazi_exe: "{{ cargo_binstall_packages['yazi']['path'] }}"
 zellij_exe: "{{ cargo_binstall_packages['zellij']['path'] }}"
 zoxide_exe: "{{ cargo_binstall_packages['zoxide']['path'] }}"

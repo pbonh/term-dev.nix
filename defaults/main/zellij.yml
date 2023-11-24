@@ -81,7 +81,13 @@ zellij_kdl_layouts:
     cwd: "{{ ansible_env.HOME }}"
     template_info: "{{ zellij_kdl_template_info_default }}"
     layout_info: |
-      tab name="main tab" split_direction="vertical" focus=true cwd="{{ dotfiles_user_home }}" {
+      tab name="Notes" split_direction="vertical" focus=true {
+          pane {
+              command "{{ nvim_exe }}"
+              cwd "{{ nvim_neorg_dir }}"
+          }
+      }
+      tab name="main tab" split_direction="vertical" cwd="{{ dotfiles_user_home }}" {
           pane
           pane {
               command "{{ nvim_cmd }}"

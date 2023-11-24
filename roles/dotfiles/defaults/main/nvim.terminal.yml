@@ -1,5 +1,5 @@
 ---
-toggleterm_shell: "vim.o.shell"
+nvim_toggleterm_shell: "vim.o.shell"
 nvim_terminal_default:
   packer: |
     use { 'akinsho/toggleterm.nvim',
@@ -12,6 +12,12 @@ nvim_terminal_default:
       dependencies = {
         'is0n/fm-nvim',
       },
+    },
+    {
+      "willothy/flatten.nvim",
+      config = true,
+      lazy = false,
+      priority = 1001,
     },
   config: |
     require('fm-nvim').setup({
@@ -74,16 +80,9 @@ nvim_terminal_default:
         end
       end,
       open_mapping = [[<c-s>]],
-      hide_numbers = true,
-      shade_filetypes = {},
-      shade_terminals = true,
-      shading_factor = '1',
-      start_in_insert = true,
-      insert_mappings = true, -- whether or not the open mapping applies in insert mode
-      persist_size = true,
       direction = 'float',
       close_on_exit = false,
-      shell = {{ toggleterm_shell }},
+      shell = {{ nvim_toggleterm_shell }},
       float_opts = {
         border = 'curved',
         width = function()
@@ -92,26 +91,34 @@ nvim_terminal_default:
         height = function()
           return math.floor(vim.o.lines * 0.8)
         end,
-        winblend = 3,
-        highlights = {
-          border = 'Normal',
-          background = 'Normal',
-        }
+        -- winblend = 3,
+        -- highlights = {
+        --    border = 'Normal',
+        --    background = 'Normal',
+        --  }
       }
     })
     local Terminal  = require('toggleterm.terminal').Terminal
-    local justchoose = Terminal:new({ cmd = '{{ just_exe }} --choose' })
+    local justchoose = Terminal:new({
+      cmd = '{{ just_exe }} --choose',
+      hidden = true,
+    })
     function just_terminal_runner()
       justchoose:toggle()
     end
-    local gitui = Terminal:new({ cmd = '{{ gitui_exe }}', close_on_exit = true })
-    function gitui_terminal_runner()
-      gitui:toggle()
+    local xplr = Terminal:new({
+      cmd = '{{ xplr_exe }}',
+      hidden = true,
+      close_on_exit = true,
+    })
+    function xplr_terminal_runner()
+      xplr:toggle()
     end
   keymaps: |
     -- { '<leader>sj', { n = '<cmd>lua require(\'fm-nvim\').Joshuto(vim.fm.expand(\'%:p:~:.:h\'))<CR>', }, description = 'ToggleTerm: Joshuto(Current File)', },
     -- { '<leader>sJ', { n = '<cmd>lua require(\'fm-nvim\').Joshuto()<CR>', }, description = 'ToggleTerm: Joshuto(Project Root)', },
     { '<leader>x', { n = '<cmd>lua require(\'fm-nvim\').Xplr(vim.fn.expand(\'%:p:~:.:h\'))<CR>', }, description = 'ToggleTerm: XPLR(Current File)', },
     { '<leader>X', { n = '<cmd>lua require(\'fm-nvim\').Xplr()<CR>', }, description = 'ToggleTerm: XPLR(Project Root)', },
-    { '<leader>j', { n = '<cmd>lua just_terminal_runner()<CR>', }, description = 'ToggleTerm: GitUI', },
+    { '<leader>j', { n = '<cmd>lua just_terminal_runner()<CR>', }, description = 'ToggleTerm: Justfile Chooser', },
     -- { '<leader>gg', { n = '<cmd>lua gitui_terminal_runner()<CR>', }, description = 'ToggleTerm: GitUI', },
+    -- { '<leader>X', { n = '<cmd>lua xplr_terminal_runner()<CR>', }, description = 'ToggleTerm: XPLR', },

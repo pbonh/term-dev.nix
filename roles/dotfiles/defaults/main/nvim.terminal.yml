@@ -84,14 +84,14 @@ nvim_terminal_default:
       close_on_exit = false,
       shell = {{ nvim_toggleterm_shell }},
       float_opts = {
-        border = 'curved',
+        border = 'shadow',
         width = function()
-          return math.floor(vim.o.columns * 0.8)
+          return math.floor(vim.o.columns * 0.9)
         end,
         height = function()
-          return math.floor(vim.o.lines * 0.8)
+          return math.floor(vim.o.lines * 0.9)
         end,
-        -- winblend = 3,
+        winblend = 3,
         -- highlights = {
         --    border = 'Normal',
         --    background = 'Normal',
@@ -102,6 +102,7 @@ nvim_terminal_default:
     local justchoose = Terminal:new({
       cmd = '{{ just_exe }} --choose',
       hidden = true,
+      start_in_insert = true,
     })
     function just_terminal_runner()
       justchoose:toggle()
@@ -109,16 +110,37 @@ nvim_terminal_default:
     local xplr = Terminal:new({
       cmd = '{{ xplr_exe }}',
       hidden = true,
+      start_in_insert = true,
       close_on_exit = true,
     })
     function xplr_terminal_runner()
       xplr:toggle()
     end
+    local yazi = Terminal:new({
+      cmd = '{{ yazi_exe }}',
+      hidden = true,
+      start_in_insert = true,
+      close_on_exit = true,
+    })
+    function yazi_terminal_runner()
+      yazi:toggle()
+    end
+    local yazi_cwd = Terminal:new({
+      cmd = '{{ yazi_exe }}',
+      dir = vim.fn.expand('%:p:~:.:h'),
+      hidden = true,
+      start_in_insert = true,
+      close_on_exit = true,
+    })
+    function yazi_cwd_terminal_runner()
+      yazi_cwd:toggle()
+    end
   keymaps: |
     -- { '<leader>sj', { n = '<cmd>lua require(\'fm-nvim\').Joshuto(vim.fm.expand(\'%:p:~:.:h\'))<CR>', }, description = 'ToggleTerm: Joshuto(Current File)', },
     -- { '<leader>sJ', { n = '<cmd>lua require(\'fm-nvim\').Joshuto()<CR>', }, description = 'ToggleTerm: Joshuto(Project Root)', },
-    { '<leader>x', { n = '<cmd>lua require(\'fm-nvim\').Xplr(vim.fn.expand(\'%:p:~:.:h\'))<CR>', }, description = 'ToggleTerm: XPLR(Current File)', },
-    { '<leader>X', { n = '<cmd>lua require(\'fm-nvim\').Xplr()<CR>', }, description = 'ToggleTerm: XPLR(Project Root)', },
-    { '<leader>j', { n = '<cmd>lua just_terminal_runner()<CR>', }, description = 'ToggleTerm: Justfile Chooser', },
+    -- { '<leader>x', { n = '<cmd>lua require(\'fm-nvim\').Xplr(vim.fn.expand(\'%:p:~:.:h\'))<CR>', }, description = 'ToggleTerm: XPLR(Current File)', },
+    -- { '<leader>X', { n = '<cmd>lua require(\'fm-nvim\').Xplr()<CR>', }, description = 'ToggleTerm: XPLR(Project Root)', },
     -- { '<leader>gg', { n = '<cmd>lua gitui_terminal_runner()<CR>', }, description = 'ToggleTerm: GitUI', },
-    -- { '<leader>X', { n = '<cmd>lua xplr_terminal_runner()<CR>', }, description = 'ToggleTerm: XPLR', },
+    { '<leader>j', { n = '<cmd>lua just_terminal_runner()<CR>', }, description = 'ToggleTerm: Justfile Chooser', },
+    { '<leader>X', { n = '<cmd>lua yazi_terminal_runner()<CR>', }, description = 'ToggleTerm: Yazi(Project Root)', },
+    { '<leader>x', { n = '<cmd>lua yazi_cwd_terminal_runner()<CR>', }, description = 'ToggleTerm: Yazi(Current File)', },

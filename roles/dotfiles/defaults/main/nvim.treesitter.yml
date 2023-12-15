@@ -1,4 +1,30 @@
 ---
+treesitter_parsers: []
+treesitter_custom_parsers_default: []
+# treesitter_custom_parsers_default:
+#   - norg_meta
+#   - norg_table
+treesitter_custom_parsers: "{{ treesitter_custom_parsers_default }}"
+treesitter_parsers_all: "{{ treesitter_parsers + treesitter_custom_parsers }}"
+treesitter_extra_config: []
+treesitter_custom_parsers_info: ""
+# treesitter_custom_parsers_info: |
+#   parser_configs.norg_meta = {
+#       install_info = {
+#           url = 'https://github.com/nvim-neorg/tree-sitter-norg-meta',
+#           files = { 'src/parser.c' },
+#           branch = 'main'
+#       },
+#   }
+#   parser_configs.norg_table = {
+#       install_info = {
+#           url = 'https://github.com/nvim-neorg/tree-sitter-norg-table',
+#           files = { 'src/parser.c' },
+#           branch = 'main'
+#       },
+#   }
+treesitter_parsers_file: "{{ '\"' + treesitter_parsers_all |join('\", \"') + '\"' }}"
+treesitter_parsers_luafile: "{{ \"'\" + treesitter_parsers_all | join(\"', '\") + \"'\" }}"
 treesitter_compiler_exe: "{{ gcc_exe }}"
 treesitter_compiler_path_settings: |
   require('nvim-treesitter.install').compilers = {

@@ -86,10 +86,10 @@ nvim_terminal_default:
       float_opts = {
         border = 'shadow',
         width = function()
-          return math.floor(vim.o.columns * 0.9)
+          return math.floor(vim.o.columns * 0.85)
         end,
         height = function()
-          return math.floor(vim.o.lines * 0.9)
+          return math.floor(vim.o.lines * 0.85)
         end,
         winblend = 3,
         -- highlights = {

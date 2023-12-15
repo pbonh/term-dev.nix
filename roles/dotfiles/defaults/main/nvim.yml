@@ -88,38 +88,14 @@ lsp_providers_luafile: "{{ \"'\" + lsp_providers | join(\"', '\") + \"'\" }}"
 lsp_providers_file: "{{ (lsp_providers_luafile != '') | ternary(lsp_providers_luafile, '-- No Additional Servers Preconfigured') }}"
 lsp_providers_plugins: []
 lsp_providers_setup: []
-treesitter_parsers: []
-treesitter_custom_parsers_default:
-  - norg_meta
-  - norg_table
-treesitter_custom_parsers: "{{ treesitter_custom_parsers_default }}"
-treesitter_parsers_all: "{{ treesitter_parsers + treesitter_custom_parsers }}"
-treesitter_extra_config: []
 refactoring_settings: []
 telescope_picker_config: ''
 nvim_completion_config: []
-treesitter_custom_parsers_info: |
-  parser_configs.norg_meta = {
-      install_info = {
-          url = 'https://github.com/nvim-neorg/tree-sitter-norg-meta',
-          files = { 'src/parser.c' },
-          branch = 'main'
-      },
-  }
-  parser_configs.norg_table = {
-      install_info = {
-          url = 'https://github.com/nvim-neorg/tree-sitter-norg-table',
-          files = { 'src/parser.c' },
-          branch = 'main'
-      },
-  }
 lsp_provider_file: "{{ '''' + lsp_providers |join(''', ''') + '''' }}"
 lsp_provider_plugins_file: "{{ lsp_providers_plugins | join('\n') }}"
 lsp_provider_lspconfig_setup_file: "{{ lsp_providers_setup | join('\n') }}"
 lsp_provider_neovim_plugins_file: "{{ lsp_provider_neovim_plugins | join('\n') }}"
 language_neovim_plugins_file: "{{ language_neovim_plugins | join('\n') }}"
-treesitter_parsers_file: "{{ '\"' + treesitter_parsers_all |join('\", \"') + '\"' }}"
-treesitter_parsers_luafile: "{{ \"'\" + treesitter_parsers_all | join(\"', '\") + \"'\" }}"
 refactoring_settings_file: "{{ refactoring_settings | join('\n') }}"
 dap_plugin_settings_file: "{{ dap_plugin_settings | join('\n') }}"
 extra_nvim_lua_settings_file: "{{ extra_nvim_lua_settings | join('\n') }}"

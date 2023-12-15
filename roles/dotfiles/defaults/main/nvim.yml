@@ -2,16 +2,39 @@
 nvim_version: "stable"
 nvim_appimage_version: "{{ nvim_version }}"
 nvim_appimage_url: "https://github.com/neovim/neovim/releases/download/{{ nvim_appimage_version }}/nvim.appimage"
-nvim_appimage_exe: "{{ bin_directory }}/nvim.appimage"
+nvim_appimage_exe: "{{ tool_install_bin }}/nvim.appimage"
 nvim_exe_url: "https://github.com/neovim/neovim/releases/download/{{ nvim_version }}"
+nvim_src_install_option: false
+nvim_appimage_install_option: false
+nvim_src_url: "https://github.com/neovim/neovim"
+nvim_src_download: "{{ dot_download_dir }}/neovim"
+nvim_src_version: "stable"
+nvim_src_install_dir: "{{ tool_install_dir }}/neovim"
+nvim_src_install_exe: "{{ nvim_src_install_dir }}/bin/nvim"
+nvim_make_exe: "{{ make_exe }}"
+nvim_cmake_exe: "cmake"
+nvim_gcc_exe: "{{ gcc_exe }}"
+nvim_gpp_exe: "{{ gpp_exe }}"
+nvim_src_make_opts:
+  CMAKE_PRG: "{{ nvim_cmake_exe }}"
+  CMAKE_BUILD_TYPE: Release
+  CMAKE_EXTRA_FLAGS: "-DCMAKE_INSTALL_PREFIX={{ nvim_src_install_dir }} -DCMAKE_C_COMPILER={{ nvim_gcc_exe }} -DCMAKE_CXX_COMPILER={{ nvim_gpp_exe }}"
+nvim_download: nvim-linux64
+nvim_download_archive: "{{ nvim_download }}.tar.gz"
+nvim_download_dir: "{{ dot_download_dir }}"
+nvim_install_dir: "{{ nvim_download_dir }}/{{ nvim_download }}"
+nvim_install_download: "{{ nvim_download_dir }}/{{ nvim_download_archive }}"
+nvim_install_exe: "{{ nvim_download }}/bin/nvim"
 nvim_macos_download: nvim-macos
 nvim_macos_download_archive: "{{ nvim_macos_download }}.tar.gz"
-nvim_macos_download_dir: "{{ dotfiles_user_home }}/.local"
+nvim_macos_download_dir: "{{ dot_download_dir }}"
 nvim_macos_install_dir: "{{ nvim_macos_download_dir }}/{{ nvim_macos_download }}"
 nvim_macos_install_download: "{{ nvim_macos_download_dir }}/{{ nvim_macos_download_archive }}"
 nvim_macos_exe: nvim-macos/bin/nvim
-nvim_exe: "{{ bin_directory }}/nvim"
+nvim_exe_default: "{{ bin_directory }}/nvim"
+nvim_exe: "{{ nvim_exe_default }}"
 nvim_cmd: "{{ nvim_exe }}"
+nvim_lazy_url: "https://github.com/folke/lazy.nvim.git"
 nvim_path_settings:
   - "-- vim.opt.runtimepath:remove(vim.fn.expand('{{ default_nvim_config_dir }}'))"
   - "-- vim.opt.packpath:remove(vim.fn.expand('{{ default_nvim_share_dir }}/site'))"
@@ -42,7 +65,6 @@ nvim_filetype_dir: "{{ nvim_config_dir }}/ftdetect"
 nvim_syntax_dir: "{{ nvim_config_dir }}/syntax"
 nvim_filetype_settings_dir: "{{ nvim_config_dir }}/ftplugin"
 nvim_projects_dir: "{{ nvim_xdg_config_dir }}/nvim/projects"
-nvim_neorg_dir: "{{ dotfiles_user_home }}/OrgNotes"
 nvim_shell_cmd: "zsh"
 nvim_shell: "/bin/{{ nvim_shell_cmd }}"
 nvim_fterm_cmds:
@@ -62,15 +84,14 @@ extra_plugin_settings: []
 extra_lua_plugin_settings: []
 extra_nvim_language_mappings: []
 lsp_providers: []
-null_ls_providers: ''
 lsp_providers_luafile: "{{ \"'\" + lsp_providers | join(\"', '\") + \"'\" }}"
 lsp_providers_file: "{{ (lsp_providers_luafile != '') | ternary(lsp_providers_luafile, '-- No Additional Servers Preconfigured') }}"
 lsp_providers_plugins: []
 lsp_providers_setup: []
-treesitter_compiler_path_settings: "require('nvim-treesitter.install').compilers = { '{{ gcc_exe }}', }"
 treesitter_parsers: []
 treesitter_custom_parsers_default:
-  - just
+  - norg_meta
+  - norg_table
 treesitter_custom_parsers: "{{ treesitter_custom_parsers_default }}"
 treesitter_parsers_all: "{{ treesitter_parsers + treesitter_custom_parsers }}"
 treesitter_extra_config: []
@@ -78,13 +99,19 @@ refactoring_settings: []
 telescope_picker_config: ''
 nvim_completion_config: []
 treesitter_custom_parsers_info: |
-  parser_configs.just = {
-    install_info = {
-      url = "https://github.com/IndianBoy42/tree-sitter-just",
-      files = { "src/parser.c", "src/scanner.cc" },
-      branch = "main",
-    },
-    maintainers = { "@IndianBoy42" },
+  parser_configs.norg_meta = {
+      install_info = {
+          url = 'https://github.com/nvim-neorg/tree-sitter-norg-meta',
+          files = { 'src/parser.c' },
+          branch = 'main'
+      },
+  }
+  parser_configs.norg_table = {
+      install_info = {
+          url = 'https://github.com/nvim-neorg/tree-sitter-norg-table',
+          files = { 'src/parser.c' },
+          branch = 'main'
+      },
   }
 lsp_provider_file: "{{ '''' + lsp_providers |join(''', ''') + '''' }}"
 lsp_provider_plugins_file: "{{ lsp_providers_plugins | join('\n') }}"

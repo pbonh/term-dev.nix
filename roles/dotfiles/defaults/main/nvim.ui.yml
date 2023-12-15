@@ -42,6 +42,58 @@ nvim_ui_default:
       },
     }
     use { 'nyngwang/NeoZoom.lua' }
+  lazy: |
+    { 'kdheepak/tabline.nvim',
+      dependencies = {
+        'nvim-lualine/lualine.nvim',
+        'kyazdani42/nvim-web-devicons',
+        'b0o/incline.nvim',
+      },
+    },
+    {
+      'mawkler/modicator.nvim',
+      dependencies = 'sainnhe/gruvbox-material',
+      init = function()
+        -- These are required for Modicator to work
+        vim.o.cursorline = true
+        vim.o.number = true
+        vim.o.termguicolors = true
+      end,
+      opts = {}
+    },
+    { 'petertriho/nvim-scrollbar',
+      dependencies = {
+        'kevinhwang91/nvim-hlslens',
+        'lewis6991/gitsigns.nvim',
+      },
+    },
+    { 'startup-nvim/startup.nvim',
+      dependencies = {
+        'nvim-telescope/telescope.nvim',
+        'nvim-lua/plenary.nvim',
+      },
+    },
+    { 'stevearc/oil.nvim',
+      dependencies = {
+        'kyazdani42/nvim-web-devicons',
+      },
+    },
+    { 'chentoast/marks.nvim' },
+    { 'rcarriga/nvim-notify' },
+    { 'nvim-neo-tree/neo-tree.nvim',
+      branch = 'v2.x',
+      dependencies = {
+        'nvim-lua/plenary.nvim',
+        'nvim-tree/nvim-web-devicons',
+        'MunifTanjim/nui.nvim',
+      },
+    },
+    { 'nvim-tree/nvim-tree.lua',
+      dependencies = {
+        'nvim-tree/nvim-web-devicons',
+      },
+    },
+    { 'nyngwang/NeoZoom.lua' },
   config: |
     vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
     vim.fn.sign_define("DiagnosticSignError", {text = " ", texthl = "DiagnosticSignError"})

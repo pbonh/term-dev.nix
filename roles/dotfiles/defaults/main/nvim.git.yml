@@ -3,6 +3,9 @@ nvim_git_default:
   packer: |
     use { 'sindrets/diffview.nvim', requires = 'nvim-lua/plenary.nvim' }
     use { 'TimUntersberger/neogit', requires = 'nvim-lua/plenary.nvim' }
+  lazy: |
+    { 'sindrets/diffview.nvim', dependencies = 'nvim-lua/plenary.nvim' },
+    { 'TimUntersberger/neogit', dependencies = 'nvim-lua/plenary.nvim' },
   config: |
     require('diffview').setup()
     require('neogit').setup()

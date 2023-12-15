@@ -1,7 +1,11 @@
 ---
+dotfiles_home: "{{ ansible_env.HOME }}"
 dotfiles_user_home: "{{ ansible_env.HOME }}"
-bin_directory: "{{ dotfiles_user_home }}/.local/bin"
-xdg_share_dir: "{{ dotfiles_user_home }}/.local/share"
+default_home_local: "{{ dotfiles_user_home }}/.local"
+tool_install_dir: "{{ default_home_local }}"
+tool_install_bin: "{{ tool_install_dir }}/bin"
+bin_directory: "{{ tool_install_bin }}"
+xdg_share_dir: "{{ default_home_local }}/share"
 xdg_config_dir: "{{ dotfiles_user_home }}/.config"
 xdg_cache_dir:  "{{ dotfiles_user_home }}/.cache"
 xdg_config_dirs:
@@ -12,4 +16,5 @@ extra_bookmarks: []
 extra_bookmarks_file: "{{ extra_bookmarks | join('\n') }}"
 gcc_exe: /usr/bin/gcc
 gpp_exe: /usr/bin/g++
-dot_download_dir: "{{ dotfiles_user_home }}/.local/downloads"
+make_exe: make
+dot_download_dir: "{{ tool_install_dir }}/downloads"

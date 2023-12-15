@@ -19,6 +19,9 @@ rust_dev_packages:
   rustfmt:
     name: rustfmt
     path: "{{ cargo_path }}/rustfmt"
+  cargo-readme:
+    name: cargo-readme
+    path: "{{ cargo_path }}/cargo-readme"
 treesitter_parsers_rust:
   - rust
 rust_tools_nix:
@@ -28,7 +31,11 @@ rust_file_extensions:
 rust_file_extensions_comma_list: "{{ '\"' + rust_file_extensions |join('\", \"') + '\"' }}"
 rust_dbg: "{{ nix_bin }}/rust-lldb"
 codelldb_extension_url: https://github.com/vadimcn/vscode-lldb.git
+<<<<<<< HEAD
 codelldb_extension_version: "1.9.2"
+=======
+codelldb_extension_version: "1.10.0"
+>>>>>>> main
 codelldb_install_path: "{{ dotfiles_user_home }}/.vscode/extensions/vadimcn.vscode-lldb-{{ codelldb_extension_version }}"
 codelldb_bin_path: adapter/codelldb
 codelldb_liblldb_path: lldb/lib/liblldb.so
@@ -36,9 +43,7 @@ lsp_providers_rust: []
 lsp_providers_rust_setup: []
 rust_extra_lua_plugin_settings: []
 rust_analyzer_exe: "{{ rustup_path }}/rust-analyzer"
-clippy_exe: "cargo-clippy"
-null_ls_providers_rust: |
-  null_ls.builtins.formatting.rustfmt,
+clippy_exe: "{{ rustup_path }}/cargo-clippy"
 extra_nvim_plugins_rust: |
   use { 'simrat39/rust-tools.nvim',
     requires = {
@@ -46,6 +51,14 @@ extra_nvim_plugins_rust: |
       'mfussenegger/nvim-dap',
     }
   }
+extra_nvim_plugins_rust_lazy: |
+  { 'simrat39/rust-tools.nvim',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'mfussenegger/nvim-dap',
+    }
+  },
+  { 'rust-lang/rust.vim' },
 extra_nvim_config_rust: |
   dap.adapters.rustdbg = {
     id = 'rustdbg',
@@ -104,8 +117,26 @@ extra_nvim_config_rust: |
   function bacon_watch_terminal_runner()
     bacon_watch:toggle()
   end
+
+  vim.g.rustfmt_autosave = 1
 extra_nvim_keymap_rust: |
-  vim.api.nvim_set_keymap('n', '<leader>ch', '<cmd>lua require(\"rust-tools\").hover_actions.hover_actions()<CR>', { noremap = true, silent = true })
-  vim.api.nvim_set_keymap('n', '<leader>ca', '<cmd>lua require(\"rust-tools\").code_action_group.code_action_group()<CR>', { noremap = true, silent = true })
-  vim.api.nvim_set_keymap('n', '<leader>cd', '<cmd>RustDebuggables<CR>', { noremap = true, silent = true })
-  vim.api.nvim_set_keymap('n', '<leader>cw', '<cmd>lua bacon_watch_terminal_runner()<CR>', { noremap = true, silent = true })
+  { '<leader>ch', {
+      n = '<cmd>lua require(\"rust-tools\").hover_actions.hover_actions()<CR>',
+    },
+    description = 'Rust-Tools: Hover Actions',
+  },
+  { '<leader>ca', {
+      n = '<cmd>lua require(\"rust-tools\").code_action_group.code_action_group()<CR>',
+    },
+    description = 'Rust-Tools: Code Action Group',
+  },
+  { '<leader>cd', {
+      n = '<cmd>RustDebuggables<CR>',
+    },
+    description = 'Rust-Tools: Select Rust Debuggable',
+  },
+  { '<leader>cw', {
+      n = '<cmd>lua bacon_watch_terminal_runner()<CR>',
+    },
+    description = 'Rust: Bacon Codebase Watcher',
+  },

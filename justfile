@@ -5,10 +5,11 @@ task_prelude := env_var_or_default('DOTFILES_TASK_PRELUDE', '')
 playbook_selection := if os() == "macos" { ".macos" } else { ".nix" }
 
 default:
-  @just --list
+  @just --choose
 
 install-requirements:
-  ansible-galaxy install -r requirements.yml && ansible-galaxy collection install -r requirements.yml
+  {{ task_prelude }} ansible-galaxy install -r requirements.yml
+  {{ task_prelude }} ansible-galaxy collection install -r requirements.yml
 
 init-submodules:
   git submodule update --recursive --init
@@ -19,32 +20,47 @@ update-submodules:
 reset-submodules:
   git submodule foreach --recursive git reset --hard
 
-nix-all:
-  ansible-playbook dotfiles.yml --ask-become-pass
+work tag:
+  {{ task_prelude }} ansible-playbook dotfiles.yml --tags "{{ tag }}"
 
-nix-tools: update-submodules
-  ansible-playbook dotfiles.yml --tags "tools" --skip-tags "dependencies"
+all:
+  {{ task_prelude }} ansible-playbook dotfiles.yml --ask-become-pass
 
-nix-dot: update-submodules
-  ansible-playbook dotfiles.yml --tags "dot"
+tools: update-submodules
+  {{ task_prelude }} ansible-playbook dotfiles.yml --tags "tools"
 
-nix-dot-neovim: update-submodules
-  {{ task_prelude }} ansible-playbook dotfiles.yml --tags "neovim"
+setup:
+  {{ task_prelude }} ansible-playbook dotfiles.yml --tags "setup"
 
-nix-dot-helix: update-submodules
-  {{ task_prelude }} ansible-playbook dotfiles.yml --tags "helix"
+nix:
+  {{ task_prelude }} ansible-playbook dotfiles.yml --tags "nix"
 
-nix-dot-zellij: update-submodules
+dot: update-submodules
+  {{ task_prelude }} ansible-playbook dotfiles.yml --tags "git,fzf,neovim-config,navi,direnv,scripts,bookmarks,bash,nushell,zsh,zellij"
+
+env: update-submodules
+  {{ task_prelude }} ansible-playbook dotfiles.yml --tags "env"
+
+shell: update-submodules
+  {{ task_prelude }} ansible-playbook dotfiles.yml --tags "navi,scripts,bookmarks,bash,nushell,zsh,tcsh"
+
+neovim: update-submodules
+  {{ task_prelude }} ansible-playbook dotfiles.yml --tags "neovim-config"
+
+helix: update-submodules
+  {{ task_prelude }} ansible-playbook dotfiles.yml --tags "helix-config"
+
+zellij: update-submodules
   {{ task_prelude }} ansible-playbook dotfiles.yml --tags "zellij"
 
-nix-binscripts: update-submodules
+binscripts: update-submodules
   {{ task_prelude }} ansible-playbook dotfiles.yml --tags "scripts"
 
-nix-cpp: update-submodules
+cpp: update-submodules
   {{ task_prelude }} ansible-playbook dotfiles.yml --tags "cpp" --ask-become-pass
 
-nix-rust: update-submodules
-  {{ task_prelude }} ansible-playbook dotfiles.yml --tags "rust"
+update-rust-tools:
+  {{ task_prelude }} cargo install-update -a
 
 install-rust-tools:
   {{ task_prelude }} ansible-playbook dotfiles.yml --tags "rust-tools"
@@ -58,6 +74,3 @@ pull-nix-dot-repo:
 
 push-nix-dot-repo:
   git subtree push --prefix=roles/dotfiles dotfiles-nix main
-
-neovim-packer-sync:
-  nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'

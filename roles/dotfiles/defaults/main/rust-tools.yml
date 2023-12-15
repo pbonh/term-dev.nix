@@ -1,13 +1,17 @@
 ---
 rustup_arch: x86_64
-rustup_os: linux-musl
+rustup_os: linux-gnu
+rustup_macos_arch: aarch64
+rustup_macos_os: apple-darwin
 rustup_url: https://static.rust-lang.org/rustup/rustup-init.sh
 rustup_script_path: "{{ dotfiles_user_home }}/rustup-init.sh"
 rustup_toolchain: "stable"
-rustup_musl_target: "x86_64-unknown-linux-musl"
+rustup_musl_target: "{{ rustup_arch }}-unknown-linux-musl"
 rustup_path: "{{ dotfiles_user_home }}/.rustup/toolchains/{{ rustup_toolchain }}-{{ rustup_arch }}-{{ rustup_os }}/bin"
-cargo_path: "{{ dotfiles_user_home }}/.cargo/bin"
+cargo_home: "{{ dotfiles_user_home }}/.cargo"
+cargo_path: "{{ cargo_home }}/bin"
 cargo_bin: "{{ cargo_path }}/cargo"
+rustup_exe: "{{ cargo_path }}/rustup"
 cargo_binstall_exe: "{{ cargo_path }}/cargo-binstall"
 rustc_env_variables: ""
 cargo_binstall_args: ""
@@ -22,6 +26,9 @@ cargo_binstall_packages:
   atuin:
     name: atuin
     path: "{{ cargo_path }}/atuin"
+  ast-grep:
+    name: ast-grep
+    path: "{{ cargo_path }}/sg"
   bat:
     name: bat
     path: "{{ cargo_path }}/bat"
@@ -127,6 +134,9 @@ cargo_binstall_packages:
   xplr:
     name: xplr
     path: "{{ cargo_path }}/xplr"
+  yazi:
+    name: yazi-fm
+    path: "{{ cargo_path }}/yazi"
   zellij:
     name: zellij
     path: "{{ cargo_path }}/zellij"
@@ -134,6 +144,7 @@ cargo_binstall_packages:
     name: zoxide
     path: "{{ cargo_path }}/zoxide"
 atuin_exe: "{{ cargo_binstall_packages['atuin']['path'] }}"
+astgrep_exe: "{{ cargo_binstall_packages['ast-grep']['path'] }}"
 bat_exe: "{{ cargo_binstall_packages['bat']['path'] }}"
 broot_exe: "{{ cargo_binstall_packages['broot']['path'] }}"
 bottom_exe: "{{ cargo_binstall_packages['bottom']['path'] }}"
@@ -169,5 +180,6 @@ starship_exe: "{{ cargo_binstall_packages['starship']['path'] }}"
 wikitui_exe: "{{ cargo_binstall_packages['wikitui']['path'] }}"
 xcp_exe: "{{ cargo_binstall_packages['xcp']['path'] }}"
 xplr_exe: "{{ cargo_binstall_packages['xplr']['path'] }}"
+yazi_exe: "{{ cargo_binstall_packages['yazi']['path'] }}"
 zellij_exe: "{{ cargo_binstall_packages['zellij']['path'] }}"
 zoxide_exe: "{{ cargo_binstall_packages['zoxide']['path'] }}"

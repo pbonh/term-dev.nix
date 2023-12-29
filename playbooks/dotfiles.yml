@@ -1,5 +1,5 @@
 ---
-- name: Developer Nix Setup
+- name: Developer Dotfile Setup
   hosts: localhost
   connection: local
   vars_files:

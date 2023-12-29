@@ -132,3 +132,6 @@ dmypy.json
 ansible.tar.bz2
 ansible/
 ansible-*
+
+# User Ansible Variables File
+vars/term-dev.yml

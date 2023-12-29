@@ -40,6 +40,9 @@ update_gitconfig() {
     git config --global user.name "$name"
     git config --global user.email "$email"
 
+    # Configure Git settings
+    git config --global init.defaultBranch main
+
     # Configure ghq settings
     git config --global "ghq.ssh://git@$domain/$username.vcs" git
     git config --global "ghq.ssh://git@$domain/$username.root" "$checkout_dir"

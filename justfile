@@ -65,6 +65,10 @@ update-rust-tools:
 install-rust-tools:
   {{ task_prelude }} ansible-playbook playbooks/dotfiles.yml --tags "rust-tools"
 
+add-nix-devbox-repo:
+  git remote add -f devbox-nix git@github.com:pbonh/devbox.nix.git
+  git subtree add --prefix roles/devbox devbox-nix main --squash
+
 add-nix-dot-repo:
   git remote add -f dotfiles-nix git@github.com:pbonh/dotfiles.nix.git
   git subtree add --prefix roles/dotfiles dotfiles-nix main --squash

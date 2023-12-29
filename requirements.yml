@@ -1,6 +1,5 @@
 ---
 collections:
-- pfsensible.core
 - community.general
 - ansible.posix
 
@@ -9,4 +8,3 @@ roles:
 - jaredhocutt.gnome_extensions
 - geerlingguy.nodejs
 - ktosiek.nix
-- ccremer.zfs-auto-snapshot

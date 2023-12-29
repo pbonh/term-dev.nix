@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+# Install Devbox Tools
 devbox global add \
     gcc \
     joplin \
@@ -78,7 +79,6 @@ devbox global add \
     ghq \
     broot \
     lf \
-    sc-im \
     glances \
     watchman \
     aspell \
@@ -100,3 +100,10 @@ devbox global add \
     nodePackages.yaml-language-server \
     sumneko-lua-language-server \
     shfmt
+
+# Refresh Global Environment
+eval "$(devbox global shellenv --preserve-path-stack -r)"
+
+
+# Insecure Packages
+# sc-im

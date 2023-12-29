@@ -80,6 +80,12 @@ add-nix-dot-repo:
 pull-nix-dot-repo:
   git fetch dotfiles-nix main && git subtree pull --prefix roles/dotfiles dotfiles-nix main --squash
 
+push-nix-devbox-repo:
+  git subtree push --prefix=roles/devbox devbox-nix main
+
+push-nix-baremetal-repo:
+  git subtree push --prefix=roles/baremetal baremetal-nix main
+
 push-nix-dot-repo:
   git subtree push --prefix=roles/dotfiles dotfiles-nix main
 

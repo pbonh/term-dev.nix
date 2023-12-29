@@ -21,49 +21,49 @@ reset-submodules:
   git submodule foreach --recursive git reset --hard
 
 work tag:
-  {{ task_prelude }} ansible-playbook dotfiles.yml --tags "{{ tag }}"
+  {{ task_prelude }} ansible-playbook playbooks/dotfiles.yml --tags "{{ tag }}"
 
 all:
-  {{ task_prelude }} ansible-playbook dotfiles.yml --ask-become-pass
+  {{ task_prelude }} ansible-playbook playbooks/dotfiles.yml --ask-become-pass
 
 tools: update-submodules
-  {{ task_prelude }} ansible-playbook dotfiles.yml --tags "tools"
+  {{ task_prelude }} ansible-playbook playbooks/dotfiles.yml --tags "tools"
 
 setup:
-  {{ task_prelude }} ansible-playbook dotfiles.yml --tags "setup"
+  {{ task_prelude }} ansible-playbook playbooks/dotfiles.yml --tags "setup"
 
 nix:
-  {{ task_prelude }} ansible-playbook dotfiles.yml --tags "nix"
+  {{ task_prelude }} ansible-playbook playbooks/dotfiles.yml --tags "nix"
 
 dot: update-submodules
-  {{ task_prelude }} ansible-playbook dotfiles.yml --tags "git,fzf,neovim-config,navi,direnv,scripts,bookmarks,bash,nushell,zsh,zellij"
+  {{ task_prelude }} ansible-playbook playbooks/dotfiles.yml --tags "git,fzf,neovim-config,navi,direnv,scripts,bookmarks,bash,nushell,zsh,zellij"
 
 env: update-submodules
-  {{ task_prelude }} ansible-playbook dotfiles.yml --tags "env"
+  {{ task_prelude }} ansible-playbook playbooks/dotfiles.yml --tags "env"
 
 shell: update-submodules
-  {{ task_prelude }} ansible-playbook dotfiles.yml --tags "navi,scripts,bookmarks,bash,nushell,zsh,tcsh"
+  {{ task_prelude }} ansible-playbook playbooks/dotfiles.yml --tags "navi,scripts,bookmarks,bash,nushell,zsh,tcsh"
 
 neovim: update-submodules
-  {{ task_prelude }} ansible-playbook dotfiles.yml --tags "neovim-config"
+  {{ task_prelude }} ansible-playbook playbooks/dotfiles.yml --tags "neovim-config"
 
 helix: update-submodules
-  {{ task_prelude }} ansible-playbook dotfiles.yml --tags "helix-config"
+  {{ task_prelude }} ansible-playbook playbooks/dotfiles.yml --tags "helix-config"
 
 zellij: update-submodules
-  {{ task_prelude }} ansible-playbook dotfiles.yml --tags "zellij"
+  {{ task_prelude }} ansible-playbook playbooks/dotfiles.yml --tags "zellij"
 
 binscripts: update-submodules
-  {{ task_prelude }} ansible-playbook dotfiles.yml --tags "scripts"
+  {{ task_prelude }} ansible-playbook playbooks/dotfiles.yml --tags "scripts"
 
 cpp: update-submodules
-  {{ task_prelude }} ansible-playbook dotfiles.yml --tags "cpp" --ask-become-pass
+  {{ task_prelude }} ansible-playbook playbooks/dotfiles.yml --tags "cpp" --ask-become-pass
 
 update-rust-tools:
   {{ task_prelude }} cargo install-update -a
 
 install-rust-tools:
-  {{ task_prelude }} ansible-playbook dotfiles.yml --tags "rust-tools"
+  {{ task_prelude }} ansible-playbook playbooks/dotfiles.yml --tags "rust-tools"
 
 add-nix-dot-repo:
   git remote add -f dotfiles-nix git@github.com:pbonh/dotfiles.nix.git
@@ -74,3 +74,7 @@ pull-nix-dot-repo:
 
 push-nix-dot-repo:
   git subtree push --prefix=roles/dotfiles dotfiles-nix main
+
+bluefin:
+  ./scripts/bootstrap_gitssh.sh
+  ./scripts/bootstrap_bluefin.sh

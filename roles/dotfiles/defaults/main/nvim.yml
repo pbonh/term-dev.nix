@@ -31,6 +31,7 @@ nvim_syntax_dir: "{{ nvim_config_dir }}/syntax"
 nvim_filetype_settings_dir: "{{ nvim_config_dir }}/ftplugin"
 nvim_projects_dir: "{{ nvim_xdg_config_dir }}/nvim/projects"
 nvim_shell_cmd: "zsh"
+nvim_python_exe: "{{ tool_system_path }}nvim-python3"
 nvim_shell: "/bin/{{ nvim_shell_cmd }}"
 nvim_fterm_cmds:
   - cmd_name: ManLs

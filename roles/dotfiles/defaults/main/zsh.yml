@@ -7,6 +7,7 @@ zsh_fzf_tab: "{{ zsh_plugins }}/fzf-tab"
 zsh_git_fuzzy: "{{ zsh_plugins }}/git-fuzzy"
 zsh_git_fuzzy_upstream: origin
 zsh_git_fuzzy_branch: main
+fzf_install_dir: ""
 zsh_default_options: |
   HISTFILE=~/.histfile
   HISTSIZE=1000
@@ -20,7 +21,7 @@ zsh_default_options: |
   #. /home/{{ zsh_username }}/.nix-profile/etc/profile.d/hm-session-vars.sh
 zsh_default_env: |
   export PATH=$PATH:{{ bin_directory }}
-  export PATH=$PATH:{{ fzf_install_dir }}/bin
+  # export PATH=$PATH:{{ fzf_install_dir }}/bin
   export SHELL="{{ nvim_shell }}"
   export GIT_SSH="{{ git_ssh }}"
   export EDITOR="{{ nvim_exe }}"
@@ -41,7 +42,11 @@ zsh_fzf_setup: |
   export PATH=$PATH:{{ zsh_git_fuzzy }}/bin
   export GF_BASE_REMOTE={{ zsh_git_fuzzy_upstream }}
   export GF_BASE_BRANCH={{ zsh_git_fuzzy_branch }}
-  source {{ fzf_install_dir }}/shell/key-bindings.zsh
+  # source {{ fzf_install_dir }}/shell/key-bindings.zsh
+  if [ -n "${commands[fzf-share]}" ]; then
+    source "$(fzf-share)/key-bindings.zsh"
+    source "$(fzf-share)/completion.zsh"
+  fi
   {% for fzf_env_var in fzf_env -%}
   {{ "export " + fzf_env[fzf_env_var]['name'] + "='" + fzf_env[fzf_env_var]['env'] + "'" }}
   {% endfor %}

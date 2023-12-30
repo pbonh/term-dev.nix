@@ -25,7 +25,7 @@
     nvim_cache_dir: "{{ nvim_xdg_profile_dir['cache'] }}/{{ profile_item.value.name }}/nvim"
   template:
     src: "nvim/nvim-profile.j2"
-    dest: "{{ bin_directory }}/nvim-{{ profile_item.value.name }}"
+    dest: "{{ bin_directory }}nvim-{{ profile_item.value.name }}"
   loop: "{{ nvim_xdg_profiles | dict2items }}"
   loop_control:
     loop_var: profile_item
@@ -38,7 +38,7 @@
     nvim_cache_dir: "{{ nvim_xdg_profile_dir['cache'] }}/{{ profile_item.value.name }}/nvim"
   template:
     src: "nvim/nvim-profile-init.j2"
-    dest: "{{ bin_directory }}/nvim-init-{{ profile_item.value.name }}"
+    dest: "{{ bin_directory }}nvim-init-{{ profile_item.value.name }}"
   loop: "{{ nvim_xdg_profiles | dict2items }}"
   loop_control:
     loop_var: profile_item

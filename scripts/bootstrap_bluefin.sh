@@ -10,7 +10,7 @@
 # =============================================
 
 # Install System Prerequisites
-rpm-ostree install selinux-python3
+rpm-ostree install libselinux-python
 
 # Function to check if a command exists
 command_exists() {

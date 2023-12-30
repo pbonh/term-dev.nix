@@ -135,3 +135,6 @@ ansible-*
 
 # User Ansible Variables File
 vars/term-dev.yml
+
+# Dotenv Files
+.env*

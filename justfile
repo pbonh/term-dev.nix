@@ -20,6 +20,9 @@ update-submodules:
 reset-submodules:
   git submodule foreach --recursive git reset --hard
 
+devbox:
+  {{ task_prelude }} ansible-playbook playbooks/devbox.yml
+
 work tag:
   {{ task_prelude }} ansible-playbook playbooks/dotfiles.yml --tags "{{ tag }}"
 

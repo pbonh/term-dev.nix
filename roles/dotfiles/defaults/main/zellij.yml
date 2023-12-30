@@ -79,26 +79,7 @@ zellij_kdl_layouts:
   example:
     name: dev1
     cwd: "{{ ansible_env.HOME }}"
-<<<<<<< HEAD
-    template_info: |
-      tab_template name="shell-in-dir" {
-          pane size=1 borderless=true {
-              plugin location="zellij:tab-bar"
-          }
-      }
-      default_tab_template {
-          // the default zellij tab-bar and status bar plugins
-          pane size=1 borderless=true {
-              plugin location="zellij:tab-bar"
-          }
-          children
-          pane size=2 borderless=true {
-              plugin location="zellij:status-bar"
-          }
-      }
-=======
     template_info: "{{ zellij_kdl_template_info_default }}"
->>>>>>> main
     layout_info: |
       tab name="Notes" split_direction="vertical" focus=true {
           pane {

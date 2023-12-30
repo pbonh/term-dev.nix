@@ -10,7 +10,7 @@
 # =============================================
 
 # Install System Prerequisites
-rpm-ostree install libselinux-python
+rpm-ostree install ansible
 
 # Function to check if a command exists
 command_exists() {

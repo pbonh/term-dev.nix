@@ -1,4 +1,5 @@
 ---
+baremetal: "yes"
 extra_bookmarks:
   - "{{ dotfiles_home }}"
   - "{{ dotfiles_checkout_dir }}"

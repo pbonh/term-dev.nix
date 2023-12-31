@@ -1,4 +1,8 @@
 ---
+- name: Ansible Variables | Setup Ansible Variables | task
+  import_tasks: tasks/setup_vars.yml
+  when: baremetal is 'yes'
+
 - name: XDG | Install XDG Directories | task
   import_tasks: tasks/setup_xdg.yml
   tags:

@@ -45,20 +45,20 @@ update_gitconfig() {
 
     # Configure ghq settings
     git config --global "ghq.ssh://git@$domain/$username.vcs" git
-    git config --global "ghq.ssh://git@$domain/$username.root" "$checkout_dir"
+    git config --global "ghq.ssh://git@$domain/$username.root" "$HOME/$checkout_dir"
 }
 
 # Function to create directory for code checkouts
 create_checkout_dir() {
-    local dir="$1"
+    local checkout_dir="$1"
 
     # Check if directory exists
-    if [[ -d "$HOME/$dir" ]]; then
-        echo "Directory $HOME/$dir already exists."
+    if [[ -d "$HOME/$checkout_dir" ]]; then
+        echo "Directory $HOME/$checkout_dir already exists."
     else
         # Create directory
-        mkdir -p "$HOME/$dir"
-        echo "Directory $HOME/$dir created."
+        mkdir -p "$HOME/$checkout_dir"
+        echo "Directory $HOME/$checkout_dir created."
     fi
 }
 

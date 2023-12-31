@@ -47,6 +47,9 @@ env: update-submodules
 shell: update-submodules
   {{ task_prelude }} ansible-playbook playbooks/dotfiles.yml --tags "navi,scripts,bookmarks,bash,nushell,zsh,tcsh"
 
+zsh: update-submodules
+  {{ task_prelude }} ansible-playbook playbooks/dotfiles.yml --tags "zsh"
+
 neovim: update-submodules
   {{ task_prelude }} ansible-playbook playbooks/dotfiles.yml --tags "neovim-config"
 

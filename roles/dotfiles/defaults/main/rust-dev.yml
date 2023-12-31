@@ -38,8 +38,8 @@ codelldb_liblldb_path: lldb/lib/liblldb.so
 lsp_providers_rust: []
 lsp_providers_rust_setup: []
 rust_extra_lua_plugin_settings: []
-rust_analyzer_exe: "{{ rustup_path }}rust-analyzer"
-clippy_exe: "{{ rustup_path }}cargo-clippy"
+rust_analyzer_exe: "rust-analyzer"
+clippy_exe: "cargo-clippy"
 extra_nvim_plugins_rust: |
   use { 'simrat39/rust-tools.nvim',
     requires = {

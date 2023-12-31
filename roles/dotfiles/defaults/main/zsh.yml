@@ -7,6 +7,7 @@ zsh_fzf_tab: "{{ zsh_plugins }}/fzf-tab"
 zsh_git_fuzzy: "{{ zsh_plugins }}/git-fuzzy"
 zsh_git_fuzzy_upstream: origin
 zsh_git_fuzzy_branch: main
+zsh_homebrew_env: "eval \"$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)\""
 zsh_default_options: |
   HISTFILE=~/.histfile
   HISTSIZE=1000
@@ -21,6 +22,7 @@ zsh_default_options: |
   export PATH=$PATH:/nix/var/nix/profiles/default/bin
   eval "$(devbox global shellenv --init-hook)"
 zsh_default_env: |
+  {{ zsh_homebrew_env }}
   export PATH=$PATH:{{ bin_directory }}
   export SHELL="{{ nvim_shell }}"
   export GIT_SSH="{{ git_ssh }}"

@@ -18,10 +18,10 @@ curl -fsSL https://get.jetpack.io/devbox | bash
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 
 # Useful Flatpaks
-flatpak install flathub com.mattjakeman.ExtensionManager
-flatpak install flathub com.bitwarden.desktop
-flatpak install flathub com.visualstudio.code
-flatpak install flathub org.mozilla.Thunderbird
+flatpak install -y --noninteractive flathub com.mattjakeman.ExtensionManager
+flatpak install -y --noninteractive flathub com.bitwarden.desktop
+flatpak install -y --noninteractive flathub com.visualstudio.code
+flatpak install -y --noninteractive flathub org.mozilla.Thunderbird
 
 # Brave(Native)
 sudo dnf install -y dnf-plugins-core

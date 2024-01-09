@@ -9,12 +9,9 @@ command_exists() {
 ensure_commands() {
     local missing_cmds=()
 
-    # Check for git and ghq
+    # Check for git
     if ! command_exists git; then
         missing_cmds+=("git")
-    fi
-    if ! command_exists ghq; then
-        missing_cmds+=("ghq")
     fi
 
     # Handle missing commands

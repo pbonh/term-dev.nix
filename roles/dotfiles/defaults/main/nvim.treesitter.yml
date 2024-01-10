@@ -54,8 +54,9 @@ nvim_treesitter_default:
     require('nvim-treesitter.configs').setup({
       ensure_installed = { 
         'vim',
-        'regex',
+        'jsonc',
         'lua',
+        'regex',
         'bash',
         'markdown',
         'markdown_inline',

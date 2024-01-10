@@ -11,30 +11,6 @@ gdb_bin: "{{ nix_bin }}/gdb"
 lldb_vscode_bin: "{{ nix_bin }}/lldb-vscode"
 cmake_bin: "{{ nix_bin }}/cmake"
 clangd_bin: "{{ nix_bin }}/clangd"
-cpp_fedora_packages:
-  - boost
-  - boost-devel
-  - clang
-  - clang-tools-extra
-  - lld
-  - cmake
-  - ninja-build
-  - flex
-  - bison
-  - lldb
-ubuntu_clang_version: 12
-cpp_ubuntu_packages:
-  - build-essential
-  - "clang-{{ ubuntu_clang_version }}"
-  - "clang-tools-{{ ubuntu_clang_version }}"
-  - "clangd-{{ ubuntu_clang_version }}"
-  - "lldb-{{ ubuntu_clang_version }}"
-  - "lld-{{ ubuntu_clang_version }}"
-  - libboost-all-dev
-  - cmake
-  - ninja-build
-  - flex
-  - bison
 nvim_share_dir: "{{ xdg_share_dir }}/nvim"
 nvim_vim_plug_dir: "{{ nvim_share_dir }}/site/autoload"
 nvim_plugged_dir: "{{ nvim_share_dir }}/plugged"
@@ -136,8 +112,6 @@ lldb_vscode_runner: |
       -- https://www.kernel.org/doc/html/latest/admin-guide/LSM/Yama.html
       -- runInTerminal = false,
     },
-gccdiag_url: https://gitlab.com/andrejr/gccdiag
-gccdiag_download: "{{ tool_install_dir }}/gccdiag"
 cpp_file_extensions:
   - c
   - cc
@@ -152,8 +126,6 @@ cpp_file_extensions:
   - llvm
   - tablegen
 cpp_file_extensions_comma_list: "{{ '\"' + cpp_file_extensions |join('\", \"') + '\"' }}"
-cargo_path: "{{ ansible_env.HOME }}/.cargo/bin"
-cargo_bin: "{{ cargo_path }}/cargo"
 cargo_cpp_packages:
   - { name: neocmakelsp, path: neocmakelsp }
 treesitter_parsers_cpp:
@@ -340,4 +312,3 @@ cpp_neoformat_plugin_settings: |
 neoformat_plugin_settings: "{{ cpp_neoformat_plugin_settings }}"
 cpp_dap_plugin_settings: []
 cpp_extra_lua_plugin_settings: []
-conan_exe: "{{ bin_directory }}/conan"

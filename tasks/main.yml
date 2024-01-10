@@ -1,45 +1,25 @@
 ---
+- name: Ansible Variables | Setup Ansible Variables | task
+  import_tasks: tasks/setup_baremetal_vars.yml
+  when: baremetal == 'yes'
+  tags:
+    - always
+
+- name: Ansible Variables | Setup Ansible Variables | task
+  import_tasks: tasks/setup_homebrew_vars.yml
+  when: homebrew == 'yes'
+  tags:
+    - always
+
 - name: XDG | Install XDG Directories | task
   import_tasks: tasks/setup_xdg.yml
   tags:
     - setup
 
-- name: Musl | Install Rust Tools | task
-  import_tasks: tasks/install_rust_tools.yml
-  tags:
-    - rust-tools
-
-- name: Nix | Install Nix Home-Manager | task
-  when: ansible_distribution != 'MacOSX'
-  import_tasks: tasks/install_home_manager.yml
-  tags:
-    - home-manager
-    - nix
-
-- name: Nix | Install Node Tools | task
-  when: ansible_distribution != 'MacOSX'
-  import_tasks: tasks/install_node_tools.yml
-  tags:
-    - node-tools
-    - nix
-
-- name: Nix | Install Python Tools | task
-  when: ansible_distribution != 'MacOSX'
-  import_tasks: tasks/install_python_tools.yml
-  tags:
-    - python-tools
-    - nix
-
 - name: Shell | Install Scripts | task
   import_tasks: tasks/install_scripts.yml
   tags:
     - scripts
-
-- name: Shell | Install FZF | task
-  import_tasks: tasks/install_fzf.yml
-  tags:
-    - fzf
-    - env
 
 - name: Install Zsh Config
   import_tasks: tasks/install_zsh.yml
@@ -65,8 +45,20 @@
     - tcsh
     - env
 
-- name: Install Git Config
-  import_tasks: tasks/install_git.yml
+# - name: Install Git Config
+#   import_tasks: tasks/install_git.yml
+#   tags:
+#     - git
+#     - env
+
+- name: Install Lazygit Config
+  import_tasks: tasks/install_lazygit.yml
+  tags:
+    - git
+    - env
+
+- name: Install Gitui Config
+  import_tasks: tasks/install_gitui.yml
   tags:
     - git
     - env
@@ -77,22 +69,16 @@
     - navi
     - env
 
-- name: Install Neovim AppImage
-  import_tasks: tasks/install_neovim_app.yml
+- name: Install Broot Config
+  import_tasks: tasks/install_broot.yml
   tags:
-    - neovim-app
-    - editor
+    - broot
+    - env
 
 - name: Install Neovim Config
   import_tasks: tasks/install_neovim_configs.yml
   tags:
     - neovim-config
-    - editor
-
-- name: Install Helix App
-  import_tasks: tasks/install_helix_app.yml
-  tags:
-    - helix-app
     - editor
 
 - name: Install Helix Config
@@ -120,29 +106,9 @@
     - session
 
 - name: Install Ranger-Zoxide Plugin
-  when: ansible_distribution != 'MacOSX'
   import_tasks: tasks/install_ranger_zoxide.yml
   tags:
     - ranger
-    - env
-
-- name: Install Lazygit
-  when: ansible_distribution != 'MacOSX'
-  import_tasks: tasks/install_lazygit.yml
-  tags:
-    - git
-    - env
-
-- name: Install Gitui
-  import_tasks: tasks/install_gitui.yml
-  tags:
-    - git
-    - env
-
-- name: Install Broot
-  import_tasks: tasks/install_broot.yml
-  tags:
-    - broot
     - env
 
 - name: Install Bookmarks
@@ -158,37 +124,14 @@
     - env
 
 - name: Install Joplin Config
-  when: ansible_distribution != 'MacOSX'
   import_tasks: tasks/install_joplin.yml
   tags:
     - joplin
     - notes
 
-- name: Install Joplin Config
+- name: Install CLI-FM Config
   import_tasks: tasks/install_clifm.yml
   tags:
     - clifm
     - notes
 
-- name: Boost | Install CppTools | task
-  when: ansible_distribution != 'MacOSX' and 'cpp' in install_languages
-  import_tasks: install_cpp_tools.yml
-  tags:
-    - cpp
-
-- name: VSCode CppTools | Install VSCode CppTools | task
-  when: ansible_distribution != 'MacOSX' and 'cpp' in install_languages
-  import_tasks: install_vscode_cpptools.yml
-  tags:
-    - cpp
-
-- name: Musl | Install Python Development Tools | task
-  import_tasks: tasks/install_python_dev.yml
-  tags:
-    - python-dev
-
-#- name: GCCDiag | Install GCCDiag | task
-#  import_tasks: install_gccdiag.yml
-#  tags:
-#    - cpp
-#  when: "'cpp' in install_languages"

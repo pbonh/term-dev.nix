@@ -1,13 +1,12 @@
 #!/usr/bin/env bash
-#
-# README ======================================
-#  # Run FIRST
-#  ```
-#  just devmode
-#  refresh-global
-#  systemctl reboot
-#  ```
-# =============================================
+
+# Nix via Determinate Systems
+curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems
+
+# Devbox
+curl -fsSL https://get.jetpack.io/devbox | bash
+
+eval "$(devbox global shellenv --recompute)"
 
 # Function to check if a command exists
 command_exists() {
@@ -65,4 +64,3 @@ EOF
 }
 
 setup_bashrc
-eval "$(devbox global shellenv --recompute)"

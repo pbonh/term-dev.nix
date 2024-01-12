@@ -8,12 +8,6 @@ sudo dnf upgrade -y
 sudo dnf groupinstall -y "Development Tools" "Development Libraries"
 sudo dnf install -y python3-psutil ansible make git gcc-c++ xclip just distrobox
 
-# Nix via Determinate Systems
-curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems
-
-# Devbox
-curl -fsSL https://get.jetpack.io/devbox | bash
-
 # Flathub
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 

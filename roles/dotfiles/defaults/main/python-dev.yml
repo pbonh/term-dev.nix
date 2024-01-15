@@ -46,4 +46,5 @@ extra_nvim_keymap_python: |
       n = '<cmd>lua require(\'dap-python\').debug_selection()<CR>',
     },
     description = 'Python-DAP: Debugger Selection',
+    filters = { ft = 'python' },
   },

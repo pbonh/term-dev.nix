@@ -242,36 +242,43 @@ extra_nvim_keymap_cpp: |
       n = '<cmd>CMake configure<CR>',
     },
     description = 'CMake: Configure',
+    filters = { ft = 'cpp' },
   },
   { '<leader>ct', {
       n = '<cmd>CMake select_target<CR>',
     },
     description = 'CMake: Select Target',
+    filters = { ft = 'cpp' },
   },
   { '<leader>cb', {
       n = '<cmd>CMake build<CR>',
     },
     description = 'CMake: Build Target',
+    filters = { ft = 'cpp' },
   },
   { '<leader>ca', {
       n = '<cmd>CMake build_all<CR>',
     },
     description = 'CMake: Build All Targets',
+    filters = { ft = 'cpp' },
   },
   { '<leader>cr', {
       n = '<cmd>CMake run<CR>',
     },
     description = 'CMake: Run Target',
+    filters = { ft = 'cpp' },
   },
   { '<leader>cd', {
       n = '<cmd>CMake debug<CR>',
     },
     description = 'CMake: Debug Target',
+    filters = { ft = 'cpp' },
   },
   { '<leader>cl', {
       n = '<cmd>CMake clean<CR>',
     },
     description = 'CMake: Clean',
+    filters = { ft = 'cpp' },
   },
 nvim_completion_config_cpp: ""
 # nvim_completion_config_cpp: |

@@ -28,9 +28,8 @@ require('legendary').setup({
     which_key = {
       auto_register = true,
     },
-    lazy_nvim = {
-      auto_register = true
-    },
+    lazy_nvim = true,
+    nvim_tree = true,
   },
   keymaps = {
     {{ nvim_xdg_profile_keybindings | indent(4) }}

@@ -10,6 +10,25 @@ extra_nvim_plugins_devcontainers_lazy: |
   },
 extra_nvim_config_devcontainers: |
   require("devcontainer").setup({
+    autocommands = {
+      init = true,
+      clean = true,
+      update = true,
+    },
+    attach_mounts = {
+      always = true,
+      neovim_config = {
+        enabled = true,
+        options = { "readonly" }
+      },
+      neovim_data = {
+        enabled = true,
+      },
+      -- Only useful if using neovim 0.8.0+
+      neovim_state = {
+        enabled = true,
+      },
+    },
     nvim_installation_commands_provider = function(path_binaries, version_string)
       -- Returns table - list of commands to run when adding neovim to container
       -- Each command can either be a string or a table (list of command parts)

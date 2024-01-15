@@ -79,6 +79,9 @@ extra_nvim_config_rust: |
     },
     tools = {
       executor = require('rustaceanvim.executors').toggleterm,
+      hover_actions = {
+        auto_focus = true,
+      },
     },
     dap = {
       adapter = require('rustaceanvim.config').get_codelldb_adapter(codelldb_path, liblldb_path),
@@ -97,19 +100,27 @@ extra_nvim_keymap_rust: |
       n = '<cmd>RustLsp hover actions<CR>',
     },
     description = 'Rust-Tools: Hover Actions',
+    filters = { ft = 'rust' },
+    opts = { silent = true, noremap = true, },
   },
   { '<leader>ca', {
       n = '<cmd>lua vim.cmd.RustLsp("codeAction")<CR>',
     },
     description = 'Rust-Tools: Code Action Group',
+    filters = { ft = 'rust' },
+    opts = { silent = true, noremap = true },
   },
   { '<leader>cd', {
       n = '<cmd>RustLsp debuggables<CR>',
     },
     description = 'Rust-Tools: Select Rust Debuggable',
+    filters = { ft = 'rust' },
+    opts = { silent = true, noremap = true },
   },
   { '<leader>cw', {
       n = '<cmd>lua bacon_watch_terminal_runner()<CR>',
     },
     description = 'Rust: Bacon Codebase Watcher',
+    filters = { ft = 'rust' },
+    opts = { silent = true, noremap = true },
   },

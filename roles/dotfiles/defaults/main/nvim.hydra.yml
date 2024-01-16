@@ -1,7 +1,7 @@
 ---
 nvim_hydra_default:
   packer: |
-    use { 'anuvyklack/hydra.nvim',
+    use { 'nvimtools/hydra.nvim',
       requires = {
         'anuvyklack/keymap-layer.nvim',
         'jlanzarotta/bufexplorer',
@@ -15,7 +15,7 @@ nvim_hydra_default:
       },
     }
   lazy: |
-    { 'anuvyklack/hydra.nvim',
+    { 'nvimtools/hydra.nvim',
       dependencies = {
         'anuvyklack/keymap-layer.nvim',
         'jlanzarotta/bufexplorer',

@@ -104,8 +104,7 @@ nvim_default_plugins:
   intellisense: "{{ nvim_intellisense_default }}"
   debugger: "{{ nvim_debugger_default }}"
 nvim_extra_plugins: {}
-nvim_startup_commands: |
-  vim.cmd("WindowsDisableAutowidth")
+nvim_startup_commands: ""
 nvim_xdg_profiles:
   lazy:
     name: lazy

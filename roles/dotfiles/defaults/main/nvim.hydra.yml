@@ -46,6 +46,9 @@ nvim_hydra_default:
           hint = {
              float_opts = {
                relative='win',
+               style = "minimal",
+               focusable = false,
+               noautocmd = true,
              },
           },
           on_enter = function()
@@ -118,6 +121,9 @@ nvim_hydra_default:
              position = 'middle',
              float_opts = {
                relative='win',
+               style = "minimal",
+               focusable = false,
+               noautocmd = true,
              },
           }
        },
@@ -217,6 +223,9 @@ nvim_hydra_default:
              position = 'middle',
              float_opts = {
                relative='win',
+               style = "minimal",
+               focusable = false,
+               noautocmd = true,
              },
              offset = -1
           }

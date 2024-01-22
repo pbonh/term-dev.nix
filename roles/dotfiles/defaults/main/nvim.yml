@@ -78,3 +78,4 @@ lsp_provider_coc_settings_languageserver:
 lsp_provider_coc_settings_merged: "{{ lsp_provider_coc_settings_base | combine(lsp_provider_coc_settings_languageserver) }}"
 lsp_provider_coc_settings_json: "{{ lsp_provider_coc_settings_merged | to_nice_json }}"
 nvim_test_enable: false
+nvim_exe_default: "{{ bin_directory }}nvim"

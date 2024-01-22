@@ -23,6 +23,9 @@ reset-submodules:
 devbox:
   {{ task_prelude }} ansible-playbook playbooks/devbox.yml
 
+baremetal:
+  {{ task_prelude }} ansible-playbook playbooks/baremetal.yml
+
 work tag:
   {{ task_prelude }} ansible-playbook playbooks/dotfiles.yml --tags "{{ tag }}"
 

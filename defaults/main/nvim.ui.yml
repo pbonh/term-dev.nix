@@ -67,11 +67,11 @@ nvim_ui_default:
         'lewis6991/gitsigns.nvim',
       },
     },
-    { 'startup-nvim/startup.nvim',
-      dependencies = {
-        'nvim-telescope/telescope.nvim',
-        'nvim-lua/plenary.nvim',
-      },
+    {
+      'goolord/alpha-nvim',
+      config = function ()
+          require'alpha'.setup(require'alpha.themes.dashboard'.config)
+      end
     },
     { 'stevearc/oil.nvim',
       dependencies = {
@@ -330,7 +330,6 @@ nvim_ui_default:
     require('scrollbar').setup()
     require('gitsigns').setup()
     require('hlslens').setup()
-    require('startup').setup()
     require('oil').setup()
     require('neo-zoom').setup {
       winopts = {

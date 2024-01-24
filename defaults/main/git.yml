@@ -9,4 +9,4 @@ code_checkout_path_github: "{{ code_checkout_path }}/github.com/{{ github_userna
 code_checkout_path_gitlab: "{{ code_checkout_path }}/gitlab.com/{{ github_username }}"
 code_home_dir: "{{ code_checkout_path_github }}"
 homelab_dir: "{{ code_checkout_path_github }}/homelab"
-dotfiles_checkout_dir: "{{ code_checkout_path_github }}/role.nix-dot"
+dotfiles_checkout_dir: "{{ code_checkout_path_github }}/term-dev.nix"

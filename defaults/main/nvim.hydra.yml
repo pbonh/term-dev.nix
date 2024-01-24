@@ -1,29 +1,21 @@
 ---
 nvim_hydra_default:
   packer: |
-    use { 'anuvyklack/hydra.nvim',
+    use { 'nvimtools/hydra.nvim',
       requires = {
-        'anuvyklack/keymap-layer.nvim',
         'jlanzarotta/bufexplorer',
         'sindrets/winshift.nvim',
         'mrjones2014/smart-splits.nvim',
-        'anuvyklack/windows.nvim',
-        'anuvyklack/middleclass',
-        'anuvyklack/animation.nvim',
         'lewis6991/gitsigns.nvim',
         'declancm/maximize.nvim',
       },
     }
   lazy: |
-    { 'anuvyklack/hydra.nvim',
+    { 'nvimtools/hydra.nvim',
       dependencies = {
-        'anuvyklack/keymap-layer.nvim',
         'jlanzarotta/bufexplorer',
         'sindrets/winshift.nvim',
         'mrjones2014/smart-splits.nvim',
-        'anuvyklack/windows.nvim',
-        'anuvyklack/middleclass',
-        'anuvyklack/animation.nvim',
         'lewis6991/gitsigns.nvim',
         'declancm/maximize.nvim',
       },
@@ -52,7 +44,12 @@ nvim_hydra_default:
           color = 'pink',
           invoke_on_body = true,
           hint = {
-             border = 'rounded'
+             float_opts = {
+               relative='win',
+               style = "minimal",
+               focusable = false,
+               noautocmd = true,
+             },
           },
           on_enter = function()
              vim.cmd 'mkview'
@@ -121,8 +118,13 @@ nvim_hydra_default:
           color = 'amaranth',
           invoke_on_body = true,
           hint = {
-             border = 'rounded',
-             position = 'middle'
+             position = 'middle',
+             float_opts = {
+               relative='win',
+               style = "minimal",
+               focusable = false,
+               noautocmd = true,
+             },
           }
        },
        mode = {'n','x'},
@@ -193,7 +195,6 @@ nvim_hydra_default:
           { '<Esc>', nil, { exit = true } }
        }
     })
-    require('windows').setup()
     require('smart-splits').setup({
       ignored_buftypes = {
         'NvimTree',
@@ -204,35 +205,6 @@ nvim_hydra_default:
     local splits = require('smart-splits')
     local cmd = require('hydra.keymap-util').cmd
     local pcmd = require('hydra.keymap-util').pcmd
-    local buffer_hydra = Hydra({
-       name = 'Barbar',
-       config = {
-          on_key = function()
-             -- Preserve animation
-             vim.wait(200, function() vim.cmd 'redraw' end, 30, false)
-          end
-       },
-       heads = {
-          { 'h', function() vim.cmd('BufferPrevious') end, { on_key = false } },
-          { 'l', function() vim.cmd('BufferNext') end, { desc = 'choose', on_key = false } },
-          { 'H', function() vim.cmd('BufferMovePrevious') end },
-          { 'L', function() vim.cmd('BufferMoveNext') end, { desc = 'move' } },
-          { 'p', function() vim.cmd('BufferPin') end, { desc = 'pin' } },
-          { 'd', function() vim.cmd('BufferClose') end, { desc = 'close' } },
-          { 'c', function() vim.cmd('BufferClose') end, { desc = false } },
-          { 'q', function() vim.cmd('BufferClose') end, { desc = false } },
-          { 'od', function() vim.cmd('BufferOrderByDirectory') end, { desc = 'by directory' } },
-          { 'ol', function() vim.cmd('BufferOrderByLanguage') end,  { desc = 'by language' } },
-          { '<Esc>', nil, { exit = true } },
-          { '<C-c>', nil, { exit = true } },
-       }
-    })
-    local function choose_buffer()
-       if #vim.fn.getbufinfo({ buflisted = true }) > 1 then
-          buffer_hydra:activate()
-       end
-    end
-    vim.keymap.set('n', 'gb', choose_buffer)
     local window_hint = [[
      ^^^^^^^^^^^^     Move      ^^    Size   ^^   ^^     Split
      ^^^^^^^^^^^^-------------  ^^-----------^^   ^^---------------
@@ -241,7 +213,6 @@ nvim_hydra_default:
      ^ ^ _j_ ^ ^  ^ ^ _J_ ^ ^   ^   _<C-j>_   ^   _q_, _c_: close
      focus^^^^^^  window^^^^^^  ^_=_: equalize^   _z_: maximize
      ^ ^ ^ ^ ^ ^  ^ ^ ^ ^ ^ ^   ^^ ^          ^   _o_: remain only
-     _b_: choose buffer
     ]]
     Hydra({
        name = 'Windows',
@@ -249,8 +220,13 @@ nvim_hydra_default:
        config = {
           invoke_on_body = true,
           hint = {
-             border = 'rounded',
              position = 'middle',
+             float_opts = {
+               relative='win',
+               style = "minimal",
+               focusable = false,
+               noautocmd = true,
+             },
              offset = -1
           }
        },
@@ -280,7 +256,6 @@ nvim_hydra_default:
           { '<C-z>', function() require('maximize').toggle() end, { exit = true, desc = false } },
           { 'o',     '<C-w>o', { exit = true, desc = 'remain only' } },
           { '<C-o>', '<C-w>o', { exit = true, desc = false } },
-          { 'b', choose_buffer, { exit = true, desc = 'choose buffer' } },
           { 'c',     pcmd('close', 'E444') },
           { 'q',     pcmd('close', 'E444'), { desc = 'close window' } },
           { '<C-c>', pcmd('close', 'E444'), { desc = false } },

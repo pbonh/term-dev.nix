@@ -8,6 +8,11 @@ zsh_git_fuzzy: "{{ zsh_plugins }}/git-fuzzy"
 zsh_git_fuzzy_upstream: origin
 zsh_git_fuzzy_branch: main
 zsh_homebrew_env: ""
+zsh_devbox_env: |
+  #. /home/{{ zsh_username }}/.nix-profile/etc/profile.d/nix.sh
+  #. /home/{{ zsh_username }}/.nix-profile/etc/profile.d/hm-session-vars.sh
+  export PATH=$PATH:/nix/var/nix/profiles/default/bin
+  eval "$(devbox global shellenv --init-hook)"
 zsh_default_options: |
   HISTFILE=~/.histfile
   HISTSIZE=1000
@@ -17,11 +22,8 @@ zsh_default_options: |
   fpath=({{ zsh_completions }} $fpath)
   autoload -Uz compinit
   compinit
-  #. /home/{{ zsh_username }}/.nix-profile/etc/profile.d/nix.sh
-  #. /home/{{ zsh_username }}/.nix-profile/etc/profile.d/hm-session-vars.sh
-  export PATH=$PATH:/nix/var/nix/profiles/default/bin
-  eval "$(devbox global shellenv --init-hook)"
 zsh_default_env: |
+  {{ zsh_devbox_env }}
   {{ zsh_homebrew_env }}
   export PATH=$PATH:{{ bin_directory }}
   export SHELL="{{ nvim_shell }}"

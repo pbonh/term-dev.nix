@@ -46,7 +46,7 @@ nvim_ui_default:
     { 'kdheepak/tabline.nvim',
       dependencies = {
         'nvim-lualine/lualine.nvim',
-        'kyazdani42/nvim-web-devicons',
+        'nvim-tree/nvim-web-devicons',
         'b0o/incline.nvim',
       },
     },
@@ -59,7 +59,7 @@ nvim_ui_default:
         vim.o.number = true
         vim.o.termguicolors = true
       end,
-      opts = {}
+      opts = {},
     },
     { 'petertriho/nvim-scrollbar',
       dependencies = {
@@ -69,13 +69,16 @@ nvim_ui_default:
     },
     {
       'goolord/alpha-nvim',
+      dependencies = { 
+        'nvim-tree/nvim-web-devicons'
+      },
       config = function ()
           require'alpha'.setup(require'alpha.themes.dashboard'.config)
       end
     },
     { 'stevearc/oil.nvim',
       dependencies = {
-        'kyazdani42/nvim-web-devicons',
+        'nvim-tree/nvim-web-devicons',
       },
     },
     { 'chentoast/marks.nvim' },

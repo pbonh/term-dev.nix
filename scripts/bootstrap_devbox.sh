@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Nix via Determinate Systems
-curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems
+curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
 
 # Devbox
 curl -fsSL https://get.jetpack.io/devbox | bash

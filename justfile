@@ -72,7 +72,7 @@ update-rust-tools:
   {{ task_prelude }} cargo install-update -a
 
 install-rust-tools:
-  {{ task_prelude }} ansible-playbook playbooks/dotfiles.yml --tags "rust-tools"
+  {{ task_prelude }} ansible-playbook playbooks/baremetal.yml --tags "rust-tools"
 
 add-nix-devbox-repo:
   git remote add -f devbox-nix git@github.com:pbonh/devbox.nix.git

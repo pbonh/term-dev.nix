@@ -20,7 +20,7 @@
     diffr_exe: "{{ cargo_path }}diffr"
     dust_exe: "{{ cargo_path }}dust"
     eva_exe: "{{ cargo_path }}eva"
-    erdtree_exe: "{{ cargo_path }}et"
+    erdtree_exe: "{{ cargo_path }}erd"
     exa_exe: "{{ cargo_path }}exz"
     fd_exe: "{{ cargo_path }}fd"
     felix_exe: "{{ cargo_path }}fx"

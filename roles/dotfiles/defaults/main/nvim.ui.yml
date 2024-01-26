@@ -305,7 +305,6 @@ nvim_ui_default:
       }
     })
     require('marks').setup()
-    require('modicator').setup()
     require('nvim-tree').setup()
     require('lualine').setup({
       options = { theme  = gruvbox },
@@ -371,6 +370,7 @@ nvim_ui_default:
       --   exclude_buftypes = {},
       -- },
     }
+    require('modicator').setup()
   keymaps: |
     { 'n', { n = '<Cmd>execute(\'normal! \' . v:count1 . \'n\')<CR><Cmd>lua require(\'hlslens\').start()<CR>', }, description = 'HLSLens: Next Search Result', },
     { 'N', { n = '<Cmd>execute(\'normal! \' . v:count1 . \'N\')<CR><Cmd>lua require(\'hlslens\').start()<CR>', }, description = 'HLSLens: Previous Search Result', },

@@ -69,7 +69,7 @@ nvim_ui_default:
     },
     {
       'goolord/alpha-nvim',
-      dependencies = { 
+      dependencies = {
         'nvim-tree/nvim-web-devicons'
       },
       config = function ()

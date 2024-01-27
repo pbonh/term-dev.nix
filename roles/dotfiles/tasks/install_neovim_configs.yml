@@ -22,3 +22,9 @@
     src: nvim/init.lazy.lua.j2
     dest: "{{ xdg_config_dir }}/{{ item.value['appname'] }}/init.lua"
   loop: "{{ nvim_xdg_profiles | dict2items }}"
+
+- name: Neovim | Setup Neovim Project Directories | template
+  template:
+    src: "nvim/{{ cd_project_nvim_dir_database_filename }}.j2"
+    dest: "{{ xdg_config_dir }}/{{ item.value['appname'] }}/{{ cd_project_nvim_dir_database_filename }}"
+  loop: "{{ nvim_xdg_profiles | dict2items }}"

@@ -93,6 +93,7 @@ nvim_plugin_example:
       { '<leader>_', { n = '<cmd>command<CR>', }, description = 'Description', },
 nvim_default_plugins:
   ui: "{{ nvim_ui_default }}"
+  project: "{{ nvim_project_default }}"
   legendary: "{{ nvim_legendary_default }}"
   telescope: "{{ nvim_telescope_default }}"
   hydra: "{{ nvim_hydra_default }}"
@@ -117,6 +118,7 @@ nvim_xdg_profiles:
       plugins: |
         {{ nvim_legendary_default['lazy'] }}
         {{ nvim_ui_default['lazy'] }}
+        {{ nvim_project_default['lazy'] }}
         {{ nvim_telescope_default['lazy'] }}
         {{ nvim_hydra_default['lazy'] }}
         {{ nvim_treesitter_default['lazy'] }}
@@ -134,6 +136,7 @@ nvim_xdg_profiles:
       config: |
         {{ nvim_legendary_default['config'] }}
         {{ nvim_ui_default['config'] }}
+        {{ nvim_project_default['config'] }}
         {{ nvim_telescope_default['config'] }}
         {{ nvim_hydra_default['config'] }}
         {{ nvim_treesitter_default['config'] }}
@@ -150,6 +153,7 @@ nvim_xdg_profiles:
       keymaps: |
         {{ nvim_legendary_default['keymaps'] }}
         {{ nvim_ui_default['keymaps'] }}
+        {{ nvim_project_default['keymaps'] }}
         {{ nvim_telescope_default['keymaps'] }}
         {{ nvim_hydra_default['keymaps'] }}
         {{ nvim_treesitter_default['keymaps'] }}

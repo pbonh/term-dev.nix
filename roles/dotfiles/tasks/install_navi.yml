@@ -4,7 +4,7 @@
     path: "{{ xdg_config_dir_navi_cheats }}"
     state: directory
 
-- name: Neovim | Copy Neovim Plugin Config Files | template
+- name: Navi | Copy Cheat Files | template
   ansible.builtin.template:
     src: "{{ item.src }}"
     dest: "{{ xdg_config_dir_navi_cheats }}/{{ item.path | regex_replace('\\.j2$', '') }}.cheat"

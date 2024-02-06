@@ -25,7 +25,9 @@ treesitter_custom_parsers_info: ""
 #   }
 treesitter_parsers_file: "{{ '\"' + treesitter_parsers_all |join('\", \"') + '\"' }}"
 treesitter_parsers_luafile: "{{ \"'\" + treesitter_parsers_all | join(\"', '\") + \"'\" }}"
-treesitter_compiler_exe: "{{ gcc_exe }}"
+devbox_nix_path_default: "{{ ansible_env.HOME }}/.local/share/devbox/global/default/.devbox/nix/profile/default/bin"
+gcc_devbox_exe: "{{ devbox_nix_path_default }}/gcc"
+treesitter_compiler_exe: "{{ gcc_devbox_exe }}"
 treesitter_compiler_path_settings: |
   require('nvim-treesitter.install').compilers = {
     '{{ treesitter_compiler_exe }}',
@@ -63,6 +65,7 @@ nvim_treesitter_default:
         'json',
         'query',
         'toml',
+        'norg',
         {{ treesitter_parsers_file or '-- No Extra Treesitter Parsers Installed' }}
       },
       -- 'yaml',

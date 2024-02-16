@@ -120,8 +120,8 @@ zsh_fzf_setup: |
           echo "$pids" | xargs kill -9 "$@"
       fi
   }
-  alias cdg='source change_directory_bookmarks'
-  alias mkcd='source make_directory_then_change'
+  alias cdg='cd $(cdscuts_glob_echo | {{ skim_exe }})'
+  alias mkcd='make_directory_then_change'
   alias ffe='fzf_find_edit'
   alias fcd='fzf_change_directory'
   alias fcdd='fzf_change_directory_arg'

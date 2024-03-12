@@ -69,10 +69,23 @@ nvim_ui_default:
     },
     {
       'goolord/alpha-nvim',
-      dependencies = { 
+      dependencies = {
         'nvim-tree/nvim-web-devicons'
       },
       config = function ()
+          local alpha = require("alpha")
+          local dashboard = require("alpha.themes.dashboard")
+          dashboard.section.buttons.val = {
+            dashboard.button("e", "  New file", "<cmd>ene <CR>"),
+            dashboard.button("SPC f f", "  Find file", "<cmd>Telescope find_files<CR>"),
+            dashboard.button("SPC ?", "  Recently opened files", "<cmd>Telescope oldfiles<CR>"),
+            dashboard.button("SPC f r", "  Frecency/MRU"),
+            dashboard.button("SPC Q", "  Find word",  "<cmd>Telescope live_grep<CR>"),
+            dashboard.button("SPC f p", "  Jump to bookmarks",  "<cmd>CdProject<CR>"),
+            -- dashboard.button("SPC s l", "  Open last session", "<cmd>SessionManager load_last_session<CR>"),
+          }
+          alpha.setup(dashboard.config)
+
           require'alpha'.setup(require'alpha.themes.dashboard'.config)
       end
     },
@@ -305,7 +318,6 @@ nvim_ui_default:
       }
     })
     require('marks').setup()
-    require('modicator').setup()
     require('nvim-tree').setup()
     require('lualine').setup({
       options = { theme  = gruvbox },
@@ -371,6 +383,7 @@ nvim_ui_default:
       --   exclude_buftypes = {},
       -- },
     }
+    require('modicator').setup()
   keymaps: |
     { 'n', { n = '<Cmd>execute(\'normal! \' . v:count1 . \'n\')<CR><Cmd>lua require(\'hlslens\').start()<CR>', }, description = 'HLSLens: Next Search Result', },
     { 'N', { n = '<Cmd>execute(\'normal! \' . v:count1 . \'N\')<CR><Cmd>lua require(\'hlslens\').start()<CR>', }, description = 'HLSLens: Previous Search Result', },

@@ -128,10 +128,3 @@
   tags:
     - joplin
     - notes
-
-- name: Install CLI-FM Config
-  import_tasks: tasks/install_clifm.yml
-  tags:
-    - clifm
-    - notes
-

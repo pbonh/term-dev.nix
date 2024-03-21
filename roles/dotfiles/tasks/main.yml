@@ -102,7 +102,7 @@
 - name: Install Zellij Plugins
   import_tasks: tasks/install_zellij_plugins.yml
   tags:
-    - zellij-plugins
+    - zellij
     - session
 
 - name: Install Ranger-Zoxide Plugin

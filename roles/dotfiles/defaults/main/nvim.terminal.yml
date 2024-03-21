@@ -68,6 +68,7 @@ nvim_terminal_default:
     end
     local yazi = Terminal:new({
       cmd = '{{ yazi_exe }}',
+      dir = vim.fn.getcwd(),
       hidden = true,
       start_in_insert = true,
       close_on_exit = true,
@@ -92,7 +93,8 @@ nvim_terminal_default:
     -- { '<leader>X', { n = '<cmd>lua require(\'fm-nvim\').Xplr()<CR>', }, description = 'ToggleTerm: XPLR(Project Root)', },
     -- { '<leader>gg', { n = '<cmd>lua gitui_terminal_runner()<CR>', }, description = 'ToggleTerm: GitUI', },
     { '<leader>j', { n = '<cmd>lua just_terminal_runner()<CR>', }, description = 'ToggleTerm: Justfile Chooser', },
-    { '<leader>X', { n = '<cmd>lua require("tfm").open()<CR>', }, description = 'FM-Nvim: Yazi(Project Root)', },
-    { '<leader>x', { n = '<cmd>lua require("tfm").open(vim.fn.expand("%:p:~:.:h"))<CR>', }, description = 'FM-Nvim: Yazi(Current File)', },
+    { '<leader>x', { n = '<cmd>lua require("tfm").open()<CR>', }, description = 'FM-Nvim: Yazi(Current File)', },
+    { '<leader>X', { n = '<cmd>lua require("tfm").open(vim.fn.getcwd())<CR>', }, description = 'FM-Nvim: Yazi(Project Root)', },
+    -- { '<leader>x', { n = '<cmd>lua require("tfm").open(vim.fn.expand("%:p:~:.:h"))<CR>', }, description = 'FM-Nvim: Yazi(Current File)', },
     -- { '<leader>X', { n = '<cmd>lua yazi_terminal_runner()<CR>', }, description = 'ToggleTerm: Yazi(Project Root)', },
     -- { '<leader>x', { n = '<cmd>lua yazi_cwd_terminal_runner()<CR>', }, description = 'ToggleTerm: Yazi(Current File)', },

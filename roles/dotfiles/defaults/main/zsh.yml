@@ -11,7 +11,7 @@ zsh_homebrew_env: ""
 zsh_devbox_env: |
   #. /home/{{ zsh_username }}/.nix-profile/etc/profile.d/nix.sh
   #. /home/{{ zsh_username }}/.nix-profile/etc/profile.d/hm-session-vars.sh
-  export PATH=$PATH:/nix/var/nix/profiles/default/bin
+  export PATH=$PATH:{{ devbox_nix_root_path }}
   eval "$(devbox global shellenv --init-hook)"
 zsh_default_options: |
   HISTFILE=~/.histfile
@@ -131,6 +131,14 @@ zsh_fzf_setup: |
   alias gsk='{{ skim_exe }} --ansi -i -c '"'"'{{ rg_exe }} --color=always --line-number "{}"'"'"''
   alias dsk='{{ skim_exe }} --ansi -i -c '"'"'{{ fd_exe }} --type d "{}"'"'"''
   alias skvi='f(){ x="$({{ skim_exe }} --bind "ctrl-p:toggle-preview" --ansi --preview="{{ bat_exe }} {} --color=always" --preview-window=right:60%:hidden)"; [[ $? -eq 0 ]] && nvim "$x" || true }; f'
+  function yy() {
+    local tmp="$(mktemp -t "yazi-cwd.XXXXX")"
+    yazi "$@" --cwd-file="$tmp"
+    if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+            cd -- "$cwd"
+    fi
+    rm -f -- "$tmp"
+  }
 zsh_navi_setup: |
   # eval "$({{ navi_exe }} widget zsh)"
   _navi_call() {

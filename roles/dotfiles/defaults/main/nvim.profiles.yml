@@ -291,6 +291,14 @@ nvim_plugin_groups_all:
   colorscheme: "{{ nvim_colorscheme_default }}"
   intellisense: "{{ nvim_intellisense_default }}"
   debugger: "{{ nvim_debugger_default }}"
+  tasks: "{{ nvim_tasks_default }}"
+nvim_plugin_groups_bone:
+  telescope: "{{ nvim_telescope_default }}"
+  hydra: "{{ nvim_hydra_default }}"
+  git: "{{ nvim_git_default }}"
+  terminal: "{{ nvim_terminal_default }}"
+  motion: "{{ nvim_motion_flash }}"
+  tasks: "{{ nvim_tasks_default }}"
 nvim_xdg_modular_profiles:
   lazy:
     name: lazy
@@ -299,9 +307,13 @@ nvim_xdg_modular_profiles:
       options: "{{ nvim_default_editor_options }}"
       keymaps: "{{ nvim_default_keymap_options }}"
       plugin_groups: "{{ nvim_plugin_groups_all }}"
-# bone:
-#   name: bone
-#   appname: nvim-bone
+  bone:
+    name: bone
+    appname: nvim-bone
+    config:
+      options: "{{ nvim_default_editor_options }}"
+      keymaps: "{{ nvim_default_keymap_options }}"
+      plugin_groups: "{{ nvim_plugin_groups_bone }}"
 nvim_lazy_modular_config_base:
   - health.lua
   - lazy-bootstrap.lua

@@ -14,8 +14,8 @@ require('lazy').setup({
   -- Legendary Keymap Plugin
   {{ nvim_legendary_default['lazy'] | indent(2) }}
 
-  {% for nvim_lazy_plugin_group in nvim_lazy_plugin_groups -%}
-  {{ "require " + "'" + nvim_lazy_plugin_groups[nvim_lazy_plugin_group].key + "'," | indent(2) }}
+  {% for plugin_group_name in nvim_lazy_plugin_groups.keys() -%}
+  {{ "require " + "'" + plugin_group_name + "'," | indent(2) }}
   {% endfor %}
 }, {
   ui = {

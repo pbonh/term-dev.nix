@@ -1,0 +1,30 @@
+---
+  # debug:
+  #   msg: "Config File: {{ xdg_config_dir }}/nvim-{{ profile.key }}-modular/lua/plugins/{{ item.key }}.lua, Plugin Dict: {{ item.value['lazy'] }}"
+  # loop: "{{ profile.value.config.plugin_groups | dict2items }}"
+  # loop_control:
+  #   loop_var: item
+- name: Neovim | Iterate Neovim Profile Options(Modular) | template
+  vars:
+    # nvim_editor_options: "{{ config_file_tuple.0.value['options'] }}"
+    # nvim_keymap_options: "{{ config_file_tuple.0.value['keymaps'] }}"
+    nvim_lazy_plugin_groups: "{{ config_file_tuple.0.value }}"
+  debug:
+    msg: "{{ nvim_lazy_plugin_groups }}"
+  # ansible.builtin.template:
+  #   src: "nvim-modular/lua/{{ config_file_tuple.1 }}.j2"
+  #   dest: "{{ xdg_config_dir }}/nvim-{{ profile.key }}-modular/lua/plugins/{{ config_file_tuple.0.key }}.lua"
+  loop: "{{ profile.value.config.plugin_groups | dict2items | product(nvim_lazy_modular_config_base) }}"
+  loop_control:
+    loop_var: config_file_tuple
+
+- name: Neovim | Iterate Neovim Profile Plugin Configs(Modular) | template
+  vars:
+    nvim_lazy_plugin_group: "{{ plugin_group.value['lazy'] }}"
+    nvim_lazy_plugin_group_config: "{{ plugin_group.value['config'] }}"
+  ansible.builtin.template:
+    src: "nvim-modular/lua/plugins/plugins.lua.j2"
+    dest: "{{ xdg_config_dir }}/nvim-{{ profile.key }}-modular/lua/plugins/{{ plugin_group.key }}.lua"
+  loop: "{{ profile.value.config.plugin_groups | dict2items }}"
+  loop_control:
+    loop_var: plugin_group

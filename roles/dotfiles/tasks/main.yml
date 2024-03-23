@@ -63,6 +63,12 @@
     - git
     - env
 
+- name: Install Yazi Config
+  import_tasks: tasks/install_yazi.yml
+  tags:
+    - yazi
+    - env
+
 - name: Install Navi Config
   import_tasks: tasks/install_navi.yml
   tags:

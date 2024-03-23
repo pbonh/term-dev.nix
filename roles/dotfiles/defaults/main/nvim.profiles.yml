@@ -1,6 +1,6 @@
 ---
 nvim_profile_dir_name: "nvim-profiles"
-nvim_xdg_profile_dir: 
+nvim_xdg_profile_dir:
   config: "{{ xdg_config_dir }}/{{ nvim_profile_dir_name }}"
   share: "{{ xdg_share_dir }}/{{ nvim_profile_dir_name }}"
   cache: "{{ xdg_cache_dir }}/{{ nvim_profile_dir_name }}"
@@ -201,3 +201,21 @@ nvim_xdg_profiles:
         {{ nvim_motion_flash['keymaps'] }}
         {{ nvim_tasks_default['keymaps'] }}
       startup: "{{ nvim_startup_commands }}"
+nvim_xdg_modular_lua_hierarchy:
+  - ""
+  - lua
+  - lua/plugins
+nvim_xdg_modular_profiles:
+  lazy:
+    name: lazy
+    appname: nvim-lazy
+  bone:
+    name: bone
+    appname: nvim-bone
+nvim_lazy_modular_config_base:
+  - health.lua
+  - lazy-bootstrap.lua
+  - lazy-plugins.lua
+  - keymaps.lua
+  - keymaps-legendary.lua
+  - options.lua

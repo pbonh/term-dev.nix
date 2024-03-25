@@ -4,6 +4,15 @@
     nvim_editor_options: "{{ profile.value.config['options'] }}"
     nvim_keymap_options: "{{ profile.value.config['keymaps'] }}"
     nvim_lazy_plugin_groups: "{{ profile.value.config['plugin_groups'] }}"
+  debug:
+    msg: "{{ nvim_lazy_plugin_groups }}"
+  loop: "{{ nvim_lazy_modular_config_base }}"
+
+- name: Neovim | Iterate Neovim Profile Options(Modular) | template
+  vars:
+    nvim_editor_options: "{{ profile.value.config['options'] }}"
+    nvim_keymap_options: "{{ profile.value.config['keymaps'] }}"
+    nvim_lazy_plugin_groups: "{{ profile.value.config['plugin_groups'] }}"
   ansible.builtin.template:
     src: "nvim-modular/lua/{{ item }}.j2"
     dest: "{{ xdg_config_dir }}/nvim-{{ profile.key }}-modular/lua/{{ item }}"

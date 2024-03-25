@@ -321,3 +321,4 @@ nvim_lazy_modular_config_base:
   - keymaps.lua
   - keymaps-legendary.lua
   - options.lua
+  - options-plugins.lua

@@ -317,31 +317,40 @@ nvim_telescope:
     { '<leader>Q', { n = '<cmd>lua require(\'telescope.builtin\').live_grep()<CR>', }, description = 'Telescope: Live Grep Project', },
     { '<leader>/', { n = '<cmd>lua require(\'telescope.builtin\').current_buffer_fuzzy_find()<CR>', }, description = 'Telescope: Find in Current Buffer', },
     { '<leader>?', { n = '<cmd>lua require(\'telescope.builtin\').oldfiles()<CR>', }, description = 'Telescope: Old Files', },
+nvim_fzfx_fast_preview: "1"
 nvim_fzfx:
   lazy: |
-    require("lazy").setup({
-      {
-        "junegunn/fzf",
-        build = function()
-          vim.fn["fzf#install"]()
-        end,
+    {
+      "junegunn/fzf",
+      build = function()
+        vim.fn["fzf#install"]()
+      end,
+    },
+    {
+      "linrongbin16/fzfx.nvim",
+      dependencies = {
+        "nvim-tree/nvim-web-devicons",
+        'junegunn/fzf'
       },
-      {
-        "linrongbin16/fzfx.nvim",
-        dependencies = {
-          "nvim-tree/nvim-web-devicons",
-          'junegunn/fzf'
-        },
-        version = 'v5.*',
-        config = function()
-          require("fzfx").setup()
-        end,
-      },
-    })
+      version = 'v5.*',
+      config = function()
+        vim.g.fzfx_disable_buffer_previewer = {{ nvim_fzfx_fast_preview }}
+        require("fzfx").setup()
+      end,
+    },
   config: ""
   keymaps: |
     { '<leader>ff', { n = '<cmd>FzfxFiles<CR>', }, description = 'FzfX: Find Files', },
-    -- { '<leader>fb', { n = '<cmd>lua require(\'telescope.builtin\').buffers()<CR>', }, description = 'Telescope: Find Open Buffers', },
+    { '<leader>fb', { n = '<cmd>FzfxBuffers<CR>', }, description = 'FzfX: Find Open Buffers', },
+    { '_', { n = '<cmd>FzfxLiveGrep args .expand(\'<cword>\')<CR>', }, description = 'FzfX: Grep String(Cursor Word)', },
+    { '<leader>q', { n = '<cmd>FzfxBufLiveGrep<CR>', }, description = 'FzfX: Grep Current File', },
+    { '<leader>Q', { n = '<cmd>FzfxLiveGrep<CR>', }, description = 'FzfX: Grep Project', },
+    -- { '<leader>fb', { n = '<cmd><CR>', }, description = 'FzfX: Find Open Buffers', },
+    -- { '<leader>fb', { n = '<cmd><CR>', }, description = 'FzfX: Find Open Buffers', },
+    -- { '<leader>fb', { n = '<cmd><CR>', }, description = 'FzfX: Find Open Buffers', },
+    -- { '<leader>fb', { n = '<cmd><CR>', }, description = 'FzfX: Find Open Buffers', },
+    -- { '<leader>fb', { n = '<cmd><CR>', }, description = 'FzfX: Find Open Buffers', },
+    -- { '<leader>fb', { n = '<cmd><CR>', }, description = 'FzfX: Find Open Buffers', },
     -- { '<leader>fh', { n = '<cmd>lua require(\'telescope.builtin\').help_tags()<CR>', }, description = 'Telescope: Find Help Tags', },
     -- { '<leader>ft', { n = '<cmd>Telescope tele_tabby list<CR>', }, description = 'Telescope: Search Tabs', },
     -- -- { '<leader>fl', { n = '<cmd>Telescope aerial<CR>', }, description = 'Telescope: Search Aerial Document Symbols', },

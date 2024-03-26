@@ -26,6 +26,7 @@ treesitter_custom_parsers_info: ""
 treesitter_parsers_file: "{{ '\"' + treesitter_parsers_all |join('\", \"') + '\"' }}"
 treesitter_parsers_luafile: "{{ \"'\" + treesitter_parsers_all | join(\"', '\") + \"'\" }}"
 gcc_devbox_exe: "{{ devbox_nix_path_default }}/gcc"
+nvim_treesitter_max_file_lines: "nil"
 treesitter_compiler_exe: "{{ gcc_devbox_exe }}"
 treesitter_compiler_path_settings: |
   require('nvim-treesitter.install').compilers = {
@@ -75,7 +76,7 @@ nvim_treesitter_default:
         enable = true,
         -- disable = { 'jsx', 'cpp' }, list of languages you want to disable the plugin for
         extended_mode = false, -- Also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
-        max_file_lines = nil, -- Do not enable for files with more than n lines, int
+        max_file_lines = {{ nvim_treesitter_max_file_lines }}, -- Do not enable for files with more than n lines, int
         -- colors = {}, -- table of hex strings
         -- termcolors = {} -- table of colour name strings
       },
@@ -238,7 +239,7 @@ nvim_treesitter_default:
         enable = true,
         -- disable = { 'jsx', 'cpp' }, list of languages you want to disable the plugin for
         extended_mode = false, -- Also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
-        max_file_lines = nil, -- Do not enable for files with more than n lines, int
+        max_file_lines = {{ nvim_treesitter_max_file_lines }}, -- Do not enable for files with more than n lines, int
         -- colors = {}, -- table of hex strings
         -- termcolors = {} -- table of colour name strings
       },

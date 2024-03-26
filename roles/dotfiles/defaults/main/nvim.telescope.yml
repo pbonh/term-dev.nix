@@ -317,3 +317,39 @@ nvim_telescope:
     { '<leader>Q', { n = '<cmd>lua require(\'telescope.builtin\').live_grep()<CR>', }, description = 'Telescope: Live Grep Project', },
     { '<leader>/', { n = '<cmd>lua require(\'telescope.builtin\').current_buffer_fuzzy_find()<CR>', }, description = 'Telescope: Find in Current Buffer', },
     { '<leader>?', { n = '<cmd>lua require(\'telescope.builtin\').oldfiles()<CR>', }, description = 'Telescope: Old Files', },
+nvim_fzfx:
+  lazy: |
+    require("lazy").setup({
+      {
+        "junegunn/fzf",
+        build = function()
+          vim.fn["fzf#install"]()
+        end,
+      },
+      {
+        "linrongbin16/fzfx.nvim",
+        dependencies = {
+          "nvim-tree/nvim-web-devicons",
+          'junegunn/fzf'
+        },
+        version = 'v5.*',
+        config = function()
+          require("fzfx").setup()
+        end,
+      },
+    })
+  config: ""
+  keymaps: |
+    { '<leader>ff', { n = '<cmd>FzfxFiles<CR>', }, description = 'FzfX: Find Files', },
+    -- { '<leader>fb', { n = '<cmd>lua require(\'telescope.builtin\').buffers()<CR>', }, description = 'Telescope: Find Open Buffers', },
+    -- { '<leader>fh', { n = '<cmd>lua require(\'telescope.builtin\').help_tags()<CR>', }, description = 'Telescope: Find Help Tags', },
+    -- { '<leader>ft', { n = '<cmd>Telescope tele_tabby list<CR>', }, description = 'Telescope: Search Tabs', },
+    -- -- { '<leader>fl', { n = '<cmd>Telescope aerial<CR>', }, description = 'Telescope: Search Aerial Document Symbols', },
+    -- { '<leader>fd', { n = '<cmd>lua tcd_into_directory()<CR>', }, description = 'Telescope: TCD Into Directory', },
+    -- { '_', { n = '<cmd>lua require(\'telescope.builtin\').grep_string()<CR>', }, description = 'Telescope: Grep String(Cursor Word)', },
+    -- { '<leader>fe', { n = '<cmd>Telescope file_browser path=%:p:h<CR>', }, description = 'Telescope: File Browser(Current File)', },
+    -- { '<leader>fE', { n = '<cmd>Telescope file_browser<CR>', }, description = 'Telescope: File Browser(Root)', },
+    -- { '<leader>q', { n = '<cmd>Telescope dir live_grep<CR>', }, description = 'Telescope: Selective Live Grep Project', },
+    -- { '<leader>Q', { n = '<cmd>lua require(\'telescope.builtin\').live_grep()<CR>', }, description = 'Telescope: Live Grep Project', },
+    -- { '<leader>/', { n = '<cmd>lua require(\'telescope.builtin\').current_buffer_fuzzy_find()<CR>', }, description = 'Telescope: Find in Current Buffer', },
+    -- { '<leader>?', { n = '<cmd>lua require(\'telescope.builtin\').oldfiles()<CR>', }, description = 'Telescope: Old Files', },

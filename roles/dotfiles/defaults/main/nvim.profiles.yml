@@ -306,7 +306,7 @@ nvim_xdg_modular_profiles:
     config:
       options: "{{ nvim_default_editor_options }}"
       keymaps: "{{ nvim_default_keymap_options }}"
-      plugin_groups: "{{ nvim_plugin_groups_all }}"
+      plugin_groups: "{{ nvim_plugin_groups_all | ansible.builtin.combine(nvim_extra_plugins) }}"
   bone:
     name: bone
     appname: nvim-bone

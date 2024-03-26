@@ -47,6 +47,9 @@ dot: update-submodules
 env: update-submodules
   {{ task_prelude }} ansible-playbook playbooks/dotfiles.yml --tags "env"
 
+git:
+  {{ task_prelude }} ansible-playbook playbooks/dotfiles.yml --tags "git"
+
 shell: update-submodules
   {{ task_prelude }} ansible-playbook playbooks/dotfiles.yml --tags "navi,scripts,bookmarks,bash,nushell,zsh,tcsh"
 

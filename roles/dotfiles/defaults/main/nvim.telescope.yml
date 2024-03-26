@@ -302,6 +302,7 @@ nvim_telescope:
       'NoahTheDuke/vim-just',
       lazy = false,
     },
+  config: ""
   keymaps: |
     { '<leader>ff', { n = '<cmd>lua require(\'telescope.builtin\').find_files()<CR>', }, description = 'Telescope: Find Files', },
     { '<leader>fb', { n = '<cmd>lua require(\'telescope.builtin\').buffers()<CR>', }, description = 'Telescope: Find Open Buffers', },

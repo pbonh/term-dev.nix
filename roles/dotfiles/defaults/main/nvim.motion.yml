@@ -70,3 +70,38 @@ nvim_motion_flash:
   keymaps: |
     { '<C-o>', { n = '<cmd>Portal jumplist backward<CR>', }, description = 'Portal: Jump Backward', },
     { '<C-i>', { n = '<cmd>Portal jumplist forward<CR>', }, description = 'Portal: Jump Forward', },
+nvim_motion:
+  lazy: |
+    {
+      'folke/flash.nvim',
+      event = 'VeryLazy',
+      ---@type Flash.Config
+      opts = {},
+      -- stylua: ignore
+      keys = {
+        { 's', mode = { 'n', 'x', 'o' }, function() require('flash').jump() end, desc = 'Flash' },
+        { 'S', mode = { 'n', 'x', 'o' }, function() require('flash').treesitter() end, desc = 'Flash Treesitter' },
+        { 'r', mode = 'o', function() require('flash').remote() end, desc = 'Remote Flash' },
+        { 'R', mode = { 'o', 'x' }, function() require('flash').treesitter_search() end, desc = 'Treesitter Search' },
+        { '<c-s>', mode = { 'c' }, function() require('flash').toggle() end, desc = 'Toggle Flash Search' },
+      },
+    },
+    { 'cbochs/portal.nvim',
+      dependencies = {
+        'cbochs/grapple.nvim',  -- Optional: provides the 'grapple' query item
+        'ThePrimeagen/harpoon', -- Optional: provides the 'harpoon' query item
+      },
+      config = function()
+        require('portal').setup()
+      end,
+    },
+    {
+      'kylechui/nvim-surround',
+      config = function()
+        require('nvim-surround').setup()
+      end,
+    },
+  config: ""
+  keymaps: |
+    { '<C-o>', { n = '<cmd>Portal jumplist backward<CR>', }, description = 'Portal: Jump Backward', },
+    { '<C-i>', { n = '<cmd>Portal jumplist forward<CR>', }, description = 'Portal: Jump Forward', },

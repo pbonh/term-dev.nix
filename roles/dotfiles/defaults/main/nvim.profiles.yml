@@ -280,25 +280,25 @@ nvim_xdg_modular_lua_hierarchy:
   - lua
   - lua/plugins
 nvim_plugin_groups_all:
-  ui: "{{ nvim_ui_default }}"
-  project: "{{ nvim_project_default }}"
-  telescope: "{{ nvim_telescope_default }}"
-  hydra: "{{ nvim_hydra_default }}"
-  treesitter: "{{ nvim_treesitter_default }}"
-  git: "{{ nvim_git_default }}"
-  terminal: "{{ nvim_terminal_default }}"
-  motion: "{{ nvim_motion_flash }}"
-  colorscheme: "{{ nvim_colorscheme_default }}"
-  intellisense: "{{ nvim_intellisense_default }}"
-  debugger: "{{ nvim_debugger_default }}"
-  tasks: "{{ nvim_tasks_default }}"
+  ui: "{{ nvim_ui }}"
+  project: "{{ nvim_project }}"
+  telescope: "{{ nvim_telescope }}"
+  hydra: "{{ nvim_hydra }}"
+  treesitter: "{{ nvim_treesitter }}"
+  git: "{{ nvim_git }}"
+  terminal: "{{ nvim_terminal }}"
+  motion: "{{ nvim_motion }}"
+  colorscheme: "{{ nvim_colorscheme }}"
+  intellisense: "{{ nvim_intellisense }}"
+  debugger: "{{ nvim_debugger }}"
+  tasks: "{{ nvim_tasks }}"
 nvim_plugin_groups_bone:
-  telescope: "{{ nvim_telescope_default }}"
-  hydra: "{{ nvim_hydra_default }}"
-  git: "{{ nvim_git_default }}"
-  terminal: "{{ nvim_terminal_default }}"
-  motion: "{{ nvim_motion_flash }}"
-  tasks: "{{ nvim_tasks_default }}"
+  telescope: "{{ nvim_telescope }}"
+  hydra: "{{ nvim_hydra }}"
+  git: "{{ nvim_git }}"
+  terminal: "{{ nvim_terminal }}"
+  motion: "{{ nvim_motion }}"
+  tasks: "{{ nvim_tasks }}"
 nvim_xdg_modular_profiles:
   lazy:
     name: lazy

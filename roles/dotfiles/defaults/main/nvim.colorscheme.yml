@@ -11,3 +11,15 @@ nvim_colorscheme_default:
     vim.o.background = 'dark'
     vim.cmd([[colorscheme gruvbox-material]])
   keymaps: ''
+nvim_colorscheme:
+  lazy: |
+    { 
+      'sainnhe/gruvbox-material',
+      lazy = false,
+      init = function()
+        vim.o.background = 'dark'
+        vim.cmd([[colorscheme gruvbox-material]])
+      end,
+    },
+  config: ""
+  keymaps: ''

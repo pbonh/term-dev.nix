@@ -51,4 +51,5 @@ nvim_tasks:
     },
   config: ""
   keymaps: |
+    { '<leader>t', description = 'Overseer', },
     { '<leader>tj', { n = '<cmd>JustOverseer<CR>', }, description = 'Overseer: Justfile Chooser', },

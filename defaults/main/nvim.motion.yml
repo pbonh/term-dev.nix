@@ -87,6 +87,10 @@ nvim_motion:
       },
     },
     { 'cbochs/portal.nvim',
+      dependencies = {
+        'cbochs/grapple.nvim',  -- Optional: provides the 'grapple' query item
+        'ThePrimeagen/harpoon', -- Optional: provides the 'harpoon' query item
+      },
       config = function()
         require('portal').setup()
       end,

@@ -238,6 +238,7 @@ extra_nvim_config_cpp: |
     dap_open_command = require('dapui').open,
   })
 extra_nvim_keymap_cpp: |
+  { '<leader>c', description = 'CMake', filters = { ft = 'cpp' } },
   { '<leader>cc', {
       n = '<cmd>CMake configure<CR>',
     },

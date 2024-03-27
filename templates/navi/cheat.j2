@@ -19,6 +19,9 @@ rm -rf {{ nvim_plugged_dir }}/*
 # Install Plugins
 nvim --headless +PlugInstall +qall
 
+# Print CheckHealth Log
+{{ nvim_checkhealth_log_cmd }}
+
 % nix
 
 # Source Nix Profile

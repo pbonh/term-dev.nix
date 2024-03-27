@@ -1,0 +1,11 @@
+---
+- name: Setup Yazi Config Directory
+  file:
+    path: "{{ yazi_config }}"
+    state: directory
+    mode: "0755"
+
+- name: Yazi | Copies Yazi Config | template
+  template:
+    src: yazi/yazi.toml.j2
+    dest: "{{ yazi_config_file }}"

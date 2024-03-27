@@ -45,11 +45,11 @@
     - tcsh
     - env
 
-# - name: Install Git Config
-#   import_tasks: tasks/install_git.yml
-#   tags:
-#     - git
-#     - env
+- name: Install Git Config
+  import_tasks: tasks/install_git.yml
+  tags:
+    - git
+    - env
 
 - name: Install Lazygit Config
   import_tasks: tasks/install_lazygit.yml
@@ -61,6 +61,12 @@
   import_tasks: tasks/install_gitui.yml
   tags:
     - git
+    - env
+
+- name: Install Yazi Config
+  import_tasks: tasks/install_yazi.yml
+  tags:
+    - yazi
     - env
 
 - name: Install Navi Config

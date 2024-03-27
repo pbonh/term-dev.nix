@@ -130,7 +130,7 @@ zsh_fzf_setup: |
   alias fsk='{{ skim_exe }} --ansi -i -c '"'"'{{ fd_exe }} --type f "{}"'"'"''
   alias gsk='{{ skim_exe }} --ansi -i -c '"'"'{{ rg_exe }} --color=always --line-number "{}"'"'"''
   alias dsk='{{ skim_exe }} --ansi -i -c '"'"'{{ fd_exe }} --type d "{}"'"'"''
-  alias skvi='f(){ x="$({{ skim_exe }} --bind "ctrl-p:toggle-preview" --ansi --preview="{{ bat_exe }} {} --color=always" --preview-window=right:60%:hidden)"; [[ $? -eq 0 ]] && nvim "$x" || true }; f'
+  alias skvi='f(){ x="$({{ skim_exe }} --bind "ctrl-p:toggle-preview" --ansi --preview="{{ bat_exe }} {} --color=always" --preview-window=right:60%:hidden)"; [[ $? -eq 0 ]] && {{ nvim_exe }} "$x" || true }; f'
   function yy() {
     local tmp="$(mktemp -t "yazi-cwd.XXXXX")"
     yazi "$@" --cwd-file="$tmp"
@@ -173,6 +173,9 @@ zsh_navi_setup: |
 zsh_nvim_setup: |
   {% for nvim_profile_name in nvim_xdg_profiles -%}
   {{ "alias vim-" + nvim_xdg_profiles[nvim_profile_name]['name'] + "='NVIM_APPNAME=" + nvim_xdg_profiles[nvim_profile_name]['appname'] + " " + nvim_exe + "'" }}
+  {% endfor %}
+  {% for nvim_profile_name in nvim_xdg_modular_profiles -%}
+  {{ "alias vim-" + nvim_xdg_modular_profiles[nvim_profile_name]['name'] + "-m='NVIM_APPNAME=" + nvim_xdg_modular_profiles[nvim_profile_name]['appname'] + "-modular " + nvim_exe + "'" }}
   {% endfor %}
 zsh_default_aliases: |
   alias cat={{ bat_exe }}

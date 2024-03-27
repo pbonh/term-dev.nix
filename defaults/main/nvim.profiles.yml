@@ -1,6 +1,6 @@
 ---
 nvim_profile_dir_name: "nvim-profiles"
-nvim_xdg_profile_dir: 
+nvim_xdg_profile_dir:
   config: "{{ xdg_config_dir }}/{{ nvim_profile_dir_name }}"
   share: "{{ xdg_share_dir }}/{{ nvim_profile_dir_name }}"
   cache: "{{ xdg_cache_dir }}/{{ nvim_profile_dir_name }}"
@@ -69,6 +69,65 @@ nvim_default_editor_options: |
   -- vim.g.python3_host_prog = '{{ nvim_python_exe }}'
   -- vim.opt.conceallevel = 2
   -- vim.opt.concealcursor = 'niv'
+  vim.opt.sessionoptions = 'buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,globals'
+nvim_kickstart_editor_options: |
+  -- [[ Setting options ]]
+  -- See `:help vim.opt`
+  -- NOTE: You can change these options as you wish!
+  --  For more options, you can see `:help option-list`
+
+  -- Make line numbers default
+  vim.opt.number = true
+  -- You can also add relative line numbers, for help with jumping.
+  --  Experiment for yourself to see if you like it!
+  -- vim.opt.relativenumber = true
+
+  -- Enable mouse mode, can be useful for resizing splits for example!
+  vim.opt.mouse = 'a'
+
+  -- Don't show the mode, since it's already in status line
+  vim.opt.showmode = false
+
+  -- Sync clipboard between OS and Neovim.
+  --  Remove this option if you want your OS clipboard to remain independent.
+  --  See `:help 'clipboard'`
+  vim.opt.clipboard = 'unnamedplus'
+
+  -- Enable break indent
+  vim.opt.breakindent = true
+
+  -- Save undo history
+  vim.opt.undofile = true
+
+  -- Case-insensitive searching UNLESS \C or capital in search
+  vim.opt.ignorecase = true
+  vim.opt.smartcase = true
+
+  -- Keep signcolumn on by default
+  vim.opt.signcolumn = 'yes'
+
+  -- Decrease update time
+  vim.opt.updatetime = 250
+  vim.opt.timeoutlen = 300
+
+  -- Configure how new splits should be opened
+  vim.opt.splitright = true
+  vim.opt.splitbelow = true
+
+  -- Sets how neovim will display certain whitespace in the editor.
+  --  See `:help 'list'`
+  --  and `:help 'listchars'`
+  vim.opt.list = true
+  vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+
+  -- Preview substitutions live, as you type!
+  vim.opt.inccommand = 'split'
+
+  -- Show which line your cursor is on
+  vim.opt.cursorline = true
+
+  -- Minimal number of screen lines to keep above and below the cursor.
+  vim.opt.scrolloff = 10
 nvim_default_keymap_options: |
   vim.g.mapleader = ' '
   vim.g.maplocalleader = ' '
@@ -80,9 +139,24 @@ nvim_default_keymap_options: |
   vim.api.nvim_set_keymap('t', '<C-l>', '<C-\\><C-n><C-W>l ', { noremap = true, silent = true })
   -- vim.api.nvim_set_keymap('n', 'k', \"v:count == 0 ? 'gk' : 'k'\", { noremap = true, expr = true, silent = true })
   -- vim.api.nvim_set_keymap('n', 'j', \"v:count == 0 ? 'gj' : 'j'\", { noremap = true, expr = true, silent = true })
+  vim.keymap.set('n', '<C-]>', '<cmd>nohlsearch<CR>')
+
+  -- [[ Basic Autocommands ]]
+  --  See `:help lua-guide-autocommands`
+
+  -- Highlight when yanking (copying) text
+  --  Try it with `yap` in normal mode
+  --  See `:help vim.highlight.on_yank()`
+  vim.api.nvim_create_autocmd('TextYankPost', {
+    desc = 'Highlight when yanking (copying) text',
+    group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
+    callback = function()
+      vim.highlight.on_yank()
+    end,
+  })
 nvim_default_keymap_options_file: "{{ nvim_default_keymap_options }}"
 nvim_default_ui_options: |
-  vim.opt.sessionoptions = 'buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,globals'
+  -- vim.opt.sessionoptions = 'buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,globals'
 nvim_plugin_example:
   plugin:
     packer: |
@@ -201,3 +275,50 @@ nvim_xdg_profiles:
         {{ nvim_motion_flash['keymaps'] }}
         {{ nvim_tasks_default['keymaps'] }}
       startup: "{{ nvim_startup_commands }}"
+nvim_xdg_modular_lua_hierarchy:
+  - ""
+  - lua
+  - lua/plugins
+nvim_plugin_groups_all:
+  ui: "{{ nvim_ui }}"
+  project: "{{ nvim_project }}"
+  telescope: "{{ nvim_telescope }}"
+  hydra: "{{ nvim_hydra }}"
+  treesitter: "{{ nvim_treesitter }}"
+  git: "{{ nvim_git }}"
+  terminal: "{{ nvim_terminal }}"
+  motion: "{{ nvim_motion }}"
+  colorscheme: "{{ nvim_colorscheme }}"
+  intellisense: "{{ nvim_intellisense }}"
+  debugger: "{{ nvim_debugger }}"
+  tasks: "{{ nvim_tasks }}"
+nvim_plugin_groups_bone:
+  telescope: "{{ nvim_telescope }}"
+  hydra: "{{ nvim_hydra }}"
+  git: "{{ nvim_git }}"
+  terminal: "{{ nvim_terminal }}"
+  motion: "{{ nvim_motion }}"
+  tasks: "{{ nvim_tasks }}"
+nvim_xdg_modular_profiles:
+  lazy:
+    name: lazy
+    appname: nvim-lazy
+    config:
+      options: "{{ nvim_default_editor_options }}"
+      keymaps: "{{ nvim_default_keymap_options }}"
+      plugin_groups: "{{ nvim_plugin_groups_all | ansible.builtin.combine(nvim_extra_plugins) }}"
+  bone:
+    name: bone
+    appname: nvim-bone
+    config:
+      options: "{{ nvim_default_editor_options }}"
+      keymaps: "{{ nvim_default_keymap_options }}"
+      plugin_groups: "{{ nvim_plugin_groups_bone }}"
+nvim_lazy_modular_config_base:
+  - health.lua
+  - lazy-bootstrap.lua
+  - lazy-plugins.lua
+  - keymaps.lua
+  - keymaps-legendary.lua
+  - options.lua
+  - options-plugins.lua

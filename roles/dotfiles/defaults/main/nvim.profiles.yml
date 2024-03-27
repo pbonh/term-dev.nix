@@ -289,7 +289,7 @@ nvim_plugin_groups_all:
   terminal: "{{ nvim_terminal }}"
   motion: "{{ nvim_motion }}"
   colorscheme: "{{ nvim_colorscheme }}"
-  intellisense: "{{ nvim_intellisense }}"
+  intellisense: "{{ nvim_lspconfig_cmp_base }}"
   debugger: "{{ nvim_debugger }}"
   tasks: "{{ nvim_tasks }}"
 nvim_plugin_groups_bone:

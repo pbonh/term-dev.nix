@@ -126,6 +126,7 @@ nvim_debugger:
   config: |
     local dap = require('dap')
   keymaps: |
+    { '<leader>d', description = 'DAP', },
     { '<leader>db', { n = '<cmd>lua require(\'dap\').toggle_breakpoint()<CR>', }, description = 'DAP: Toggle Breakpoint', },
     { '<leader>dc', { n = '<cmd>lua require(\'dap\').continue()<CR>', }, description = 'DAP: Continue', },
     { '<leader>dv', { n = '<cmd>lua require(\'dap\').step_over()<CR>', }, description = 'DAP: Step Over', },

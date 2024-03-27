@@ -125,3 +125,4 @@ extra_nvim_keymap_rust: |
     filters = { ft = 'rust' },
     opts = { silent = true, noremap = true },
   },
+  { '<leader>c', description = 'Rust', filters = { ft = 'rust' } },

@@ -504,3 +504,123 @@ nvim_lspconfig_cmp_base:
       },
       description = 'LSP: Code Action',
     },
+nvim_lspconfig_cmp_navbuddy:
+  lazy: |
+    {
+      'neovim/nvim-lspconfig',
+      dependencies = {
+        'hrsh7th/cmp-nvim-lsp',
+        'hrsh7th/cmp-buffer',
+        'hrsh7th/cmp-path',
+        'hrsh7th/cmp-cmdline',
+        'hrsh7th/nvim-cmp',
+        'hrsh7th/cmp-vsnip',
+        'hrsh7th/vim-vsnip',
+        {
+          "SmiteshP/nvim-navic",
+          dependencies = {
+            "MunifTanjim/nui.nvim"
+          },
+          opts = { lsp = { auto_attach = true } }
+        },
+        {
+          "SmiteshP/nvim-navbuddy",
+          dependencies = {
+            "SmiteshP/nvim-navic",
+            "MunifTanjim/nui.nvim"
+          },
+          opts = { lsp = { auto_attach = true } }
+        },
+      },
+      config = function()
+        -- Set up nvim-cmp.
+        local cmp = require('cmp')
+        local cmp_select = {behavior = cmp.SelectBehavior.Select}
+
+        cmp.setup({
+          snippet = {
+            -- REQUIRED - you must specify a snippet engine
+            expand = function(args)
+              vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
+            end,
+          },
+          window = {
+            -- completion = cmp.config.window.bordered(),
+            -- documentation = cmp.config.window.bordered(),
+          },
+          mapping = cmp.mapping.preset.insert({
+            ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+            ['<C-f>'] = cmp.mapping.scroll_docs(4),
+            ['<C-Space>'] = cmp.mapping.complete(),
+            ['<C-e>'] = cmp.mapping.abort(),
+            ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+            ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
+            ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
+            ['<C-y>'] = cmp.mapping.confirm({ select = true }),
+            ['<C-Space>'] = cmp.mapping.complete(),
+          }),
+          sources = cmp.config.sources({
+            { name = 'nvim_lsp' },
+            { name = 'vsnip' }, -- For vsnip users.
+          }, {
+            { name = 'buffer' },
+          })
+        })
+
+        -- Set configuration for specific filetype.
+        cmp.setup.filetype('gitcommit', {
+          sources = cmp.config.sources({
+            { name = 'git' }, -- You can specify the `git` source if [you were installed it](https://github.com/petertriho/cmp-git).
+          }, {
+            { name = 'buffer' },
+          })
+        })
+
+        -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
+        cmp.setup.cmdline({ '/', '?' }, {
+          mapping = cmp.mapping.preset.cmdline(),
+          sources = {
+            { name = 'buffer' }
+          }
+        })
+
+        -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+        cmp.setup.cmdline(':', {
+          mapping = cmp.mapping.preset.cmdline(),
+          sources = cmp.config.sources({
+            { name = 'path' }
+          }, {
+            { name = 'cmdline' }
+          }),
+          matching = { disallow_symbol_nonprefix_matching = false }
+        })
+
+        -- Set up lspconfig.
+        local lspconfig = require('lspconfig')
+        local capabilities = require('cmp_nvim_lsp').default_capabilities()
+        local servers = {
+          {{ lsp_providers_luafile | indent(2) or '-- No Additional Servers Preconfigured' }}
+        }
+        for _, lsp in ipairs(servers) do
+          lspconfig[lsp].setup {
+            capabilities = capabilities,
+          }
+        end
+      end,
+    },
+    { 'stevearc/aerial.nvim' },
+  config: ""
+  keymaps: |
+    { 'gd', { n = '<cmd>Telescope lsp_definitions<CR>', }, description = 'Telescope: Definition Finder', },
+    { 'gr', { n = '<cmd>Telescope lsp_references<CR>', }, description = 'Telescope: Reference Finder', },
+    { 'gs', { n = '<cmd>Telescope lsp_document_symbols<CR>', }, description = 'Telescope: Document Symbol Finder', },
+    { 'gS', { n = '<cmd>Telescope lsp_dynamic_workspace_symbols<CR>', }, description = 'Telescope: Workspace Symbol Finder', },
+    { '<leader>;', { n = '<cmd>Navbuddy<CR>', }, description = 'Navbuddy: Outline Toggle', },
+    { 'K', { n = '<cmd>lua vim.lsp.buf.hover()<cr>', }, description = 'LSP: Hover', },
+    { 'gD', { n = '<cmd>lua vim.lsp.buf.declaration()<cr>', }, description = 'LSP: Declaration', },
+    { 'gi', { n = '<cmd>lua vim.lsp.buf.implementation()<cr>', }, description = 'LSP: Implementation', },
+    { 'go', { n = '<cmd>lua vim.lsp.buf.type_definition()<cr>', }, description = 'LSP: Type Definition', },
+    { 'gs', { n = '<cmd>lua vim.lsp.buf.signature_help()<cr>', }, description = 'LSP: Signature Help', },
+    { '<F2>', { n = '<cmd>lua vim.lsp.buf.rename()<cr>', }, description = 'LSP: Rename', },
+    { '<F3>', { n = '<cmd>lua vim.lsp.buf.format({async = true})<cr>', x = '<cmd>lua vim.lsp.buf.format({async = true})<cr>', }, description = 'LSP: Format', },
+    { '<F4>', { n = '<cmd>lua vim.lsp.buf.code_action()<cr>', }, description = 'LSP: Code Action', },

@@ -96,6 +96,42 @@ nvim_motion:
       end,
     },
     {
+      "cbochs/grapple.nvim",
+      dependencies = {
+        { "nvim-tree/nvim-web-devicons" }
+      },
+      opts = {
+        scope = "git_branch",
+        icons = true,
+        quick_select = "123456789",
+      },
+      keys = {
+        { ";", "<cmd>Grapple toggle_tags<cr>", desc = "Toggle tags menu" },
+        { "<leader>b", "<cmd>Grapple toggle<cr>", desc = "Toggle tag" },
+        { "H", "<cmd>Grapple cycle forward<cr>", desc = "Go to next tag" },
+        { "L", "<cmd>Grapple cycle backward<cr>", desc = "Go to previous tag" },
+      },
+    },
+    {
+      "cbochs/grapple.nvim",
+      opts = {
+        scope = "git", -- also try out "git_branch"
+      },
+      event = { "BufReadPost", "BufNewFile" },
+      cmd = "Grapple",
+      keys = {
+        { "<leader>mm", "<cmd>Grapple toggle<cr>", desc = "Grapple toggle tag" },
+        { "<leader>mk", "<cmd>Grapple toggle_tags<cr>", desc = "Grapple toggle tags" },
+        { "<leader>mK", "<cmd>Grapple toggle_scopes<cr>", desc = "Grapple toggle scopes" },
+        { "<leader>mj", "<cmd>Grapple cycle forward<cr>", desc = "Grapple cycle forward" },
+        { "<leader>mJ", "<cmd>Grapple cycle backward<cr>", desc = "Grapple cycle backward" },
+        { "<leader>m1", "<cmd>Grapple select index=1<cr>", desc = "Grapple select 1" },
+        { "<leader>m2", "<cmd>Grapple select index=2<cr>", desc = "Grapple select 2" },
+        { "<leader>m3", "<cmd>Grapple select index=3<cr>", desc = "Grapple select 3" },
+        { "<leader>m4", "<cmd>Grapple select index=4<cr>", desc = "Grapple select 4" },
+      },
+    },
+    {
       'kylechui/nvim-surround',
       config = function()
         require('nvim-surround').setup()

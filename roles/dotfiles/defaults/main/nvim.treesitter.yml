@@ -27,6 +27,8 @@ treesitter_parsers_file: "{{ '\"' + treesitter_parsers_all |join('\", \"') + '\"
 treesitter_parsers_luafile: "{{ \"'\" + treesitter_parsers_all | join(\"', '\") + \"'\" }}"
 gcc_devbox_exe: "{{ devbox_nix_path_default }}/gcc"
 nvim_treesitter_max_file_lines: "nil"
+# Ex: lang == "cpp" and api.nvim_buf_line_count(bufnr) > 50000
+nvim_treesitter_disable: "false"
 treesitter_compiler_exe: "{{ gcc_devbox_exe }}"
 treesitter_compiler_path_settings: |
   require('nvim-treesitter.install').compilers = {
@@ -235,6 +237,9 @@ nvim_treesitter:
           -- 'yaml',
           highlight = {
             enable = true, -- false will disable the whole extension
+            disable = function(lang, bufnr)
+              return {{ nvim_treesitter_disable }}
+            end,
           },
           rainbow = {
             enable = true,

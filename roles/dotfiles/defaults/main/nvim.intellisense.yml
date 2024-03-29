@@ -608,7 +608,13 @@ nvim_lspconfig_cmp_navbuddy:
         end
       end,
     },
-    { 'stevearc/aerial.nvim' },
+    {
+      'numToStr/Comment.nvim',
+      lazy = false,
+      config = function()
+        require('Comment').setup()
+      end,
+    },
   config: ""
   keymaps: |
     { 'gd', { n = '<cmd>Telescope lsp_definitions<CR>', }, description = 'Telescope: Definition Finder', },

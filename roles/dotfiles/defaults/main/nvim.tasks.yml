@@ -1,20 +1,17 @@
 ---
-nvim_overseer_tasks: |
-  vim.api.nvim_create_user_command("JustOverseer", function(params)
-    local task = require("overseer").new_task({
-      cmd = { "{{ just_exe }}" },
-      args = { "--choose" },
-      components = {
-        { "on_output_quickfix", open = not params.bang, open_height = 8 },
-        "default",
-      },
-    })
-    task:start()
-  end, {
-    desc = "Run the Justfile as an Overseer task",
-    nargs = "*",
-    bang = true,
-  })
+nvim_overseer_reldir: "lua/overseer/template/user"
+nvim_overseer_tasks:
+  just_choose:
+    name = "Just Choose",
+    builder = function()
+      -- Full path to current file (see :help expand())
+      local file = vim.fn.expand("%:p")
+      return {
+        cmd = { "{{ just_exe }}" },
+        args = { "--choose" },
+        components = { { "on_output_quickfix", open = true }, "default" },
+      }
+    end,
 nvim_tasks_default:
   packer: |
     use {
@@ -32,9 +29,9 @@ nvim_tasks_default:
     require('overseer').setup({
       strategy = "toggleterm",
     })
-    {{ nvim_overseer_tasks }}
   keymaps: |
-    { '<leader>tj', { n = '<cmd>JustOverseer<CR>', }, description = 'Overseer: Justfile Chooser', },
+    { '<leader>t', description = 'Overseer', },
+    { '<leader>tt', { n = '<cmd>OverseerRun<CR>', }, description = 'Overseer: Select Task', },
 nvim_tasks:
   lazy: |
     {
@@ -46,10 +43,10 @@ nvim_tasks:
         require('overseer').setup({
           strategy = "toggleterm",
         })
-        {{ nvim_overseer_tasks }}
+        require("dap.ext.vscode").json_decode = require("overseer.json").decode
       end,
     },
   config: ""
   keymaps: |
     { '<leader>t', description = 'Overseer', },
-    { '<leader>tj', { n = '<cmd>JustOverseer<CR>', }, description = 'Overseer: Justfile Chooser', },
+    { '<leader>tt', { n = '<cmd>OverseerRun<CR>', }, description = 'Overseer: Select Task', },

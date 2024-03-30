@@ -300,7 +300,7 @@ nvim_plugin_groups_bone:
   terminal: "{{ nvim_terminal }}"
   motion: "{{ nvim_motion }}"
   tasks: "{{ nvim_tasks }}"
-  notes: "{{ nvim_neorg }}"
+  notes: "{{ nvim_neorg_legacy }}"
 nvim_xdg_modular_profiles:
   lazy:
     name: lazy

@@ -299,7 +299,7 @@ nvim_plugin_groups_bone:
   git: "{{ nvim_git }}"
   terminal: "{{ nvim_terminal }}"
   motion: "{{ nvim_motion }}"
-  tasks: "{{ nvim_tasks }}"
+  tasks: "{{ nvim_tasks_nodap }}"
   notes: "{{ nvim_neorg_legacy }}"
 nvim_xdg_modular_profiles:
   lazy:

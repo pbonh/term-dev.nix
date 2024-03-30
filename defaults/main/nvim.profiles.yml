@@ -296,11 +296,12 @@ nvim_plugin_groups_all:
 nvim_plugin_groups_bone:
   telescope: "{{ nvim_telescope }}"
   hydra: "{{ nvim_hydra }}"
+  treesitter: "{{ nvim_treesitter }}"
   git: "{{ nvim_git }}"
   terminal: "{{ nvim_terminal }}"
   motion: "{{ nvim_motion }}"
-  tasks: "{{ nvim_tasks }}"
-  notes: "{{ nvim_neorg }}"
+  tasks: "{{ nvim_tasks_nodap }}"
+  notes: "{{ nvim_neorg_legacy }}"
 nvim_xdg_modular_profiles:
   lazy:
     name: lazy

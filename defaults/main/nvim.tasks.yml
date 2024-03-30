@@ -50,3 +50,20 @@ nvim_tasks:
   keymaps: |
     { '<leader>t', description = 'Overseer', },
     { '<leader>tt', { n = '<cmd>OverseerRun<CR>', }, description = 'Overseer: Select Task', },
+nvim_tasks_nodap:
+  lazy: |
+    {
+      'stevearc/overseer.nvim',
+      dependencies = {
+          {'akinsho/toggleterm.nvim'},
+      },
+      config = function()
+        require('overseer').setup({
+          strategy = "toggleterm",
+        })
+      end,
+    },
+  config: ""
+  keymaps: |
+    { '<leader>t', description = 'Overseer', },
+    { '<leader>tt', { n = '<cmd>OverseerRun<CR>', }, description = 'Overseer: Select Task', },

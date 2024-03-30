@@ -103,7 +103,6 @@ nvim_terminal:
     { 'akinsho/toggleterm.nvim',
       dependencies = {
         'is0n/fm-nvim',
-        'rolv-apneseth/tfm.nvim',
       },
       config = function()
         require('toggleterm').setup({
@@ -121,10 +120,10 @@ nvim_terminal:
           float_opts = {
             border = 'shadow',
             width = function()
-              return math.floor(vim.o.columns * 0.85)
+              return math.floor(vim.o.columns * 0.8)
             end,
             height = function()
-              return math.floor(vim.o.lines * 0.85)
+              return math.floor(vim.o.lines * 0.8)
             end,
             winblend = 3,
             -- highlights = {
@@ -142,36 +141,35 @@ nvim_terminal:
         function just_terminal_runner()
           justchoose:toggle()
         end
-        local xplr = Terminal:new({
-          cmd = '{{ xplr_exe }}',
-          hidden = true,
-          start_in_insert = true,
-          close_on_exit = true,
-        })
-        function xplr_terminal_runner()
-          xplr:toggle()
-        end
-        local yazi = Terminal:new({
-          cmd = '{{ yazi_exe }}',
-          dir = vim.fn.getcwd(),
-          hidden = true,
-          start_in_insert = true,
-          close_on_exit = true,
-        })
-        function yazi_terminal_runner()
-          yazi:toggle()
-        end
-        local yazi_cwd = Terminal:new({
-          cmd = '{{ yazi_exe }}',
-          dir = vim.fn.expand('%:p:~:.:h'),
-          hidden = true,
-          start_in_insert = true,
-          close_on_exit = true,
-        })
-        function yazi_cwd_terminal_runner()
-          yazi_cwd:toggle()
-        end
       end,
+    },
+    {
+      "rolv-apneseth/tfm.nvim",
+      lazy = false,
+      opts = {
+        file_manager = "yazi",
+        replace_netrw = true,
+        -- Enable creation of commands
+        -- Commands:
+        --   Tfm: selected file(s) will be opened in the current window
+        --   TfmSplit: selected file(s) will be opened in a horizontal split
+        --   TfmVsplit: selected file(s) will be opened in a vertical split
+        --   TfmTabedit: selected file(s) will be opened in a new tab page
+        enable_cmds = false, 
+        -- Custom keybindings only applied within the TFM buffer
+        -- Default: {}
+        keybindings = {
+          ["<ESC>"] = "q"
+        },
+        -- Customise UI. The below options are the default
+        ui = {
+          border = "rounded",
+          height = 1,
+          width = 1,
+          x = 0.5,
+          y = 0.5,
+        },
+      },
     },
     {
       "willothy/flatten.nvim",
@@ -181,14 +179,6 @@ nvim_terminal:
     },
   config: ""
   keymaps: |
-    -- { '<leader>sj', { n = '<cmd>lua require(\'fm-nvim\').Joshuto(vim.fm.expand(\'%:p:~:.:h\'))<CR>', }, description = 'ToggleTerm: Joshuto(Current File)', },
-    -- { '<leader>sJ', { n = '<cmd>lua require(\'fm-nvim\').Joshuto()<CR>', }, description = 'ToggleTerm: Joshuto(Project Root)', },
-    -- { '<leader>x', { n = '<cmd>lua require(\'fm-nvim\').Xplr(vim.fn.expand(\'%:p:~:.:h\'))<CR>', }, description = 'ToggleTerm: XPLR(Current File)', },
-    -- { '<leader>X', { n = '<cmd>lua require(\'fm-nvim\').Xplr()<CR>', }, description = 'ToggleTerm: XPLR(Project Root)', },
-    -- { '<leader>gg', { n = '<cmd>lua gitui_terminal_runner()<CR>', }, description = 'ToggleTerm: GitUI', },
     { '<leader>j', { n = '<cmd>lua just_terminal_runner()<CR>', }, description = 'ToggleTerm: Justfile Chooser', },
-    { '<leader>x', { n = '<cmd>lua require("tfm").open()<CR>', }, description = 'FM-Nvim: Yazi(Current File)', },
-    { '<leader>X', { n = '<cmd>lua require("tfm").open(vim.fn.getcwd())<CR>', }, description = 'FM-Nvim: Yazi(Project Root)', },
-    -- { '<leader>x', { n = '<cmd>lua require("tfm").open(vim.fn.expand("%:p:~:.:h"))<CR>', }, description = 'FM-Nvim: Yazi(Current File)', },
-    -- { '<leader>X', { n = '<cmd>lua yazi_terminal_runner()<CR>', }, description = 'ToggleTerm: Yazi(Project Root)', },
-    -- { '<leader>x', { n = '<cmd>lua yazi_cwd_terminal_runner()<CR>', }, description = 'ToggleTerm: Yazi(Current File)', },
+    { '<leader>a', { n = '<cmd>lua require("tfm").open()<CR>', }, description = 'FM-Nvim: Yazi(Current File)', },
+    { '<leader>A', { n = '<cmd>lua require("tfm").open(vim.fn.getcwd())<CR>', }, description = 'FM-Nvim: Yazi(Project Root)', },

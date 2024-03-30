@@ -94,7 +94,8 @@ nvim_hydra_default:
           { 'B', function() gitsigns.blame_line{ full = true } end, { desc = 'blame show full' } },
           { '/', gitsigns.show, { exit = true, desc = 'show base file' } }, -- show the base of the file
           { '<Enter>', '<Cmd>Neogit<CR>', { exit = true, desc = 'Neogit' } },
-          { 'g', '<Cmd>Gitui<CR>', { exit = true, desc = 'Gitui' } },
+          { 'g', '<Cmd>Neogit<CR>', { exit = true, desc = 'Neogit' } },
+          -- { 'g', '<Cmd>Gitui<CR>', { exit = true, desc = 'Gitui' } },
           { 'q', nil, { exit = true, nowait = true, desc = 'exit' } },
        }
     })
@@ -292,7 +293,7 @@ nvim_hydra:
          _K_: prev hunk   _u_: undo last stage   _p_: preview hunk   _B_: blame show full 
          ^ ^              _S_: stage buffer      ^ ^                 _/_: show base file
          ^
-         ^ ^              _<Enter>_: Neogit      _g_: Gitui          _q_: exit
+         ^ ^              _g_: Neogit                                 _q_: exit
         ]]
         Hydra({
            name = 'Git',
@@ -351,8 +352,8 @@ nvim_hydra:
               { 'b', gitsigns.blame_line, { desc = 'blame' } },
               { 'B', function() gitsigns.blame_line{ full = true } end, { desc = 'blame show full' } },
               { '/', gitsigns.show, { exit = true, desc = 'show base file' } }, -- show the base of the file
-              { '<Enter>', '<Cmd>Neogit<CR>', { exit = true, desc = 'Neogit' } },
-              { 'g', '<Cmd>Gitui<CR>', { exit = true, desc = 'Gitui' } },
+              { 'g', '<Cmd>Neogit<CR>', { exit = true, desc = 'Neogit' } },
+              -- { 'g', '<Cmd>Gitui<CR>', { exit = true, desc = 'Gitui' } },
               { 'q', nil, { exit = true, nowait = true, desc = 'exit' } },
            }
         })

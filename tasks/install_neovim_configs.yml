@@ -25,6 +25,13 @@
     path: "{{ nvim_neorg_dir }}"
     state: directory
 
+- name: Neovim | Setup Neovim Overseer Directories | template
+  file:
+    path: "{{ xdg_config_dir }}/{{ item.value.appname }}-modular/{{ nvim_overseer_reldir }}"
+    state: directory
+    mode: '0755'
+  loop: "{{ nvim_xdg_modular_profiles | dict2items }}"
+
 - name: Neovim | Setup Neovim Profile Configs | template
   vars:
     nvim_xdg_profile_defaults: "{{ item.value['config']['defaults'] }}"
@@ -60,3 +67,4 @@
     src: "nvim/{{ cd_project_nvim_dir_database_filename }}.j2"
     dest: "{{ xdg_config_dir }}/{{ item.value['appname'] }}-modular/{{ cd_project_nvim_dir_database_filename }}"
   loop: "{{ nvim_xdg_modular_profiles | dict2items }}"
+

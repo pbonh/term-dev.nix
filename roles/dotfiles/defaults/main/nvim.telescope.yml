@@ -363,3 +363,81 @@ nvim_fzfx:
     -- { '<leader>Q', { n = '<cmd>lua require(\'telescope.builtin\').live_grep()<CR>', }, description = 'Telescope: Live Grep Project', },
     -- { '<leader>/', { n = '<cmd>lua require(\'telescope.builtin\').current_buffer_fuzzy_find()<CR>', }, description = 'Telescope: Find in Current Buffer', },
     -- { '<leader>?', { n = '<cmd>lua require(\'telescope.builtin\').oldfiles()<CR>', }, description = 'Telescope: Old Files', },
+nvim_fzf_lua:
+  lazy: |
+    {
+      "ibhagwan/fzf-lua",
+      dependencies = { "nvim-tree/nvim-web-devicons" },
+      config = function()
+        local actions = require "fzf-lua.actions"
+        require("fzf-lua").setup({
+          keymaps = {
+            prompt            = "Keymaps> ",
+            winopts           = { preview = { layout = "vertical" } },
+            fzf_opts          = { ["--tiebreak"] = "index", },
+            ignore_patterns   = { "^<SNR>", "^<Plug>" },
+            actions           = {
+              ["default"]     = actions.keymap_apply,
+              ["ctrl-x"]      = actions.keymap_split,
+              ["ctrl-v"]      = actions.keymap_vsplit,
+              ["ctrl-t"]      = actions.keymap_tabedit,
+            },
+          },
+        })
+      end
+    },
+    {
+      'nvim-telescope/telescope-fzf-native.nvim',
+      dependencies = {
+        'nvim-telescope/telescope.nvim',
+        'nvim-lua/plenary.nvim',
+        'stevearc/dressing.nvim',
+        'nvim-lua/popup.nvim',
+        'sharkdp/fd',
+      },
+      build = '{{ nvim_make_exe }}',
+      config = function()
+        require('dressing').setup()
+        require('telescope').setup({
+          extensions = {
+            ast_grep = {
+                command = {
+                    "{{ astgrep_exe }}",
+                    "--json=stream",
+                },
+                grep_open_files = false,
+                lang = nil, -- string value, specify language for ast-grep `nil` for default
+            },
+          }
+        })
+        require('telescope').load_extension('fzf')
+
+        local telescope = require('telescope')
+        local builtin = require('telescope.builtin')
+        function tcd_into_directory()
+          builtin.find_files({
+            find_command = {'{{ fd_exe }}', '--type', 'd'}, -- Uses 'fd' to find directories
+            attach_mappings = function(_, map)
+              map('i', '<CR>', function(prompt_bufnr)
+                local selection = require('telescope.actions.state').get_selected_entry()
+                require('telescope.actions').close(prompt_bufnr)
+                vim.cmd('tcd ' .. selection.value)
+              end)
+              return true
+            end
+          })
+        end
+      end,
+    },
+  config: ""
+  keymaps: |
+    { '<leader>f', description = 'Fzf-Lua', },
+    { '<leader>ff', { n = '<cmd>FzfLua files<CR>', }, description = 'Fzf-Lua: Find Files', },
+    { '<leader>fb', { n = '<cmd>FzfLua buffers<CR>', }, description = 'Fzf-Lua: Find Open Buffers', },
+    { '<leader>ft', { n = '<cmd>FzfLua tabs<CR>', }, description = 'Fzf-Lua: Find Tabs', },
+    { '<leader>f?', { n = '<cmd>FzfLua oldfiles<CR>', }, description = 'Fzf-Lua: Find Old Files', },
+    { '<leader>f/', { n = '<cmd>FzfLua blines<CR>', }, description = 'Fzf-Lua: Find Current Buffer Lines', },
+    { '_', { n = '<cmd>FzfLua grep_cword<CR>', }, description = 'Fzf-Lua: Grep String(Cursor Word)', },
+    { '<leader>q', { n = '<cmd>FzfLua lgrep_curbuf<CR>', }, description = 'Fzf-Lua: Grep Current File', },
+    { '<leader>Q', { n = '<cmd>FzfLua live_grep<CR>', }, description = 'Fzf-Lua: Grep Project', },
+    { '<leader>fd', { n = '<cmd>lua tcd_into_directory()<CR>', }, description = 'Telescope: TCD Into Directory', },

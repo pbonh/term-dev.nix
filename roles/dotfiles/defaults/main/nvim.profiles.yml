@@ -282,7 +282,7 @@ nvim_xdg_modular_lua_hierarchy:
 nvim_plugin_groups_all:
   ui: "{{ nvim_ui }}"
   project: "{{ nvim_project }}"
-  telescope: "{{ nvim_telescope }}"
+  telescope: "{{ nvim_fzf_lua }}"
   hydra: "{{ nvim_hydra }}"
   treesitter: "{{ nvim_treesitter }}"
   git: "{{ nvim_git }}"
@@ -294,7 +294,7 @@ nvim_plugin_groups_all:
   tasks: "{{ nvim_tasks }}"
   notes: "{{ nvim_neorg }}"
 nvim_plugin_groups_bone:
-  telescope: "{{ nvim_telescope }}"
+  telescope: "{{ nvim_fzf_lua }}"
   hydra: "{{ nvim_hydra }}"
   treesitter: "{{ nvim_treesitter }}"
   git: "{{ nvim_git }}"

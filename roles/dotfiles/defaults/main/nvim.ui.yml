@@ -537,6 +537,5 @@ nvim_ui:
     { '#', { n = '#<Cmd>lua require(\'hlslens\').start()<CR>', }, description = 'HLSLens: Search Cursorword In Reverse', },
     { 'g*', { n = 'g*<Cmd>lua require(\'hlslens\').start()<CR>', }, 'HLSLens: Search Nearest Cursorword', },
     { 'g#', { n = 'g#<Cmd>lua require(\'hlslens\').start()<CR>', }, description =  'HLSLens: Search Nearest Cursorword In Reverse', },
-    { '<C-]>', { n = ':noh<CR>', }, description = 'HLSLens: Clear Search Result', },
     { '-', { n = ':Oil --float<CR>', }, description = 'Oil: Open Parent Directory', },
     { '<leader>z', { n = '<cmd>NeoZoomToggle<CR>', }, description = 'Neo-Zoom: Toggle Float/Zoom Window', },

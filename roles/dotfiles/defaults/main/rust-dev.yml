@@ -88,10 +88,7 @@ extra_nvim_config_rust: |
       adapter = require('rustaceanvim.config').get_codelldb_adapter(codelldb_path, liblldb_path),
     },
   }
-  local cargo_watch = Terminal:new({ cmd = '{{ cargo_bin }} watch -x check -x test', close_on_exit = true, hidden = true })
-  function cargo_watch_terminal_runner()
-    cargo_watch:toggle()
-  end
+  local Terminal  = require('toggleterm.terminal').Terminal
   local bacon_watch = Terminal:new({ cmd = '{{ cargo_path }}bacon', close_on_exit = true, hidden = true })
   function bacon_watch_terminal_runner()
     bacon_watch:toggle()

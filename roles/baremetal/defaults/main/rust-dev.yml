@@ -105,10 +105,6 @@ extra_nvim_config_rust: |
     },
   }
   require('rust-tools').setup(opts)
-  local cargo_watch = Terminal:new({ cmd = '{{ cargo_bin }} watch -x check -x test', close_on_exit = true, hidden = true })
-  function cargo_watch_terminal_runner()
-    cargo_watch:toggle()
-  end
   local bacon_watch = Terminal:new({ cmd = '{{ cargo_path }}bacon', close_on_exit = true, hidden = true })
   function bacon_watch_terminal_runner()
     bacon_watch:toggle()

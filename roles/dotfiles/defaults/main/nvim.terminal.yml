@@ -180,5 +180,5 @@ nvim_terminal:
   config: ""
   keymaps: |
     { '<leader>j', { n = '<cmd>lua just_terminal_runner()<CR>', }, description = 'ToggleTerm: Justfile Chooser', },
-    { '<leader>a', { n = '<cmd>lua require("tfm").open()<CR>', }, description = 'FM-Nvim: Yazi(Current File)', },
-    { '<leader>A', { n = '<cmd>lua require("tfm").open(vim.fn.getcwd())<CR>', }, description = 'FM-Nvim: Yazi(Project Root)', },
+    { '<leader>x', { n = '<cmd>lua require("tfm").open()<CR>', }, description = 'FM-Nvim: Yazi(Current File)', },
+    { '<leader>X', { n = '<cmd>lua require("tfm").open(vim.fn.getcwd())<CR>', }, description = 'FM-Nvim: Yazi(Project Root)', },

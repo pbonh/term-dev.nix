@@ -287,21 +287,21 @@ nvim_plugin_groups_all:
   treesitter: "{{ nvim_treesitter }}"
   git: "{{ nvim_git }}"
   terminal: "{{ nvim_terminal }}"
-  motion: "{{ nvim_motion }}"
   colorscheme: "{{ nvim_colorscheme }}"
   intellisense: "{{ nvim_lspconfig_cmp_navbuddy }}"
   debugger: "{{ nvim_debugger }}"
   tasks: "{{ nvim_tasks }}"
   notes: "{{ nvim_neorg }}"
+  motion: "{{ nvim_motion }}"
 nvim_plugin_groups_bone:
   telescope: "{{ nvim_fzf_lua }}"
   hydra: "{{ nvim_hydra }}"
   treesitter: "{{ nvim_treesitter }}"
   git: "{{ nvim_git }}"
   terminal: "{{ nvim_terminal }}"
-  motion: "{{ nvim_motion }}"
   tasks: "{{ nvim_tasks_nodap }}"
   notes: "{{ nvim_neorg_legacy }}"
+  motion: "{{ nvim_motion }}"
 nvim_xdg_modular_profiles:
   lazy:
     name: lazy

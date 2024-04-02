@@ -10,7 +10,7 @@
     src: helix/config.toml.j2
     dest: "{{ helix_config_file }}"
 
-- name: Helix | Copies Helix Language Config | template
-  template:
-    src: helix/languages.toml.j2
-    dest: "{{ helix_lang_file }}"
+# - name: Helix | Copies Helix Language Config | template
+#   template:
+#     src: helix/languages.toml.j2
+#     dest: "{{ helix_lang_file }}"

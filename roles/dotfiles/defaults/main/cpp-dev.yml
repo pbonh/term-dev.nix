@@ -135,13 +135,13 @@ treesitter_parsers_cpp:
   - cmake
 treesitter_extra_config_cpp: |
   nt_cpp_tools = {
-      enable = true,
-      preview = {
-          quit = 'q', -- optional keymapping for quit preview
-          accept = '<tab>' -- optional keymapping for accept preview
-      },
-      header_extension = 'h', -- optional
-      source_extension = 'cxx', -- optional
+    enable = true,
+    preview = {
+      quit = 'q', -- optional keymapping for quit preview
+      accept = '<tab>' -- optional keymapping for accept preview
+    },
+    header_extension = 'h', -- optional
+    source_extension = 'cxx', -- optional
   },
 extra_nvim_plugins_cpp: |
   use 'p00f/clangd_extensions.nvim'

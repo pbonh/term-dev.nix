@@ -462,7 +462,7 @@ nvim_ui:
             dashboard.button("e", "  New file", "<cmd>ene <CR>"),
             dashboard.button("SPC f f", "  Find file", "<cmd>FzfLua files<CR>"),
             dashboard.button("SPC f ?", "  Recently opened files", "<cmd>FzfLua oldfiles<CR>"),
-            dashboard.button("SPC Q", "  Find word",  "<cmd>FzfLua live_grep<CR>"),
+            dashboard.button("SPC f Q", "  Find word",  "<cmd>FzfLua live_grep<CR>"),
             dashboard.button("SPC f p", "  Jump to bookmarks",  "<cmd>CdProject<CR>"),
             -- dashboard.button("SPC f r", "  Frecency/MRU"),
             -- dashboard.button("SPC s l", "  Open last session", "<cmd>SessionManager load_last_session<CR>"),

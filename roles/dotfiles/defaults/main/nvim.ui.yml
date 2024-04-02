@@ -472,63 +472,63 @@ nvim_ui:
           require'alpha'.setup(require'alpha.themes.dashboard'.config)
       end
     },
-    { 'stevearc/oil.nvim',
-      dependencies = {
-        'nvim-tree/nvim-web-devicons',
-      },
-      config = function()
-        require('oil').setup()
-      end,
-    },
-    {
-      'chentoast/marks.nvim',
-      config = function()
-        require('marks').setup()
-      end,
-    },
-    { 'rcarriga/nvim-notify' },
-    {
-      'nyngwang/NeoZoom.lua',
-      config = function()
-        require('neo-zoom').setup({
-          winopts = {
-            offset = {
-              -- NOTE: you can omit `top` and/or `left` to center the floating window.
-              -- top = 0,
-              -- left = 0.17,
-              width = 150,
-              height = 0.85,
-            },
-            -- NOTE: check :help nvim_open_win() for possible border values.
-            -- border = 'double',
-          },
-          -- exclude_filetypes = { 'lspinfo', 'mason', 'lazy', 'fzf', 'qf' },
-          exclude_buftypes = { 'terminal' },
-          presets = {
-            {
-              filetypes = { 'dapui_.*', 'dap-repl' },
-              config = {
-                top = 0.25,
-                left = 0.6,
-                width = 0.4,
-                height = 0.65,
-              },
-              callbacks = {
-                function () vim.wo.wrap = true end,
-              },
-            },
-          },
-          -- popup = {
-          --   -- NOTE: Add popup-effect (replace the window on-zoom with a `[No Name]`).
-          --   -- This way you won't see two windows of the same buffer
-          --   -- got updated at the same time.
-          --   enabled = true,
-          --   exclude_filetypes = {},
-          --   exclude_buftypes = {},
-          -- },
-        })
-      end,
-    },
+    -- { 'stevearc/oil.nvim',
+    --   dependencies = {
+    --     'nvim-tree/nvim-web-devicons',
+    --   },
+    --   config = function()
+    --     require('oil').setup()
+    --   end,
+    -- },
+    -- {
+    --   'chentoast/marks.nvim',
+    --   config = function()
+    --     require('marks').setup()
+    --   end,
+    -- },
+    -- { 'rcarriga/nvim-notify' },
+    -- {
+    --   'nyngwang/NeoZoom.lua',
+    --   config = function()
+    --     require('neo-zoom').setup({
+    --       winopts = {
+    --         offset = {
+    --           -- NOTE: you can omit `top` and/or `left` to center the floating window.
+    --           -- top = 0,
+    --           -- left = 0.17,
+    --           width = 150,
+    --           height = 0.85,
+    --         },
+    --         -- NOTE: check :help nvim_open_win() for possible border values.
+    --         -- border = 'double',
+    --       },
+    --       -- exclude_filetypes = { 'lspinfo', 'mason', 'lazy', 'fzf', 'qf' },
+    --       exclude_buftypes = { 'terminal' },
+    --       presets = {
+    --         {
+    --           filetypes = { 'dapui_.*', 'dap-repl' },
+    --           config = {
+    --             top = 0.25,
+    --             left = 0.6,
+    --             width = 0.4,
+    --             height = 0.65,
+    --           },
+    --           callbacks = {
+    --             function () vim.wo.wrap = true end,
+    --           },
+    --         },
+    --       },
+    --       -- popup = {
+    --       --   -- NOTE: Add popup-effect (replace the window on-zoom with a `[No Name]`).
+    --       --   -- This way you won't see two windows of the same buffer
+    --       --   -- got updated at the same time.
+    --       --   enabled = true,
+    --       --   exclude_filetypes = {},
+    --       --   exclude_buftypes = {},
+    --       -- },
+    --     })
+    --   end,
+    -- },
   config: ""
   keymaps: |
     { 'n', { n = '<Cmd>execute(\'normal! \' . v:count1 . \'n\')<CR><Cmd>lua require(\'hlslens\').start()<CR>', }, description = 'HLSLens: Next Search Result', },
@@ -537,5 +537,5 @@ nvim_ui:
     { '#', { n = '#<Cmd>lua require(\'hlslens\').start()<CR>', }, description = 'HLSLens: Search Cursorword In Reverse', },
     { 'g*', { n = 'g*<Cmd>lua require(\'hlslens\').start()<CR>', }, 'HLSLens: Search Nearest Cursorword', },
     { 'g#', { n = 'g#<Cmd>lua require(\'hlslens\').start()<CR>', }, description =  'HLSLens: Search Nearest Cursorword In Reverse', },
-    { '-', { n = ':Oil --float<CR>', }, description = 'Oil: Open Parent Directory', },
-    { '<leader>z', { n = '<cmd>NeoZoomToggle<CR>', }, description = 'Neo-Zoom: Toggle Float/Zoom Window', },
+    -- { '-', { n = ':Oil --float<CR>', }, description = 'Oil: Open Parent Directory', },
+    -- { '<leader>z', { n = '<cmd>NeoZoomToggle<CR>', }, description = 'Neo-Zoom: Toggle Float/Zoom Window', },

@@ -157,7 +157,6 @@ nvim_default_keymap_options: |
       vim.highlight.on_yank()
     end,
   })
-nvim_default_keymap_options_file: "{{ nvim_default_keymap_options }}"
 nvim_default_ui_options: |
   -- vim.opt.sessionoptions = 'buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,globals'
 nvim_plugin_example:
@@ -284,8 +283,8 @@ nvim_xdg_modular_lua_hierarchy:
   - lua/plugins
 nvim_plugin_groups_all:
   ui: "{{ nvim_ui }}"
-  project: "{{ nvim_project }}"
   telescope: "{{ nvim_fzf_lua }}"
+  project: "{{ nvim_project }}"
   hydra: "{{ nvim_hydra }}"
   treesitter: "{{ nvim_treesitter }}"
   git: "{{ nvim_git }}"

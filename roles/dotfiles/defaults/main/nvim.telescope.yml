@@ -369,19 +369,18 @@ nvim_fzf_lua:
       "ibhagwan/fzf-lua",
       dependencies = { "nvim-tree/nvim-web-devicons" },
       config = function()
-        local actions = require "fzf-lua.actions"
         require("fzf-lua").setup({
-          keymaps = {
-            prompt            = "Keymaps> ",
-            winopts           = { preview = { layout = "vertical" } },
-            fzf_opts          = { ["--tiebreak"] = "index", },
-            ignore_patterns   = { "^<SNR>", "^<Plug>" },
-            actions           = {
-              ["default"]     = actions.keymap_apply,
-              ["ctrl-x"]      = actions.keymap_split,
-              ["ctrl-v"]      = actions.keymap_vsplit,
-              ["ctrl-t"]      = actions.keymap_tabedit,
-            },
+          fzf_opts = {
+            -- options are sent as `<left>=<right>`
+            -- set to `false` to remove a flag
+            -- set to `true` for a no-value flag
+            -- for raw args use `fzf_args` instead
+            ["--ansi"]        = true,
+            ["--info"]        = "inline",
+            ["--height"]      = "100%",
+            ["--layout"]      = "reverse",
+            ["--border"]      = "none",
+            ["--cycle"]      = true,
           },
         })
       end

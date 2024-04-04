@@ -2,13 +2,14 @@
 require('legendary').setup({
   extensions = {
     which_key = {
-      auto_register = true,
+      auto_register = false,
+      use_groups = false,
     },
     lazy_nvim = true,
-    nvim_tree = true,
+    diffview = true,
   },
   keymaps = {
-    {{ nvim_legendary_default['keymaps'] | indent(2) }}
+    {{ nvim_legendary['keymaps'] | indent(2) }}
 
     {% for nvim_lazy_plugin_group in nvim_lazy_plugin_groups -%}
     {{ nvim_lazy_plugin_groups[nvim_lazy_plugin_group]['keymaps'] | indent(4) }}

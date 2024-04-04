@@ -1,7 +1,7 @@
 ---
 baremetal: "yes"
 homebrew: "yes"
-extra_bookmarks:
+project_paths:
   - "{{ dotfiles_home }}"
   - "{{ dotfiles_checkout_dir }}"
 lang_tools_nix: "{{ cpp_tools_nix + python_tools_nix }}"

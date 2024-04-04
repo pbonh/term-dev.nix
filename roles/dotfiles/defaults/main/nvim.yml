@@ -69,8 +69,7 @@ dap_plugin_settings_file: "{{ dap_plugin_settings | join('\n') }}"
 extra_nvim_lua_settings_file: "{{ extra_nvim_lua_settings | join('\n') }}"
 extra_plugin_settings_file: "{{ extra_plugin_settings | join('\n') }}"
 extra_lua_plugin_settings_file: "{{ extra_lua_plugin_settings | join('\n') }}"
-extra_bookmarks_startify: "{{ '\"' + extra_bookmarks |join('\", \"') + '\"' }}"
-extra_bookmarks_project: "{{ extra_bookmarks_startify }}"
+project_paths_startify: "{{ '\"' + project_paths |join('\", \"') + '\"' }}"
 lsp_provider_coc_settings: {}
 lsp_provider_coc_settings_base:
   diagnostic.displayByAle: true

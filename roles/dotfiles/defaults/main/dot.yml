@@ -13,8 +13,13 @@ xdg_config_dirs:
   config: "{{ xdg_config_dir }}"
   cache: "{{ xdg_cache_dir }}"
 dot_download_dir: "{{ tool_install_dir }}/downloads"
-extra_bookmarks: []
-extra_bookmarks_file: "{{ extra_bookmarks | join('\n') }}"
+projects:
+  proj1:
+    name: "pbonh/term-dev.nix"
+    url: "https://github.com/pbonh/term-dev.nix"
+    path: "{{ code_checkout_path_github }}/pbonh/term-dev.nix"
+project_paths: []
+project_paths_file: "{{ project_paths | join('\n') }}"
 devbox_nix_root_path: /nix/var/nix/profiles/default/bin
 devbox_nix_path_default: "{{ ansible_env.HOME }}/.local/share/devbox/global/default/.devbox/nix/profile/default/bin"
 gcc_exe: /usr/bin/gcc

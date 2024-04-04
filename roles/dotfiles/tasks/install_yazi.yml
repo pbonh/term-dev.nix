@@ -7,5 +7,7 @@
 
 - name: Yazi | Copies Yazi Config | template
   template:
-    src: yazi/yazi.toml.j2
-    dest: "{{ yazi_config_file }}"
+    src: '{{ item.src }}'
+    dest: "{{ yazi_config }}/{{ item.path  | regex_replace('\\.j2$', '') }}"
+  with_filetree: '../templates/yazi'
+  when: item.state == 'file'

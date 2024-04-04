@@ -65,6 +65,9 @@ helix: update-submodules
 zellij: update-submodules
   {{ task_prelude }} ansible-playbook playbooks/dotfiles.yml --tags "zellij"
 
+yazi: update-submodules
+  {{ task_prelude }} ansible-playbook playbooks/dotfiles.yml --tags "yazi"
+
 binscripts: update-submodules
   {{ task_prelude }} ansible-playbook playbooks/dotfiles.yml --tags "scripts"
 

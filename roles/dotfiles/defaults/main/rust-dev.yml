@@ -90,7 +90,7 @@ extra_nvim_config_rust: |
     },
   }
   local Terminal  = require('toggleterm.terminal').Terminal
-  local bacon_watch = Terminal:new({ cmd = '{{ cargo_path }}bacon', close_on_exit = true, hidden = true })
+  local bacon_watch = Terminal:new({ cmd = 'bacon', close_on_exit = true, hidden = true })
   function bacon_watch_terminal_runner()
     bacon_watch:toggle()
   end

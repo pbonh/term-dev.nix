@@ -1,11 +1,4 @@
 ---
-- name: Neovim | Setup Neovim Profile Directories | file
-  file:
-    path: "{{ item.0.value }}/{{ item.1.value.appname }}"
-    state: directory
-    mode: '0755'
-  loop: "{{ xdg_config_dirs | dict2items | product(nvim_xdg_profiles | dict2items) | list }}"
-
 - name: Neovim | Setup Neovim Profile Directories(Modular) | file
   file:
     path: "{{ item.0.value }}/{{ item.1.value.appname }}-modular"
@@ -32,18 +25,6 @@
     mode: '0755'
   loop: "{{ nvim_xdg_modular_profiles | dict2items }}"
 
-- name: Neovim | Setup Neovim Profile Configs | template
-  vars:
-    nvim_xdg_profile_defaults: "{{ item.value['config']['defaults'] }}"
-    nvim_xdg_profile_plugins: "{{ item.value['config']['plugins'] }}"
-    nvim_xdg_profile_config: "{{ item.value['config']['config'] }}"
-    nvim_xdg_profile_keybindings: "{{ item.value['config']['keymaps'] }}"
-    nvim_xdg_profile_startup: "{{ item.value['config']['startup'] }}"
-  template:
-    src: nvim/init.lazy.lua.j2
-    dest: "{{ xdg_config_dir }}/{{ item.value['appname'] }}/init.lua"
-  loop: "{{ nvim_xdg_profiles | dict2items }}"
-
 - name: Neovim | Setup Neovim Profile Main Config(Modular) | template
   ansible.builtin.template:
     src: "nvim-modular/init.lua.j2"
@@ -56,15 +37,8 @@
   loop_control:
     loop_var: profile
 
-- name: Neovim | Setup Neovim Project Directories | template
-  template:
-    src: "nvim/{{ cd_project_nvim_dir_database_filename }}.j2"
-    dest: "{{ xdg_config_dir }}/{{ item.value['appname'] }}/{{ cd_project_nvim_dir_database_filename }}"
-  loop: "{{ nvim_xdg_profiles | dict2items }}"
-
 - name: Neovim | Setup Neovim Project Directories(Modular) | template
   template:
     src: "nvim/{{ cd_project_nvim_dir_database_filename }}.j2"
     dest: "{{ xdg_config_dir }}/{{ item.value['appname'] }}-modular/{{ cd_project_nvim_dir_database_filename }}"
   loop: "{{ nvim_xdg_modular_profiles | dict2items }}"
-

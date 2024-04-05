@@ -17,4 +17,8 @@ require('legendary').setup({
   },
 })
 
+{% for extra_nvim_language in extra_nvim_language_keymaps -%}
+{{ extra_nvim_language_keymaps[extra_nvim_language]['mappings'] }}
+{% endfor %}
+
 -- vim: ts=2 sts=2 sw=2 et

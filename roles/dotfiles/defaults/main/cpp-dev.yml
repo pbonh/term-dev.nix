@@ -238,49 +238,71 @@ extra_nvim_config_cpp: |
     dap_open_command = require('dapui').open,
   })
 extra_nvim_keymap_cpp: |
-  { '<leader>c', description = 'CMake', filters = { ft = 'cpp' } },
-  { '<leader>cc', {
-      n = '<cmd>CMake configure<CR>',
-    },
-    description = 'CMake: Configure',
-    filters = { ft = 'cpp' },
-  },
-  { '<leader>ct', {
-      n = '<cmd>CMake select_target<CR>',
-    },
-    description = 'CMake: Select Target',
-    filters = { ft = 'cpp' },
-  },
-  { '<leader>cb', {
-      n = '<cmd>CMake build<CR>',
-    },
-    description = 'CMake: Build Target',
-    filters = { ft = 'cpp' },
-  },
-  { '<leader>ca', {
-      n = '<cmd>CMake build_all<CR>',
-    },
-    description = 'CMake: Build All Targets',
-    filters = { ft = 'cpp' },
-  },
-  { '<leader>cr', {
-      n = '<cmd>CMake run<CR>',
-    },
-    description = 'CMake: Run Target',
-    filters = { ft = 'cpp' },
-  },
-  { '<leader>cd', {
-      n = '<cmd>CMake debug<CR>',
-    },
-    description = 'CMake: Debug Target',
-    filters = { ft = 'cpp' },
-  },
-  { '<leader>cl', {
-      n = '<cmd>CMake clean<CR>',
-    },
-    description = 'CMake: Clean',
-    filters = { ft = 'cpp' },
-  },
+  -- { '<leader>c', description = 'CMake', filters = { ft = 'cpp' } },
+  -- { '<leader>cc', {
+  --     n = '<cmd>CMake configure<CR>',
+  --   },
+  --   description = 'CMake: Configure',
+  --   filters = { ft = 'cpp' },
+  -- },
+  -- { '<leader>ct', {
+  --     n = '<cmd>CMake select_target<CR>',
+  --   },
+  --   description = 'CMake: Select Target',
+  --   filters = { ft = 'cpp' },
+  -- },
+  -- { '<leader>cb', {
+  --     n = '<cmd>CMake build<CR>',
+  --   },
+  --   description = 'CMake: Build Target',
+  --   filters = { ft = 'cpp' },
+  -- },
+  -- { '<leader>ca', {
+  --     n = '<cmd>CMake build_all<CR>',
+  --   },
+  --   description = 'CMake: Build All Targets',
+  --   filters = { ft = 'cpp' },
+  -- },
+  -- { '<leader>cr', {
+  --     n = '<cmd>CMake run<CR>',
+  --   },
+  --   description = 'CMake: Run Target',
+  --   filters = { ft = 'cpp' },
+  -- },
+  -- { '<leader>cd', {
+  --     n = '<cmd>CMake debug<CR>',
+  --   },
+  --   description = 'CMake: Debug Target',
+  --   filters = { ft = 'cpp' },
+  -- },
+  -- { '<leader>cl', {
+  --     n = '<cmd>CMake clean<CR>',
+  --   },
+  --   description = 'CMake: Clean',
+  --   filters = { ft = 'cpp' },
+  -- },
+nvim_keymap_cpp: |
+  local group = vim.api.nvim_create_augroup("cpp_autocommands", { clear = true })
+  vim.api.nvim_create_autocmd("FileType", {
+      pattern = {
+        "cpp",
+        "cc",
+        "c",
+        "hpp",
+        "h",
+      },
+      callback = function(ev)
+          vim.api.nvim_buf_set_keymap(0, 'n', '<leader>cc', '<cmd>CMake configure<CR>', { noremap = true, silent = true })
+          vim.api.nvim_buf_set_keymap(0, 'n', '<leader>ct', '<cmd>CMake select_target<CR>', { noremap = true, silent = true })
+          vim.api.nvim_buf_set_keymap(0, 'n', '<leader>cb', '<cmd>CMake build<CR>', { noremap = true, silent = true })
+          vim.api.nvim_buf_set_keymap(0, 'n', '<leader>ca', '<cmd>CMake build_all<CR>', { noremap = true, silent = true })
+          vim.api.nvim_buf_set_keymap(0, 'n', '<leader>cr', '<cmd>CMake run<CR>', { noremap = true, silent = true })
+          vim.api.nvim_buf_set_keymap(0, 'n', '<leader>cd', '<cmd>CMake debug<CR>', { noremap = true, silent = true })
+          vim.api.nvim_buf_set_keymap(0, 'n', '<leader>cl', '<cmd>CMake clean<CR>', { noremap = true, silent = true })
+      end,
+      group = group 
+  })
+
 nvim_completion_config_cpp: ""
 # nvim_completion_config_cpp: |
 #   sorting = {

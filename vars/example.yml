@@ -29,6 +29,16 @@ extra_nvim_language_mappings:
   python:
     mappings: "{{ extra_nvim_keymap_python }}"
     ext: "{{ python_file_extensions }}"
+extra_nvim_language_keymaps:
+  cpp:
+    mappings: "{{ nvim_keymap_cpp }}"
+    ext: "{{ cpp_file_extensions }}"
+  python:
+    mappings: "{{ nvim_keymap_python }}"
+    ext: "{{ python_file_extensions }}"
+  rust:
+    mappings: "{{ nvim_keymap_rust }}"
+    ext: "{{ rust_file_extensions }}"
 zellij_kdl_layouts:
   dotfiles:
     name: dotfiles

@@ -1,6 +1,11 @@
 ---
 baremetal: "yes"
 homebrew: "yes"
+projects:
+  proj1:
+    name: "pbonh/term-dev.nix"
+    url: "https://github.com/pbonh/term-dev.nix"
+    path: "{{ code_checkout_path_github }}/pbonh/term-dev.nix"
 project_paths:
   - "{{ dotfiles_home }}"
   - "{{ dotfiles_checkout_dir }}"

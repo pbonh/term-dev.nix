@@ -13,15 +13,15 @@ command_exists() {
     command -v "$1" >/dev/null 2>&1
 }
 
-# # Install Nix
-# if ! command_exists nix; then
-#     just nix-install
-# fi
 
 # Function to ensure necessary commands are available
 ensure_commands() {
     local missing_cmds=()
 
+    # # Install Nix
+    # if ! command_exists nix; then
+    #     just nix-install
+    # fi
     if ! command_exists devbox; then
         missing_cmds+=("devbox")
     fi

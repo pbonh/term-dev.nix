@@ -2,9 +2,10 @@
 
 # Nix via Determinate Systems
 curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install --no-confirm
+. /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
 
 # Devbox
-curl -fsSL https://get.jetpack.io/devbox | bash
+curl -fsSL https://get.jetpack.io/devbox | bash -- -f
 
 eval "$(devbox global shellenv --recompute)"
 

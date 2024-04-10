@@ -64,10 +64,10 @@ EOF
 # Install Tools(Devbox)
 install_prereq() {
     devbox global add ansible just
-    refresh-global
+    eval "$(devbox global shellenv --preserve-path-stack -r)" && hash -r
     cp ./vars/example.yml ./vars/term-dev.yml
     just devbox
-    refresh-global
+    eval "$(devbox global shellenv --preserve-path-stack -r)" && hash -r
 }
 
 # Install Dotfiles(Devbox)

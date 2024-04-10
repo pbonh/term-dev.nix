@@ -35,9 +35,6 @@ ensure_commands() {
     fi
 }
 
-# Check if necessary commands are available
-ensure_commands
-
 # Function to setup Bash
 setup_bashrc() {
     # Define the directory and file path
@@ -64,4 +61,21 @@ EOF
     fi
 }
 
+# Install Tools(Devbox)
+install_prereq() {
+    devbox global add ansible just
+    refresh-global
+    cp ./vars/example.yml ./vars/term-dev.yml
+    just devbox
+    refresh-global
+}
+
+# Install Dotfiles(Devbox)
+install_dotfiles() {
+    just dot-all
+}
+
+ensure_commands
 setup_bashrc
+install_prereq
+install_dotfiles

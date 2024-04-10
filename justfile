@@ -29,8 +29,8 @@ baremetal:
 work tag:
   {{ task_prelude }} ansible-playbook playbooks/dotfiles.yml --tags "{{ tag }}"
 
-all:
-  {{ task_prelude }} ansible-playbook playbooks/dotfiles.yml --ask-become-pass
+dot-all:
+  {{ task_prelude }} ansible-playbook playbooks/dotfiles.yml
 
 tools: update-submodules
   {{ task_prelude }} ansible-playbook playbooks/dotfiles.yml --tags "tools"

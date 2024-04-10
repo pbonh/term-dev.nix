@@ -85,8 +85,8 @@ lsp_provider_coc_settings_json: "{{ lsp_provider_coc_settings_merged | to_nice_j
 nvim_test_enable: false
 nvim_checkhealth_log:
   - "--headless"
-  - "\\\"+checkhealth\\\""
-  - "\\\"+w!health.log\\\""
+  - "\"+checkhealth\""
+  - "\"+w\\!health.log\""
   - "+qa"
-nvim_checkhealth_log_cmd: "{{ 'nvim' + nvim_checkhealth_log | join(' ') }}"
+nvim_checkhealth_log_cmd: "{{ 'nvim ' + nvim_checkhealth_log | join(' ') }}"
 nvim_exe_default: "{{ bin_directory }}nvim"

@@ -1,6 +1,6 @@
 ---
-baremetal: "yes"
-homebrew: "yes"
+baremetal: "no"
+homebrew: "no"
 projects:
   proj1:
     name: "pbonh/term-dev.nix"
@@ -14,7 +14,7 @@ install_languages:
   - cpp
   - python
 lsp_providers: "{{ lsp_providers_cpp + lsp_providers_python }}"
-treesitter_parsers: "{{ treesitter_parsers_cpp + treesitter_parsers_python }}"
+treesitter_parsers: "{{ treesitter_parsers_rust + treesitter_parsers_cpp + treesitter_parsers_python }}"
 treesitter_extra_config: "{{ treesitter_extra_config_cpp }}"
 nvim_extra_plugins:
   cpp:
@@ -27,6 +27,11 @@ nvim_extra_plugins:
     lazy: "{{ extra_nvim_plugins_python_lazy }}"
     config: "{{ extra_nvim_config_python }}"
     keymaps: "{{ extra_nvim_keymap_python }}"
+  rust:
+    packer: "{{ extra_nvim_plugins_rust }}"
+    lazy: "{{ extra_nvim_plugins_rust_lazy }}"
+    config: "{{ extra_nvim_config_rust }}"
+    keymaps: "{{ extra_nvim_keymap_rust }}"
 extra_nvim_language_mappings:
   cpp:
     mappings: "{{ extra_nvim_keymap_cpp }}"
@@ -34,6 +39,9 @@ extra_nvim_language_mappings:
   python:
     mappings: "{{ extra_nvim_keymap_python }}"
     ext: "{{ python_file_extensions }}"
+  rust:
+    mappings: "{{ extra_nvim_keymap_rust }}"
+    ext: "{{ rust_file_extensions }}"
 extra_nvim_language_keymaps:
   cpp:
     mappings: "{{ nvim_keymap_cpp }}"

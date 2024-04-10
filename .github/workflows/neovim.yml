@@ -18,7 +18,7 @@ jobs:
           ${{ github.workspace }}/scripts/bootstrap_devbox_ci.sh
       - name: Run Neovim CheckHealth
         run: |
-          NVIM_APPNAME=nvim-lazy-modular nvim --headless "+checkhealth" "+w\!health.log" +qa
+          eval "$(devbox global shellenv --init-hook)" && NVIM_APPNAME=nvim-lazy-modular nvim --headless "+checkhealth" "+w\!health.log" +qa
       - run: echo "💡 healthlog=$(cat ${{ github.repository }}/health.log)" >> $GITHUB_OUTPUT
       - run: echo ${{ steps.vars.outputs.healthlog }}
       - run: echo "🍏 This job's status is ${{ job.status }}."

@@ -215,8 +215,12 @@ nvim_treesitter_default:
 nvim_treesitter:
   lazy: |
     {
-      'nvim-treesitter/nvim-treesitter',
+      'nvim-treesitter/nvim-treesitter-textobjects',
       build = ':TSUpdate',
+      dependencies = {
+        'nvim-treesitter/nvim-treesitter',
+        'nvim-treesitter/nvim-treesitter-refactor',
+      },
       config = function()
         {{ treesitter_compiler_path_settings }}
         local parser_configs = require('nvim-treesitter.parsers').get_parser_configs()
@@ -224,6 +228,7 @@ nvim_treesitter:
         require('nvim-treesitter.configs').setup({
           ensure_installed = {
             'vim',
+            'vimdoc',
             'jsonc',
             'lua',
             'regex',
@@ -301,6 +306,17 @@ nvim_treesitter:
           },
           {{ treesitter_extra_config_cpp | indent(8) or '-- No Extra Treesitter Config' }}
         })
+        vim.o.foldcolumn = '1' -- '0' is not bad
+        vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
+        vim.o.foldlevelstart = 99
+        vim.o.foldenable = true
+      end,
+    },
+    { 'nvim-treesitter/nvim-treesitter-context',
+      dependencies = {
+        'nvim-treesitter/nvim-treesitter',
+      },
+      config = function()
         require('treesitter-context').setup({
             enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
             {{ nvim_treesitter_disable | indent(10) }}
@@ -344,9 +360,6 @@ nvim_treesitter:
         vim.o.foldenable = true
       end,
     },
-    { 'nvim-treesitter/nvim-treesitter-textobjects', dependencies = { 'nvim-treesitter/nvim-treesitter' } },
-    { 'nvim-treesitter/nvim-treesitter-context', dependencies = { 'nvim-treesitter/nvim-treesitter' } },
-    { 'nvim-treesitter/nvim-treesitter-refactor', dependencies = { 'nvim-treesitter/nvim-treesitter' } },
     {
       'kevinhwang91/nvim-ufo',
       dependencies = 'kevinhwang91/promise-async',

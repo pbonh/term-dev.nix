@@ -386,15 +386,13 @@ nvim_fzf_lua:
       end
     },
     {
-      'nvim-telescope/telescope-fzf-native.nvim',
+      'nvim-telescope/telescope.nvim',
       dependencies = {
-        'nvim-telescope/telescope.nvim',
         'nvim-lua/plenary.nvim',
         'stevearc/dressing.nvim',
         'nvim-lua/popup.nvim',
         'sharkdp/fd',
       },
-      build = '{{ nvim_make_exe }}',
       config = function()
         require('dressing').setup()
         require('telescope').setup({
@@ -409,7 +407,6 @@ nvim_fzf_lua:
             },
           }
         })
-        require('telescope').load_extension('fzf')
 
         local telescope = require('telescope')
         local builtin = require('telescope.builtin')

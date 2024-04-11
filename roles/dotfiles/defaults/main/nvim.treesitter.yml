@@ -217,8 +217,6 @@ nvim_treesitter:
     { 'nvim-treesitter/nvim-treesitter-textobjects', dependencies = { 'nvim-treesitter/nvim-treesitter' } },
     { 'nvim-treesitter/nvim-treesitter-context', dependencies = { 'nvim-treesitter/nvim-treesitter' } },
     { 'nvim-treesitter/nvim-treesitter-refactor', dependencies = { 'nvim-treesitter/nvim-treesitter' } },
-    { 'mrjones2014/nvim-ts-rainbow', dependencies = { 'nvim-treesitter/nvim-treesitter' } },
-    { 'David-Kunz/markid' },
     {
       'nvim-treesitter/nvim-treesitter',
       build = ':TSUpdate',
@@ -250,15 +248,6 @@ nvim_treesitter:
           indent = {
             enable = true, -- false will disable the whole extension
             {{ nvim_treesitter_disable | indent(8) }}
-          },
-          rainbow = {
-            enable = true,
-            {{ nvim_treesitter_disable | indent(8) }}
-            -- disable = { 'jsx', 'cpp' }, list of languages you want to disable the plugin for
-            extended_mode = false, -- Also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
-            max_file_lines = {{ nvim_treesitter_max_file_lines }}, -- Do not enable for files with more than n lines, int
-            -- colors = {}, -- table of hex strings
-            -- termcolors = {} -- table of colour name strings
           },
           incremental_selection = {
             enable = true,
@@ -312,9 +301,6 @@ nvim_treesitter:
               -- Set to false if you have an `updatetime` of ~100.
               clear_on_cursor_move = false,
             },
-          },
-          markid = {
-            enable = true
           },
           {{ treesitter_extra_config_cpp | indent(8) or '-- No Extra Treesitter Config' }}
         })

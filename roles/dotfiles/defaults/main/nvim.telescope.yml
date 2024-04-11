@@ -392,6 +392,7 @@ nvim_fzf_lua:
         'stevearc/dressing.nvim',
         'nvim-lua/popup.nvim',
         'sharkdp/fd',
+        'Marskey/telescope-sg',
       },
       config = function()
         require('dressing').setup()

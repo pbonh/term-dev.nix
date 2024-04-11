@@ -214,9 +214,6 @@ nvim_treesitter_default:
     { 'zM', { n = '<Cmd>lua require(\'ufo\').closeAllFolds<CR>', }, description = 'UFO: Close All Folds', },
 nvim_treesitter:
   lazy: |
-    { 'nvim-treesitter/nvim-treesitter-textobjects', dependencies = { 'nvim-treesitter/nvim-treesitter' } },
-    { 'nvim-treesitter/nvim-treesitter-context', dependencies = { 'nvim-treesitter/nvim-treesitter' } },
-    { 'nvim-treesitter/nvim-treesitter-refactor', dependencies = { 'nvim-treesitter/nvim-treesitter' } },
     {
       'nvim-treesitter/nvim-treesitter',
       build = ':TSUpdate',
@@ -347,6 +344,9 @@ nvim_treesitter:
         vim.o.foldenable = true
       end,
     },
+    { 'nvim-treesitter/nvim-treesitter-textobjects', dependencies = { 'nvim-treesitter/nvim-treesitter' } },
+    { 'nvim-treesitter/nvim-treesitter-context', dependencies = { 'nvim-treesitter/nvim-treesitter' } },
+    { 'nvim-treesitter/nvim-treesitter-refactor', dependencies = { 'nvim-treesitter/nvim-treesitter' } },
     {
       'kevinhwang91/nvim-ufo',
       dependencies = 'kevinhwang91/promise-async',

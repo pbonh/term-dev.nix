@@ -27,7 +27,7 @@ jobs:
           eval "$(devbox global shellenv --init-hook)" && NVIM_APPNAME=nvim-lazy-modular nvim --headless "+Lazy! sync" +qa
       - name: Run Neovim CheckHealth
         run: |
-          eval "$(devbox global shellenv --init-hook)" && NVIM_APPNAME=nvim-lazy-modular nvim --headless "+checkhealth" "+w\!health.log" +qa
-      - run: echo "💡 healthlog=$(cat ${{ github.repository }}/health.log)" >> $GITHUB_OUTPUT
+          eval "$(devbox global shellenv --init-hook)" && NVIM_APPNAME=nvim-lazy-modular nvim --headless "+checkhealth" "+w\! health.log" +qa
+      - run: echo "💡 healthlog=$(cat health.log)" >> $GITHUB_OUTPUT
       - run: echo ${{ steps.vars.outputs.healthlog }}
       - run: echo "🍏 This job's status is ${{ job.status }}."

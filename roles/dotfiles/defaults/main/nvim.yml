@@ -86,7 +86,7 @@ nvim_test_enable: false
 nvim_checkhealth_log:
   - "--headless"
   - "\"+checkhealth\""
-  - "\"+w\\!health.log\""
+  - "\"+w\\! health.log\""
   - "+qa"
 nvim_checkhealth_log_cmd: "{{ 'nvim ' + nvim_checkhealth_log | join(' ') }}"
 nvim_exe_default: "{{ bin_directory }}nvim"

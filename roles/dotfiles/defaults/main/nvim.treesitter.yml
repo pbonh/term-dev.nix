@@ -242,7 +242,7 @@ nvim_treesitter:
             'yaml',
             {{ treesitter_parsers_file or '-- No Extra Treesitter Parsers Installed' }}
           },
-          sync_install = false,
+          sync_install = true,
           highlight = {
             enable = true, -- false will disable the whole extension
             {{ nvim_treesitter_disable | indent(8) }}

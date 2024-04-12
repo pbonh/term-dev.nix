@@ -119,6 +119,11 @@ nvim_neorg:
 nvim_neorg_legacy:
   lazy: |
     {
+      "vhyrro/luarocks.nvim",
+      priority = 1000,
+      config = true,
+    },
+    {
       "nvim-neorg/neorg",
       lazy = false,
       version = "v7.0.0",

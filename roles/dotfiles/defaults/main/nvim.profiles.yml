@@ -293,7 +293,7 @@ nvim_plugin_groups_all:
   intellisense: "{{ nvim_lspconfig_cmp_navbuddy }}"
   debugger: "{{ nvim_debugger }}"
   tasks: "{{ nvim_tasks }}"
-  notes: "{{ nvim_neorg }}"
+  notes: "{{ nvim_neorg_legacy }}"
   motion: "{{ nvim_motion }}"
 nvim_plugin_groups_bone:
   telescope: "{{ nvim_fzf_lua }}"

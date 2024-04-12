@@ -243,6 +243,7 @@ nvim_treesitter:
             {{ treesitter_parsers_file or '-- No Extra Treesitter Parsers Installed' }}
           },
           sync_install = true,
+          auto_install = false,
           highlight = {
             enable = true, -- false will disable the whole extension
             {{ nvim_treesitter_disable | indent(8) }}

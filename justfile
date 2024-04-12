@@ -45,7 +45,7 @@ nix:
   {{ task_prelude }} ansible-playbook playbooks/dotfiles.yml --tags "nix"
 
 dot: update-submodules
-  {{ task_prelude }} ansible-playbook playbooks/dotfiles.yml --tags "git,fzf,neovim-config,navi,direnv,scripts,bookmarks,bash,nushell,zsh,zellij"
+  {{ task_prelude }} ansible-playbook playbooks/dotfiles.yml --tags "git,fzf,neovim-config,navi,direnv,scripts,bookmarks,bash,nushell,zsh,zellij,yazi"
 
 env: update-submodules
   {{ task_prelude }} ansible-playbook playbooks/dotfiles.yml --tags "env"

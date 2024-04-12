@@ -158,7 +158,6 @@ nvim_neorg_legacy:
       "nvim-neorg/neorg",
       lazy = false,
       version = "v7.0.0",
-      build = ":Neorg sync-parsers",
       dependencies = { "nvim-lua/plenary.nvim" },
       ft = 'norg',
       config = function()

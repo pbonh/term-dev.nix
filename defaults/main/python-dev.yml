@@ -42,9 +42,20 @@ extra_nvim_config_python: |
   })
   require('dap-python').setup('{{ debugpy_python_exe }}')
 extra_nvim_keymap_python: |
-  { '<leader>cd', {
-      n = '<cmd>lua require(\'dap-python\').debug_selection()<CR>',
-    },
-    description = 'Python-DAP: Debugger Selection',
-    filters = { ft = 'python' },
-  },
+  -- { '<leader>cd', {
+  --     n = '<cmd>lua require(\'dap-python\').debug_selection()<CR>',
+  --   },
+  --   description = 'Python-DAP: Debugger Selection',
+  --   filters = { ft = 'python' },
+  -- },
+nvim_keymap_python: |
+  local group = vim.api.nvim_create_augroup("python_autocommands", { clear = true })
+  vim.api.nvim_create_autocmd("FileType", {
+      pattern = {
+        "python",
+      },
+      callback = function(ev)
+          vim.api.nvim_buf_set_keymap(0, 'n', '<leader>cd', '<cmd>lua require(\'dap-python\').debug_selection()<CR>', { noremap = true, silent = true })
+      end,
+      group = group 
+  })

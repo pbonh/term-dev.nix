@@ -45,7 +45,7 @@ nvim_legendary:
   lazy: |
     {
       'mrjones2014/legendary.nvim',
-      version = 'v2.13.6',
+      version = 'v2.13.9',
       priority = 10000,
       lazy = false,
       dependencies = {
@@ -54,7 +54,6 @@ nvim_legendary:
       },
       config = function ()
         require('which-key').setup({
-          triggers = {'<leader>', 'g'},
           triggers_blacklist = {
             n = { '<C-w>', '<C-g>' },
             v = { '<C-w>', '<C-g>' },
@@ -67,15 +66,26 @@ nvim_legendary:
     { '<CR>', {
         n = ':',
       },
-      description = 'Enter Ex Commands',
+      description = 'Vim: Enter Ex Commands',
     },
     { ':', {
         n = ',',
       },
-      description = 'Remap Repeat',
+      description = 'Vim: Remap Repeat',
     },
     { '<leader>l', {
         n = ':Legendary<CR>',
       },
-      description = 'List Legendary Commands',
+      description = 'Legendary: List Commands',
+    },
+    { '<leader>L', {
+        n = ':Lazy<CR>',
+      },
+      description = 'Lazy: Launch UI',
+    },
+    {
+      '<C-]>', {
+        n = ':noh<CR>',
+      },
+      description = 'Vim: Clear Search Result',
     },

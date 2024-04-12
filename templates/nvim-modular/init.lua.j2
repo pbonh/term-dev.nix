@@ -84,6 +84,9 @@ I hope you enjoy your Neovim journey,
 P.S. You can delete this when you're done too. It's your config now! :)
 --]]
 
+-- Enable FileType Detection
+vim.cmd [[ filetype on ]]
+
 -- Set <space> as the leader key
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
@@ -112,7 +115,11 @@ require 'keymaps-legendary'
 require 'options-plugins'
 
 -- [[ Health Check Utility Functions ]]
-require 'health'
+-- BROKEN
+-- require 'health'
+
+-- [[ User Global Startup Commands ]]
+{{ nvim_startup_commands }}
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et

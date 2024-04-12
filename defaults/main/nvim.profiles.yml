@@ -131,15 +131,18 @@ nvim_kickstart_editor_options: |
 nvim_default_keymap_options: |
   vim.g.mapleader = ' '
   vim.g.maplocalleader = ' '
-  vim.api.nvim_set_keymap('', '<Space>', '<Nop>', { noremap = true, silent = true })
-  vim.api.nvim_set_keymap('t', '<C-]>', '<C-\\><C-n> ', { noremap = true, silent = true })
-  vim.api.nvim_set_keymap('t', '<C-h>', '<C-\\><C-n><C-W>h ', { noremap = true, silent = true })
-  vim.api.nvim_set_keymap('t', '<C-j>', '<C-\\><C-n><C-W>j ', { noremap = true, silent = true })
-  vim.api.nvim_set_keymap('t', '<C-k>', '<C-\\><C-n><C-W>k ', { noremap = true, silent = true })
-  vim.api.nvim_set_keymap('t', '<C-l>', '<C-\\><C-n><C-W>l ', { noremap = true, silent = true })
+  vim.keymap.set('', '<Space>', '<Nop>', { noremap = true, silent = true })
+  vim.keymap.set('t', '<C-]>', '<C-\\><C-n> ', { noremap = true, silent = true })
+  vim.keymap.set('t', '<C-h>', '<C-\\><C-n><C-W>h ', { noremap = true, silent = true })
+  vim.keymap.set('t', '<C-j>', '<C-\\><C-n><C-W>j ', { noremap = true, silent = true })
+  vim.keymap.set('t', '<C-k>', '<C-\\><C-n><C-W>k ', { noremap = true, silent = true })
+  vim.keymap.set('t', '<C-l>', '<C-\\><C-n><C-W>l ', { noremap = true, silent = true })
   -- vim.api.nvim_set_keymap('n', 'k', \"v:count == 0 ? 'gk' : 'k'\", { noremap = true, expr = true, silent = true })
   -- vim.api.nvim_set_keymap('n', 'j', \"v:count == 0 ? 'gj' : 'j'\", { noremap = true, expr = true, silent = true })
   vim.keymap.set('n', '<C-]>', '<cmd>nohlsearch<CR>')
+  vim.api.nvim_create_user_command('ChangeTabDirectory', function(_)
+    vim.api.nvim_command('tcd %:p:h')
+  end, { desc = 'Vim: Change Tab Directory to that of Current Buffer' })
 
   -- [[ Basic Autocommands ]]
   --  See `:help lua-guide-autocommands`
@@ -154,7 +157,6 @@ nvim_default_keymap_options: |
       vim.highlight.on_yank()
     end,
   })
-nvim_default_keymap_options_file: "{{ nvim_default_keymap_options }}"
 nvim_default_ui_options: |
   -- vim.opt.sessionoptions = 'buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,globals'
 nvim_plugin_example:
@@ -281,27 +283,27 @@ nvim_xdg_modular_lua_hierarchy:
   - lua/plugins
 nvim_plugin_groups_all:
   ui: "{{ nvim_ui }}"
+  telescope: "{{ nvim_fzf_lua }}"
   project: "{{ nvim_project }}"
-  telescope: "{{ nvim_telescope }}"
   hydra: "{{ nvim_hydra }}"
   treesitter: "{{ nvim_treesitter }}"
   git: "{{ nvim_git }}"
   terminal: "{{ nvim_terminal }}"
-  motion: "{{ nvim_motion }}"
   colorscheme: "{{ nvim_colorscheme }}"
   intellisense: "{{ nvim_lspconfig_cmp_navbuddy }}"
   debugger: "{{ nvim_debugger }}"
   tasks: "{{ nvim_tasks }}"
   notes: "{{ nvim_neorg }}"
+  motion: "{{ nvim_motion }}"
 nvim_plugin_groups_bone:
-  telescope: "{{ nvim_telescope }}"
+  telescope: "{{ nvim_fzf_lua }}"
   hydra: "{{ nvim_hydra }}"
   treesitter: "{{ nvim_treesitter }}"
   git: "{{ nvim_git }}"
   terminal: "{{ nvim_terminal }}"
-  motion: "{{ nvim_motion }}"
   tasks: "{{ nvim_tasks_nodap }}"
   notes: "{{ nvim_neorg_legacy }}"
+  motion: "{{ nvim_motion }}"
 nvim_xdg_modular_profiles:
   lazy:
     name: lazy
@@ -321,7 +323,7 @@ nvim_lazy_modular_config_base:
   - health.lua
   - lazy-bootstrap.lua
   - lazy-plugins.lua
-  - keymaps.lua
-  - keymaps-legendary.lua
   - options.lua
   - options-plugins.lua
+  - keymaps.lua
+  - keymaps-legendary.lua

@@ -52,6 +52,11 @@ extra_plugin_settings: []
 extra_lua_plugin_settings: []
 extra_nvim_language_mappings: []
 lsp_providers: []
+lsp_providers_devbox:
+  - ansiblels
+  - bashls
+  - lua_ls
+  - yamlls
 lsp_providers_luafile: "{{ \"'\" + lsp_providers | join(\"', '\") + \"'\" }}"
 lsp_providers_file: "{{ (lsp_providers_luafile != '') | ternary(lsp_providers_luafile, '-- No Additional Servers Preconfigured') }}"
 lsp_providers_plugins: []
@@ -69,8 +74,7 @@ dap_plugin_settings_file: "{{ dap_plugin_settings | join('\n') }}"
 extra_nvim_lua_settings_file: "{{ extra_nvim_lua_settings | join('\n') }}"
 extra_plugin_settings_file: "{{ extra_plugin_settings | join('\n') }}"
 extra_lua_plugin_settings_file: "{{ extra_lua_plugin_settings | join('\n') }}"
-extra_bookmarks_startify: "{{ '\"' + extra_bookmarks |join('\", \"') + '\"' }}"
-extra_bookmarks_project: "{{ extra_bookmarks_startify }}"
+project_paths_startify: "{{ '\"' + project_paths |join('\", \"') + '\"' }}"
 lsp_provider_coc_settings: {}
 lsp_provider_coc_settings_base:
   diagnostic.displayByAle: true
@@ -81,8 +85,8 @@ lsp_provider_coc_settings_json: "{{ lsp_provider_coc_settings_merged | to_nice_j
 nvim_test_enable: false
 nvim_checkhealth_log:
   - "--headless"
-  - "\\\"+checkhealth\\\""
-  - "\\\"+w!health.log\\\""
+  - "\"+checkhealth\""
+  - "\"+w\\! health.log\""
   - "+qa"
-nvim_checkhealth_log_cmd: "{{ 'nvim' + nvim_checkhealth_log | join(' ') }}"
+nvim_checkhealth_log_cmd: "{{ 'nvim ' + nvim_checkhealth_log | join(' ') }}"
 nvim_exe_default: "{{ bin_directory }}nvim"

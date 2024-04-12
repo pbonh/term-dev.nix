@@ -21,6 +21,9 @@ reset-submodules:
   git submodule foreach --recursive git reset --hard
 
 devbox:
+  {{ task_prelude }} ansible-playbook playbooks/devbox.yml --tags "core"
+
+devbox-all:
   {{ task_prelude }} ansible-playbook playbooks/devbox.yml
 
 baremetal:

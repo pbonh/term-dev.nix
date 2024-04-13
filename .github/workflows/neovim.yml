@@ -22,13 +22,19 @@ jobs:
       - name: Bootstrap Environment
         run: |
           ${{ github.workspace }}/scripts/bootstrap_devbox_ci.sh
-      # - name: Install Treesitter Parsers
-      #   run: |
-      #     eval "$(devbox global shellenv --init-hook)" && NVIM_APPNAME=nvim-lazy-modular nvim --headless "+TSUpdate" +qa
-          # eval "$(devbox global shellenv --init-hook)" && NVIM_APPNAME=nvim-lazy-modular nvim --headless "+Lazy! sync" +qa
-      - name: Install Neovim Plugins; Run Neovim CheckHealth
+      - name: Install Treesitter Parsers
         run: |
-          eval "$(devbox global shellenv --init-hook)" && NVIM_APPNAME=nvim-lazy-modular nvim --headless -c "lua require('lazy').sync({wait = true, show = false})" "+checkhealth" "+w\! health.log" +qa
-      - run: echo "💡 healthlog=$(cat health.log)" >> $GITHUB_OUTPUT
+          eval "$(devbox global shellenv --init-hook)" && NVIM_APPNAME=nvim-lazy-modular nvim --headless "+TSUpdate" +qa
+      - name: Install Neovim Plugins
+        if: always()
+        run: |
+          eval "$(devbox global shellenv --init-hook)" && NVIM_APPNAME=nvim-lazy-modular nvim --headless "+Lazy! sync" +qa
+      - name: Run Neovim CheckHealth
+        if: always()
+        run: |
+          eval "$(devbox global shellenv --init-hook)" && NVIM_APPNAME=nvim-lazy-modular nvim --headless "+checkhealth" "+w\! health.log" +qa
+      - name: Print CheckHealth Report
+        if: always()
+        run: echo "💡 healthlog=$(cat health.log)" >> $GITHUB_OUTPUT
       - run: echo ${{ steps.vars.outputs.healthlog }}
       - run: echo "🍏 This job's status is ${{ job.status }}."

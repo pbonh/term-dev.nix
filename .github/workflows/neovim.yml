@@ -22,12 +22,13 @@ jobs:
       - name: Bootstrap Environment
         run: |
           ${{ github.workspace }}/scripts/bootstrap_devbox_ci.sh
-      - name: Install Treesitter Parsers
-        run: |
-          eval "$(devbox global shellenv --init-hook)" && NVIM_APPNAME=nvim-lazy-modular nvim --headless "+TSUpdate" +qa
+      # - name: Install Treesitter Parsers
+      #   run: |
+      #     eval "$(devbox global shellenv --init-hook)" && NVIM_APPNAME=nvim-lazy-modular nvim --headless "+TSUpdate" +qa
+          # eval "$(devbox global shellenv --init-hook)" && NVIM_APPNAME=nvim-lazy-modular nvim --headless "+Lazy! sync" +qa
       - name: Install Neovim Plugins
         run: |
-          eval "$(devbox global shellenv --init-hook)" && NVIM_APPNAME=nvim-lazy-modular nvim --headless "+Lazy! sync" +qa
+          eval "$(devbox global shellenv --init-hook)" && NVIM_APPNAME=nvim-lazy-modular nvim -c "lua require('lazy').sync({wait = true, show = false})" +qa
       - name: Run Neovim CheckHealth
         run: |
           eval "$(devbox global shellenv --init-hook)" && NVIM_APPNAME=nvim-lazy-modular nvim --headless "+checkhealth" "+w\! health.log" +qa

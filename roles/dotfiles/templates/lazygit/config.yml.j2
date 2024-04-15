@@ -32,7 +32,7 @@ gui:
 git:
   paging:
     colorArg: always
-    pager: {{ nix_bin }}/delta --paging=never --24-bit-color=never
+    pager: {{ delta_exe }} --paging=never --24-bit-color=never
   merging:
     # only applicable to unix users
     manualCommit: false

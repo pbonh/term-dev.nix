@@ -116,3 +116,6 @@ push-nix-dot-repo:
 bluefin:
   ./scripts/bootstrap_gitssh.sh
   ./scripts/bootstrap_bluefin.sh
+
+bluefin-act-runner:
+  distrobox-host-exec act

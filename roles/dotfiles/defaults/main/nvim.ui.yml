@@ -472,6 +472,10 @@ nvim_ui:
           require'alpha'.setup(require'alpha.themes.dashboard'.config)
       end
     },
+    {
+      'kevinhwang91/nvim-bqf',
+      ft = 'qf',
+    },
     -- { 'stevearc/oil.nvim',
     --   dependencies = {
     --     'nvim-tree/nvim-web-devicons',

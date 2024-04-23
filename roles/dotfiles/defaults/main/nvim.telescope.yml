@@ -369,6 +369,7 @@ nvim_fzf_lua:
       "ibhagwan/fzf-lua",
       dependencies = { "nvim-tree/nvim-web-devicons" },
       config = function()
+        require('fzf-lua').setup({'fzf-native'})
         require("fzf-lua").setup({
           fzf_opts = {
             -- options are sent as `<left>=<right>`
@@ -435,6 +436,6 @@ nvim_fzf_lua:
     { '<leader>f?', { n = '<cmd>FzfLua oldfiles<CR>', }, description = 'Fzf-Lua: Find Old Files', },
     { '<leader>f/', { n = '<cmd>FzfLua blines<CR>', }, description = 'Fzf-Lua: Find Current Buffer Lines', },
     { '_', { n = '<cmd>FzfLua grep_cword<CR>', }, description = 'Fzf-Lua: Grep String(Cursor Word)', },
-    { '<leader>q', { n = '<cmd>FzfLua lgrep_curbuf<CR>', }, description = 'Fzf-Lua: Grep Current File', },
+    { '<leader>q', { n = '<cmd>FzfLua live_grep_glob<CR>', }, description = 'Fzf-Lua: Grep Project(Glob)', },
     { '<leader>Q', { n = '<cmd>FzfLua live_grep<CR>', }, description = 'Fzf-Lua: Grep Project', },
     { '<leader>fd', { n = '<cmd>lua tcd_into_directory()<CR>', }, description = 'Telescope: TCD Into Directory', },

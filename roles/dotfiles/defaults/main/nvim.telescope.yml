@@ -394,6 +394,7 @@ nvim_fzf_lua:
         'nvim-lua/popup.nvim',
         'sharkdp/fd',
         'Marskey/telescope-sg',
+        'debugloop/telescope-undo.nvim',
       },
       config = function()
         require('dressing').setup()
@@ -425,6 +426,7 @@ nvim_fzf_lua:
             end
           })
         end
+        telescope.load_extension('undo')
       end,
     },
   config: ""
@@ -439,3 +441,4 @@ nvim_fzf_lua:
     { '<leader>q', { n = '<cmd>FzfLua live_grep_glob<CR>', }, description = 'Fzf-Lua: Grep Project(Glob)', },
     { '<leader>Q', { n = '<cmd>FzfLua live_grep<CR>', }, description = 'Fzf-Lua: Grep Project', },
     { '<leader>fd', { n = '<cmd>lua tcd_into_directory()<CR>', }, description = 'Telescope: TCD Into Directory', },
+    { '<leader>u', { n = '<cmd>Telescope undo<CR>', }, description = 'Telescope: Undo History', },

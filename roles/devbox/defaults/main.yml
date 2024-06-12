@@ -6,7 +6,6 @@ devbox_dev_tools:
   - gcc
   - zellij
   - zsh
-  - ast-grep
   - starship
   - nushell
   - just
@@ -101,8 +100,8 @@ devbox_dev_all_tools:
   - fff
   - broot
   - lf
-  - glances
   - watchman
   - aspell
   - bc
   - nox
+  # - ast-grep

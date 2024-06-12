@@ -12,7 +12,6 @@ devbox global add \
     zoxide \
     zsh-powerlevel10k \
     atuin \
-    ast-grep \
     starship \
     xcp \
     nushell \
@@ -79,7 +78,6 @@ devbox global add \
     ghq \
     broot \
     lf \
-    glances \
     watchman \
     aspell \
     bc \
@@ -100,6 +98,8 @@ devbox global add \
     nodePackages.yaml-language-server \
     sumneko-lua-language-server \
     shfmt
+
+    # ast-grep
 
 # Refresh Global Environment
 eval "$(devbox global shellenv --preserve-path-stack -r)"

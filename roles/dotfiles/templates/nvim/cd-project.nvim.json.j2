@@ -1,5 +1,0 @@
-[
-  {% for bookmark in extra_bookmarks %}
-  {{ "{\"name\": \"" + bookmark.split('/').pop() + "\", \"path\": \"" + bookmark + "\"}" }}{% if not loop.last %},{% endif %}
-  {% endfor %}
-]

@@ -1,3 +1,0 @@
----
-direnv_exe: "{{ tool_system_path }}direnv"
-direnv_config: "{{ dotfiles_user_home }}/.direnvrc"

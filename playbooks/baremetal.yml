@@ -1,9 +1,0 @@
----
-- name: Baremetal Developer Tools Installer
-  hosts: localhost
-  connection: local
-  vars_files:
-    - ../vars/term-dev.yml
-  tasks:
-    - import_role:
-        name: roles/baremetal

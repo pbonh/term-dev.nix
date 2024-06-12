@@ -1,3 +1,0 @@
----
-yazi_config: "{{ xdg_config_dir }}/yazi"
-yazi_config_file: "{{ yazi_config }}/yazi.toml"

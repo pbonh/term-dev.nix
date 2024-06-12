@@ -1,3 +1,0 @@
----
-clifm_download_url: https://github.com/leo-arch/clifm.git
-clifm_install_prefix: "{{ tool_install_dir }}"

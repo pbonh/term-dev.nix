@@ -1,9 +1,0 @@
----
-- name: Developer Dotfile Setup
-  hosts: localhost
-  connection: local
-  vars_files:
-    - ../vars/term-dev.yml
-  tasks:
-    - import_role:
-        name: roles/dotfiles

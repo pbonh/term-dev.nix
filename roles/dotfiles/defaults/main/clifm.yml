@@ -1,2 +1,0 @@
----
-clifm_config_file: "{{ xdg_config_dir }}/clifm/profiles/{{ ansible_env.USER }}/clifmrc"

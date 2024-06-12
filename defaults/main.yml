@@ -98,5 +98,8 @@ devbox_dev_tools:
   - nodePackages.prettier
   - nodePackages.bash-language-server
   - nodePackages.yaml-language-server
+  - lua
+  - luarocks
+  - luajit
   - sumneko-lua-language-server
   - shfmt

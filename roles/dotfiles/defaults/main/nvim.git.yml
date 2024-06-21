@@ -32,6 +32,7 @@ nvim_git:
       dependencies = {
         "nvim-lua/plenary.nvim",         -- required
         "sindrets/diffview.nvim",        -- optional - Diff integration
+        "ibhagwan/fzf-lua",
         "nvim-telescope/telescope.nvim", -- optional
       },
       config = true

@@ -54,7 +54,7 @@ extra_nvim_plugins_rust: |
 extra_nvim_plugins_rust_lazy: |
   {
     'mrcjkb/rustaceanvim',
-    version = '^3',
+    version = '^4',
     ft = { 'rust' },
   },
   { 'rust-lang/rust.vim' },

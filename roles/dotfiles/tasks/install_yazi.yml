@@ -5,9 +5,33 @@
     state: directory
     mode: "0755"
 
+- name: Setup Yazi Sidebar Config Directory
+  file:
+    path: "{{ zellij_config_dir }}/yazi/sidebar"
+    state: directory
+    mode: "0755"
+
 - name: Yazi | Copies Yazi Config | template
   template:
-    src: '{{ item.src }}'
-    dest: "{{ yazi_config }}/{{ item.path  | regex_replace('\\.j2$', '') }}"
-  with_filetree: '../templates/yazi'
-  when: item.state == 'file'
+    src: "yazi/yazi.toml.j2"
+    dest: "{{ yazi_config }}/yazi.toml"
+
+- name: Yazi | Copies Yazi Theme | template
+  template:
+    src: "yazi/theme.toml.j2"
+    dest: "{{ yazi_config }}/theme.toml"
+
+- name: Yazi | Copies Yazi Sidebar Lua Config | template
+  template:
+    src: "yazi/sidebar/init.lua.j2"
+    dest: "{{ zellij_config_dir }}/yazi/sidebar/init.lua"
+
+- name: Yazi | Copies Yazi Sidebar Config | template
+  template:
+    src: "yazi/yazi.toml.j2"
+    dest: "{{ zellij_config_dir }}/yazi/sidebar/yazi.toml"
+
+- name: Yazi | Copies Yazi Sidebar Theme | template
+  template:
+    src: "yazi/theme.toml.j2"
+    dest: "{{ zellij_config_dir }}/yazi/sidebar/theme.toml"

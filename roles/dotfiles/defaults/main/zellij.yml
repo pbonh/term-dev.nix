@@ -163,3 +163,107 @@ zellij_kdl_layouts:
               cwd "{{ xdg_config_dir }}"
           }
       }
+yazelix_tab_template_default: |
+    tab_template name="ui" {
+        pane size=1 borderless=true {
+           plugin location="zellij:tab-bar"
+        }
+        children
+        pane size=1 borderless=true {
+           plugin location="zellij:status-bar"
+        }
+    }
+yazelix_layout_info_default: |
+    default_tab_template {
+        pane size=1 borderless=true {
+           plugin location="zellij:tab-bar"
+        }
+        pane split_direction="vertical" {
+            pane name="sidebar" {
+                command "env"
+                args "YAZI_CONFIG_HOME={{ zellij_config_dir }}/yazi/sidebar" "{{ yazi_exe }}"
+                size "20%"
+            }
+            pane {
+                focus true
+            }
+        }
+        pane size=1 borderless=true {
+           plugin location="zellij:status-bar"
+        }
+    }
+yazelix_keybindings_default: |
+    shared {
+        // Previously: Ctrl + o (in helix: jump_backward)
+        bind "Ctrl e" { SwitchToMode "Session"; }
+        
+        // Previously: Ctrl + s (in helix: save_selection)
+        // bind "Alt 1" { SwitchToMode "Scroll"; }
+        bind "Ctrl y" { SwitchToMode "Scroll"; }
+        
+        // Previously: Alt + i (in helix: shrink_selection)
+        bind "Alt w" { MoveTab "Left"; }
+        
+        // Previously: Alt + o (in helix: expand_selection)
+        bind "Alt q" { MoveTab "Right"; }
+        
+        // Previously: Alt + n (in helix: select_next_sibling)
+        bind "Alt m" { NewPane; }
+
+        // Previously: Ctrl + b (in helix: move_page_up)
+        bind "Alt 2" { SwitchToMode "Tmux"; }
+    }
+
+    session {
+        // Exit session mode
+        bind "Ctrl e" { SwitchToMode "Normal"; }
+    }
+
+    scroll {
+        // Exit scroll mode
+        // bind "Alt 1" { SwitchToMode "Normal"; }
+        bind "Ctrl y" { SwitchToMode "Normal"; }
+    }
+
+    tmux {
+        // Exit tmux mode
+        bind "Alt 2" { SwitchToMode "Normal"; }
+    }
+yazelix_swap_sidebar_open_default: |
+    ui min_panes=5 {
+        pane split_direction="vertical" {
+            pane name="sidebar" {
+                command "env"
+                args "YAZI_CONFIG_HOME={{ zellij_config_dir }}/yazi/sidebar" "{{ yazi_exe }}"
+                size "20%"
+            }
+            pane name="main" split_direction="vertical" {
+                pane 
+                pane  stacked=true { children; }
+            }
+        }
+    }
+yazelix_swap_sidebar_closed_default: |
+    ui min_panes=5 {
+        pane split_direction="vertical" {
+            pane name="sidebar" {
+                command "env"
+                args "YAZI_CONFIG_HOME={{ zellij_config_dir }}/yazi/sidebar" "{{ yazi_exe }}"
+                size "1%"
+            }
+
+            pane name="main" split_direction="vertical" {
+                pane 
+                pane stacked=true { children; }
+            }
+        }
+    }
+yazelix_layouts:
+  example:
+    name: dev1
+    cwd: "{{ ansible_env.HOME }}"
+    tab_template: "{{ yazelix_tab_template_default }}"
+    layout_info: "{{ yazelix_layout_info_default }}"
+    keybindings: "{{ yazelix_keybindings_default }}"
+    sidebar_open: "{{ yazelix_swap_sidebar_open_default }}"
+    sidebar_closed: "{{ yazelix_swap_sidebar_closed_default }}"

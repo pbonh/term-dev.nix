@@ -169,7 +169,7 @@ yazelix_tab_template_default: |
            plugin location="zellij:tab-bar"
         }
         children
-        pane size=1 borderless=true {
+        pane size=2 borderless=true {
            plugin location="zellij:status-bar"
         }
     }
@@ -188,7 +188,7 @@ yazelix_layout_info_default: |
                 focus true
             }
         }
-        pane size=1 borderless=true {
+        pane size=2 borderless=true {
            plugin location="zellij:status-bar"
         }
     }

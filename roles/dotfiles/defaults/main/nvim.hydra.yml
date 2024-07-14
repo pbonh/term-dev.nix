@@ -283,9 +283,6 @@ nvim_hydra:
         vim.o.winwidth = 10
         vim.o.winminwidth = 10
         vim.o.equalalways = false
-        require('maximize').setup({
-          default_keymaps = false,
-        })
         local Hydra = require('hydra')
         local gitsigns = require('gitsigns')
         local hint = [[

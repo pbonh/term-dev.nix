@@ -470,11 +470,23 @@ nvim_ui:
           alpha.setup(dashboard.config)
 
           require'alpha'.setup(require'alpha.themes.dashboard'.config)
-      end
+      end,
     },
     {
       'kevinhwang91/nvim-bqf',
       ft = 'qf',
+    },
+    {
+      'nvim-focus/focus.nvim',
+      version = '*',
+      config = function()
+        require('focus').setup({
+          ui = {
+            hybridnumber = true, -- Display hybrid line numbers in the focussed window only
+            absolutenumber_unfocussed = true, -- Preserve absolute numbers in the unfocussed windows
+          },
+        })
+      end,
     },
     -- { 'stevearc/oil.nvim',
     --   dependencies = {

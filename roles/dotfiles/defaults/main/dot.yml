@@ -22,6 +22,9 @@ project_paths: []
 project_paths_file: "{{ project_paths | join('\n') }}"
 devbox_nix_root_path: /nix/var/nix/profiles/default/bin
 devbox_nix_path_default: "{{ ansible_env.HOME }}/.local/share/devbox/global/default/.devbox/nix/profile/default/bin"
+github_url: "https://github.com"
+github_ssh_url: "ssh://git@github.com"
+codeberg_url: "https://codeberg.org"
 gcc_exe: /usr/bin/gcc
 gpp_exe: /usr/bin/g++
 make_exe: "make"

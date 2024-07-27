@@ -53,12 +53,7 @@ nvim_legendary:
         'folke/which-key.nvim',
       },
       config = function ()
-        require('which-key').setup({
-          triggers_blacklist = {
-            n = { '<C-w>', '<C-g>' },
-            v = { '<C-w>', '<C-g>' },
-          },
-        })
+        require('which-key').setup({})
       end,
     },
   config: ""

@@ -13,15 +13,6 @@ sudo ostree admin pin 0
 
 % neovim
 
-# Install/Update Packer Packages
-nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
-
-# Remove ALL Plugins
-rm -rf {{ nvim_plugged_dir }}/*
-
-# Install Plugins
-nvim --headless +PlugInstall +qall
-
 # Print CheckHealth Log
 {{ nvim_checkhealth_log_cmd }}
 

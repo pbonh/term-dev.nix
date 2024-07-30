@@ -1,21 +1,5 @@
 ---
 nvim_intellisense_default:
-  packer: |
-    use { 'saadparwaiz1/cmp_luasnip',
-      requires = {
-        'numToStr/Comment.nvim',
-        'neovim/nvim-lspconfig',
-        'glepnir/lspsaga.nvim',
-        'dnlhc/glance.nvim',
-        'onsails/lspkind.nvim',
-        'L3MON4D3/LuaSnip',
-        'hrsh7th/nvim-cmp',
-        'hrsh7th/cmp-buffer',
-        'hrsh7th/cmp-path',
-        'hrsh7th/cmp-nvim-lsp',
-      },
-    }
-    use { 'stevearc/aerial.nvim', }
   lazy: |
     {
       "L3MON4D3/LuaSnip",

@@ -13,11 +13,6 @@ nvim_overseer_tasks:
       }
     end,
 nvim_tasks_default:
-  packer: |
-    use {
-      'stevearc/overseer.nvim',
-      config = function() require('overseer').setup() end
-    }
   lazy: |
     {
       'stevearc/overseer.nvim',

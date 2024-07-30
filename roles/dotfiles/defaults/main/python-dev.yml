@@ -29,8 +29,6 @@ treesitter_parsers_python:
   - python
 python_file_extensions:
   - python
-extra_nvim_plugins_python: |
-  use 'mfussenegger/nvim-dap-python'
 extra_nvim_plugins_python_lazy: |
   {
     'mfussenegger/nvim-dap-python',

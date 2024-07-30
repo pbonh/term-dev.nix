@@ -1,36 +1,5 @@
 nvim_neorg_dir: "{{ dotfiles_user_home }}/OrgNotes"
 nvim_neorg_default:
-  packer: |
-    use {
-        "nvim-neorg/neorg",
-        config = function()
-            require('neorg').setup {
-                load = {
-                    ["core.defaults"] = {}, -- Loads default behaviour
-                    ["core.concealer"] = {}, -- Adds pretty icons to your documents
-                    ["core.keybinds"] = {
-                        config = {
-                            default_keybinds = true,
-                            neorg_leader = ",",
-                            hook = function(keybinds)
-                              keybinds.unmap("norg", "n", "<CR>")
-                              keybinds.unmap("norg", "n", "<M-CR>")
-                            end,
-                        },
-                    },
-                    ["core.dirman"] = { -- Manages Neorg workspaces
-                        config = {
-                            workspaces = {
-                                notes = "{{ nvim_neorg_dir }}"
-                            },
-                        },
-                    },
-                },
-            }
-        end,
-        run = ":Neorg sync-parsers",
-        requires = "nvim-lua/plenary.nvim",
-    }
   lazy: |
     {
       "nvim-neorg/neorg",

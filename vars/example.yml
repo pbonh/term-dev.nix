@@ -18,17 +18,14 @@ treesitter_parsers: "{{ treesitter_parsers_rust + treesitter_parsers_cpp + trees
 treesitter_extra_config: "{{ treesitter_extra_config_cpp }}"
 nvim_extra_plugins:
   cpp:
-    packer: "{{ extra_nvim_plugins_cpp }}"
     lazy: "{{ extra_nvim_plugins_cpp_lazy }}"
     config: "{{ extra_nvim_config_cpp }}"
     keymaps: "{{ extra_nvim_keymap_cpp }}"
   python:
-    packer: "{{ extra_nvim_plugins_python }}"
     lazy: "{{ extra_nvim_plugins_python_lazy }}"
     config: "{{ extra_nvim_config_python }}"
     keymaps: "{{ extra_nvim_keymap_python }}"
   rust:
-    packer: "{{ extra_nvim_plugins_rust }}"
     lazy: "{{ extra_nvim_plugins_rust_lazy }}"
     config: "{{ extra_nvim_config_rust }}"
     keymaps: "{{ extra_nvim_keymap_rust }}"

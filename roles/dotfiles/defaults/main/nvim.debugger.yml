@@ -1,19 +1,5 @@
 ---
 nvim_debugger_default:
-  packer: |
-    use { 'rcarriga/nvim-dap-ui', requires = { 'mfussenegger/nvim-dap' } }
-    use { 'nvim-telescope/telescope-dap.nvim',
-      requires = {
-          {'mfussenegger/nvim-dap'},
-          {'nvim-telescope/telescope.nvim'}
-      }
-    }
-    use {  'theHamsta/nvim-dap-virtual-text',
-      requires = {
-          {'mfussenegger/nvim-dap'},
-          {'nvim-treesitter/nvim-treesitter'}
-      }
-    }
   lazy: |
     { 'rcarriga/nvim-dap-ui', dependencies = { 'mfussenegger/nvim-dap' } },
     { 'nvim-telescope/telescope-dap.nvim',
@@ -47,8 +33,6 @@ nvim_debugger_default:
     { '<F11>', { n = '<cmd>lua require(\'dap\').step_into()<CR>', }, description = 'DAP: Step Into', },
     { '<F12>', { n = '<cmd>lua require(\'dap\').step_out()<CR>', }, description = 'DAP: Step Out', },
 nvim_debugger_nondap:
-  packer: |
-    use 'sakhnik/nvim-gdb'
   lazy: |
     {
       'sakhnik/nvim-gdb'

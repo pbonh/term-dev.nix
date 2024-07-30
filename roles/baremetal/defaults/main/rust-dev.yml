@@ -40,13 +40,6 @@ lsp_providers_rust_setup: []
 rust_extra_lua_plugin_settings: []
 rust_analyzer_exe: "{{ rustup_path }}rust-analyzer"
 clippy_exe: "{{ rustup_path }}cargo-clippy"
-extra_nvim_plugins_rust: |
-  use { 'simrat39/rust-tools.nvim',
-    requires = {
-      'nvim-lua/plenary.nvim',
-      'mfussenegger/nvim-dap',
-    }
-  }
 extra_nvim_plugins_rust_lazy: |
   { 'simrat39/rust-tools.nvim',
     dependencies = {

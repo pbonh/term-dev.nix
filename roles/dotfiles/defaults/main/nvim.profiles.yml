@@ -161,8 +161,8 @@ nvim_default_ui_options: |
   -- vim.opt.sessionoptions = 'buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,globals'
 nvim_plugin_example:
   plugin:
-    packer: |
-      use 'path/to/plugin'
+    lazy: |
+      { 'path/to/plugin' },
     config: |
       require('plugin').setup()
     keymaps: |

@@ -1,47 +1,5 @@
 ---
 nvim_ui_default:
-  packer: |
-    use { 'kdheepak/tabline.nvim',
-      requires = {
-        'nvim-lualine/lualine.nvim',
-        'kyazdani42/nvim-web-devicons',
-        'b0o/incline.nvim',
-      },
-    }
-    use { 'melkster/modicator.nvim' }
-    use { 'petertriho/nvim-scrollbar',
-      requires = {
-        'kevinhwang91/nvim-hlslens',
-        'lewis6991/gitsigns.nvim',
-      },
-    }
-    use { 'startup-nvim/startup.nvim',
-      requires = {
-        'nvim-telescope/telescope.nvim',
-        'nvim-lua/plenary.nvim',
-      },
-    }
-    use { 'stevearc/oil.nvim',
-      requires = {
-        'kyazdani42/nvim-web-devicons',
-      },
-    }
-    use { 'chentoast/marks.nvim' }
-    use { 'rcarriga/nvim-notify' }
-    use { 'nvim-neo-tree/neo-tree.nvim',
-      branch = 'v2.x',
-      requires = {
-        'nvim-lua/plenary.nvim',
-        'nvim-tree/nvim-web-devicons',
-        'MunifTanjim/nui.nvim',
-      },
-    }
-    use { 'nvim-tree/nvim-tree.lua',
-      requires = {
-        'nvim-tree/nvim-web-devicons',
-      },
-    }
-    use { 'nyngwang/NeoZoom.lua' }
   lazy: |
     { 'kdheepak/tabline.nvim',
       dependencies = {

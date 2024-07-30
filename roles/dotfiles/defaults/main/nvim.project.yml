@@ -1,8 +1,6 @@
 ---
 cd_project_nvim_dir_database_filename: "cd-project.nvim.json"
 nvim_project_default:
-  packer: |
-    use { "LintaoAmons/cd-project.nvim", },
   lazy: |
     -- using lazy.nvim
     {

@@ -12,13 +12,7 @@ lldb_vscode_bin: "{{ nix_bin }}/lldb-vscode"
 cmake_bin: "{{ nix_bin }}/cmake"
 clangd_bin: "{{ nix_bin }}/clangd"
 nvim_share_dir: "{{ xdg_share_dir }}/nvim"
-nvim_vim_plug_dir: "{{ nvim_share_dir }}/site/autoload"
-nvim_plugged_dir: "{{ nvim_share_dir }}/plugged"
 nvim_config_dir: "{{ xdg_config_dir }}/nvim"
-nvim_init: "{{ nvim_config_dir }}/init.vim"
-nvim_plugin_config_dir: "{{ nvim_config_dir }}/nvim-config"
-nvim_coc_settings_file: "{{ nvim_config_dir }}/coc-settings.json"
-nvim_filetype_settings_dir: "{{ nvim_config_dir }}/ftplugin"
 nvim_cmake_copy_compile_commands: CMakeCopyCompileCommands
 nvim_cmake_build_dir: build/linux-debug
 ccls_clang_args: {}
@@ -125,7 +119,7 @@ cpp_file_extensions:
   - mlir
   - llvm
   - tablegen
-cpp_file_extensions_comma_list: "{{ '\"' + cpp_file_extensions |join('\", \"') + '\"' }}"
+# cpp_file_extensions_comma_list: "{{ '\"' + cpp_file_extensions |join('\", \"') + '\"' }}"
 cargo_cpp_packages:
   - { name: neocmakelsp, path: neocmakelsp }
 treesitter_parsers_cpp:
@@ -145,20 +139,6 @@ treesitter_extra_config_cpp: |
     header_extension = 'h', -- optional
     source_extension = 'cxx', -- optional
   },
-extra_nvim_plugins_cpp: |
-  use 'p00f/clangd_extensions.nvim'
-  use { 'Shatur/neovim-cmake',
-    requires = {
-      'nvim-lua/plenary.nvim',
-      'mfussenegger/nvim-dap',
-      'stevearc/dressing.nvim'
-    }
-  }
-  use { 'Badhi/nvim-treesitter-cpp-tools',
-    requires = {
-      'nvim-treesitter/nvim-treesitter'
-    }
-  }
 extra_nvim_plugins_cpp_lazy: |
   { 'p00f/clangd_extensions.nvim' },
   { 'Shatur/neovim-cmake',
@@ -319,28 +299,3 @@ nvim_completion_config_cpp: ""
 #       cmp.config.compare.order,
 #     },
 #   },
-cpp_ale_plugin_settings: |
-  vim.cmd([[ let g:ale_c_parse_compile_commands=1 ]])
-  vim.cmd([[
-    let g:ale_linters = {
-    \\  'c': ['gcc', 'g++'],
-    \\  'cpp': ['gcc', 'g++'],
-    \\  'cc': ['gcc', 'g++'],
-    \\  'cxx': ['gcc', 'g++'],
-    \\  'hpp': ['gcc', 'g++'],
-    \\  'hxx': ['gcc', 'g++'],
-    \\}
-  ]])
-ale_plugin_settings: "{{ cpp_ale_plugin_settings }}"
-cpp_neoformat_plugin_settings: |
-  vim.cmd([[
-    let g:neoformat_cpp_clangformat = {
-    \\  'exe': '{{ nix_bin }}/clang-format',
-    \\  'args': ['--style={{ clang_format_fileoption }}'],
-    \\}
-  ]])
-  vim.cmd([[ let g:neoformat_enabled_cpp = ['clangformat'] ]])
-  vim.cmd([[ let g:neoformat_enabled_c = ['clangformat'] ]])
-neoformat_plugin_settings: "{{ cpp_neoformat_plugin_settings }}"
-cpp_dap_plugin_settings: []
-cpp_extra_lua_plugin_settings: []

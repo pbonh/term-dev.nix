@@ -1,21 +1,5 @@
 ---
 nvim_telescope_default:
-  packer: |
-    use { 'nvim-telescope/telescope-fzf-native.nvim',
-      requires = {
-        'nvim-telescope/telescope.nvim',
-        'nvim-lua/plenary.nvim',
-        'stevearc/dressing.nvim',
-        'nvim-lua/popup.nvim',
-        'TC72/telescope-tele-tabby.nvim',
-        'sharkdp/fd',
-      },
-      run = '{{ nvim_make_exe }}',
-    }
-    use { 'nvim-telescope/telescope-ui-select.nvim' }
-    use { 'princejoogie/dir-telescope.nvim' }
-    use { 'nvim-telescope/telescope-file-browser.nvim' }
-    use { 'Marskey/telescope-sg' }
   lazy: |
     { 'nvim-telescope/telescope-fzf-native.nvim',
       dependencies = {

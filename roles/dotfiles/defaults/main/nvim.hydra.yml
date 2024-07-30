@@ -1,15 +1,5 @@
 ---
 nvim_hydra_default:
-  packer: |
-    use { 'nvimtools/hydra.nvim',
-      requires = {
-        'jlanzarotta/bufexplorer',
-        'sindrets/winshift.nvim',
-        'mrjones2014/smart-splits.nvim',
-        'lewis6991/gitsigns.nvim',
-        'declancm/maximize.nvim',
-      },
-    }
   lazy: |
     { 'nvimtools/hydra.nvim',
       dependencies = {

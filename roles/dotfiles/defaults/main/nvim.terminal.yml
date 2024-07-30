@@ -1,12 +1,6 @@
 ---
 nvim_toggleterm_shell: "vim.o.shell"
 nvim_terminal_default:
-  packer: |
-    use { 'akinsho/toggleterm.nvim',
-      requires = {
-        'is0n/fm-nvim',
-      },
-    }
   lazy: |
     { 'akinsho/toggleterm.nvim',
       dependencies = {

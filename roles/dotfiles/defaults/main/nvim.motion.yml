@@ -1,20 +1,20 @@
 ---
 nvim_motion_default:
-  packer: |
-    use { 'ggandor/flit.nvim',
-      requires = {
+  lazy: |
+    { 'ggandor/flit.nvim',
+      dependencies = {
         'ggandor/leap.nvim',
         'ggandor/leap-spooky.nvim',
         'https://tpope.io/vim/repeat.git',
       },
-    }
-    use { 'cbochs/portal.nvim',
-      requires = {
+    },
+    { 'cbochs/portal.nvim',
+      dependencies = {
         'cbochs/grapple.nvim',  -- Optional: provides the 'grapple' query item
         'ThePrimeagen/harpoon', -- Optional: provides the 'harpoon' query item
       },
-    }
-    use { 'kylechui/nvim-surround' }
+    },
+    { 'kylechui/nvim-surround' },
   config: |
     require('leap').set_default_keymaps(true)
     require('leap').add_repeat_mappings(';', ',', {
@@ -33,15 +33,6 @@ nvim_motion_default:
     { '<C-o>', { n = '<cmd>Portal jumplist backward<CR>', }, description = 'Portal: Jump Backward', },
     { '<C-i>', { n = '<cmd>Portal jumplist forward<CR>', }, description = 'Portal: Jump Forward', },
 nvim_motion_flash:
-  packer: |
-    { 'folke/flash.nvim' },
-    use { 'cbochs/portal.nvim',
-      requires = {
-        'cbochs/grapple.nvim',  -- Optional: provides the 'grapple' query item
-        'ThePrimeagen/harpoon', -- Optional: provides the 'harpoon' query item
-      },
-    },
-    use { 'kylechui/nvim-surround' },
   lazy: |
     {
       'folke/flash.nvim',

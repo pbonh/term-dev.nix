@@ -1,11 +1,5 @@
 ---
 nvim_legendary_default:
-  packer: |
-    use { 'mrjones2014/legendary.nvim',
-      requires = {
-        'folke/which-key.nvim',
-      },
-    }
   lazy: |
     {
       'mrjones2014/legendary.nvim',

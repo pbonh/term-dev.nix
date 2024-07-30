@@ -16,6 +16,11 @@
     src: "yazi/yazi.toml.j2"
     dest: "{{ yazi_config }}/yazi.toml"
 
+- name: Yazi | Copies Yazi Keymap | template
+  template:
+    src: "yazi/keymap.toml.j2"
+    dest: "{{ yazi_config }}/keymap.toml"
+
 - name: Yazi | Copies Yazi Theme | template
   template:
     src: "yazi/theme.toml.j2"

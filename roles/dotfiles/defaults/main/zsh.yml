@@ -12,6 +12,7 @@ zsh_devbox_env: |
   #. /home/{{ zsh_username }}/.nix-profile/etc/profile.d/nix.sh
   #. /home/{{ zsh_username }}/.nix-profile/etc/profile.d/hm-session-vars.sh
   export PATH=$PATH:{{ devbox_nix_root_path }}
+  export LANG=C.UTF-8
   eval "$(devbox global shellenv --init-hook)"
 zsh_default_options: |
   HISTFILE=~/.histfile

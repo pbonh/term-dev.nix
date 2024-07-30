@@ -171,11 +171,8 @@ zsh_navi_setup: |
   zle -N _navi_widget
   bindkey '^a' _navi_widget
 zsh_nvim_setup: |
-  {% for nvim_profile_name in nvim_xdg_profiles -%}
-  {{ "alias vim-" + nvim_xdg_profiles[nvim_profile_name]['name'] + "='NVIM_APPNAME=" + nvim_xdg_profiles[nvim_profile_name]['appname'] + " " + nvim_exe + "'" }}
-  {% endfor %}
   {% for nvim_profile_name in nvim_xdg_modular_profiles -%}
-  {{ "alias vim-" + nvim_xdg_modular_profiles[nvim_profile_name]['name'] + "-m='NVIM_APPNAME=" + nvim_xdg_modular_profiles[nvim_profile_name]['appname'] + "-modular " + nvim_exe + "'" }}
+  {{ "alias vim-" + nvim_xdg_modular_profiles[nvim_profile_name]['name'] + "='NVIM_APPNAME=" + nvim_xdg_modular_profiles[nvim_profile_name]['appname'] + "-modular " + nvim_exe + "'" }}
   {% endfor %}
 zsh_default_aliases: |
   alias cat={{ bat_exe }}

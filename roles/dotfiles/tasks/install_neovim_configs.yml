@@ -46,6 +46,6 @@
 
 - name: Neovim | Setup Neovim Project Directories(Modular) | template
   template:
-    src: "nvim/{{ cd_project_nvim_dir_database_filename }}.j2"
+    src: "nvim-modular/{{ cd_project_nvim_dir_database_filename }}.j2"
     dest: "{{ xdg_config_dir }}/{{ item.value['appname'] }}-modular/{{ cd_project_nvim_dir_database_filename }}"
   loop: "{{ nvim_xdg_modular_profiles | dict2items }}"

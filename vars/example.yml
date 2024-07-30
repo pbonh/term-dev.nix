@@ -61,9 +61,20 @@ zellij_kdl_layouts:
               cwd "{{ dotfiles_home }}"
           }
       }
+      tab name="Neovim" split_direction="vertical" {
+          pane {
+              command "{{ nvim_exe }}"
+              cwd "{{ nvim_config_dir }}-lazy-modular"
+          }
+      }
       tab name="Code" split_direction="vertical" {
           pane {
               command "{{ nvim_exe }}"
               cwd "{{ dotfiles_checkout_dir }}"
+          }
+      }
+      tab name="CPU/Mem" {
+          pane {
+              command "{{ bottom_exe }}"
           }
       }

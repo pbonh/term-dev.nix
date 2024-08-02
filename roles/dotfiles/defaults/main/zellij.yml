@@ -149,17 +149,17 @@ yazelix_keybindings_default: |
     shared {
         // Previously: Ctrl + o (in helix: jump_backward)
         bind "Ctrl e" { SwitchToMode "Session"; }
-        
+
         // Previously: Ctrl + s (in helix: save_selection)
         // bind "Alt 1" { SwitchToMode "Scroll"; }
         bind "Ctrl y" { SwitchToMode "Scroll"; }
-        
+
         // Previously: Alt + i (in helix: shrink_selection)
         bind "Alt w" { MoveTab "Left"; }
-        
+
         // Previously: Alt + o (in helix: expand_selection)
         bind "Alt q" { MoveTab "Right"; }
-        
+
         // Previously: Alt + n (in helix: select_next_sibling)
         bind "Alt m" { NewPane; }
 
@@ -217,6 +217,6 @@ yazelix_layouts:
     cwd: "{{ ansible_env.HOME }}"
     tab_template: "{{ yazelix_tab_template_default }}"
     layout_info: "{{ yazelix_layout_info_default }}"
-    keybindings: "{{ yazelix_keybindings_default }}"
+    keybindings: ""
     sidebar_open: "{{ yazelix_swap_sidebar_open_default }}"
     sidebar_closed: "{{ yazelix_swap_sidebar_closed_default }}"

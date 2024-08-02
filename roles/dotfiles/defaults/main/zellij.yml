@@ -52,53 +52,6 @@ zellij_plugins:
   #           };
   #           SwitchToMode "Normal"
   #       }
-zellij_layouts:
-  example:
-    name: example
-    zellij_session:
-      session:
-        name: "Example Project"
-    zellij_template:
-      template:
-        direction: Horizontal
-        parts:
-          - direction: Vertical
-            borderless: true
-            split_size:
-              Fixed: 1
-            run:
-              plugin:
-                location: "zellij:tab-bar"
-          - direction: Vertical
-            body: true
-          - direction: Vertical
-            borderless: true
-            split_size:
-              Fixed: 2
-            run:
-              plugin:
-                location: "zellij:status-bar"
-    zellij_tabs:
-      tabs:
-        - direction: Vertical
-          name: "Notes"
-          run:
-            command: {cmd: "{{ nvim_exe }}", args: ["+cd {{ nvim_neorg_dir }}", "+e work.norg"]}
-        - direction: Vertical
-          name: "Homelab"
-          run:
-            command: {cmd: "{{ nvim_shell }}", args: ["-c", "cd {{ homelab_dir }} && exec {{ nvim_shell_cmd }}"]}
-        - direction: Vertical
-          name: "Dotfiles"
-          run:
-            command: {cmd: "{{ nvim_shell }}", args: ["-c", "cd {{ dotfiles_checkout_dir }} && exec {{ nvim_shell_cmd }}"]}
-        - direction: Vertical
-          name: "Code"
-          run:
-            command: {cmd: "{{ nvim_shell }}", args: ["-c", "cd {{ code_home_dir }} && exec {{ nvim_shell_cmd }}"]}
-zellij_session_info: "{{ zellij_layouts.example.zellij_session }}"
-zellij_template_info: "{{ zellij_layouts.example.zellij_template }}"
-zellij_tab_info: "{{ zellij_layouts.example.zellij_tabs }}"
 zellij_kdl_config_file: "{{ zellij_config_dir }}/config.kdl"
 zellij_kdl_template_info_default: |
   tab_template name="shell-in-dir" {

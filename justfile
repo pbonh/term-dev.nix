@@ -45,7 +45,7 @@ nix:
   {{ task_prelude }} ansible-playbook playbooks/dotfiles.yml --tags "nix"
 
 dot: update-submodules
-  {{ task_prelude }} ansible-playbook playbooks/dotfiles.yml --tags "git,fzf,neovim-config,navi,direnv,scripts,bookmarks,bash,nushell,zsh,zellij,yazi"
+  {{ task_prelude }} ansible-playbook playbooks/dotfiles.yml --tags "git,fzf,neovim-config,neovim-config-clean,navi,direnv,scripts,bookmarks,bash,nushell,zsh,zellij,yazi"
 
 env: update-submodules
   {{ task_prelude }} ansible-playbook playbooks/dotfiles.yml --tags "env"
@@ -61,6 +61,9 @@ zsh: update-submodules
 
 neovim: update-submodules
   {{ task_prelude }} ansible-playbook playbooks/dotfiles.yml --tags "neovim-config"
+
+neovim-clean: update-submodules
+  {{ task_prelude }} ansible-playbook playbooks/dotfiles.yml --tags "neovim-config-clean"
 
 helix: update-submodules
   {{ task_prelude }} ansible-playbook playbooks/dotfiles.yml --tags "helix-config"

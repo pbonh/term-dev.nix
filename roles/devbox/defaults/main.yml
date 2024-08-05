@@ -4,6 +4,8 @@ devbox_nix_path_default: "{{ ansible_env.HOME }}/.local/share/devbox/global/defa
 devbox_dev_tools:
   - ansible
   - gcc
+  - gnumake
+  - cmake
   - zellij
   - zsh
   - starship

@@ -42,6 +42,14 @@ zsh_default_plugins: |
   eval "$({{ starship_exe }} init zsh)"
   eval "$({{ zoxide_exe }} init zsh)"
 zsh_fzf_setup: |
+  export FZF_DEFAULT_COMMAND='{{ fd_exe }} --type f --color=never'
+  export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+  export FZF_ALT_C_COMMAND='{{ fd_exe }} --type d . --color=never'
+  export FZF_DEFAULT_OPTS='
+    --height 75% --multi --reverse
+    --bind ctrl-f:page-down,ctrl-b:page-up
+  '
+  export FZF_CTRL_T_OPTS="--preview '{{ bat_exe }} --color=always --line-range :500 {}'"
   # export PATH=$PATH:{{ fzf_install_dir }}/bin
   if [ -n "${commands[fzf-share]}" ]; then
     source "$(fzf-share)/key-bindings.zsh"
@@ -135,9 +143,10 @@ zsh_fzf_setup: |
   alias gsk='{{ skim_exe }} --ansi -i -c '"'"'{{ rg_exe }} --color=always --line-number "{}"'"'"''
   alias dsk='{{ skim_exe }} --ansi -i -c '"'"'{{ fd_exe }} --type d "{}"'"'"''
   alias skvi='f(){ x="$({{ skim_exe }} --bind "ctrl-p:toggle-preview" --ansi --preview="{{ bat_exe }} {} --color=always" --preview-window=right:60%:hidden)"; [[ $? -eq 0 ]] && {{ nvim_exe }} "$x" || true }; f'
+zsh_yazi_setup: |
   function yy() {
     local tmp="$(mktemp -t "yazi-cwd.XXXXX")"
-    yazi "$@" --cwd-file="$tmp"
+    {{ yazi_exe }} "$@" --cwd-file="$tmp"
     if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
             cd -- "$cwd"
     fi
@@ -174,6 +183,7 @@ zsh_navi_setup: |
   }
   zle -N _navi_widget
   bindkey '^a' _navi_widget
+  alias nvi='{{ navi_shell_cmd }}'
 zsh_nvim_setup: |
   {% for nvim_profile_name in nvim_xdg_modular_profiles -%}
   {{ "alias vim-" + nvim_xdg_modular_profiles[nvim_profile_name]['name'] + "='NVIM_APPNAME=" + nvim_xdg_modular_profiles[nvim_profile_name]['appname'] + "-modular " + nvim_exe + "'" }}
@@ -183,7 +193,7 @@ zsh_default_aliases: |
   alias ls='{{ lsd_exe }} --group-dirs first'
   alias ll='{{ lsd_exe }} --group-dirs first -l'
   alias jchoose='{{ just_exe }} --choose'
-  alias vim='{{ nvim_exe_bone }}'
+  alias vim='{{ nvim_exe_bone_bash }}'
 zsh_ssh_setup: |
   env={{ dotfiles_user_home }}/.ssh/agent.env
   agent_load_env () { test -f "$env" && . "$env" >| /dev/null ; }

@@ -1,6 +1,127 @@
 ---
-extra_bashrc: []
-extra_bashrc_file: "{{ extra_bashrc | join('\n') }}"
 bash_plugins: "{{ dotfiles_user_home }}/.bashrc.d"
 bash_fzf_tab: "{{ bash_plugins }}/fzf-tab-completion"
 bash_git_fuzzy: "{{ bash_plugins }}/git-fuzzy"
+bash_default_options: |
+  if [ -f /etc/bashrc ]; then
+    . /etc/bashrc
+  fi
+bash_default_env: |
+  if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]
+  then
+      PATH="$HOME/.local/bin:$HOME/bin:$PATH"
+  fi
+  export PATH
+  export SHELL="{{ nvim_shell }}"
+  export GIT_SSH="{{ git_ssh }}"
+  export EDITOR="{{ nvim_exe }}"
+  export VISUAL="{{ nvim_exe }} --cmd 'let g:flatten_wait=1'"
+  export LANG=en_US.UTF-8
+  export LC_CTYPE=en_US.UTF-8
+bash_extra_env: ""
+bash_default_plugins: |
+  if [ -d {{ bash_plugins }} ]; then
+    for rc in {{ bash_plugins }}/*; do
+      if [ -f "$rc" ]; then
+        . "$rc"
+      fi
+    done
+  fi
+  unset rc
+bash_fzf_setup: |
+  export FZF_DEFAULT_COMMAND='{{ fd_exe }} --type f --color=never'
+  export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+  export FZF_ALT_C_COMMAND='{{ fd_exe }} --type d . --color=never'
+  export FZF_DEFAULT_OPTS='
+    --height 75% --multi --reverse
+    --bind ctrl-f:page-down,ctrl-b:page-up
+  '
+  export FZF_CTRL_T_OPTS="--preview '{{ bat_exe }} --color=always --line-range :500 {}'"
+  eval "$({{ fzf_exe }} --bash)"
+  export PATH="$PATH:{{ bash_git_fuzzy }}/bin"
+  fzf_find_edit() {
+    local file=$(
+      {{ fzf_exe }} --query="$1" --no-multi --select-1 --exit-0 \
+          --preview 'bat --color=always --line-range :500 {}'
+    )
+    if [[ -n "$file" ]]; then
+        $EDITOR "$file"
+    fi
+  }
+  fzf_change_directory() {
+    local directory=$(
+      fd --type d | \
+        {{ fzf_exe }} --query="$1" --no-multi --select-1 --exit-0 \
+            --preview 'tree -C {} | head -100'
+    )
+    if [[ -n $directory ]]; then
+        cd "$directory"
+    fi
+  }
+  fzf_kill() {
+    if [[ $(uname) == Linux ]]; then
+        local pids=$(ps -f -u $USER | sed 1d | {{ fzf_exe }} | awk '{print $2}')
+    elif [[ $(uname) == Darwin ]]; then
+        local pids=$(ps -f -u $USER | sed 1d | {{ fzf_exe }} | awk '{print $3}')
+    else
+        echo 'Error: unknown platform'
+        return
+    fi
+    if [[ -n "$pids" ]]; then
+        echo "$pids" | xargs kill -9 "$@"
+    fi
+  }
+  alias ffe='fzf_find_edit'
+  alias fcd='fzf_change_directory'
+  alias fkill='fzf_kill'
+bash_yazi_setup: |
+  yy() {
+    local tmp="$(mktemp -t "yazi-cwd.XXXXX")"
+    {{ yazi_exe }} "$@" --cwd-file="$tmp"
+    if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+            cd -- "$cwd"
+    fi
+    rm -f -- "$tmp"
+  }
+  alias yy='yy'
+bash_navi_setup: |
+  # eval "$({{ navi_exe }} widget bash)"
+  _navi_call() {
+     local result="$({{ navi_exe }} "$@" </dev/tty)"
+     printf "%s" "$result"
+  }
+  _navi_widget() {
+     local -r input="${READLINE_LINE}"
+     local -r last_command="$(echo "${input}" | {{ navi_exe }} fn widget::last_command)"
+
+     if [ -z "${last_command}" ]; then
+        local -r output="$(_navi_call --print)"
+     else
+        local -r find="${last_command}_NAVIEND"
+        local -r replacement="$(_navi_call --print --query "$last_command")"
+        local output="$input"
+        if [ -n "$replacement" ]; then
+           output="${input}_NAVIEND"
+           output="${output//$find/$replacement}"
+        fi
+     fi
+
+     READLINE_LINE="$output"
+     READLINE_POINT=${% raw %}{{% endraw %}#READLINE_LINE}
+  }
+  _navi_widget_legacy() {
+     _navi_call --print
+  }
+  if [ ${BASH_VERSION:0:1} -lt 4 ]; then
+     bind '"\C-a": " \C-b\C-k \C-u`_navi_widget_legacy`\e\C-e\C-a\C-y\C-h\C-e\e \C-y\ey\C-x\C-x\C-f"'
+  else
+     bind -x '"\C-a": _navi_widget'
+  fi
+bash_default_aliases: |
+  alias cat={{ bat_exe }}
+  alias ls='{{ lsd_exe }} --group-dirs first'
+  alias ll='{{ lsd_exe }} --group-dirs first -l'
+  alias jchoose='{{ just_exe }} --choose'
+  alias vim='{{ nvim_exe_bone_bash }}'
+  alias nvi='{{ navi_shell_cmd }}'
+bash_extra_aliases: ""

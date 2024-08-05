@@ -52,16 +52,14 @@ zellij_kdl_layouts:
     cwd: "{{ ansible_env.HOME }}"
     template_info: "{{ zellij_kdl_template_info_default }}"
     layout_info: |
-      tab name="Dotfiles" split_direction="vertical" focus=true {
+      tab name="Dotfiles" split_direction="vertical" cwd="{{ dotfiles_checkout_dir }}" focus=true {
           pane {
               command "{{ nvim_exe }}"
-              cwd "{{ dotfiles_checkout_dir }}"
           }
       }
-      tab name="Neovim" split_direction="vertical" {
+      tab name="Neovim" split_direction="vertical" cwd="{{ nvim_config_dir }}-lazy-modular" {
           pane {
               command "{{ nvim_exe }}"
-              cwd "{{ nvim_config_dir }}-lazy-modular"
           }
       }
       tab name="CPU/Mem" {

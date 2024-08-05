@@ -12,7 +12,11 @@ zsh_devbox_env: |
   #. /home/{{ zsh_username }}/.nix-profile/etc/profile.d/nix.sh
   #. /home/{{ zsh_username }}/.nix-profile/etc/profile.d/hm-session-vars.sh
   export PATH=$PATH:{{ devbox_nix_root_path }}
-  export LANG=C.UTF-8
+  # export LANG=C.UTF-8
+  # export LC_CTYPE=en_US.UTF-8
+  # export LC_ALL=en_US.UTF-8
+  export LOCALE_ARCHIVE=/usr/lib/locale/locale-archive
+  export LANG=en_US.UTF-8
   eval "$(devbox global shellenv --init-hook)"
 zsh_default_options: |
   HISTFILE=~/.histfile
@@ -31,7 +35,6 @@ zsh_default_env: |
   export GIT_SSH="{{ git_ssh }}"
   export EDITOR="{{ nvim_exe }}"
   export VISUAL="{{ nvim_exe }} --cmd 'let g:flatten_wait=1'"
-  export LC_CTYPE=en_US.UTF-8
 zsh_extra_env: ""
 zsh_default_plugins: |
   #eval "$({{ atuin_exe }} init zsh)"

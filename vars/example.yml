@@ -6,9 +6,6 @@ projects:
     name: "pbonh/term-dev.nix"
     url: "https://github.com/pbonh/term-dev.nix"
     path: "{{ code_checkout_path_github }}/pbonh/term-dev.nix"
-project_paths:
-  - "{{ dotfiles_home }}"
-  - "{{ dotfiles_checkout_dir }}"
 lang_tools_nix: "{{ cpp_tools_nix + python_tools_nix }}"
 install_languages:
   - cpp

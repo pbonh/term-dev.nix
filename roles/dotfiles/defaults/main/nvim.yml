@@ -27,9 +27,6 @@ lsp_providers_devbox:
   - lua_ls
   - yamlls
 lsp_providers_luafile: "{{ \"'\" + lsp_providers | join(\"', '\") + \"'\" }}"
-# lsp_providers_file: "{{ (lsp_providers_luafile != '') | ternary(lsp_providers_luafile, '-- No Additional Servers Preconfigured') }}"
-# lsp_provider_file: "{{ '''' + lsp_providers |join(''', ''') + '''' }}"
-# project_paths_startify: "{{ '\"' + project_paths |join('\", \"') + '\"' }}"
 lsp_provider_coc_settings: {}
 nvim_checkhealth_log:
   - "--headless"

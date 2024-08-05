@@ -183,6 +183,7 @@ zsh_default_aliases: |
   alias ls='{{ lsd_exe }} --group-dirs first'
   alias ll='{{ lsd_exe }} --group-dirs first -l'
   alias jchoose='{{ just_exe }} --choose'
+  alias vim='{{ nvim_exe_bone }}'
 zsh_ssh_setup: |
   env={{ dotfiles_user_home }}/.ssh/agent.env
   agent_load_env () { test -f "$env" && . "$env" >| /dev/null ; }

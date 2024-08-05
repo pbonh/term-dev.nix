@@ -55,19 +55,13 @@ zellij_kdl_layouts:
       tab name="Dotfiles" split_direction="vertical" focus=true {
           pane {
               command "{{ nvim_exe }}"
-              cwd "{{ dotfiles_home }}"
+              cwd "{{ dotfiles_checkout_dir }}"
           }
       }
       tab name="Neovim" split_direction="vertical" {
           pane {
               command "{{ nvim_exe }}"
               cwd "{{ nvim_config_dir }}-lazy-modular"
-          }
-      }
-      tab name="Code" split_direction="vertical" {
-          pane {
-              command "{{ nvim_exe }}"
-              cwd "{{ dotfiles_checkout_dir }}"
           }
       }
       tab name="CPU/Mem" {

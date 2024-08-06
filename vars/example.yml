@@ -54,7 +54,10 @@ zellij_kdl_layouts:
     layout_info: |
       tab name="Dotfiles" split_direction="vertical" cwd="{{ dotfiles_checkout_dir }}" focus=true {
           pane {
-              command "{{ nvim_exe }}"
+              command "env"
+              args {% set bash_arg_list = nvim_exe_bone_bash_cmd %}
+                   {% set bash_arg_string = bash_arg_list | map('string') | map('regex_replace', '^(.*)$', '"\\1"') | join(' ') %}
+                   {{ bash_arg_string }}
           }
       }
       tab name="Neovim" split_direction="vertical" cwd="{{ nvim_config_dir }}-lazy-modular" {

@@ -12,7 +12,7 @@ bash_default_env: |
       PATH="$HOME/.local/bin:$HOME/bin:$PATH"
   fi
   export PATH
-  export SHELL="{{ nvim_shell }}"
+  # export SHELL="{{ nvim_shell }}"
   export GIT_SSH="{{ git_ssh }}"
   export EDITOR="{{ nvim_exe }}"
   export VISUAL="{{ nvim_exe }} --cmd 'let g:flatten_wait=1'"

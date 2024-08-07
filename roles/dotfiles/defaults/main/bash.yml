@@ -18,7 +18,8 @@ bash_default_env: |
   export VISUAL="{{ nvim_exe }} --cmd 'let g:flatten_wait=1'"
   export LANG=en_US.UTF-8
   export LC_CTYPE=en_US.UTF-8
-bash_extra_env: ""
+bash_homebrew_env: ""
+bash_extra_env: "{{ bash_homebrew_env }}"
 bash_default_plugins: |
   if [ -d {{ bash_plugins }} ]; then
     for rc in {{ bash_plugins }}/*; do

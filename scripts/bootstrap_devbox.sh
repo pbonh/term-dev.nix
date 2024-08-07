@@ -52,10 +52,13 @@ setup_bashrc() {
     # Create and populate the devbox file if it does not exist
     if [[ ! -f "$devbox_file" ]]; then
         cat <<-EOF > "$devbox_file"
-        # Add nix to PATH manually
-        export PATH=\$PATH:/nix/var/nix/profiles/default/bin
-        # Source Devbox Global
-        eval "\$(devbox global shellenv --init-hook)"
+# Add nix to PATH manually
+export PATH=\$PATH:/nix/var/nix/profiles/default/bin
+# Source Devbox Global
+if  command -v devbox &> /dev/null
+then
+  eval "\$(devbox global shellenv --init-hook)"
+fi
 EOF
         echo "Created and initialized file: $devbox_file"
     else

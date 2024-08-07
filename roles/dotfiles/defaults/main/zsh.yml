@@ -17,7 +17,10 @@ zsh_devbox_env: |
   # export LC_ALL=en_US.UTF-8
   export LOCALE_ARCHIVE=/usr/lib/locale/locale-archive
   export LANG=en_US.UTF-8
-  eval "$(devbox global shellenv --init-hook)"
+  if  command -v devbox &> /dev/null
+  then
+    eval "$(devbox global shellenv --init-hook)"
+  fi
 zsh_default_options: |
   HISTFILE=~/.histfile
   HISTSIZE=1000

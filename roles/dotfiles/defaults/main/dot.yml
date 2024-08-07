@@ -12,6 +12,7 @@ xdg_config_dirs:
   share: "{{ xdg_share_dir }}"
   config: "{{ xdg_config_dir }}"
   cache: "{{ xdg_cache_dir }}"
+macos_config_dir: "{{ dotfiles_user_home }}/Library/Application\ Support"
 dot_download_dir: "{{ tool_install_dir }}/downloads"
 projects:
   proj1:

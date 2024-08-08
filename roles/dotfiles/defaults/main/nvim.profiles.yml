@@ -7,7 +7,7 @@ nvim_xdg_profile_dir:
 nvim_default_editor_options: |
   vim.g.loaded_netrw = 1
   vim.g.loaded_netrwPlugin = 1
-  vim.opt.shell= '{{ nvim_shell }}'
+  vim.opt.shell= '{{ nvim_shell_legacy }}'
   vim.opt.termguicolors = true
   vim.opt.hidden = true
   vim.opt.magic = true

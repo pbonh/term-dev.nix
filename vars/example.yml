@@ -65,6 +65,12 @@ zellij_kdl_layouts:
               command "{{ nvim_exe }}"
           }
       }
+      tab name="Devbox Project" split_direction="vertical" {
+          pane {
+              command "devbox"
+              args "run" "{{ nvim_exe }}"
+          }
+      }
       tab name="CPU/Mem" {
           pane {
               command "{{ bottom_exe }}"

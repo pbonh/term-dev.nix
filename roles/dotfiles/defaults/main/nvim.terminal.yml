@@ -1,5 +1,5 @@
 ---
-nvim_toggleterm_shell: "vim.o.shell"
+nvim_toggleterm_shell: "{{ nvim_shell }}"
 nvim_terminal_default:
   lazy: |
     { 'akinsho/toggleterm.nvim',
@@ -26,7 +26,7 @@ nvim_terminal_default:
       open_mapping = [[<c-s>]],
       direction = 'float',
       close_on_exit = false,
-      shell = {{ nvim_toggleterm_shell }},
+      shell = "{{ nvim_toggleterm_shell }}",
       float_opts = {
         border = 'shadow',
         width = function()
@@ -45,6 +45,7 @@ nvim_terminal_default:
     local Terminal  = require('toggleterm.terminal').Terminal
     local justchoose = Terminal:new({
       cmd = '{{ just_exe }} --choose',
+      shell = '{{ nvim_shell_legacy }}',
       hidden = true,
       start_in_insert = true,
     })
@@ -110,7 +111,7 @@ nvim_terminal:
           open_mapping = [[<c-s>]],
           direction = 'float',
           close_on_exit = false,
-          shell = {{ nvim_toggleterm_shell }},
+          shell = "{{ nvim_toggleterm_shell }}",
           float_opts = {
             border = 'shadow',
             width = function()
@@ -129,6 +130,7 @@ nvim_terminal:
         local Terminal  = require('toggleterm.terminal').Terminal
         local justchoose = Terminal:new({
           cmd = '{{ just_exe }} --choose',
+          shell = '{{ nvim_shell_legacy }}',
           hidden = true,
           start_in_insert = true,
         })

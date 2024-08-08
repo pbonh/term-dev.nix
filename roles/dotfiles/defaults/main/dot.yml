@@ -29,3 +29,7 @@ gpp_exe: /usr/bin/g++
 make_exe: "make"
 cargo_home: "{{ dotfiles_user_home }}/.cargo"
 cargo_path: "{{ cargo_home }}/bin/"
+homebrew_install_path: "/home/linuxbrew/.linuxbrew"
+homebrew_path: "{{ homebrew_install_path }}/bin"
+homebrew_install_path_macos: "/home/homebrew/.homebrew"
+homebrew_path_macos: "{{ homebrew_install_path_macos }}/bin"

@@ -11,3 +11,7 @@ gpp_exe: /usr/bin/g++
 make_exe: "make"
 dot_download_dir: "{{ tool_install_dir }}/downloads"
 direnv_exe: "{{ tool_system_path }}direnv"
+homebrew_install_path: "/home/linuxbrew/.linuxbrew"
+homebrew_path: "{{ homebrew_install_path }}/bin"
+homebrew_install_path_macos: "/home/homebrew/.homebrew"
+homebrew_path_macos: "{{ homebrew_install_path_macos }}/bin"

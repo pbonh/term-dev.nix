@@ -1,13 +1,22 @@
 ---
 tcsh_config_file: "{{ dotfiles_user_home }}/.cshrc"
 tcsh_config_dir: "{{ xdg_config_dir }}/tcsh"
+tcsh_plugins: "{{ tcsh_config_dir }}"
 tcsh_default_options: ""
 tcsh_default_env: |
   set path = ($path {{ cargo_path }})
   set path = ($path {{ bin_directory }})
   #setenv PATH $PATH\:{{ cargo_path }}\:{{ bin_directory }}
 tcsh_extra_env: ""
-tcsh_default_plugins: ""
+tcsh_default_plugins: |
+  foreach cshrc_file ( `ls {{ tcsh_config_dir }}` )
+    source {{ tcsh_config_dir }}/$cshrc_file
+  end
+tcsh_plugins_source:
+  devbox:
+    name: devbox
+    script: |
+      set path = ($path {{ devbox_nix_root_path }})
 tcsh_fzf_setup: |
   {% for fzf_env_var in fzf_env -%}
   {{ "setenv " + fzf_env[fzf_env_var]['name'] + " '" + fzf_env[fzf_env_var]['env'] + "'" }}

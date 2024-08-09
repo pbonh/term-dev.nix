@@ -40,7 +40,7 @@ zsh_default_env: |
   {{ "export PATH=" + path_directories[path_info]['path'] + ":$PATH" }}
   {% endif %}
   {% endfor %}
-  # export SHELL="{{ nvim_shell }}"
+  # export SHELL="{{ interactive_shell }}"
   export GIT_SSH="{{ git_ssh }}"
   export EDITOR="{{ nvim_exe }}"
   export VISUAL="{{ nvim_exe }} --cmd 'let g:flatten_wait=1'"

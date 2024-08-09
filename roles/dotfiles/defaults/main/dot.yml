@@ -14,6 +14,9 @@ xdg_config_dirs:
   cache: "{{ xdg_cache_dir }}"
 macos_config_dir: "{{ dotfiles_user_home }}/Library/Application\ Support"
 dot_download_dir: "{{ tool_install_dir }}/downloads"
+interactive_shell_cmd: "nu"
+interactive_shell: "{{ nu_exe }}"
+command_shell: "/bin/bash"
 projects:
   proj1:
     name: "pbonh/term-dev.nix"

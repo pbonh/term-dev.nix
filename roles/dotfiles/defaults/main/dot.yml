@@ -33,3 +33,8 @@ homebrew_install_path: "/home/linuxbrew/.linuxbrew"
 homebrew_path: "{{ homebrew_install_path }}/bin"
 homebrew_install_path_macos: "/home/homebrew/.homebrew"
 homebrew_path_macos: "{{ homebrew_install_path_macos }}/bin"
+path_directories:
+  scripts:
+    name: scripts
+    prepend: false
+    path: "{{ tool_install_bin }}"

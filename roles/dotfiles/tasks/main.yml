@@ -11,8 +11,8 @@
   tags:
     - always
 
-- name: XDG | Install XDG Directories | task
-  import_tasks: tasks/setup_xdg.yml
+- name: Env | Setup Environment | task
+  import_tasks: tasks/setup_env.yml
   tags:
     - setup
 

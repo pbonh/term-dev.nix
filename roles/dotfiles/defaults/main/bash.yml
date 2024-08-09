@@ -7,11 +7,13 @@ bash_default_options: |
     . /etc/bashrc
   fi
 bash_default_env: |
-  if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]
-  then
-      PATH="$HOME/.local/bin:$HOME/bin:$PATH"
-  fi
-  export PATH
+  {% for path_info in path_directories -%}
+  {% if path_directories[path_info]['prepend'] == false %}
+  {{ "export PATH=$PATH:" + path_directories[path_info]['path'] }}
+  {% else %}
+  {{ "export PATH=" + path_directories[path_info]['path'] + ":$PATH" }}
+  {% endif %}
+  {% endfor %}
   # export SHELL="{{ nvim_shell }}"
   export GIT_SSH="{{ git_ssh }}"
   export EDITOR="{{ nvim_exe }}"
@@ -47,14 +49,9 @@ bash_plugins_source:
         eval "$({{ homebrew_path }}/brew shellenv)"
       fi
 bash_fzf_setup: |
-  export FZF_DEFAULT_COMMAND='{{ fd_exe }} --type f --color=never'
-  export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-  export FZF_ALT_C_COMMAND='{{ fd_exe }} --type d . --color=never'
-  export FZF_DEFAULT_OPTS='
-    --height 75% --multi --reverse
-    --bind ctrl-f:page-down,ctrl-b:page-up
-  '
-  export FZF_CTRL_T_OPTS="--preview '{{ bat_exe }} --color=always --line-range :500 {}'"
+  {% for fzf_env_var in fzf_env -%}
+  {{ "export " + fzf_env[fzf_env_var]['name'] + "='" + fzf_env[fzf_env_var]['env'] + "'" }}
+  {% endfor %}
   eval "$({{ fzf_exe }} --bash)"
   export PATH="$PATH:{{ bash_git_fuzzy }}/bin"
   fzf_find_edit() {

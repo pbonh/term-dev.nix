@@ -4,9 +4,14 @@ tcsh_config_dir: "{{ xdg_config_dir }}/tcsh"
 tcsh_plugins: "{{ tcsh_config_dir }}"
 tcsh_default_options: ""
 tcsh_default_env: |
-  set path = ($path {{ cargo_path }})
-  set path = ($path {{ bin_directory }})
   #setenv PATH $PATH\:{{ cargo_path }}\:{{ bin_directory }}
+  {% for path_info in path_directories -%}
+  {% if path_directories[path_info]['prepend'] == false %}
+  {{ "set path = ($path " + path_directories[path_info]['path'] + ")" }}
+  {% else %}
+  {{ "set path = (" + path_directories[path_info]['path'] + " $path)" }}
+  {% endif %}
+  {% endfor %}
 tcsh_extra_env: ""
 tcsh_default_plugins: |
   foreach cshrc_file ( `ls {{ tcsh_config_dir }}` )

@@ -1,11 +1,26 @@
 ---
-treesitter_parsers: []
+treesitter_parsers:
+  - vim
+  - vimdoc
+  - jsonc
+  - lua
+  - just
+  - regex
+  - bash
+  - markdown
+  - markdown_inline
+  - json
+  - query
+  - toml
+  - norg
+  - yaml
+treesitter_parsers_lang: []
 treesitter_custom_parsers_default: []
 # treesitter_custom_parsers_default:
 #   - norg_meta
 #   - norg_table
 treesitter_custom_parsers: "{{ treesitter_custom_parsers_default }}"
-treesitter_parsers_all: "{{ treesitter_parsers + treesitter_custom_parsers }}"
+treesitter_parsers_all: "{{ treesitter_parsers + treesitter_parsers_lang + treesitter_custom_parsers }}"
 treesitter_extra_config: []
 treesitter_custom_parsers_info: ""
 # treesitter_custom_parsers_info: |
@@ -56,20 +71,8 @@ nvim_treesitter_default:
     {{ treesitter_custom_parsers_info or '-- No Custom Treesitter Parsers Installed' }}
     require('nvim-treesitter.configs').setup({
       ensure_installed = { 
-        'vim',
-        'jsonc',
-        'lua',
-        'regex',
-        'bash',
-        'markdown',
-        'markdown_inline',
-        'json',
-        'query',
-        'toml',
-        'norg',
         {{ treesitter_parsers_file or '-- No Extra Treesitter Parsers Installed' }}
       },
-      -- 'yaml',
       highlight = {
         enable = true, -- false will disable the whole extension
       },
@@ -219,19 +222,6 @@ nvim_treesitter:
         {{ treesitter_custom_parsers_info or '-- No Custom Treesitter Parsers Installed' }}
         require('nvim-treesitter.configs').setup({
           ensure_installed = {
-            'vim',
-            'vimdoc',
-            'jsonc',
-            'lua',
-            'regex',
-            'bash',
-            'markdown',
-            'markdown_inline',
-            'json',
-            'query',
-            'toml',
-            'norg',
-            'yaml',
             {{ treesitter_parsers_file or '-- No Extra Treesitter Parsers Installed' }}
           },
           sync_install = true,

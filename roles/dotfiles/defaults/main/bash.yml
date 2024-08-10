@@ -138,5 +138,6 @@ bash_default_aliases: |
   alias ll='{{ lsd_exe }} --group-dirs first -l'
   alias jchoose='{{ just_exe }} --choose'
   alias vim='{{ nvim_exe_bone_bash }}'
+  alias cdg='cd $(cdscuts_glob_echo | {{ skim_exe }})'
   alias nvi='{{ navi_shell_cmd }}'
 bash_extra_aliases: ""

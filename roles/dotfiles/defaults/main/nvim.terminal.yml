@@ -168,6 +168,16 @@ nvim_terminal:
       },
     },
     {
+      "mikavilpas/yazi.nvim",
+      event = "VeryLazy",
+      opts = {
+        open_for_directories = true,
+        keymaps = {
+          show_help = '<f1>',
+        },
+      },
+    },
+    {
       "willothy/flatten.nvim",
       config = true,
       lazy = false,
@@ -176,5 +186,7 @@ nvim_terminal:
   config: ""
   keymaps: |
     { '<leader>j', { n = '<cmd>lua just_terminal_runner()<CR>', }, description = 'ToggleTerm: Justfile Chooser', },
-    { '<leader>x', { n = '<cmd>lua require("tfm").open()<CR>', }, description = 'FM-Nvim: Yazi(Current File)', },
-    { '<leader>X', { n = '<cmd>lua require("tfm").open(vim.fn.getcwd())<CR>', }, description = 'FM-Nvim: Yazi(Project Root)', },
+    -- { '<leader>x', { n = '<cmd>lua require("tfm").open()<CR>', }, description = 'FM-Nvim: Yazi(Current File)', },
+    -- { '<leader>X', { n = '<cmd>lua require("tfm").open(vim.fn.getcwd())<CR>', }, description = 'FM-Nvim: Yazi(Project Root)', },
+     { '<leader>x', { n = '<cmd>Yazi<CR>', }, description = 'Yazi-Nvim: Yazi(Current File)', },
+     { '<leader>X', { n = '<cmd>Yazi cwd<CR>', }, description = 'Yazi-Nvim: Yazi(Project Root)', },

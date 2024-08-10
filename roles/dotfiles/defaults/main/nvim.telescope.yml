@@ -353,6 +353,7 @@ nvim_fzf_lua:
       "ibhagwan/fzf-lua",
       dependencies = { "nvim-tree/nvim-web-devicons" },
       config = function()
+        local actions = require "fzf-lua.actions"
         require('fzf-lua').setup({'fzf-native'})
         require("fzf-lua").setup({
           fzf_opts = {
@@ -366,6 +367,19 @@ nvim_fzf_lua:
             ["--layout"]      = "reverse",
             ["--border"]      = "none",
             ["--cycle"]      = true,
+          },
+          actions = {
+            files = {
+              ["default"] = function(selected, opts)
+                local ee = fzf_path.entry_to_file(selected[1], opts)
+                focus.split_nicely(ee.path)
+                vim.api.nvim_win_set_cursor(0, {ee.line, ee.col - 1})
+              end,
+              ["ctrl-x"]      = actions.file_split,
+            },
+            buffers = {
+              ["ctrl-x"]      = actions.buf_split,
+            },
           },
         })
       end
@@ -440,6 +454,7 @@ nvim_fzf_lua_ui:
       dependencies = { "nvim-tree/nvim-web-devicons" },
       config = function()
         require('fzf-lua').setup({'fzf-native'})
+        local actions = require "fzf-lua.actions"
         local focus = require('focus')
         local fzf_path = require('fzf-lua.path')
         require('fzf-lua').setup({
@@ -462,6 +477,10 @@ nvim_fzf_lua_ui:
                 focus.split_nicely(ee.path)
                 vim.api.nvim_win_set_cursor(0, {ee.line, ee.col - 1})
               end,
+              ["ctrl-x"]      = actions.file_split,
+            },
+            buffers = {
+              ["ctrl-x"]      = actions.buf_split,
             },
           },
         })

@@ -65,6 +65,7 @@ nushell_aliases: |
   alias cat = {{ bat_exe }}
   # alias ls = {{ lsd_exe }} --group-dirs first
   alias ll = {{ lsd_exe }} --group-dirs first -l
+nushell_extra_aliases: ""
 nushell_starship_dir: "{{ xdg_cache_dir }}/starship"
 nushell_starship_source: "{{ nushell_starship_dir }}/init.nu"
 nushell_starship_config: |

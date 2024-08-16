@@ -24,6 +24,17 @@ rust_dev_packages:
     path: "{{ cargo_path }}cargo-readme"
 treesitter_parsers_rust:
   - rust
+treesitter_parsers_egg_parser_config: |
+  parser_configs.egg = {
+      install_info = {
+          url = 'https://github.com/segeljakt/tree-sitter-egg',
+          files = {
+            'src/parser.c',
+            'src/tree_sitter/parser.h',
+          },
+          branch = 'master'
+      },
+  }
 rust_tools_nix:
   - vscode-extensions.vadimcn.vscode-lldb
 rust_file_extensions:

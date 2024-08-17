@@ -49,9 +49,6 @@ bash_plugins_source:
         eval "$({{ homebrew_path }}/brew shellenv)"
       fi
 bash_fzf_setup: |
-  {% for fzf_env_var in fzf_env -%}
-  {{ "export " + fzf_env[fzf_env_var]['name'] + "='" + fzf_env[fzf_env_var]['env'] + "'" }}
-  {% endfor %}
   eval "$({{ fzf_exe }} --bash)"
   export PATH="$PATH:{{ bash_git_fuzzy }}/bin"
   fzf_find_edit() {
@@ -89,6 +86,9 @@ bash_fzf_setup: |
   alias ffe='fzf_find_edit'
   alias fcd='fzf_change_directory'
   alias fkill='fzf_kill'
+  {% for fzf_env_var in fzf_env -%}
+  {{ "export " + fzf_env[fzf_env_var]['name'] + "='" + fzf_env[fzf_env_var]['env'] + "'" }}
+  {% endfor %}
 bash_yazi_setup: |
   yy() {
     local tmp="$(mktemp -t "yazi-cwd.XXXXX")"
@@ -138,7 +138,7 @@ bash_default_aliases: |
   alias ll='{{ lsd_exe }} --group-dirs first -l'
   alias jchoose='{{ just_exe }} --choose'
   alias vim='{{ nvim_exe_bone_bash }}'
-  alias cdg='cd $(cdscuts_glob_echo | {{ skim_exe }})'
+  alias cdg='cd $(cdscuts_glob_echo | {{ fzf_exe }})'
   alias nvi='{{ navi_shell_cmd }}'
 bash_extra_aliases: ""
 bash_ssh_setup: |

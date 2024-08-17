@@ -25,8 +25,8 @@ nvim_tasks_default:
       strategy = "toggleterm",
     })
   keymaps: |
-    { '<leader>t', description = 'Overseer', },
-    { '<leader>tt', { n = '<cmd>OverseerRun<CR>', }, description = 'Overseer: Select Task', },
+    { '<leader>O', description = 'Overseer', },
+    { '<leader>Or', { n = '<cmd>OverseerRun<CR>', }, description = 'Overseer: Select Task', },
 nvim_tasks:
   lazy: |
     {
@@ -43,8 +43,8 @@ nvim_tasks:
     },
   config: ""
   keymaps: |
-    { '<leader>t', description = 'Overseer', },
-    { '<leader>tt', { n = '<cmd>OverseerRun<CR>', }, description = 'Overseer: Select Task', },
+    { '<leader>O', description = 'Overseer', },
+    { '<leader>Or', { n = '<cmd>OverseerRun<CR>', }, description = 'Overseer: Select Task', },
 nvim_tasks_nodap:
   lazy: |
     {
@@ -60,5 +60,5 @@ nvim_tasks_nodap:
     },
   config: ""
   keymaps: |
-    { '<leader>t', description = 'Overseer', },
-    { '<leader>tt', { n = '<cmd>OverseerRun<CR>', }, description = 'Overseer: Select Task', },
+    { '<leader>O', description = 'Overseer', },
+    { '<leader>Or', { n = '<cmd>OverseerRun<CR>', }, description = 'Overseer: Select Task', },

@@ -198,6 +198,7 @@ nvim_plugin_groups_all:
   intellisense: "{{ nvim_lspconfig_cmp_navbuddy }}"
   debugger: "{{ nvim_debugger }}"
   tasks: "{{ nvim_tasks }}"
+  test: "{{ nvim_test }}"
   notes: "{{ nvim_neorg_legacy }}"
   motion: "{{ nvim_motion }}"
 nvim_plugin_groups_bone:

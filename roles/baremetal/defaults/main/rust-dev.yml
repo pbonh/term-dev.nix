@@ -35,6 +35,8 @@ treesitter_parsers_egg_parser_config: |
           branch = 'master'
       },
   }
+neotest_adapters_rust: |
+  require('rustaceanvim.neotest'),
 rust_tools_nix:
   - vscode-extensions.vadimcn.vscode-lldb
 rust_file_extensions:

@@ -60,7 +60,8 @@ clippy_exe: "cargo-clippy"
 extra_nvim_plugins_rust_lazy: |
   {
     'mrcjkb/rustaceanvim',
-    version = '^4',
+    version = '^5',
+    lazy = false,
     ft = { 'rust' },
   },
   { 'rust-lang/rust.vim' },
@@ -88,7 +89,8 @@ extra_nvim_config_rust: |
     },
     tools = {
       executor = require('rustaceanvim.executors').toggleterm,
-      hover_actions = {
+      test_executor = require('rustaceanvim.executors').toggleterm,
+      float_win_config = {
         auto_focus = true,
       },
     },

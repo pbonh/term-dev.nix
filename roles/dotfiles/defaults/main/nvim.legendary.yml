@@ -54,11 +54,13 @@ nvim_legendary:
   keymaps: |
     { '<CR>', {
         n = ':',
+        v = ':',
       },
       description = 'Vim: Enter Ex Commands',
     },
     { ':', {
         n = ',',
+        v = ',',
       },
       description = 'Vim: Remap Repeat',
     },

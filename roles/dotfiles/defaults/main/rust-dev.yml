@@ -145,5 +145,10 @@ nvim_keymap_rust: |
           vim.api.nvim_buf_set_keymap(0, 'n', '<leader>cd', '<cmd>RustLsp debuggables<CR>', { noremap = true, silent = true })
           vim.api.nvim_buf_set_keymap(0, 'n', '<leader>cw', '<cmd>lua bacon_watch_terminal_runner()<CR>', { noremap = true, silent = true })
       end,
-      group = group 
+      group = group
+  })
+  vim.filetype.add({
+    pattern = {
+      [".*.llhd"] = "llvm",
+    },
   })

@@ -80,5 +80,6 @@ zellij_kdl_layouts:
       tab name="CPU/Mem" {
           pane {
               command "{{ bottom_exe }}"
+              start_suspended true
           }
       }

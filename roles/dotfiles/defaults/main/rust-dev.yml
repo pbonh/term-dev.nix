@@ -36,7 +36,11 @@ treesitter_parsers_egg_parser_config: |
       },
   }
 neotest_adapters_rust: |
-  require('rustaceanvim.neotest'),
+  -- require('rustaceanvim.neotest'),
+  require("neotest-rust") {
+    args = { "--no-capture" },
+    dap_adapter = "codelldb",
+  }
 rust_tools_nix:
   - vscode-extensions.vadimcn.vscode-lldb
 rust_file_extensions:
@@ -66,10 +70,19 @@ extra_nvim_plugins_rust_lazy: |
   },
   { 'rust-lang/rust.vim' },
   { 'segeljakt/tree-sitter-egg' },
+  { 'rouge8/neotest-rust' },
 extra_nvim_config_rust: |
   local extension_path = '{{ codelldb_install_path }}/'
   local codelldb_path = extension_path .. '{{ codelldb_bin_path }}'
   local liblldb_path = extension_path .. '{{ codelldb_liblldb_path }}'
+  dap.adapters.codelldb = {
+    type = 'server',
+    port = "${port}",
+    executable = {
+      command = codelldb_path,
+      args = {"--port", "${port}"},
+    }
+  }
   vim.g.rustaceanvim = {
     -- LSP configuration
     server = {
@@ -80,8 +93,8 @@ extra_nvim_config_rust: |
           cargo = {
             allFeatures = true,
           },
-          checkOnSave = {
-            allFeatures = true,
+          checkOnSave = true,
+          check = {
             command = 'clippy',
           },
         },

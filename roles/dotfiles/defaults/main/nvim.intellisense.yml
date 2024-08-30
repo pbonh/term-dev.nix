@@ -1,4 +1,13 @@
 ---
+lsp_providers_extra: []
+lsp_providers_devbox:
+  - ansiblels
+  - bashls
+  - lua_ls
+  - yamlls
+lsp_providers: "{{ lsp_providers_devbox + lsp_providers_extra }}"
+lsp_providers_luafile: "{{ \"'\" + lsp_providers | join(\"', '\") + \"'\" }}"
+lsp_provider_coc_settings: {}
 nvim_intellisense_default:
   lazy: |
     {

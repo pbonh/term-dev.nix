@@ -10,7 +10,7 @@ lang_tools_nix: "{{ cpp_tools_nix + python_tools_nix }}"
 install_languages:
   - cpp
   - python
-lsp_providers: "{{ lsp_providers_cpp + lsp_providers_python }}"
+lsp_providers_extra: "{{ lsp_providers_cpp + lsp_providers_python }}"
 treesitter_parsers_lang: "{{ treesitter_parsers_rust + treesitter_parsers_cpp + treesitter_parsers_python }}"
 treesitter_extra_config: "{{ treesitter_extra_config_cpp }}"
 nvim_extra_plugins:

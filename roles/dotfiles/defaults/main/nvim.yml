@@ -18,14 +18,6 @@ nvim_fterm_cmds:
     cmd_str: "btop"
 nvim_nerd_font: "true"
 extra_nvim_language_mappings: []
-lsp_providers: []
-lsp_providers_devbox:
-  - ansiblels
-  - bashls
-  - lua_ls
-  - yamlls
-lsp_providers_luafile: "{{ \"'\" + lsp_providers | join(\"', '\") + \"'\" }}"
-lsp_provider_coc_settings: {}
 nvim_checkhealth_log:
   - "--headless"
   - "\"+checkhealth\""

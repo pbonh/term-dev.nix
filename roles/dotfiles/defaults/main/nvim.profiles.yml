@@ -130,7 +130,7 @@ nvim_kickstart_editor_options: |
   vim.opt.scrolloff = 10
 nvim_default_keymap_options: |
   vim.g.mapleader = ' '
-  vim.g.maplocalleader = ' '
+  vim.g.maplocalleader = ','
   vim.keymap.set('', '<Space>', '<Nop>', { noremap = true, silent = true })
   vim.keymap.set('t', '<C-]>', '<C-\\><C-n> ', { noremap = true, silent = true })
   vim.keymap.set('t', '<C-h>', '<C-\\><C-n><C-W>h ', { noremap = true, silent = true })
@@ -203,6 +203,7 @@ nvim_plugin_groups_all:
   motion: "{{ nvim_motion }}"
 nvim_plugin_groups_bone:
   telescope: "{{ nvim_fzf_lua }}"
+  project: "{{ nvim_project }}"
   hydra: "{{ nvim_hydra }}"
   treesitter: "{{ nvim_treesitter }}"
   git: "{{ nvim_git }}"

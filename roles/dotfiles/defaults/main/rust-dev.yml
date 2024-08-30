@@ -22,8 +22,17 @@ rust_dev_packages:
   cargo-readme:
     name: cargo-readme
     path: "{{ cargo_path }}cargo-readme"
+nvim_extra_plugins_rust:
+  lazy: "{{ extra_nvim_plugins_rust_lazy }}"
+  config: "{{ extra_nvim_config_rust }}"
+  keymaps: "{{ extra_nvim_keymap_rust }}"
+extra_nvim_language_keymaps_rust:
+  mappings: "{{ nvim_keymap_rust }}"
+  ext: "{{ rust_file_extensions }}"
 treesitter_parsers_rust:
   - rust
+treesitter_custom_parsers_rust:
+  - egg
 treesitter_parsers_egg_parser_config: |
   parser_configs.egg = {
       install_info = {

@@ -1,5 +1,6 @@
 ---
-neotest_adapters: []
+neotest_adapters:
+  - "{{ neotest_adapters_rust }}"
 neotest_adapters_luafile: |
   {% for neotest_adapter in neotest_adapters -%}
   {{ neotest_adapter }}

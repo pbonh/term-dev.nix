@@ -6,46 +6,6 @@ projects:
     name: "pbonh/term-dev.nix"
     url: "https://github.com/pbonh/term-dev.nix"
     path: "{{ code_checkout_path_github }}/pbonh/term-dev.nix"
-lang_tools_nix: "{{ cpp_tools_nix + python_tools_nix }}"
-install_languages:
-  - cpp
-  - python
-lsp_providers_extra: "{{ lsp_providers_cpp + lsp_providers_python }}"
-treesitter_parsers_lang: "{{ treesitter_parsers_rust + treesitter_parsers_cpp + treesitter_parsers_python }}"
-treesitter_extra_config: "{{ treesitter_extra_config_cpp }}"
-nvim_extra_plugins:
-  cpp:
-    lazy: "{{ extra_nvim_plugins_cpp_lazy }}"
-    config: "{{ extra_nvim_config_cpp }}"
-    keymaps: "{{ extra_nvim_keymap_cpp }}"
-  python:
-    lazy: "{{ extra_nvim_plugins_python_lazy }}"
-    config: "{{ extra_nvim_config_python }}"
-    keymaps: "{{ extra_nvim_keymap_python }}"
-  rust:
-    lazy: "{{ extra_nvim_plugins_rust_lazy }}"
-    config: "{{ extra_nvim_config_rust }}"
-    keymaps: "{{ extra_nvim_keymap_rust }}"
-extra_nvim_language_mappings:
-  cpp:
-    mappings: "{{ extra_nvim_keymap_cpp }}"
-    ext: "{{ cpp_file_extensions }}"
-  python:
-    mappings: "{{ extra_nvim_keymap_python }}"
-    ext: "{{ python_file_extensions }}"
-  rust:
-    mappings: "{{ extra_nvim_keymap_rust }}"
-    ext: "{{ rust_file_extensions }}"
-extra_nvim_language_keymaps:
-  cpp:
-    mappings: "{{ nvim_keymap_cpp }}"
-    ext: "{{ cpp_file_extensions }}"
-  python:
-    mappings: "{{ nvim_keymap_python }}"
-    ext: "{{ python_file_extensions }}"
-  rust:
-    mappings: "{{ nvim_keymap_rust }}"
-    ext: "{{ rust_file_extensions }}"
 nushell_extra_aliases: |
   alias zdot = {{ zellij_exe }} --layout dotfiles
 bash_extra_aliases: |

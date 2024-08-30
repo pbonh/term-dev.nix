@@ -17,7 +17,6 @@ nvim_fterm_cmds:
   - cmd_name: BTop
     cmd_str: "btop"
 nvim_nerd_font: "true"
-extra_nvim_language_mappings: []
 nvim_checkhealth_log:
   - "--headless"
   - "\"+checkhealth\""
@@ -33,3 +32,11 @@ nvim_exe_bone_bash_cmd:
   - "-c"
   - "'{{ nvim_exe }}' 'vars/term-dev.yml'"
 nvim_exe_bone: "{{ nvim_exe_bone_bash }}"
+nvim_extra_plugins:
+  cpp: "{{ nvim_extra_plugins_cpp }}"
+  python: "{{ nvim_extra_plugins_python }}"
+  rust: "{{ nvim_extra_plugins_rust }}"
+extra_nvim_language_keymaps:
+  cpp: "{{ extra_nvim_language_keymaps_cpp }}"
+  python: "{{ extra_nvim_language_keymaps_python }}"
+  rust: "{{ extra_nvim_language_keymaps_rust }}"

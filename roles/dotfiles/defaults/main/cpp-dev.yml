@@ -122,6 +122,13 @@ cpp_file_extensions:
 # cpp_file_extensions_comma_list: "{{ '\"' + cpp_file_extensions |join('\", \"') + '\"' }}"
 cargo_cpp_packages:
   - { name: neocmakelsp, path: neocmakelsp }
+nvim_extra_plugins_cpp:
+  lazy: "{{ extra_nvim_plugins_cpp_lazy }}"
+  config: "{{ extra_nvim_config_cpp }}"
+  keymaps: "{{ extra_nvim_keymap_cpp }}"
+extra_nvim_language_keymaps_cpp:
+  mappings: "{{ nvim_keymap_cpp }}"
+  ext: "{{ cpp_file_extensions }}"
 treesitter_parsers_cpp:
   - cpp
   - c

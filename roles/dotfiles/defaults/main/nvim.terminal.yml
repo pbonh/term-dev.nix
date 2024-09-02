@@ -113,18 +113,14 @@ nvim_terminal:
           close_on_exit = false,
           shell = "{{ nvim_toggleterm_shell }}",
           float_opts = {
-            border = 'shadow',
+            border = 'double',
             width = function()
               return math.floor(vim.o.columns * 0.8)
             end,
             height = function()
               return math.floor(vim.o.lines * 0.8)
             end,
-            winblend = 3,
-            -- highlights = {
-            --    border = 'Normal',
-            --    background = 'Normal',
-            --  }
+            winblend = 1,
           }
         })
         local Terminal  = require('toggleterm.terminal').Terminal
@@ -138,34 +134,6 @@ nvim_terminal:
           justchoose:toggle()
         end
       end,
-    },
-    {
-      "rolv-apneseth/tfm.nvim",
-      lazy = false,
-      opts = {
-        file_manager = "yazi",
-        replace_netrw = true,
-        -- Enable creation of commands
-        -- Commands:
-        --   Tfm: selected file(s) will be opened in the current window
-        --   TfmSplit: selected file(s) will be opened in a horizontal split
-        --   TfmVsplit: selected file(s) will be opened in a vertical split
-        --   TfmTabedit: selected file(s) will be opened in a new tab page
-        enable_cmds = false, 
-        -- Custom keybindings only applied within the TFM buffer
-        -- Default: {}
-        keybindings = {
-          ["<ESC>"] = "q"
-        },
-        -- Customise UI. The below options are the default
-        ui = {
-          border = "rounded",
-          height = 1,
-          width = 1,
-          x = 0.5,
-          y = 0.5,
-        },
-      },
     },
     {
       "mikavilpas/yazi.nvim",

@@ -1,7 +1,7 @@
 ---
 nvim_overseer_reldir: "lua/overseer/template/user"
 nvim_overseer_tasks:
-  just_choose:
+  just_choose: |
     name = "Just Choose",
     builder = function()
       -- Full path to current file (see :help expand())
@@ -59,6 +59,4 @@ nvim_tasks_nodap:
       end,
     },
   config: ""
-  keymaps: |
-    { '<leader>O', description = 'Overseer', },
-    { '<leader>Or', { n = '<cmd>OverseerRun<CR>', }, description = 'Overseer: Select Task', },
+  keymaps: "{{ nvim_tasks['keymaps'] }}"

@@ -7,7 +7,10 @@ zsh_fzf_tab: "{{ zsh_plugins }}/fzf-tab"
 zsh_git_fuzzy: "{{ zsh_plugins }}/git-fuzzy"
 zsh_git_fuzzy_upstream: origin
 zsh_git_fuzzy_branch: main
-zsh_homebrew_env: ""
+zsh_homebrew_env: |
+    if [[ -n {{ homebrew_path }} ]]; then
+      eval "$({{ homebrew_path }}/brew shellenv)"
+    fi
 zsh_devbox_env: |
   #. /home/{{ zsh_username }}/.nix-profile/etc/profile.d/nix.sh
   #. /home/{{ zsh_username }}/.nix-profile/etc/profile.d/hm-session-vars.sh

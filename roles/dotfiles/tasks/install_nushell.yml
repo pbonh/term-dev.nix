@@ -18,8 +18,8 @@
     state: directory
     mode: '0755'
 
-# - name: nushell | Install nushell Starship Integration | shell
-#   shell:
-#     cmd: "{{ starship_exe }} init nu | save -f {{ nushell_starship_source }}"
-#   args:
-#     creates: "{{ nushell_starship_source }}"
+- name: nushell | Setup Carapace Directory | file
+  file:
+    path: "{{ carapace_dir }}"
+    state: directory
+    mode: '0755'

@@ -16,6 +16,11 @@ nushell_fzf_env: |
   {{ "$env." + fzf_env[fzf_env_var]['name'] + " = '" + fzf_env[fzf_env_var]['env'] + "'" }}
   {% endfor %}
   $env.SKIM_DEFAULT_COMMAND = '{{ fd_exe }} --type f || git ls-tree -r --name-only HEAD || {{ rg_exe }} --files || find .'
+nushell_carapace_config_file: "{{ carapace_dir }}/init.nu"
+nushell_carapace_config: |
+  source {{ nushell_carapace_config_file }}
+nushell_carapace_env: |
+  {{ carapace_exe }} _carapace nushell | save --force {{ nushell_carapace_config_file }}
 nushell_starship_env: |
   {{ starship_exe }} init nu | save -f {{ nushell_starship_source }}
 nushell_custom_config: |

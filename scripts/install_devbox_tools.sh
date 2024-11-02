@@ -15,6 +15,7 @@ devbox global add \
     starship \
     xcp \
     nushell \
+    carapace \
     gum \
     glow \
     just \

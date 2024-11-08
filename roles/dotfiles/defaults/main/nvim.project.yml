@@ -84,5 +84,5 @@ nvim_project:
   config: ""
   keymaps: |
     { '<leader>fp', { n = '<cmd>CdProject<CR>', }, description = 'Cd-Project: Cd into Project', },
-    { '_', { n = '<cmd>lua require("grug-far").open({ prefills = { search = vim.fn.expand("<cword>") } })<CR>', }, description = 'Grug-Far: Project Search String(Cursor Word)', },
+    -- { '_', { n = '<cmd>lua require("grug-far").open({ prefills = { search = vim.fn.expand("<cword>") } })<CR>', }, description = 'Grug-Far: Project Search String(Cursor Word)', },
     { '<leader>R', { n = '<cmd>lua require("grug-far").open({ transient = true })<CR>', }, description = 'Grug-Far: Project Search/Replace', },

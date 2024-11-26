@@ -7,7 +7,10 @@ nvim_hydra_default:
         'sindrets/winshift.nvim',
         'mrjones2014/smart-splits.nvim',
         'lewis6991/gitsigns.nvim',
-        'declancm/maximize.nvim',
+        {
+          'declancm/maximize.nvim',
+          config = true
+        },
       },
     },
   config: |
@@ -267,7 +270,10 @@ nvim_hydra:
         'sindrets/winshift.nvim',
         'mrjones2014/smart-splits.nvim',
         'lewis6991/gitsigns.nvim',
-        'declancm/maximize.nvim',
+        {
+          'declancm/maximize.nvim',
+          config = true
+        },
       },
       config = function()
         vim.o.winwidth = 10
@@ -449,6 +455,7 @@ nvim_hydra:
           },
         })
         local splits = require('smart-splits')
+        local maximizes = require('maximize')
         local cmd = require('hydra.keymap-util').cmd
         local pcmd = require('hydra.keymap-util').pcmd
         local window_hint = [[
@@ -498,8 +505,8 @@ nvim_hydra:
               { '<C-v>', pcmd('vsplit', 'E36'), { desc = false } },
               { 'w',     '<C-w>w', { exit = true, desc = false } },
               { '<C-w>', '<C-w>w', { exit = true, desc = false } },
-              { 'z',     function() require('maximize').toggle() end, { exit = true, desc = 'maximize' } },
-              { '<C-z>', function() require('maximize').toggle() end, { exit = true, desc = false } },
+              { 'z',     cmd 'Maximize', { exit = true, desc = 'maximize' } },
+              { '<C-z>', cmd 'Maximize', { exit = true, desc = false } },
               { 'o',     '<C-w>o', { exit = true, desc = 'remain only' } },
               { '<C-o>', '<C-w>o', { exit = true, desc = false } },
               { 'c',     pcmd('close', 'E444') },

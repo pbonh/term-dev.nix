@@ -358,14 +358,21 @@ nvim_ui:
         'b0o/incline.nvim',
       },
       config = function()
+        local function maximize_status()
+          return vim.t.maximized and '   ' or ''
+        end
+
         require('lualine').setup({
-          options = { theme  = gruvbox },
           options = {
+            theme  = gruvbox,
             section_separators = { left = '', right = '' },
             component_separators = { left = '', right = '' },
             globalstatus = true,
             disabled_filetypes = {
                 'packer', 'NVimTree'
+            },
+            sections = {
+              lualine_c = { maximize_status }
             }
           },
         })

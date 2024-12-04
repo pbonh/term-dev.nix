@@ -285,10 +285,12 @@ nvim_treesitter:
           },
           {{ treesitter_extra_config_cpp | indent(8) or '-- No Extra Treesitter Config' }}
         })
-        vim.o.foldcolumn = '1' -- '0' is not bad
+        -- vim.o.foldcolumn = '1' -- '0' is not bad
         vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
         vim.o.foldlevelstart = 99
         vim.o.foldenable = true
+        vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+        vim.opt.foldtext = "v:lua.vim.treesitter.foldtext()"
       end,
     },
     { 'nvim-treesitter/nvim-treesitter-context',
@@ -333,10 +335,6 @@ nvim_treesitter:
             zindex = 20, -- The Z-index of the context window
             mode = 'cursor',  -- Line used to calculate context. Choices: 'cursor', 'topline'
         })
-        vim.o.foldcolumn = '1' -- '0' is not bad
-        vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
-        vim.o.foldlevelstart = 99
-        vim.o.foldenable = true
       end,
     },
     {

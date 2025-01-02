@@ -1,0 +1,40 @@
+---
+openai_api_key: "MY_OPEN_AI_API_KEY"
+nvim_codecompanion_adapter_config_openai: |
+        openai = function()
+          return require("codecompanion.adapters").extend("openai", {
+            env = {
+              api_key = "{{ openai_api_key }}"
+            },
+          })
+        end,
+nvim_codecompanion_adapter: "{{ nvim_codecompanion_adapter_config_openai }}"
+nvim_codecompanion_adapter_config: |
+      adapters = {
+        {{ nvim_codecompanion_adapter }}
+      },
+nvim_ai_companion:
+  lazy: |
+    {
+      "olimorris/codecompanion.nvim",
+      dependencies = {
+        "nvim-lua/plenary.nvim",
+        "nvim-treesitter/nvim-treesitter",
+      },
+      config = true
+    },
+  config: |
+    require("codecompanion").setup({
+      strategies = {
+        chat = {
+          adapter = "openai",
+        },
+        inline = {
+          adapter = "openai",
+        },
+      },
+      {{ nvim_codecompanion_adapter_config }}
+    })
+  keymaps: |
+    { '<leader>cc', { n = '<cmd>CodeCompanionChat<CR>', }, description = 'CodeCompanion: Chat', },
+    { '<leader>ce', { n = '<cmd>lua require("codecompanion").prompt("explain")<CR>', }, description = 'CodeCompanion: Explain', },

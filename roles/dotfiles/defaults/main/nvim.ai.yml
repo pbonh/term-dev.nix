@@ -52,5 +52,5 @@ nvim_ai_companion:
       {{ nvim_codecompanion_adapter_config }}
     })
   keymaps: |
-    { '<leader>cc', { n = '<cmd>CodeCompanionChat<CR>', }, description = 'CodeCompanion: Chat', },
+    { '<leader>cc', { n = '<cmd>CodeCompanionChat Toggle<CR>', }, description = 'CodeCompanion: Toggle Chat', },
     { '<leader>ce', { n = '<cmd>lua require("codecompanion").prompt("explain")<CR>', }, description = 'CodeCompanion: Explain', },

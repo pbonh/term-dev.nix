@@ -197,6 +197,5 @@ attach_to_session true
 // auto_layout false
 
 env {
-    NVIM_APPNAME "{{ zellij_nvim_app }}"
-    // SHELL "{{ zellij_shell }}"
+    {{ zellij_env_variables_file | indent(4) }}
 }

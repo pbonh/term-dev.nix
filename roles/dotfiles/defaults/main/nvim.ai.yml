@@ -13,6 +13,7 @@ nvim_codecompanion_adapter_config_ollama: |
             },
           })
         end,
+anthropic_api_key: "MY_ANTHROPIC_API_KEY"
 openai_api_key: "MY_OPEN_AI_API_KEY"
 nvim_codecompanion_adapter_config_openai: |
         openai = function()

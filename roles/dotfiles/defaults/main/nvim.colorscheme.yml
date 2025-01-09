@@ -9,7 +9,7 @@ nvim_colorscheme_default:
     vim.o.background = 'dark'
     vim.cmd([[colorscheme gruvbox-material]])
   keymaps: ''
-nvim_colorscheme:
+nvim_colorscheme_gruvbox:
   lazy: |
     {
       'sainnhe/gruvbox-material',
@@ -24,4 +24,23 @@ nvim_colorscheme:
       lazy = false,
     },
   config: ""
-  keymaps: ''
+  keymaps: ""
+nvim_colorscheme_onedark:
+  lazy: |
+    {
+      'navarasu/onedark.nvim',
+      lazy = false,
+      init = function()
+        vim.o.background = 'dark'
+        vim.cmd([[colorscheme onedark]])
+      end,
+    },
+    {
+      'NoahTheDuke/vim-just',
+      lazy = false,
+    },
+  config: |
+    require('onedark').setup({
+      style = 'deep',
+    })
+  keymaps: ""

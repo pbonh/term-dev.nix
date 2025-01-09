@@ -351,9 +351,9 @@ nvim_ui_default:
     { '<leader>z', { n = '<cmd>NeoZoomToggle<CR>', }, description = 'Neo-Zoom: Toggle Float/Zoom Window', },
 nvim_ui:
   lazy: |
-    { 'kdheepak/tabline.nvim',
+    {
+      'nvim-lualine/lualine.nvim',
       dependencies = {
-        'nvim-lualine/lualine.nvim',
         'nvim-tree/nvim-web-devicons',
         'b0o/incline.nvim',
       },
@@ -364,7 +364,7 @@ nvim_ui:
 
         require('lualine').setup({
           options = {
-            theme  = gruvbox,
+            -- theme  = gruvbox,
             section_separators = { left = '', right = '' },
             component_separators = { left = '', right = '' },
             globalstatus = true,
@@ -375,17 +375,6 @@ nvim_ui:
               lualine_c = { maximize_status }
             }
           },
-        })
-        require('tabline').setup({
-          enable = true,
-          options = {
-            max_bufferline_percent = 66, -- set to nil by default, and it uses vim.o.columns * 2/3
-            show_tabs_always = true, -- this shows tabs only when there are more than one tab or if the first tab is named
-            show_devicons = true, -- this shows devicons in buffer section
-            show_bufnr = false, -- this appends [bufnr] to buffer section,
-            show_filename_only = false, -- shows base filename only instead of relative path in filename
-            modified_icon = '+ ', -- change the default modified icon
-          }
         })
         require('incline').setup()
       end,
@@ -404,7 +393,8 @@ nvim_ui:
       end,
       opts = {},
     },
-    { 'petertriho/nvim-scrollbar',
+    {
+      'petertriho/nvim-scrollbar',
       dependencies = {
         'kevinhwang91/nvim-hlslens',
         'lewis6991/gitsigns.nvim',

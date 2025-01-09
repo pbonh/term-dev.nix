@@ -194,7 +194,7 @@ nvim_plugin_groups_all:
   treesitter: "{{ nvim_treesitter }}"
   git: "{{ nvim_git }}"
   terminal: "{{ nvim_terminal }}"
-  colorscheme: "{{ nvim_colorscheme_onedark }}"
+  colorscheme: "{{ nvim_colorscheme_nightfox }}"
   intellisense: "{{ nvim_lspconfig_cmp_navbuddy }}"
   debugger: "{{ nvim_debugger }}"
   tasks: "{{ nvim_tasks }}"

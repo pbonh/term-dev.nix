@@ -44,3 +44,19 @@ nvim_colorscheme_onedark:
       style = 'deep',
     })
   keymaps: ""
+nvim_colorscheme_nightfox:
+  lazy: |
+    {
+      "EdenEast/nightfox.nvim",
+      lazy = false,
+      init = function()
+        vim.o.background = 'dark'
+        vim.cmd([[colorscheme carbonfox]])
+      end,
+    },
+    {
+      'NoahTheDuke/vim-just',
+      lazy = false,
+    },
+  config: ""
+  keymaps: ""
